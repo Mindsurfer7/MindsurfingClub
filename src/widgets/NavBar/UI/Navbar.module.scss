@@ -1,0 +1,24 @@
+.navbar {
+  width: 100%;
+  height: var(--navbar--height);
+  padding: 10px;
+  margin: 5px;
+  background: var(--inverted-bg-color);
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+}
+
+.links {
+  margin: 5px;
+  margin-left: auto;
+}
+
+.mainLink {
+  margin-right: 10px;
+}
+
+.psyroom {
+  margin-left: 5px;
+}

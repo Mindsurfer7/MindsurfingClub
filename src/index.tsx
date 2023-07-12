@@ -1,14 +1,12 @@
 import { someFn } from "./test";
 import { render } from "react-dom";
 import React from "react";
-import App from "./App";
+import App from "./App/App";
 import { BrowserRouter } from "react-router-dom";
-import { Theme } from "./theme/ThemeContext";
-import ThemeProvider from "./theme/ThemeProvider";
+import { Theme } from "./App/providers/ThemeProvider/lib/ThemeContext";
+import { ThemeProvider } from "App/providers/ThemeProvider";
 
-console.log("xxx");
-
-someFn();
+import "shared/config/i18next/i18n";
 
 render(
   <BrowserRouter>

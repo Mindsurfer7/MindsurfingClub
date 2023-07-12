@@ -7,6 +7,10 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["./src/*"]
+    },
     "outDir": "dist",
     "jsx": "react-jsx",
     "sourceMap": true
