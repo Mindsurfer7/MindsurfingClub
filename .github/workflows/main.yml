@@ -23,11 +23,12 @@ jobs:
         run: npm run prodBuild
         - name: unit testing
         run: npm run test
+        - name: build storybook
+        run: npm run build-storybook
+      - name: screenshot testing
+        run: npm run screenshotTest
       # - name: linting typescript
       #   run: npm run lintTS
       # - name: linting css
       #   run: npm run lintSCSS
-      # - name: build storybook
-      #   run: npm run build-storybook
-      # - name: screenshot testing
-      #   run: npm run screenshotTest
+      

@@ -13,7 +13,7 @@
     "test": "jest --config ./config/jest/jest.config.ts",
     "UItest": "npx loki test",
     "screenApprove": "npx loki approve",
-    "screenshotTest": "loki --requireReference --reactUri file:./storybook-static",
+    "screenshotTest": "npx loki --requireReference --reactUri file:./storybook-static",
     "storybook": "start-storybook -p 6006 -c ./config/storybook",
     "build-storybook": "build-storybook -c ./config/storybook"
   },
