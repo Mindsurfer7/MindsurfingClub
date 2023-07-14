@@ -1,9 +1,9 @@
 name: linting, testing, building
 on:
   push:
-    branches: [main]
+    branches: [master]
   pull_request:
-    branches: [main]
+    branches: [master]
 jobs:
   pipeline:
     runs-on: ubuntu-latest
@@ -17,18 +17,17 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-       - name: install modules
+      - name: install modules
         run: npm install
       - name: build production project
-        run: npm run prodBuild
-        - name: unit testing
-        run: npm run test
-        - name: build storybook
-        run: npm run build-storybook
+        run: npm run build:prod
+      - name: linting typescript
+        run: npm run lint:ts
+      - name: linting css
+        run: npm run lint:scss
+      - name: unit testing
+        run: npm run test:unit
+      - name: build storybook
+        run: npm run storybook:build
       - name: screenshot testing
-        run: npm run screenshotTest
-      # - name: linting typescript
-      #   run: npm run lintTS
-      # - name: linting css
-      #   run: npm run lintSCSS
-      
+        run: npm run test:ui:ci
