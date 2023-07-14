@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./PsyRoom.module.scss";
 import Button, { ThemeButton } from "shared/UI/Button/Button";
-import PackageChecker from "tools/PackageChecker";
+//import PackageChecker from "tools/PackageChecker";
 
 interface PsyRoomProps {
   className?: string;
@@ -24,8 +24,6 @@ const PsyRoom: React.FC<PsyRoomProps> = ({ className }) => {
     <div className={classNames(cls.PsyRoom, {}, [className as string])}>
       <h1>Speak to specialist</h1>
       <div className="chat">
-        <PackageChecker />
-
         {mesArray.map((m) => (
           <div>{m}</div>
         ))}
