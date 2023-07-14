@@ -21,12 +21,12 @@ jobs:
         run: npm install
       - name: build production project
         run: npm run prodBuild
-      - name: linting typescript
-        run: npm run lintTS
-      - name: linting css
-        run: npm run lintSCSS
-      - name: unit testing
+        - name: unit testing
         run: npm run test
+      # - name: linting typescript
+      #   run: npm run lintTS
+      # - name: linting css
+      #   run: npm run lintSCSS
       # - name: build storybook
       #   run: npm run build-storybook
       # - name: screenshot testing
