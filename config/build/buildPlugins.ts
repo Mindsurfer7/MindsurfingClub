@@ -3,6 +3,7 @@ import * as webpack from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import { BuildOptions } from "./types/config";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+//import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 export function buildPlugins({
   paths,
@@ -20,5 +21,6 @@ export function buildPlugins({
     new webpack.DefinePlugin({
       IS_DEV: JSON.stringify(isDev),
     }),
+    //new BundleAnalyzerPlugin(),
   ];
 }

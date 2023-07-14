@@ -2,20 +2,21 @@ import AboutPage from "pages/about/UI/AboutPage";
 
 import { RouteProps } from "react-router-dom";
 import { MainPage } from "pages/main";
-import { MainPageLazy } from "pages/main/UI/MainPage.lazy";
-import { AboutPageLazy } from "pages/about";
 import { PsyRoom } from "pages/PsyRoom";
+import Error404 from "pages/404/Error404";
 
 export enum AppRoutes {
   Main = "main",
   About = "about",
   PsyRoom = "psyroom",
+  NotFound = "not-found",
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.Main]: "/main",
   [AppRoutes.About]: "/about",
   [AppRoutes.PsyRoom]: "/psyroom",
+  [AppRoutes.NotFound]: "*",
 };
 
 export const routeConfig: Record<AppRoutes, RouteProps> = {
@@ -30,5 +31,9 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
   [AppRoutes.PsyRoom]: {
     path: RoutePath[AppRoutes.PsyRoom],
     element: <PsyRoom />,
+  },
+  [AppRoutes.NotFound]: {
+    path: RoutePath[AppRoutes.NotFound],
+    element: <Error404 />,
   },
 };
