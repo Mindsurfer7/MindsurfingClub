@@ -9,6 +9,8 @@
     "devBuild": "webpack --env mode=development",
     "fixLint": "eslint \"**/*.{ts, tsx}\"",
     "test": "jest --config ./config/jest/jest.config.ts",
+    "UItest": "npx loki test",
+    "screenApprove": "npx loki approve",
     "storybook": "start-storybook -p 6006 -c ./config/storybook",
     "build-storybook": "build-storybook -c ./config/storybook"
   },
@@ -90,5 +92,20 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "loki": {
+    "configurations": {
+      "chrome.laptop": {
+        "target": "chrome.app",
+        "width": 1366,
+        "height": 768,
+        "deviceScaleFactor": 1,
+        "mobile": false
+      },
+      "chrome.iphone7": {
+        "target": "chrome.app",
+        "preset": "iPhone 7"
+      }
+    }
+  }
 }
