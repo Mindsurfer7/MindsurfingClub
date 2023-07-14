@@ -7,10 +7,13 @@
     "start": "webpack serve --env port=3000 ",
     "prodBuild": "webpack --env mode=production",
     "devBuild": "webpack --env mode=development",
+    "lintTS": "eslint \"**/*.{ts,tsx}\"",
+    "lintSCSS": "npx stylelint \"**/*.scss\"",
     "fixLint": "eslint \"**/*.{ts, tsx}\"",
     "test": "jest --config ./config/jest/jest.config.ts",
     "UItest": "npx loki test",
     "screenApprove": "npx loki approve",
+    "screenshotTest": "loki --requireReference --reactUri file:./storybook-static",
     "storybook": "start-storybook -p 6006 -c ./config/storybook",
     "build-storybook": "build-storybook -c ./config/storybook"
   },
