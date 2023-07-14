@@ -1,14 +1,5 @@
-import { Route, Routes } from "react-router-dom";
 import "./styles/index.scss";
-import MainPage from "pages/main/UI/MainPage";
-import AboutPage from "pages/about/UI/AboutPage";
-import { Link } from "react-router-dom";
-import { Suspense, useContext, useState } from "react";
-import {
-  Theme,
-  ThemeContext,
-} from "App/providers/ThemeProvider/lib/ThemeContext";
-
+import { Suspense } from "react";
 import { classNames } from "shared/lib/classNames/classNames";
 import { useTheme } from "App/providers/ThemeProvider";
 import { AppRouter } from "./providers/Router";
