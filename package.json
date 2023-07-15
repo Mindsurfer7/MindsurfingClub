@@ -16,7 +16,10 @@
     "screenshotTest": "npx loki --requireReference --reactUri file:./storybook-static",
     "lokiUpdate": "npx loki update --reactUri file:./storybook-static",
     "storybook": "start-storybook -p 6006 -c ./config/storybook",
-    "build-storybook": "build-storybook -c ./config/storybook"
+    "build-storybook": "build-storybook -c ./config/storybook",
+    "test:ui:report": "npm run test:ui:json && npm run test:ui:html",
+    "test:ui:json": "node scripts/generate-visual-json-report.js",
+    "test:ui:html": "reg-cli --from .loki/report.json --report .loki/report.html"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",

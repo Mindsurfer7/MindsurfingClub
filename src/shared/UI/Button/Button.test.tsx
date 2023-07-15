@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Button, { ThemeButton } from "shared/UI/Button/Button";
+import Button, { ButtonTheme } from "shared/UI/Button/Button";
 
 describe("button", () => {
   test("test", () => {
@@ -8,7 +8,7 @@ describe("button", () => {
   });
 
   test("addin theme", () => {
-    render(<Button theme={ThemeButton.Unclear}>reality check</Button>);
+    render(<Button theme={ButtonTheme.UNCLEAR}>reality check</Button>);
     expect(screen.getByText("reality check")).toHaveClass("unclear");
     screen.debug();
   });

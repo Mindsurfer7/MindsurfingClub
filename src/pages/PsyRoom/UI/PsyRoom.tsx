@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./PsyRoom.module.scss";
-import Button, { ThemeButton } from "shared/UI/Button/Button";
+import Button, { ButtonTheme } from "shared/UI/Button/Button";
 //import PackageChecker from "tools/PackageChecker";
 
 interface PsyRoomProps {
@@ -30,7 +30,7 @@ const PsyRoom: React.FC<PsyRoomProps> = ({ className }) => {
       </div>
       <div className="send">
         <textarea onChange={handleChange} value={message} />
-        <Button theme={ThemeButton.Unclear} onClick={sendMessage}>
+        <Button theme={ButtonTheme.UNCLEAR} onClick={sendMessage}>
           send
         </Button>
       </div>

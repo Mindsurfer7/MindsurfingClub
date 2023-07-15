@@ -20,16 +20,6 @@ export const NavBar = ({ className }: navprops) => {
         >
           Main
         </AppLink>
-        <AppLink theme={AppLinkTheme.primary} to={"/about"}>
-          About
-        </AppLink>
-        <AppLink
-          theme={AppLinkTheme.primary}
-          to={"/psyroom"}
-          className={cls.psyroom}
-        >
-          Psy Room
-        </AppLink>
       </div>
     </div>
   );

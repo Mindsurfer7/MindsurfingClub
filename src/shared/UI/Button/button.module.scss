@@ -1,5 +1,6 @@
 .Button {
   cursor: pointer;
+  padding: 6px 15px;
 }
 
 .clear {
@@ -12,7 +13,12 @@
 
 .unclear {
   cursor: pointer;
-  border: 2px solid purple;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 8px;
+  background: none;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
 }
 
 .outline {
@@ -20,4 +26,34 @@
   border: 1px solid var(--primary-color);
   color: var(--primary-color);
   border-radius: 4px;
+  background: none;
+}
+
+.square {
+  padding: 0;
+}
+
+.square.size-m {
+  width: var(--font-line-m);
+  height: var(--font-line-m);
+}
+.square.size-l {
+  width: var(--font-line-l);
+  height: var(--font-line-l);
+}
+.square.size-xl {
+  width: 30px;
+  height: 30px;
+  // width: var(--font-line-xl);
+  // height: var(--font-line-xl);
+}
+
+.size-m {
+  font-size: 16px;
+}
+.size-l {
+  font-size: 24px; //
+}
+.size-xl {
+  font-size: 32px;
 }

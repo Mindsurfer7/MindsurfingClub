@@ -7,6 +7,7 @@ import Error404 from "pages/404/Error404";
 
 export enum AppRoutes {
   Main = "main",
+  Home = "home",
   About = "about",
   PsyRoom = "psyroom",
   NotFound = "not-found",
@@ -14,6 +15,7 @@ export enum AppRoutes {
 
 export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.Main]: "/main",
+  [AppRoutes.Home]: "/home",
   [AppRoutes.About]: "/about",
   [AppRoutes.PsyRoom]: "/psyroom",
   [AppRoutes.NotFound]: "*",
@@ -22,6 +24,10 @@ export const RoutePath: Record<AppRoutes, string> = {
 export const routeConfig: Record<AppRoutes, RouteProps> = {
   [AppRoutes.Main]: {
     path: RoutePath[AppRoutes.Main],
+    element: <MainPage />,
+  },
+  [AppRoutes.Home]: {
+    path: RoutePath[AppRoutes.Home],
     element: <MainPage />,
   },
   [AppRoutes.About]: {

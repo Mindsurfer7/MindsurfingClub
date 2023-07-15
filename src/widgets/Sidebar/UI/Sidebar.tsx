@@ -3,7 +3,13 @@ import { classNames } from "shared/lib/classNames/classNames";
 import cls from "./Sidebar.module.scss";
 import { ThemeSwitcher } from "widgets/ThemeSwitcher";
 import LangSwitcher from "widgets/LangSwitcher/LangSwitcher";
-import Button from "shared/UI/Button/Button";
+import Button, { ButtonSize, ButtonTheme } from "shared/UI/Button/Button";
+import AppLink, { AppLinkTheme } from "shared/UI/AppLink/AppLink";
+import { RoutePath } from "shared/config/routesConfig/routesConfig";
+
+import HomeIcon from "./../../../shared/assets/icons/main-20-20.svg";
+import AboutIcon from "./../../../shared/assets/icons/about-20-20.svg";
+import PsyIcon from "./../../../shared/assets/icons/psy.svg";
 
 interface SidebarProps {
   className?: string;
@@ -23,12 +29,54 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
         className as string,
       ])}
     >
-      <Button onClick={onSwitch} data-testid={"sidebar-btn"}>
-        Switch
+      <Button
+        onClick={onSwitch}
+        data-testid={"sidebar-btn"}
+        className={cls.collapseBtn}
+        theme={ButtonTheme.UNCLEAR}
+        size={ButtonSize.XL}
+        square={true}
+      >
+        {collapse ? ">" : "<"}
       </Button>
+      <div className={cls.links}>
+        <div className={cls.linkWrapper}>
+          <AppLink
+            theme={AppLinkTheme.primary}
+            to={RoutePath.home}
+            className={cls.element}
+          >
+            <HomeIcon className={cls.icon} />
+            <span className={cls.link}>Home</span>
+          </AppLink>
+        </div>
+        <div className={cls.linkWrapper}>
+          <AppLink
+            theme={AppLinkTheme.primary}
+            to={RoutePath.about}
+            className={cls.element}
+          >
+            <AboutIcon className={cls.icon} />
+            <span className={cls.link}>About</span>
+          </AppLink>
+        </div>
+
+        <div className={cls.linkWrapper}>
+          <AppLink
+            theme={AppLinkTheme.primary}
+            to={RoutePath.psyroom}
+            className={cls.element}
+          >
+            {" "}
+            <PsyIcon className={cls.icon} />
+            <span className={cls.link}>Psy Room</span>
+          </AppLink>
+        </div>
+      </div>
+
       <div className={cls.switchers}>
         <ThemeSwitcher className={className} />
-        <LangSwitcher />
+        <LangSwitcher short={collapse ? true : false} />
       </div>
     </div>
   );
