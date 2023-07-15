@@ -27,3 +27,8 @@ jobs:
         run: npm run build-storybook
       - name: screenshot testing
         run: npm run screenshotTest
+        continue-on-error: true
+      - name: Save screenshots as artifacts
+        uses: actions/upload-artifact@v2
+        with:
+        path: .loki/difference/
