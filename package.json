@@ -14,6 +14,7 @@
     "UItest": "npx loki test",
     "screenApprove": "npx loki approve",
     "screenshotTest": "npx loki --requireReference --reactUri file:./storybook-static",
+    "lokiUpdate": "npx loki update --reactUri file:./storybook-static",
     "storybook": "start-storybook -p 6006 -c ./config/storybook",
     "build-storybook": "build-storybook -c ./config/storybook"
   },
