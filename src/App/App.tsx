@@ -5,6 +5,7 @@ import { useTheme } from "App/providers/ThemeProvider";
 import { AppRouter } from "./providers/Router";
 import { NavBar } from "widgets/NavBar";
 import { Sidebar } from "widgets/Sidebar";
+import Modal from "shared/UI/Modal/Modal";
 
 const App = () => {
   const { theme } = useTheme();
@@ -13,6 +14,7 @@ const App = () => {
     <div className={classNames("app", {}, [theme])}>
       <Suspense fallback="">
         <NavBar />
+        <Modal />
 
         <div className="content-page">
           <Sidebar />

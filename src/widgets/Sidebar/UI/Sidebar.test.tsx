@@ -10,7 +10,7 @@ describe("sidebar", () => {
     expect(screen.getByTestId("sidebar")).toBeInTheDocument();
   });
   test("bar wrapping", () => {
-    renderWithTranslation(<Sidebar />);
+    ComponentRender(<Sidebar />);
     const btn = screen.getByTestId("sidebar-btn");
     expect(screen.getByTestId("sidebar")).toBeInTheDocument();
     fireEvent.click(btn);
