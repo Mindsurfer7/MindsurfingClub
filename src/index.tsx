@@ -1,5 +1,5 @@
 import { render } from "react-dom";
-import React from "react";
+import "./App/styles/index.scss";
 import App from "./App/App";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "App/providers/ThemeProvider";
