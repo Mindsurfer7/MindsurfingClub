@@ -13,8 +13,10 @@
 
 .unclear {
   cursor: pointer;
-  border: 2px solid rgb(0, 0, 0);
-  border-radius: 8px;
+  border: 2px solid var(--inv-primary-color);
+  color: var(--inv-primary-color);
+
+  border-radius: 4px;
   background: none;
   align-items: center;
   justify-content: center;
@@ -22,7 +24,7 @@
 }
 
 .outline {
-  padding: 10px;
+  padding: 0%;
   border: 1px solid var(--primary-color);
   color: var(--primary-color);
   border-radius: 4px;

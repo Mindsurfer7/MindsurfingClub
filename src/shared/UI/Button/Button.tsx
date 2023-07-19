@@ -1,15 +1,15 @@
-import React, { ButtonHTMLAttributes } from "react";
-import { classNames } from "shared/lib/classNames/classNames";
-import cls from "./button.module.scss";
+import React, { ButtonHTMLAttributes } from 'react';
+import { classNames } from 'shared/lib/classNames/classNames';
+import cls from './button.module.scss';
 //import "../../../App/styles/variables/global.scss";
 
 export enum ButtonTheme {
-  CLEAR = "clear",
-  UNCLEAR = "unclear",
-  OUTLINE = "outline",
-  OUTLINE_DARK = "outline-dark",
-  BACKGROUND = "background",
-  BACKGROUND_INVERTED = "background-inverted",
+  CLEAR = 'clear',
+  UNCLEAR = 'unclear',
+  OUTLINE = 'outline',
+  OUTLINE_DARK = 'outline-dark',
+  BACKGROUND = 'background',
+  BACKGROUND_INVERTED = 'background-inverted',
 }
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -20,9 +20,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export enum ButtonSize {
-  M = "size-m",
-  L = "size-l",
-  XL = "size-xl",
+  M = 'size-m',
+  L = 'size-l',
+  XL = 'size-xl',
 }
 
 const Button: React.FC<ButtonProps> = (props) => {

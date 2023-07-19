@@ -4,7 +4,7 @@ type Additional = Array<string | undefined>;
 export function classNames(
   cls: string,
   mods: Mods = {},
-  add: Additional = []
+  add: Additional = [],
 ): string {
   return [
     cls,
@@ -12,7 +12,7 @@ export function classNames(
     ...Object.entries(mods)
       .filter(([cls, value]) => Boolean(value))
       .map(([cls, value]) => cls),
-  ].join(" ");
+  ].join(' ');
 }
 
 //classNames("remove-btn", { hovered: true, selectable: true, red: true }, [""]);

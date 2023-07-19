@@ -1,11 +1,10 @@
-import { useTranslation } from "react-i18next";
+import LoginForm from 'features/AuthByUsername/UI/LoginForm/LoginForm';
+import { useTranslation } from 'react-i18next';
 
 const MainPage = () => {
-  const { t } = useTranslation("main");
+  const { t } = useTranslation('main');
 
-  console.log("main page");
-
-  return <div>{t("Main Page")}</div>;
+  return <div>{t('Main Page')}</div>;
 };
 
 export default MainPage;

@@ -1,10 +1,11 @@
-.app.dark {
-  --bg-color: blue;
-  --inverted-bg-color: rgb(0, 0, 0);
+.app_theme_dark {
+  --bg-color: rgb(74, 80, 92);
+  --inverted-bg-color: rgb(133, 119, 119);
+  --sidebar-button: rgb(112, 101, 101);
 
-  --primary-color: rgb(12, 196, 12);
+  --primary-color: rgb(255, 255, 255);
   --secondary-color: rgb(0, 255, 0);
 
-  --inv-primary-color: rgb(255, 255, 255);
+  --inv-primary-color: rgb(0, 0, 0);
   --inv-secondary-color: rgb(20, 6, 211);
 }

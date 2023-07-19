@@ -1,10 +1,11 @@
-.app.light {
-  --bg-color: rgb(0, 0, 0);
+.app_theme_light {
+  --bg-color: rgb(189, 201, 201);
   --inverted-bg-color: rgb(255, 208, 0);
+  --sidebar-button: rgb(255, 216, 45);
 
-  --primary-color: rgb(255, 255, 255);
+  --primary-color: rgb(0, 0, 0);
   --secondary-color: rgb(20, 6, 211);
 
-  --inv-primary-color: rgb(12, 196, 12);
+  --inv-primary-color: rgb(255, 255, 255);
   --inv-secondary-color: rgb(0, 255, 0);
 }

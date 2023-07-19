@@ -22,7 +22,7 @@
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  background: rebeccapurple;
+  //background: rebeccapurple;
   align-items: center;
   justify-content: center;
 }
@@ -36,25 +36,24 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  background: rebeccapurple;
+  background: var(--inverted-bg-color); // rebeccapurple;
 }
 .element:hover {
-  background: rgb(135, 68, 202);
+  background: var(--sidebar-button);
 }
 .linkWrapper {
   width: 100%;
-
-  background: rebeccapurple;
 }
 .linkWrapper:hover {
-  background: rgb(135, 68, 202);
 }
 
 .collapseBtn {
   position: absolute;
   margin-right: 5px;
   font-size: large;
-  right: 40px;
+  color: var(--inv-primary-color);
+  right: 10px;
+  top: 5px;
 }
 
 .background {
@@ -72,7 +71,24 @@
   .link {
     opacity: 0;
     width: 0;
+    transition: 0.3s;
+  }
+  .icon {
+    margin-right: 3px;
+  }
+
+  .collapseBtn {
+    position: relative;
+    margin-right: 5px;
+    font-size: large;
     transition: 0.3s opacity;
+    display: flex;
+    margin-left: 25px;
+    align-items: center;
+    justify-content: center;
+  }
+  .collapseBtn:hover {
+    background: var(--sidebar-button);
   }
 
   // .Sidebar {
