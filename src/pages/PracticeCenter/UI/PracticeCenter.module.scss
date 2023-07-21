@@ -1,0 +1,70 @@
+.PracticeCenter {
+  display: flex;
+  //flex-direction: column;
+}
+
+.account {
+  width: 300px;
+  height: 250px;
+
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  margin: 10px;
+
+  display: flex;
+}
+
+.userData {
+}
+
+.pic {
+  position: relative;
+  // top: 0;
+  // left: 0;
+
+  width: 40;
+  height: 40;
+
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.impactBox {
+  width: 150px;
+  height: 130px;
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.singleImpact {
+}
+.singleImpact:hover {
+  color: rebeccapurple;
+  cursor: pointer;
+}
+
+.actions {
+  width: 300px;
+  height: 500px;
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  margin: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  //justify-content: center;
+}
+
+.actionsTitle {
+}
+
+.singleAction {
+}
+.singleAction:hover {
+  color: green;
+  cursor: pointer;
+}

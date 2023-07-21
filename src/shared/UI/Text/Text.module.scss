@@ -1,0 +1,22 @@
+.title {
+  font-size: var(--font-size-l);
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.text {
+  font: var(--font-m);
+  color: var(--secodary-color);
+}
+
+.error {
+  .title {
+    //font: var(--font-l);
+    color: var(--red-light);
+  }
+
+  .text {
+    //font: var(--font-m);
+    color: var(--red-light);
+  }
+}

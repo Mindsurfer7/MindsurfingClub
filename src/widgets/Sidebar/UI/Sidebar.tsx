@@ -50,6 +50,16 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
             <span className={cls.link}>About</span>
           </AppLink>
         </div>
+        <div className={cls.linkWrapper}>
+          <AppLink
+            theme={AppLinkTheme.primary}
+            to={RoutePath.practiceCenter}
+            className={cls.element}
+          >
+            <AboutIcon className={cls.icon} />
+            <span className={cls.link}>Practice Center</span>
+          </AppLink>
+        </div>
 
         <div className={cls.linkWrapper}>
           <AppLink

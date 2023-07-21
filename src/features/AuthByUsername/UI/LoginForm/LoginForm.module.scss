@@ -12,6 +12,21 @@ input {
 }
 
 .btn {
+  padding: 4px;
   margin-top: 10px;
   margin-left: auto;
+}
+
+.btn:hover {
+  border: 1px solid var(--inv-primary-color);
+  color: var(--inv-primary-color);
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  align-items: center;
+}
+.errorMessage {
 }

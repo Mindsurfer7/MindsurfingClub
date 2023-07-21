@@ -1,5 +1,7 @@
+import { getUsername } from 'entities/User/model/selectors/getUsername';
 import { User, UserScheme } from './model/types/user';
-export { userReducer } from './model/slice/userSlice';
+export { userReducer, userSlice } from './model/slice/userSlice';
+
 //didnt export actions
 
-export { UserScheme, User };
+export { UserScheme, User, getUsername };

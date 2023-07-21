@@ -1,5 +1,5 @@
 :root {
-  --font-family-main: "Times New Roman";
+  --font-family-main: 'Times New Roman';
 
   --font-size-m: 16px;
   --font-line-m: 24px;
@@ -9,7 +9,7 @@
   --font-line-m: 32px;
   --font-l: var(--font-size-l) / var(--font-line-l) var(--font-family-main);
 
-  --font-size-xl: 32px
+  --font-size-xl: 32px;
   --font-line-xl: 40px;
   --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
 
@@ -23,10 +23,10 @@
   // z index
 
   --overlay-color: rgba(0 0 0 / 60%);
-  --modal-z-index: 10 ;
+  --modal-z-index: 10;
+
+  //    COLORS  Consolas, "Times New Roman", Serif;
+
+  --red-light: rgb(255, 0, 0);
+  --red-dark: rgb(201, 3, 3);
 }
-
-//  Consolas, "Times New Roman", Serif;
-
-
-

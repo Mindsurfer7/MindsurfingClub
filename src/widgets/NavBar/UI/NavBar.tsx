@@ -5,9 +5,13 @@ import { syncBuiltinESMExports } from 'module';
 import AppLink, { AppLinkTheme } from 'shared/UI/AppLink/AppLink';
 import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
 import Modal from 'shared/UI/Modal/Modal';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { LoginModal } from 'features/AuthByUsername';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUsername } from 'entities/User/model/selectors/getUsername';
+import { NavLink } from 'react-router-dom';
+import { userLogout } from 'entities/User/model/slice/userSlice';
 
 interface navprops {
   className?: string;
@@ -15,28 +19,71 @@ interface navprops {
 
 export const NavBar = ({ className }: navprops) => {
   const [isVisible, setVisibility] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
+  const username = useSelector(getUsername);
+  const dispatch = useDispatch();
 
   const onCloseModal = useCallback(() => {
-    //setVisibility((prev) => !prev);
     setVisibility(false);
   }, []);
   const onOpenModal = useCallback(() => {
-    //setVisibility((prev) => !prev);
     setVisibility(true);
   }, []);
+  const onLogout = useCallback(() => {
+    dispatch(userLogout());
+    setIsLogged(false);
+  }, []);
+
+  useEffect(() => {
+    if (username) {
+      setVisibility(false);
+    }
+  }, [username]);
 
   return (
     <div className={classNames(cls.navbar, {}, [className as string])}>
       <LoginModal isVisible={isVisible} onClose={onCloseModal} />
+
       <div className={cls.links}>
-        <Button
-          theme={ButtonTheme.OUTLINE}
-          className={cls.login}
-          onClick={onOpenModal}
-        >
-          login
-        </Button>
+        {' '}
+        {username ? (
+          <div
+            className={cls.nickname}
+            onClick={() => {
+              setIsLogged(!isLogged);
+            }}
+          >
+            {username}
+          </div>
+        ) : (
+          <Button
+            theme={ButtonTheme.OUTLINE}
+            className={cls.login}
+            onClick={onOpenModal}
+          >
+            login
+          </Button>
+        )}
       </div>
+      {isLogged ? (
+        <div className={cls.account}>
+          <NavLink to={'/favorites'}>
+            <div className={'css.WatchList'}>My Account</div>
+          </NavLink>
+          <NavLink to={'/tracker'}>
+            <div className={'css.WatchList'}>Settings</div>
+          </NavLink>
+          <Button
+            theme={ButtonTheme.OUTLINE}
+            className={cls.login}
+            onClick={onLogout}
+          >
+            logout
+          </Button>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

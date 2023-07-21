@@ -27,7 +27,7 @@
   padding: 0%;
   border: 1px solid var(--primary-color);
   color: var(--primary-color);
-  border-radius: 4px;
+  border-radius: 3px;
   background: none;
 }
 
@@ -58,4 +58,8 @@
 }
 .size-xl {
   font-size: 32px;
+}
+
+.disabled {
+  opacity: 0.5;
 }

@@ -1,14 +1,15 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { ThemeDecorator } from "shared/config/storybook/ThemeDecorator/ThemeDecorator";
-import { Theme } from "App/providers/ThemeProvider";
-import { NavBar } from "./NavBar";
+import React from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
+import { Theme } from 'App/providers/ThemeProvider';
+import { NavBar } from './NavBar';
+import { StoreDecorator } from 'shared/config/storybook/StoreDecorator/StoreDecorator';
 
 export default {
-  title: "widget/Navbar",
+  title: 'widget/Navbar',
   component: NavBar,
   argTypes: {
-    backgroundColor: { control: "color" },
+    backgroundColor: { control: 'color' },
   },
 } as ComponentMeta<typeof NavBar>;
 
@@ -16,8 +17,18 @@ const Template: ComponentStory<typeof NavBar> = (args) => <NavBar {...args} />;
 
 export const light = Template.bind({});
 light.args = {};
+light.decorators = [
+  StoreDecorator({
+    user: { authData: { id: '1', username: 'admin' } },
+  }),
+];
 
-export const dark = Template.bind({});
-dark.args = {};
+// export const dark = Template.bind({});
+// dark.args = {};
+// dark.decorators = [
+//   StoreDecorator({
+//     user: { authData: { id: '1', username: 'admin' } },
+//   }),
+// ];
 
-light.decorators = [ThemeDecorator(Theme.light)];
+// dark.decorators = [ThemeDecorator(Theme.light)];
