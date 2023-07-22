@@ -15,20 +15,17 @@ export default {
 
 const Template: ComponentStory<typeof NavBar> = (args) => <NavBar {...args} />;
 
-export const light = Template.bind({});
-light.args = {};
-light.decorators = [
+export const Light = Template.bind({});
+Light.args = {};
+Light.decorators = [StoreDecorator({})];
+export const Dark = Template.bind({});
+Dark.args = {};
+Dark.decorators = [ThemeDecorator(Theme.dark), StoreDecorator({})];
+
+export const AuthNavbar = Template.bind({});
+AuthNavbar.args = {};
+AuthNavbar.decorators = [
   StoreDecorator({
     user: { authData: { id: '1', username: 'admin' } },
   }),
 ];
-
-// export const dark = Template.bind({});
-// dark.args = {};
-// dark.decorators = [
-//   StoreDecorator({
-//     user: { authData: { id: '1', username: 'admin' } },
-//   }),
-// ];
-
-// dark.decorators = [ThemeDecorator(Theme.light)];

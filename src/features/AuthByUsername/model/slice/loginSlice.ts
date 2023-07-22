@@ -38,6 +38,6 @@ export const loginSlice = createSlice({
 export const { setUsername, setPassword } = loginSlice.actions;
 export const { reducer: loginReducer } = loginSlice;
 
-export interface loginScheme {
-  value: any;
-}
+// export interface loginScheme {
+//   value: any;
+// }

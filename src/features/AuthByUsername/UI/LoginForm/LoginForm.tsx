@@ -1,25 +1,45 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './LoginForm.module.scss';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import Input from 'shared/UI/Input/Input';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, useStore } from 'react-redux';
 import {
-  setPassword,
-  setUsername,
-} from 'features/AuthByUsername/model/slice/loginSlice';
-import { selectLogingState } from 'features/AuthByUsername/model/selectors/selectLoginState/selectLoginState';
+  getLoginError,
+  getLoginIsLoading,
+  getLoginPassword,
+  getLoginUsername,
+  selectLogingState,
+} from 'features/AuthByUsername/model/selectors/selectLoginState/selectLoginState';
 import { loginByUsername } from 'features/AuthByUsername/model/services/LoginByUsername/loginByUsername';
 import { disabled } from 'shared/UI/Button/Button.stories';
 import Text, { TextTheme } from 'shared/UI/Text/Text';
+import { ReduxStoreWithManager } from 'App/providers/StoreProvider';
+import { setPassword, setUsername } from 'features/AuthByUsername';
+import { loginReducer } from 'features/AuthByUsername/model/slice/loginSlice';
 
-interface LoginFormProps {
+export interface LoginFormProps {
   className?: string;
 }
 //<Text text={loginData.error} theme={TextTheme.ERROR} />
 const LoginForm: React.FC<LoginFormProps> = memo(({ className }) => {
   const dispatch = useDispatch();
-  const loginData = useSelector(selectLogingState);
+  const store = useStore() as ReduxStoreWithManager;
+  //const loginData = useSelector(selectLogingState);
+  const username = useSelector(getLoginUsername);
+  const password = useSelector(getLoginPassword);
+  const isLoading = useSelector(getLoginIsLoading);
+  const error = useSelector(getLoginError);
+
+  useEffect(() => {
+    store.reducerManager.add('loginForm', loginReducer);
+
+    return () => {
+      console.log('unmount');
+
+      store.reducerManager.remove('loginForm');
+    };
+  }, []);
 
   const onChangeUsername = useCallback(
     (value: string) => {
@@ -34,8 +54,8 @@ const LoginForm: React.FC<LoginFormProps> = memo(({ className }) => {
     [dispatch],
   );
   const onLoginClick = useCallback(() => {
-    dispatch(loginByUsername(loginData));
-  }, [dispatch, loginData.password, loginData.username]);
+    dispatch(loginByUsername({ username, password }));
+  }, [dispatch, username, password]);
 
   return (
     <div className={classNames(cls.LoginForm, {}, [className as string])}>
@@ -47,7 +67,7 @@ const LoginForm: React.FC<LoginFormProps> = memo(({ className }) => {
         <Input
           className={cls.input}
           type="text"
-          value={loginData.username}
+          value={username}
           placeholder="login"
           onChange={onChangeUsername}
           autoFocus
@@ -56,7 +76,7 @@ const LoginForm: React.FC<LoginFormProps> = memo(({ className }) => {
       <div className={cls.input2}>
         <Input
           className={cls.input}
-          value={loginData.password}
+          value={password}
           type="text"
           placeholder="password"
           onChange={onChangePassword}
@@ -64,16 +84,14 @@ const LoginForm: React.FC<LoginFormProps> = memo(({ className }) => {
       </div>
       <div className={cls.bottom}>
         <div className={cls.errorMessage}>
-          {loginData.error && (
-            <Text text={loginData.error} theme={TextTheme.ERROR} />
-          )}
+          {error && <Text text={error} theme={TextTheme.ERROR} />}
         </div>
 
         <Button
           onClick={onLoginClick}
           className={cls.btn}
           theme={ButtonTheme.OUTLINE}
-          disabled={loginData.isLoading}
+          disabled={isLoading}
         >
           Login
         </Button>
