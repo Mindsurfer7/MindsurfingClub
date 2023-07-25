@@ -1,0 +1,28 @@
+.login {
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 30px;
+}
+.login:hover {
+  color: rgb(8, 29, 214);
+  border: 1px solid rgb(8, 29, 214);
+}
+
+.account {
+  position: absolute;
+  background-color: var(--inverted-bg-color);
+  //border: 1px solid rgb(230, 3, 3);
+  border-radius: 5px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //justify-content: center;
+
+  top: 94px;
+  right: 27px;
+  width: 250px;
+  height: 350px;
+  padding: 2px;
+}

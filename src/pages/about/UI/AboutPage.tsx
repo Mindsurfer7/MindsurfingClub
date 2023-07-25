@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const about = [
@@ -8,7 +9,7 @@ const about = [
   'webpack configuration',
 ];
 
-const AboutPage = () => {
+const AboutPage = memo(() => {
   const { t } = useTranslation('about');
 
   return (
@@ -21,6 +22,6 @@ const AboutPage = () => {
       </ul>
     </div>
   );
-};
+});
 
 export default AboutPage;

@@ -1,13 +1,16 @@
 //import { counterSlice } from "./../../../../entities/Counter/model/slice/counterSlice";
 import { ReducersMapObject, configureStore } from '@reduxjs/toolkit';
 import { StateScheme } from './stateScheme';
-import { counterReducer } from 'entities/Counter/model/slice/counterSlice';
 import { userReducer } from 'entities/User';
 import { createReducerManager } from './reducerManager';
+import { useDispatch } from 'react-redux';
 
-export function createReduxStore(initialState?: StateScheme) {
+export function createReduxStore(
+  initialState?: StateScheme,
+  asyncReducers?: ReducersMapObject<StateScheme>,
+) {
   const rootReducers: ReducersMapObject<StateScheme> = {
-    counter: counterReducer,
+    ...asyncReducers,
     user: userReducer,
   };
 
@@ -24,3 +27,6 @@ export function createReduxStore(initialState?: StateScheme) {
 
   return store;
 }
+
+export type AppDispatch = ReturnType<typeof createReduxStore>['dispatch'];
+export const useAppDiscpatch = () => useDispatch<AppDispatch>();

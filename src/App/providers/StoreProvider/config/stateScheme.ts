@@ -5,13 +5,13 @@ import {
   Reducer,
   ReducersMapObject,
 } from '@reduxjs/toolkit';
-import { CounterScheme } from 'entities/Counter';
+import { ProfileScheme } from 'entities/Profile';
 import { UserScheme } from 'entities/User';
 import { LoginScheme } from 'features/AuthByUsername';
 
 export interface StateScheme {
-  counter: CounterScheme;
   loginForm?: LoginScheme;
+  profile?: ProfileScheme;
   user: UserScheme;
 }
 
@@ -22,10 +22,6 @@ export interface ReducerManager {
   reduce: (state: StateScheme, action: AnyAction) => CombinedState<StateScheme>;
   add: (key: StateSchemeKey, reducer: Reducer) => void;
   remove: (key: StateSchemeKey) => void;
-}
-
-export interface CounterState {
-  value: number;
 }
 
 export interface ReduxStoreWithManager extends EnhancedStore<StateScheme> {

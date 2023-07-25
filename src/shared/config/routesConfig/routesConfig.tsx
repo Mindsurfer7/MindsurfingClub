@@ -5,12 +5,14 @@ import { MainPage } from 'pages/main';
 import { PsyRoom } from 'pages/PsyRoom';
 import Error404 from 'pages/404/Error404';
 import PracticeCenter from 'pages/PracticeCenter/UI/PracticeCenter';
+import { ProfilePageAsync } from 'pages/ProfilePage'; //import ProfilePage from 'pages/ProfilePage/UI/ProfilePage';
 
 export enum AppRoutes {
   Main = 'main',
   Home = 'home',
   About = 'about',
   PsyRoom = 'psyroom',
+  Profile = 'profile',
   PracticeCenter = 'practiceCenter',
   NotFound = 'not-found',
 }
@@ -20,6 +22,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.Home]: '/home',
   [AppRoutes.About]: '/about',
   [AppRoutes.PsyRoom]: '/psyroom',
+  [AppRoutes.Profile]: '/profile',
   [AppRoutes.PracticeCenter]: '/practiceCenter',
   [AppRoutes.NotFound]: '*',
 };
@@ -40,6 +43,10 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
   [AppRoutes.PsyRoom]: {
     path: RoutePath[AppRoutes.PsyRoom],
     element: <PsyRoom />,
+  },
+  [AppRoutes.Profile]: {
+    path: RoutePath[AppRoutes.Profile],
+    element: <ProfilePageAsync />,
   },
   [AppRoutes.PracticeCenter]: {
     path: RoutePath[AppRoutes.PracticeCenter],

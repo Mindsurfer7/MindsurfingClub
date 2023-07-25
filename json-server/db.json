@@ -1,10 +1,6 @@
 {
   "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "userId": 1
-    },
+    { "id": 1, "title": "json-server", "userId": 1 },
     {
       "id": 2,
       "title": "json-server",
@@ -20,10 +16,25 @@
   ],
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "admin",
       "password": "123"
+    },
+    {
+      "id": "2",
+      "username": "Mindsurfer",
+      "password": "777"
     }
   ],
-  "profile": { "name": "typicode" }
+
+  "profile": {
+    "first": "Mindsurfer",
+    "lastname": "X",
+    "age": 23,
+    "currency": "KZT",
+    "country": "Kazakhstan",
+    "city": "Almaty",
+    "username": "Mindsurfer",
+    "avatar": "https://pic.rutubelist.ru/user/3b/27/3b2758ad5492a76b578f7ee072e4e894.jpg"
+  }
 }

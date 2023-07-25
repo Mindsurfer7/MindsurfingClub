@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { classNames } from "shared/lib/classNames/classNames";
-import cls from "./PsyRoom.module.scss";
-import Button, { ButtonTheme } from "shared/UI/Button/Button";
+import React, { memo, useEffect, useState } from 'react';
+import { classNames } from 'shared/lib/classNames/classNames';
+import cls from './PsyRoom.module.scss';
+import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 //import PackageChecker from "tools/PackageChecker";
 
 interface PsyRoomProps {
   className?: string;
 }
 
-const PsyRoom: React.FC<PsyRoomProps> = ({ className }) => {
-  const [message, setMessage] = useState("");
+const PsyRoom: React.FC<PsyRoomProps> = memo(({ className }) => {
+  const [message, setMessage] = useState('');
   const [mesArray, setMesArray] = useState<string[]>([]);
 
   const sendMessage = () => {
     setMesArray([...mesArray, message]);
-    setMessage("");
+    setMessage('');
   };
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(event.target.value);
@@ -36,6 +36,6 @@ const PsyRoom: React.FC<PsyRoomProps> = ({ className }) => {
       </div>
     </div>
   );
-};
+});
 
 export default PsyRoom;

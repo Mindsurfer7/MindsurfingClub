@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './PracticeCenter.module.scss';
 
@@ -6,7 +6,7 @@ interface PracticeCenterProps {
   className?: string;
 }
 
-const PracticeCenter: React.FC<PracticeCenterProps> = ({ className }) => {
+const PracticeCenter: React.FC<PracticeCenterProps> = memo(({ className }) => {
   const [actions, setActions] = useState([
     '70 min running',
     '30 min workout',
@@ -44,6 +44,6 @@ const PracticeCenter: React.FC<PracticeCenterProps> = ({ className }) => {
       </div>
     </div>
   );
-};
+});
 
 export default PracticeCenter;
