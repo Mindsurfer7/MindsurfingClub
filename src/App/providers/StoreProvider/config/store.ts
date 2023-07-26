@@ -1,13 +1,21 @@
 //import { counterSlice } from "./../../../../entities/Counter/model/slice/counterSlice";
-import { ReducersMapObject, configureStore } from '@reduxjs/toolkit';
-import { StateScheme } from './stateScheme';
+import {
+  CombinedState,
+  Reducer,
+  ReducersMapObject,
+  configureStore,
+} from '@reduxjs/toolkit';
+import { StateScheme, ThunkExtraArg } from './stateScheme';
 import { userReducer } from 'entities/User';
 import { createReducerManager } from './reducerManager';
 import { useDispatch } from 'react-redux';
+import { API } from 'shared/API/API';
+import { NavigateOptions, To } from 'react-router-dom';
 
 export function createReduxStore(
   initialState?: StateScheme,
   asyncReducers?: ReducersMapObject<StateScheme>,
+  navigate?: (to: To, options?: NavigateOptions) => void,
 ) {
   const rootReducers: ReducersMapObject<StateScheme> = {
     ...asyncReducers,
@@ -16,11 +24,21 @@ export function createReduxStore(
 
   const reducerManager = createReducerManager(rootReducers);
 
-  const store = configureStore<StateScheme>({
-    //@ts-ignore
-    reducer: reducerManager.reduce,
+  const extraArg: ThunkExtraArg = {
+    API: API,
+    navigate,
+  };
+
+  const store = configureStore({
+    reducer: reducerManager.reduce as Reducer<CombinedState<StateScheme>>,
     devTools: IS_DEV,
     preloadedState: initialState,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        thunk: {
+          extraArgument: extraArg,
+        },
+      }),
   });
   //@ts-ignore
   store.reducerManager = reducerManager;

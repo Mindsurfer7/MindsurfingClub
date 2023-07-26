@@ -1,5 +1,12 @@
-import { ReactNode, useCallback, useEffect, useRef, useState } from 'react';
-import { classNames } from 'shared/lib/classNames/classNames';
+import {
+  MutableRefObject,
+  ReactNode,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
+import { Mods, classNames } from 'shared/lib/classNames/classNames';
 import cls from './Modal.module.scss';
 import Portal from '../Portal/Portal';
 import { useTheme } from 'App/providers/ThemeProvider';
@@ -25,7 +32,7 @@ const Modal: React.FC<ModalProps> = (props) => {
     }
   }, [isVisible]);
 
-  const timeRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeRef = useRef() as MutableRefObject<ReturnType<typeof setTimeout>>;
 
   const onContentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -33,7 +40,7 @@ const Modal: React.FC<ModalProps> = (props) => {
 
   const { theme } = useTheme();
 
-  const mods: Record<string, boolean | undefined> = {
+  const mods: Mods = {
     [cls.visible]: isVisible,
     [cls.isClosing]: isClosed,
   };

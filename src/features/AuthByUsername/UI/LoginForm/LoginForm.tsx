@@ -52,6 +52,12 @@ const LoginForm: React.FC<LoginFormProps> = memo(({ className }) => {
   );
   const onLoginClick = useCallback(() => {
     dispatch(loginByUsername({ username, password }));
+
+    //ulbi suggests to use it in fulfilled case:
+    //  const result = await dispatch(loginByUsername({ username, password }));
+    //   if (result.meta.requestStatus === 'fulfilled') {
+    //     onSuccess(); onclose props
+    // but i close modal im other place
   }, [dispatch, username, password]);
 
   useEffect(() => {

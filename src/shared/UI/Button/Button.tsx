@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes, memo } from 'react';
-import { classNames } from 'shared/lib/classNames/classNames';
+import { Mods, classNames } from 'shared/lib/classNames/classNames';
 import cls from './button.module.scss';
 //import "../../../App/styles/variables/global.scss";
 
@@ -37,7 +37,7 @@ const Button: React.FC<ButtonProps> = memo((props) => {
     ...otherProps
   } = props;
 
-  const mods: Record<string, boolean | undefined> = {
+  const mods: Mods = {
     [cls[theme]]: true,
     [cls.square]: square,
     [cls[size]]: true,

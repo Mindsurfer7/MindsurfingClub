@@ -1,4 +1,3 @@
-import { DeepPartial } from '@reduxjs/toolkit';
 import {
   getLoginError,
   getLoginIsLoading,

@@ -30,6 +30,7 @@ export const loginSlice = createSlice({
       })
       .addCase(loginByUsername.rejected, (state, action) => {
         state.isLoading = false;
+        //@ts-ignore
         state.error = action.payload;
       });
   },
@@ -37,7 +38,3 @@ export const loginSlice = createSlice({
 
 export const { setUsername, setPassword } = loginSlice.actions;
 export const { reducer: loginReducer } = loginSlice;
-
-// export interface loginScheme {
-//   value: any;
-// }
