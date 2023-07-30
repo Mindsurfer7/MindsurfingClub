@@ -9,6 +9,12 @@ import { getUsername } from 'entities/User/model/selectors/getUsername';
 import { NavLink } from 'react-router-dom';
 import { userLogout } from 'entities/User/model/slice/userSlice';
 import MiniModal from 'shared/UI/MiniModal/MiniModal';
+import { getGoogleData } from 'features/AuthWithGoogle/model/selectors/getGoogleProfile';
+import { useAppDiscpatch } from 'App/providers/StoreProvider/config/store';
+import {
+  loginWithGoogle,
+  logoutWithGoogle,
+} from 'features/AuthWithGoogle/model/services/loginWithGoogle';
 
 interface navprops {
   className?: string;
@@ -17,7 +23,10 @@ interface navprops {
 export const NavBar = memo(({ className }: navprops) => {
   const [isVisible, setVisibility] = useState(false);
   const [isLogged, setIsLogged] = useState(false);
+  const [MiniModal2open, setMiniModal2open] = useState(false);
   const username = useSelector(getUsername);
+  const googleAcc = useSelector(getGoogleData);
+  const dispatch = useAppDiscpatch();
 
   const onCloseModal = useCallback(() => {
     setVisibility(false);
@@ -25,6 +34,17 @@ export const NavBar = memo(({ className }: navprops) => {
   const onOpenModal = useCallback(() => {
     setVisibility(true);
   }, []);
+
+  const ulbiLogout = () => {
+    dispatch(userLogout());
+  };
+
+  const onGoogleLogin = () => {
+    dispatch(loginWithGoogle());
+  };
+  const onGoogleLogout = () => {
+    dispatch(logoutWithGoogle());
+  };
 
   useEffect(() => {
     if (username) {
@@ -37,15 +57,35 @@ export const NavBar = memo(({ className }: navprops) => {
       {isVisible && <LoginModal isVisible={isVisible} onClose={onCloseModal} />}
       {/* {i should add Button instead of div here} */}
       <div className={cls.links}>
+        {!googleAcc?.isLogged ? (
+          <Button
+            theme={ButtonTheme.OUTLINE}
+            className={cls.login}
+            onClick={onGoogleLogin}
+          >
+            login
+          </Button>
+        ) : (
+          <Button
+            theme={ButtonTheme.OUTLINE}
+            //className={cls.nickname}
+            onClick={() => {
+              setMiniModal2open(!MiniModal2open);
+            }}
+          >
+            {googleAcc.account?.displayName}
+          </Button>
+        )}
         {username ? (
-          <div
-            className={cls.nickname}
+          <Button
+            theme={ButtonTheme.OUTLINE}
+            //className={cls.nickname}
             onClick={() => {
               setIsLogged(!isLogged);
             }}
           >
             {username}
-          </div>
+          </Button>
         ) : (
           <Button
             theme={ButtonTheme.OUTLINE}
@@ -57,7 +97,12 @@ export const NavBar = memo(({ className }: navprops) => {
         )}
       </div>
       {/* по хорошему весь сей код над выделить в компонентик для шейред слоя + add onblur*/}
-      {isLogged && <MiniModal setIsLogged={setIsLogged} />}
+      {isLogged && (
+        <MiniModal setIsLogged={setIsLogged} onLogout={ulbiLogout} />
+      )}
+      {MiniModal2open && (
+        <MiniModal setIsLogged={setMiniModal2open} onLogout={onGoogleLogout} />
+      )}
     </div>
   );
 });

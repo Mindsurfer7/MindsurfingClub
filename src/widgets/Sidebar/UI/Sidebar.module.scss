@@ -51,7 +51,7 @@
   position: absolute;
   margin-right: 5px;
   font-size: large;
-  color: var(--inv-primary-color);
+  color: var(--primary-color);
   right: 10px;
   top: 5px;
 }
@@ -88,11 +88,12 @@
     justify-content: center;
   }
   .collapseBtn:hover {
-    background: var(--sidebar-button);
+    transition: background-color 0.1s, box-shadow 0.1s, transform 0.1s;
+    &:hover {
+      transform: scale(1.7);
+    }
+    &:active {
+      transform: translateY(2px);
+    }
   }
-
-  // .Sidebar {
-  //   display: flex;
-  //   flex-direction: column;
-  // }
 }

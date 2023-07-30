@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { User, UserScheme } from '../types/user';
+import { GoogleProfile, User, UserScheme } from '../types/user';
 import { USER_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 
 const initialState: UserScheme = {};
@@ -10,6 +10,9 @@ export const userSlice = createSlice({
   reducers: {
     setAuthData: (state, action: PayloadAction<User>) => {
       state.authData = action.payload;
+    },
+    setGoogleAuthData: (state, action: PayloadAction<GoogleProfile>) => {
+      state.googleAuthData = action.payload;
     },
     userLogout: (state) => {
       state.authData = undefined;
@@ -24,7 +27,8 @@ export const userSlice = createSlice({
   },
 });
 
-export const { setAuthData, initAuthData, userLogout } = userSlice.actions;
+export const { setAuthData, initAuthData, userLogout, setGoogleAuthData } =
+  userSlice.actions;
 export const { reducer: userReducer } = userSlice;
 
 export interface CounterScheme {

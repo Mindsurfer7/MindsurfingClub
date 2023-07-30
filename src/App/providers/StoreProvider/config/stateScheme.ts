@@ -7,15 +7,20 @@ import {
   ReducersMapObject,
 } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
+import { GPTscheme } from 'entities/GPT/types/GPTScheme';
 import { ProfileScheme } from 'entities/Profile';
 import { UserScheme } from 'entities/User';
+import { GoogleProfile } from 'entities/User/model/types/user';
 import { LoginScheme } from 'features/AuthByUsername';
+import { GoogleProfileScheme } from 'features/AuthWithGoogle/model/types/GloginSceme';
 import { NavigateOptions, To } from 'react-router-dom';
 
 export interface StateScheme {
   loginForm?: LoginScheme;
   profile?: ProfileScheme;
+  GoogleProfile?: GoogleProfileScheme;
   user: UserScheme;
+  GPT?: GPTscheme;
 }
 
 export type StateSchemeKey = keyof StateScheme;
@@ -37,5 +42,6 @@ export interface ThunkExtraArg {
 export interface ThunkConfig<T> {
   rejectValue: T;
   extra: ThunkExtraArg;
+  state: StateScheme;
   //dispatch: Dispatch;
 }

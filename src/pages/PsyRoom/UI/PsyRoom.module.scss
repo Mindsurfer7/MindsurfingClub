@@ -6,6 +6,67 @@
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  //align-items: center;
+  //justify-content: space-between;
+}
+
+h1 {
+  align-self: center;
+}
+
+.chatWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.send {
+  margin-top: auto;
+  width: 100%;
   justify-content: space-between;
+  display: flex;
+  padding: 10px;
+  // border: 2px solid rgb(112, 101, 101);
+  background: var(--inverted-bg-color);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.sendBtn {
+  width: 60px;
+  height: 30px;
+
+  cursor: pointer;
+  transition: background-color 0.1s, box-shadow 0.1s, transform 0.1s;
+  /* Add CSS transitions for smooth effect on hover */
+
+  &:hover {
+    background-color: #e20bf5; /* Change background color on hover */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add box-shadow on hover */
+    transform: scale(1.1); /* Scale up the button on hover */
+  }
+
+  &:active {
+    transform: translateY(2px); /* Shift the button down by 2 pixels on click */
+  }
+}
+
+.gpt {
+  align-self: flex-end;
+}
+
+.logBtns {
+  display: flex;
+}
+
+.message.assistantMessage {
+  align-self: flex-start;
+  //background-color: #f0f0f0; /* Example background color for assistant messages */
+  /* ... other styles for assistant messages ... */
+}
+
+/* Add styles for the user messages (position to the left) */
+.message.userMessage {
+  align-self: flex-end;
+  //background-color: #d3d3d3; /* Example background color for user messages */
+  /* ... other styles for user messages ... */
 }

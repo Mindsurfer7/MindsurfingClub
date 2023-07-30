@@ -1,0 +1,26 @@
+.ProfileCard {
+  padding: 20px;
+  border: 2px solid var(--inverted-bg-color);
+}
+
+.input {
+  margin-top: 10px;
+}
+
+.loading,
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+}
+
+.account {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.editMode {
+  border: 2px solid rgb(255, 166, 0);
+}

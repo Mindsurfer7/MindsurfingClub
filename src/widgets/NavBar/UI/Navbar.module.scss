@@ -11,19 +11,22 @@
 }
 
 .links {
+  display: flex;
   margin: 5px;
   margin-left: auto;
 }
 
 .login {
+  margin-left: 10px;
   align-items: center;
   justify-content: center;
+  padding: 2px;
   width: 60px;
   height: 30px;
 }
 .login:hover {
-  color: rgb(8, 29, 214);
-  border: 1px solid rgb(8, 29, 214);
+  color: rgb(43, 255, 0);
+  border: 1px solid rgb(43, 255, 0);
 }
 
 .mainLink {

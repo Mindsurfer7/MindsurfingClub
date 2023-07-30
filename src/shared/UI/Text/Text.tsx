@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { classNames } from 'shared/lib/classNames/classNames';
+import { Mods, classNames } from 'shared/lib/classNames/classNames';
 import cls from './Text.module.scss';
 import { title } from 'process';
 
@@ -13,19 +13,29 @@ interface TextProps {
   title?: string;
   text?: string;
   theme?: TextTheme;
+  align?: TextAlign;
 }
 
-//
+export enum TextAlign {
+  Right = 'right',
+  Left = 'left',
+  Center = 'center',
+}
 
 const Text: React.FC<TextProps> = memo((props) => {
-  const { className, title, text, theme = TextTheme.PRIMARY } = props;
-
+  const {
+    align = TextAlign.Left,
+    className,
+    title,
+    text,
+    theme = TextTheme.PRIMARY,
+  } = props;
+  const mods: Mods = {
+    [cls[theme]]: true,
+    [cls[align]]: true,
+  };
   return (
-    <div
-      className={classNames(cls.Text, { [cls[theme]]: true }, [
-        className as string,
-      ])}
-    >
+    <div className={classNames(cls.Text, mods, [className as string])}>
       {title && <p className={cls.title}>{title}</p>}
       {text && <p className={cls.text}>{text}</p>}
     </div>

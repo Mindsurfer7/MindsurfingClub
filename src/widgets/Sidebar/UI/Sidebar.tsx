@@ -36,7 +36,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
           onClick={onSwitch}
           data-testid={'sidebar-btn'}
           className={cls.collapseBtn}
-          theme={ButtonTheme.UNCLEAR}
+          theme={ButtonTheme.CLEAR}
           size={ButtonSize.XL}
           square={true}
         >

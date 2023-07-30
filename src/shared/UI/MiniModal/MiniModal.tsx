@@ -8,14 +8,17 @@ import { useDispatch } from 'react-redux';
 
 interface MiniModalProps {
   setIsLogged: (arg: boolean) => void;
+  onLogout?: () => void;
   className?: string;
 }
 
-const MiniModal: React.FC<MiniModalProps> = ({ className, setIsLogged }) => {
-  const dispatch = useDispatch();
-
-  const onLogout = useCallback(() => {
-    dispatch(userLogout());
+const MiniModal: React.FC<MiniModalProps> = ({
+  className,
+  setIsLogged,
+  onLogout,
+}) => {
+  const handleLogout = useCallback(() => {
+    onLogout?.();
     setIsLogged(false);
   }, []);
 
@@ -31,7 +34,7 @@ const MiniModal: React.FC<MiniModalProps> = ({ className, setIsLogged }) => {
         <Button
           theme={ButtonTheme.OUTLINE}
           className={cls.login}
-          onClick={onLogout}
+          onClick={handleLogout}
         >
           logout
         </Button>

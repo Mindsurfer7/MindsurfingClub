@@ -1,6 +1,10 @@
 {
   "posts": [
-    { "id": 1, "title": "json-server", "userId": 1 },
+    {
+      "id": 1,
+      "title": "json-server",
+      "userId": 1
+    },
     {
       "id": 2,
       "title": "json-server",
@@ -26,15 +30,14 @@
       "password": "777"
     }
   ],
-
   "profile": {
     "first": "Mindsurfer",
     "lastname": "X",
-    "age": 23,
+    "age": "23",
     "currency": "KZT",
     "country": "Kazakhstan",
     "city": "Almaty",
     "username": "Mindsurfer",
-    "avatar": "https://pic.rutubelist.ru/user/3b/27/3b2758ad5492a76b578f7ee072e4e894.jpg"
+    "avatar": " https://avatars.dzeninfra.ru/get-zen_doc/3680683/pub_6007cdab60595f5ffd5fd0e2_6007cf2da1b97e1f1a2ed4f5/scale_1200"
   }
 }

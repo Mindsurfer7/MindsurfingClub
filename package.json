@@ -20,7 +20,8 @@
     "build-storybook": "build-storybook -c ./config/storybook",
     "test:ui:report": "npm run test:ui:json && npm run test:ui:html",
     "test:ui:json": "node scripts/generate-visual-json-report.js",
-    "test:ui:html": "reg-cli --from .loki/report.json --report .loki/report.html"
+    "test:ui:html": "reg-cli --from .loki/report.json --report .loki/report.html",
+    "createPage": "node PageFactory.js "
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
@@ -90,6 +91,7 @@
     "@reduxjs/toolkit": "^1.8.0",
     "axios": "^0.26.1",
     "concurrently": "^7.0.0",
+    "firebase": "^10.1.0",
     "i18next": "^21.6.11",
     "i18next-browser-languagedetector": "^6.1.3",
     "i18next-http-backend": "^1.3.2",
