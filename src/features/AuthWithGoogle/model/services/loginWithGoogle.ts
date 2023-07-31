@@ -11,9 +11,9 @@ import {
   setGoogleAuthData,
 } from 'entities/User/model/slice/userSlice';
 import { signInWithPopup, signOut } from 'firebase/auth';
-import { authG, googleProvider } from 'index';
 import { ThunkConfig } from 'App/providers/StoreProvider';
 import { GoogleProfile } from 'entities/User/model/types/user';
+import { authG, googleProvider } from 'App/API/firebaseAPI';
 
 export const loginWithGoogle = createAsyncThunk<
   GoogleProfile,

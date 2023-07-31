@@ -11,6 +11,7 @@ import { createReducerManager } from './reducerManager';
 import { useDispatch } from 'react-redux';
 import { API } from 'shared/API/API';
 import { NavigateOptions, To } from 'react-router-dom';
+import { GPT_API } from 'App/API/firebaseAPI';
 
 export function createReduxStore(
   initialState?: StateScheme,
@@ -26,6 +27,7 @@ export function createReduxStore(
 
   const extraArg: ThunkExtraArg = {
     API: API,
+    GPT_API: GPT_API,
     navigate,
   };
 

@@ -6,3 +6,6 @@ export const getMessages = (state: StateScheme) => {
 export const getSingleMessage = (state: StateScheme) => {
   return state?.GPT?.singleMessage;
 };
+export const getIsWriting = (state: StateScheme) => {
+  return state?.GPT?.isLoading;
+};

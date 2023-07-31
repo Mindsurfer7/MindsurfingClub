@@ -21,7 +21,8 @@ import {
   getProfileReadonly,
 } from 'entities/Profile/model/selectors/getProfile';
 import ProfilePageHeader from './Header/ProfilePageHeader';
-import { Country, Currency } from 'shared/const/common';
+import { Currency } from 'entities/Currency';
+import { Country } from 'entities/Country';
 
 interface ProfilePageProps {
   className?: string;
@@ -67,13 +68,13 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
     },
     [dispatch],
   );
-  const onChangeCountry = useCallback(
+  const onChangeCurrency = useCallback(
     (currency?: Currency) => {
       dispatch(updateProfile({ currency }));
     },
     [dispatch],
   );
-  const onChangeCurrency = useCallback(
+  const onChangeCountry = useCallback(
     (country?: Country) => {
       dispatch(updateProfile({ country }));
     },
@@ -89,9 +90,7 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
           onChangeAge={onChangeAge}
           onChangePic={onChangePic}
           onChangeCity={onChangeCity}
-          //@ts-ignore
           onChangeCountry={onChangeCountry}
-          //@ts-ignore
           onChangeCurrency={onChangeCurrency}
           profileData={formData}
           isLoading={isLoading}

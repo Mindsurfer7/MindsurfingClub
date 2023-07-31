@@ -1,17 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { GPTmessages, GPTscheme } from 'entities/GPT/types/GPTScheme';
+import { GPTmessage, GPTscheme } from 'entities/GPT/types/GPTScheme';
 import { sendMessageToGPT } from '../services/sendMessageToGPT';
+import { requestConversations } from '../services/requestConversations';
+import { updateMessagesDB } from '../services/updateMessagesDB';
 // import { Profile, ProfileScheme } from '../types/profile';
 // import { requestProfileData } from '../services/requestProfileData';
 // import { updateProfileData } from '../services/updateProfileData';
 
 const initialState: GPTscheme = {
   singleMessage: '',
-  messages: [{ content: 'hello am an AI', role: 'assistant' }],
+  messages: [
+    {
+      role: 'system',
+      content:
+        'answer like you are a cognitive-behavior psychotherapist trying to reframe disadaptive ideas of one who talk to you',
+    },
+  ],
   isLoading: false,
-  //   readonly: true,
-  //   error: undefined,
-  //   data: undefined,
+  conversations: [],
 };
 
 export const GPTslice = createSlice({
@@ -32,23 +38,43 @@ export const GPTslice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(sendMessageToGPT.pending, (state, action) => {
-        // state.error = undefined;
         state.isLoading = true;
       })
       .addCase(sendMessageToGPT.fulfilled, (state, action) => {
-        //: PayloadAction<GPTmessages[]>
         state.isLoading = false;
-        console.log(action.payload + 'fulfilled');
         //@ts-ignore
-        state.messages = action.payload; //response.data. choices. message .content
+        const assistantReply = action.payload.choices[0].message.content;
+
+        state.messages = [
+          ...state.messages,
+          { content: assistantReply, role: 'assistant' },
+        ];
+        state.singleMessage = '';
       })
       .addCase(sendMessageToGPT.rejected, (state, action) => {
         state.isLoading = false;
-        console.log(action.payload);
-        // state.error = action.payload;
+        state.error = action.payload;
+      })
+      .addCase(requestConversations.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(requestConversations.fulfilled, (state, action) => {
+        state.conversations = action.payload;
+        state.messages = state.conversations[0].messages;
+
+        state.isLoading = false;
+      })
+      .addCase(requestConversations.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateMessagesDB.fulfilled, (state, action) => {
+        console.log('successfully updated MessagesDB');
       });
   },
 });
 
 export const { setMessages, setSingleMessage } = GPTslice.actions;
 export const { reducer: GPTReducer } = GPTslice;
+
+//: PayloadAction<GPTmessage[]>

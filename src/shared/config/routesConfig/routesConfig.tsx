@@ -7,6 +7,10 @@ import Error404 from 'pages/404/Error404';
 import PracticeCenter from 'pages/PracticeCenter/UI/PracticeCenter';
 import { ProfilePageAsync } from 'pages/ProfilePage'; //import ProfilePage from 'pages/ProfilePage/UI/ProfilePage';
 
+type AppRoutesProps = RouteProps & {
+  authOnly?: boolean;
+};
+
 export enum AppRoutes {
   Main = 'main',
   Home = 'home',
@@ -27,7 +31,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.NotFound]: '*',
 };
 
-export const routeConfig: Record<AppRoutes, RouteProps> = {
+export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.Main]: {
     path: RoutePath[AppRoutes.Main],
     element: <MainPage />,
@@ -47,6 +51,7 @@ export const routeConfig: Record<AppRoutes, RouteProps> = {
   [AppRoutes.Profile]: {
     path: RoutePath[AppRoutes.Profile],
     element: <ProfilePageAsync />,
+    authOnly: true,
   },
   [AppRoutes.PracticeCenter]: {
     path: RoutePath[AppRoutes.PracticeCenter],

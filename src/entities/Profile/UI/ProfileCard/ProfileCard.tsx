@@ -14,7 +14,8 @@ import Preloader from 'shared/UI/Preloader/Preloader';
 import Text, { TextAlign, TextTheme } from 'shared/UI/Text/Text';
 import ProfilePic from 'shared/UI/ProfilePic/ProfilePic';
 import { Select } from 'shared/UI/Select/Select';
-import { Country, Currency } from 'shared/const/common';
+import { Country, CountrySelect } from 'entities/Country';
+import { Currency, CurrencySelect } from 'entities/Currency';
 
 interface ProfileCardProps {
   className?: string;
@@ -29,19 +30,6 @@ interface ProfileCardProps {
   onChangeCountry?: (country: Country) => void;
   onChangeCurrency?: (currency: Currency) => void;
 }
-
-const currOptions = [
-  { value: Currency.RUB, content: Currency.RUB },
-  { value: Currency.EUR, content: Currency.EUR },
-  { value: Currency.USD, content: Currency.USD },
-];
-const countryOptions = [
-  { value: Country.Armenia, content: Country.Armenia },
-  { value: Country.Russia, content: Country.Russia },
-  { value: Country.Belarus, content: Country.Belarus },
-  { value: Country.Kazakhstan, content: Country.Kazakhstan },
-  { value: Country.Ukraine, content: Country.Ukraine },
-];
 
 const ProfileCard: React.FC<ProfileCardProps> = ({
   className,
@@ -119,21 +107,16 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
             readonly={readonly}
           />
         )}
-        <Select
-          className={classNames('', {}, [className])}
-          label={'Укажите валюту'}
-          options={currOptions}
+
+        <CurrencySelect
+          className={cls.input}
           value={profileData?.currency}
-          //@ts-ignore
           onChange={onChangeCurrency}
           readonly={readonly}
         />
-        <Select
-          className={classNames('', {}, [className])}
-          label={'Укажите страну'}
-          options={countryOptions}
+        <CountrySelect
+          className={cls.input}
           value={profileData?.country}
-          //@ts-ignore
           onChange={onChangeCountry}
           readonly={readonly}
         />

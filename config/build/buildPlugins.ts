@@ -10,6 +10,8 @@ export function buildPlugins({
   isDev,
   API_URL,
 }: BuildOptions): webpack.WebpackPluginInstance[] {
+  const apiKey = process.env.API_KEY;
+
   const plugins = [
     new HtmlWebpackPlugin({
       template: paths.html,
@@ -22,16 +24,17 @@ export function buildPlugins({
     new webpack.DefinePlugin({
       IS_DEV: JSON.stringify(isDev),
       API_URL: JSON.stringify(API_URL),
+      APIkey: JSON.stringify(apiKey),
     }),
   ];
 
   if (isDev) {
     plugins.push(new webpack.HotModuleReplacementPlugin());
-    plugins.push(
-      new BundleAnalyzerPlugin({
-        openAnalyzer: false,
-      }),
-    );
+    // plugins.push(
+    //   new BundleAnalyzerPlugin({
+    //     openAnalyzer: false,
+    //   }),
+    // );
   }
   return plugins;
 }

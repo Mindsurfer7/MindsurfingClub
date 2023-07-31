@@ -1,10 +1,12 @@
-export type GPTmessages = {
+export type GPTmessage = {
   content: string;
   role: string;
 };
 
 export interface GPTscheme {
   isLoading: boolean;
+  error?: any;
   singleMessage: string;
-  messages: Array<GPTmessages>;
+  messages: Array<GPTmessage>;
+  conversations?: any; // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 }

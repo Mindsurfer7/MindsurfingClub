@@ -12,9 +12,25 @@
   color: var(--primary-color);
   padding: 2px 10px 2px 2px;
   border: 1px solid var(--primary-color);
+  &:hover {
+    cursor: pointer;
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+  :disabled::-webkit-calendar-picker-indicator {
+    display: none;
+  }
 }
 
 .option {
+  &:hover {
+    cursor: pointer;
+  }
   color: var(--inverted-primary-color);
   background: var(--inverted-bg-color);
+}
+
+:disabled {
+  border: none;
 }
