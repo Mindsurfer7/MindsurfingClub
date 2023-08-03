@@ -1,4 +1,3 @@
-import { GoogleProfile } from 'entities/User/model/types/user';
 import { StateScheme } from 'App/providers/StoreProvider';
 
 export const getGoogleProfile = (state: StateScheme) => {
@@ -6,4 +5,10 @@ export const getGoogleProfile = (state: StateScheme) => {
 };
 export const getGoogleData = (state: StateScheme) => {
   return state.GoogleProfile;
+};
+export const getGoogleIsLogged = (state: StateScheme) => {
+  return state.GoogleProfile.isLogged;
+};
+export const getGoogleID = (state: StateScheme) => {
+  return state.GoogleProfile.account?.uid;
 };

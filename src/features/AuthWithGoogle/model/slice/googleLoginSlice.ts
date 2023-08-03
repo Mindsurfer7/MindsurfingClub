@@ -1,23 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { loginWithGoogle, logoutWithGoogle } from '../services/loginWithGoogle';
-import { GoogleProfileScheme } from '../types/GloginSceme';
-import { GoogleProfile } from 'entities/User/model/types/user';
+import { GoogleLoginScheme } from '../types/GloginSceme';
 
-const initialState: GoogleProfileScheme = {
+const initialState: GoogleLoginScheme = {
   isLogged: false,
   isLoading: false,
-  account: {} as GoogleProfile,
   error: '',
 };
 
 export const googleLoginSlice = createSlice({
   name: 'login',
   initialState,
-  reducers: {
-    setAccount: (state, action) => {
-      state.account = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(loginWithGoogle.pending, (state, action) => {
@@ -27,7 +21,6 @@ export const googleLoginSlice = createSlice({
       .addCase(loginWithGoogle.fulfilled, (state, action) => {
         state.isLogged = true;
         state.isLoading = false;
-        state.account = action.payload;
       })
       .addCase(loginWithGoogle.rejected, (state, action) => {
         state.isLoading = false;
@@ -40,7 +33,6 @@ export const googleLoginSlice = createSlice({
       .addCase(logoutWithGoogle.fulfilled, (state, action) => {
         state.isLogged = false;
         state.isLoading = false;
-        state.account = undefined;
       })
       .addCase(logoutWithGoogle.rejected, (state, action) => {
         state.isLoading = false;
@@ -49,5 +41,5 @@ export const googleLoginSlice = createSlice({
   },
 });
 
-export const { setAccount } = googleLoginSlice.actions;
+export const {} = googleLoginSlice.actions;
 export const { reducer: googleLoginReducer } = googleLoginSlice;

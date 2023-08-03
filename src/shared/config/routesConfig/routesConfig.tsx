@@ -6,19 +6,22 @@ import { PsyRoom } from 'pages/PsyRoom';
 import Error404 from 'pages/404/Error404';
 import PracticeCenter from 'pages/PracticeCenter/UI/PracticeCenter';
 import { ProfilePageAsync } from 'pages/ProfilePage'; //import ProfilePage from 'pages/ProfilePage/UI/ProfilePage';
+import ChatWindow from 'pages/PsyRoom/UI/ChatWindow/ChatWindow';
 
 type AppRoutesProps = RouteProps & {
   authOnly?: boolean;
+  requiresGoogleAuth?: boolean;
 };
 
 export enum AppRoutes {
-  Main = 'main',
-  Home = 'home',
-  About = 'about',
-  PsyRoom = 'psyroom',
-  Profile = 'profile',
-  PracticeCenter = 'practiceCenter',
-  NotFound = 'not-found',
+  Main = 'Main',
+  Home = 'Home',
+  About = 'About',
+  PsyRoom = 'PsyRoom',
+  Conversation = 'Conversation',
+  Profile = 'Profile',
+  PracticeCenter = 'PracticeCenter',
+  NotFound = 'NotFound',
 }
 
 export const RoutePath: Record<AppRoutes, string> = {
@@ -28,6 +31,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.PsyRoom]: '/psyroom',
   [AppRoutes.Profile]: '/profile',
   [AppRoutes.PracticeCenter]: '/practiceCenter',
+  [AppRoutes.Conversation]: '/:conversationID',
   [AppRoutes.NotFound]: '*',
 };
 
@@ -47,6 +51,11 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.PsyRoom]: {
     path: RoutePath[AppRoutes.PsyRoom],
     element: <PsyRoom />,
+    //requiresGoogleAuth: true,
+  },
+  [AppRoutes.Conversation]: {
+    path: `${RoutePath[AppRoutes.Conversation]}/:conversationId`,
+    element: <ChatWindow />,
   },
   [AppRoutes.Profile]: {
     path: RoutePath[AppRoutes.Profile],

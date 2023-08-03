@@ -12,6 +12,9 @@ import { useDispatch } from 'react-redux';
 import { API } from 'shared/API/API';
 import { NavigateOptions, To } from 'react-router-dom';
 import { GPT_API } from 'App/API/firebaseAPI';
+import { googleLoginReducer } from 'features/AuthWithGoogle/model/slice/googleLoginSlice';
+import { GoogleProfileReducer } from 'entities/GoogleProfile/model/slice/GoogleProfileSlice';
+import { GPTReducer } from 'entities/GPT';
 
 export function createReduxStore(
   initialState?: StateScheme,
@@ -21,6 +24,9 @@ export function createReduxStore(
   const rootReducers: ReducersMapObject<StateScheme> = {
     ...asyncReducers,
     user: userReducer,
+    GPT: GPTReducer,
+    GoogleProfile: GoogleProfileReducer,
+    GoogleLogin: googleLoginReducer,
   };
 
   const reducerManager = createReducerManager(rootReducers);

@@ -1,8 +1,5 @@
-import { GoogleProfile } from 'entities/User/model/types/user';
-
-export interface GoogleProfileScheme {
+export interface GoogleLoginScheme {
   isLoading: boolean;
   isLogged: boolean;
-  account?: GoogleProfile;
   error?: string;
 }

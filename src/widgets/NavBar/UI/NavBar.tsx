@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './Navbar.module.scss';
 import { memo, useCallback, useEffect, useState } from 'react';
@@ -9,16 +9,33 @@ import { getUsername } from 'entities/User/model/selectors/getUsername';
 import { NavLink } from 'react-router-dom';
 import { userLogout } from 'entities/User/model/slice/userSlice';
 import MiniModal from 'shared/UI/MiniModal/MiniModal';
-import { getGoogleData } from 'features/AuthWithGoogle/model/selectors/getGoogleProfile';
+import { getGoogleData } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import { useAppDiscpatch } from 'App/providers/StoreProvider/config/store';
 import {
   loginWithGoogle,
   logoutWithGoogle,
 } from 'features/AuthWithGoogle/model/services/loginWithGoogle';
+import { title } from 'process';
+import {
+  AppRoutes,
+  RoutePath,
+  routeConfig,
+} from 'shared/config/routesConfig/routesConfig';
 
 interface navprops {
   className?: string;
 }
+
+export const PageTitles = {
+  [RoutePath[AppRoutes.Main]]: 'Main Page',
+  [RoutePath[AppRoutes.Home]]: 'Home Page',
+  [RoutePath[AppRoutes.About]]: 'About Us',
+  [RoutePath[AppRoutes.PsyRoom]]: 'GPT Psychotherapist',
+  [RoutePath[AppRoutes.Profile]]: 'My Profile',
+  [RoutePath[AppRoutes.PracticeCenter]]: '',
+  [RoutePath[AppRoutes.Conversation]]: 'GPT Psychotherapist',
+  [RoutePath[AppRoutes.NotFound]]: '',
+};
 
 export const NavBar = memo(({ className }: navprops) => {
   const [isVisible, setVisibility] = useState(false);
@@ -27,6 +44,17 @@ export const NavBar = memo(({ className }: navprops) => {
   const username = useSelector(getUsername);
   const googleAcc = useSelector(getGoogleData);
   const dispatch = useAppDiscpatch();
+  const location = useLocation();
+  const [pageTitle, setPageTitle] = useState('');
+
+  useEffect(() => {
+    const currentRoute = location.pathname as AppRoutes;
+    const matchedRoute = Object.entries(routeConfig).find(
+      ([key, config]) => config.path === currentRoute,
+    );
+
+    setPageTitle(matchedRoute ? PageTitles[currentRoute] : 'Practice Center');
+  }, [location]);
 
   const onCloseModal = useCallback(() => {
     setVisibility(false);
@@ -55,7 +83,11 @@ export const NavBar = memo(({ className }: navprops) => {
   return (
     <div className={classNames(cls.navbar, {}, [className as string])}>
       {isVisible && <LoginModal isVisible={isVisible} onClose={onCloseModal} />}
-      {/* {i should add Button instead of div here} */}
+      {
+        <div className={cls.title}>
+          <h1>{pageTitle}</h1>
+        </div>
+      }
       <div className={cls.links}>
         {!googleAcc?.isLogged ? (
           <Button

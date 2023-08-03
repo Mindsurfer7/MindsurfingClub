@@ -15,11 +15,10 @@ interface AppLinkProps extends LinkProps {
 }
 
 const AppLink: React.FC<AppLinkProps> = memo(
-  ({ to, children, className, theme }) => {
+  ({ to, children, className, theme = AppLinkTheme.primary }) => {
     return (
       <Link
         to={to}
-        //@ts-ignore хз че тс выебывается на тему, в вебшторме такого нет
         className={classNames(cls.AppLink, { [cls[theme]]: true }, [
           className as string,
         ])}

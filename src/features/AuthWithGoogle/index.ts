@@ -1,1 +1,1 @@
-export { getGoogleProfile } from './model/selectors/getGoogleProfile';
+export { getGoogleProfile } from '../../entities/GoogleProfile/model/selectors/getGoogleProfile';

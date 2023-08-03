@@ -9,3 +9,9 @@ export const getSingleMessage = (state: StateScheme) => {
 export const getIsWriting = (state: StateScheme) => {
   return state?.GPT?.isLoading;
 };
+export const getDialogsList = (state: StateScheme) => {
+  return state?.GPT?.conversations;
+};
+export const getInputValue = (state: StateScheme) => {
+  return state?.GPT?.InputValue;
+};

@@ -13,22 +13,22 @@ export interface SidebarItemType {
 
 export const SidebarItemsList: SidebarItemType[] = [
   {
-    path: RoutePath.main,
+    path: RoutePath.Main,
     Icon: HomeIcon,
     text: 'Home',
   },
   {
-    path: RoutePath.about,
+    path: RoutePath.About,
     Icon: AboutIcon,
     text: 'About',
   },
   {
-    path: RoutePath.profile,
+    path: RoutePath.Profile,
     Icon: ProfileIcon,
     text: 'Profile',
   },
   {
-    path: RoutePath.psyroom,
+    path: RoutePath.PsyRoom,
     Icon: PsyIcon,
     text: 'PsyRoom',
   },

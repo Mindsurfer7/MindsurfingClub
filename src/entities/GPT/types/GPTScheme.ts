@@ -3,8 +3,11 @@ export type GPTmessage = {
   role: string;
 };
 
+//export type DialogsState = 'zero' | 'exist';
+
 export interface GPTscheme {
   isLoading: boolean;
+  InputValue: string;
   error?: any;
   singleMessage: string;
   messages: Array<GPTmessage>;

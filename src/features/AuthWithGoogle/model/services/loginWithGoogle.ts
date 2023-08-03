@@ -6,14 +6,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { User } from 'entities/User';
-import {
-  setAuthData,
-  setGoogleAuthData,
-} from 'entities/User/model/slice/userSlice';
+import { setAuthData } from 'entities/User/model/slice/userSlice';
 import { signInWithPopup, signOut } from 'firebase/auth';
 import { ThunkConfig } from 'App/providers/StoreProvider';
-import { GoogleProfile } from 'entities/User/model/types/user';
 import { authG, googleProvider } from 'App/API/firebaseAPI';
+import {
+  GoogleProfile,
+  logoutAccount,
+  setAccount,
+} from 'entities/GoogleProfile';
 
 export const loginWithGoogle = createAsyncThunk<
   GoogleProfile,
@@ -30,6 +31,9 @@ export const loginWithGoogle = createAsyncThunk<
       // Extract the required data from the currentUser object
       const { uid, displayName, email, photoURL } = currentUser;
       const profile: GoogleProfile = { uid, displayName, email, photoURL };
+
+      //no need if fulfilled code is written in slice
+      // thunkAPI.dispatch(setAccount(profile));
 
       return Promise.resolve({
         profile,
@@ -49,10 +53,13 @@ export const loginWithGoogle = createAsyncThunk<
 export const logoutWithGoogle = createAsyncThunk(
   'googleLogout/loginWithGoogle',
   async (_, thunkAPI) => {
+    console.log('logout thunnk called');
     try {
-      return await signOut(authG).then(() =>
+      await signOut(authG).then(() =>
         Promise.resolve({ status: 200, message: 'You were logged out' }),
       );
+
+      thunkAPI.dispatch(logoutAccount());
     } catch (e) {
       console.log(e);
       return thunkAPI.rejectWithValue('error');
