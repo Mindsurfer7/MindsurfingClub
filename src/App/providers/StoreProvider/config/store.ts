@@ -15,6 +15,8 @@ import { GPT_API } from 'App/API/firebaseAPI';
 import { googleLoginReducer } from 'features/AuthWithGoogle/model/slice/googleLoginSlice';
 import { GoogleProfileReducer } from 'entities/GoogleProfile/model/slice/GoogleProfileSlice';
 import { GPTReducer } from 'entities/GPT';
+import { PlayerReducer } from 'entities/Player/model/slice/playerSlice';
+import { TaskTrackerReducer } from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
 
 export function createReduxStore(
   initialState?: StateScheme,
@@ -24,6 +26,8 @@ export function createReduxStore(
   const rootReducers: ReducersMapObject<StateScheme> = {
     ...asyncReducers,
     user: userReducer,
+    Player: PlayerReducer,
+    TaskTracker: TaskTrackerReducer,
     GPT: GPTReducer,
     GoogleProfile: GoogleProfileReducer,
     GoogleLogin: googleLoginReducer,

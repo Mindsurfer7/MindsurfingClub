@@ -1,0 +1,64 @@
+.PlayerSpace {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 15px;
+  background: var(--inverted-bg-color);
+}
+
+.initial {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tasksWrapper {
+  display: flex;
+  background: var(--bg-color);
+  border: 2px solid rgb(0, 0, 0);
+  //width: 100%;
+  height: 300px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.setter {
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  margin: 5px;
+  //height: 150px;
+  width: 350px;
+}
+.taskList {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px;
+  //height: 150px;
+  width: 250px;
+  overflow: auto;
+}
+.difficulty {
+  display: flex;
+  margin: 0px 5px 0px 5px;
+}
+
+.daily {
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  padding: 10px;
+}
+.tasks {
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.addBtn {
+  width: 100%;
+  align-self: flex-end;
+}

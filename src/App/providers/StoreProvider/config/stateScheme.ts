@@ -14,10 +14,14 @@ import { UserScheme } from 'entities/User';
 import { LoginScheme } from 'features/AuthByUsername';
 import { NavigateOptions, To } from 'react-router-dom';
 import { GoogleLoginScheme } from 'features/AuthWithGoogle/model/types/GloginSceme';
+import { PlayerScheme } from 'entities/Player/types/player';
+import { TaskTrackerScheme } from 'entities/TaskTracker/types/taskTracker';
 
 export interface StateScheme {
   loginForm?: LoginScheme;
   profile?: ProfileScheme;
+  Player: PlayerScheme;
+  TaskTracker: TaskTrackerScheme;
   GoogleProfile: GoogleProfileScheme;
   GoogleLogin: GoogleLoginScheme;
   user: UserScheme;

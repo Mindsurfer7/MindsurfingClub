@@ -19,6 +19,7 @@ import {
 } from 'entities/GPT/model/selectors/getGPTdata';
 import { useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import Textarea from 'shared/UI/Textarea/Textarea';
 
 interface ChatWindowProps {
   className?: string;
@@ -84,11 +85,13 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ className }) => {
   return (
     <div className={classNames(cls.ChatWindow, {}, [className as string])}>
       <div className={cls.header}>
-        <NavLink to={'/psyroom'}>Back to dialogs</NavLink>
+        {' '}
+        <div className={cls.backlink}>
+          <NavLink to={'/psyroom'}>Back to list</NavLink>
+        </div>
         <div className={cls.XL}>
           <h1>Джипити Психотерапевт</h1>
         </div>
-
         <div className={cls.indicator}>
           {isWriting && <span>Psychotherapist is typing...</span>}
         </div>
@@ -111,11 +114,17 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ className }) => {
           ))}
       </div>
       <div className={cls.send}>
-        <Input
+        <Textarea
+          className={cls.textarea}
           onChange={handleChange}
           value={singleMessage}
-          placeholder="descripe your problem here..."
+          placeholder="describe your problem here..."
         />
+        {/* <Input
+          onChange={handleChange}
+          value={singleMessage}
+          placeholder="describe your problem here..."
+        /> */}
         <Button
           theme={ButtonTheme.OUTLINE}
           className={cls.sendBtn}

@@ -1,7 +1,7 @@
-@import "variables/global.scss";
-@import "themes/dark.scss";
-@import "themes/light.scss";
-@import "reset";
+@import 'variables/global.scss';
+@import 'themes/dark.scss';
+@import 'themes/light.scss';
+@import 'reset';
 
 .app {
   font: var(--font-m);
@@ -22,5 +22,5 @@
 
 .page-wrapper {
   flex-grow: 1;
-  padding: 20px;
+  padding: 10px;
 }

@@ -7,6 +7,7 @@ import Error404 from 'pages/404/Error404';
 import PracticeCenter from 'pages/PracticeCenter/UI/PracticeCenter';
 import { ProfilePageAsync } from 'pages/ProfilePage'; //import ProfilePage from 'pages/ProfilePage/UI/ProfilePage';
 import ChatWindow from 'pages/PsyRoom/UI/ChatWindow/ChatWindow';
+import PlayerSpace from 'pages/PlayerSpace/UI/PlayerSpace';
 
 type AppRoutesProps = RouteProps & {
   authOnly?: boolean;
@@ -21,6 +22,7 @@ export enum AppRoutes {
   Conversation = 'Conversation',
   Profile = 'Profile',
   PracticeCenter = 'PracticeCenter',
+  PlayerSpace = 'PlayerSpace',
   NotFound = 'NotFound',
 }
 
@@ -31,6 +33,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.PsyRoom]: '/psyroom',
   [AppRoutes.Profile]: '/profile',
   [AppRoutes.PracticeCenter]: '/practiceCenter',
+  [AppRoutes.PlayerSpace]: '/PlayerSpace',
   [AppRoutes.Conversation]: '/:conversationID',
   [AppRoutes.NotFound]: '*',
 };
@@ -65,6 +68,10 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.PracticeCenter]: {
     path: RoutePath[AppRoutes.PracticeCenter],
     element: <PracticeCenter />,
+  },
+  [AppRoutes.PlayerSpace]: {
+    path: RoutePath[AppRoutes.PlayerSpace],
+    element: <PlayerSpace />,
   },
   [AppRoutes.NotFound]: {
     path: RoutePath[AppRoutes.NotFound],

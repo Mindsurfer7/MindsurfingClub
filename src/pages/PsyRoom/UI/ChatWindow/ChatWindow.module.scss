@@ -33,6 +33,10 @@ h1 {
   position: sticky;
   top: 0;
 }
+.backlink {
+  align-self: left;
+  color: black;
+}
 .indicator {
   position: absolute;
   top: 1px;
@@ -51,6 +55,11 @@ h1 {
   border-radius: 5px;
   position: sticky;
   bottom: 0;
+  align-items: center;
+}
+.textarea {
+  flex: 1;
+  width: 100%;
 }
 
 .sendBtn {
@@ -62,9 +71,9 @@ h1 {
   /* Add CSS transitions for smooth effect on hover */
 
   &:hover {
-    color: var(--primary-color);
-    background-color: var(); /* Change background color on hover */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add box-shadow on hover */
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+
     transform: scale(1.1); /* Scale up the button on hover */
   }
 

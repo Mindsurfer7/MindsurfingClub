@@ -1,0 +1,16 @@
+textarea {
+  background: transparent;
+  border: 1px solid black;
+  border-radius: 6px;
+  outline: none;
+  width: 100%;
+  text-shadow: 0 0 0 var(--primary-color);
+  padding: 10px;
+
+  max-width: 100%;
+  max-height: 55px;
+
+  &:focus {
+    outline: none;
+  }
+}

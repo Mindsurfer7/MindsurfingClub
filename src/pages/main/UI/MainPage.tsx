@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import React, { memo } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './MainPage.module.scss';
+import Textarea from 'shared/UI/Textarea/Textarea';
 
 interface MainPageProps {
   className?: string;
@@ -24,6 +25,7 @@ const MainPage: React.FC<MainPageProps> = memo(({ className }) => {
         получать well-being profit база знаний цифровая гигиена: чб экран,
         удаление иконок навыки сохранения нейроресурса'
       </div>
+      <Textarea />
     </div>
   );
 });

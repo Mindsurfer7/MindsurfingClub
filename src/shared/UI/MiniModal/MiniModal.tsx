@@ -25,8 +25,8 @@ const MiniModal: React.FC<MiniModalProps> = ({
   return (
     <div className={classNames(cls.MiniModal, {}, [className as string])}>
       <div className={cls.account}>
-        <NavLink to={'/profile'}>
-          <div className={'css.WatchList'}>My Account</div>
+        <NavLink to={'/PlayerSpace'}>
+          <div className={'css.WatchList'}>Player Space</div>
         </NavLink>
         <NavLink to={'/tracker'}>
           <div className={'css.WatchList'}>Settings</div>

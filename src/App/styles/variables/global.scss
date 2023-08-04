@@ -1,5 +1,13 @@
+@font-face {
+  font-family: 'Tektur';
+  src: url('https://fonts.googleapis.com/css2?family=Tektur&family=Vina+Sans&display=swap');
+
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
-  --font-family-main: 'Times New Roman';
+  --font-family-main: 'Tektur'; // 'Consolas', 'Times New Roman', 'Serif';
 
   --font-size-m: 16px;
   --font-line-m: 24px;
@@ -17,7 +25,7 @@
 
   --navbar--height: 50px;
 
-  --sidebar-width: 300px;
+  --sidebar-width: 250px;
   --sidebar-width-small: 80px;
 
   // z index

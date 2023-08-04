@@ -34,6 +34,7 @@ export const PageTitles = {
   [RoutePath[AppRoutes.Profile]]: 'My Profile',
   [RoutePath[AppRoutes.PracticeCenter]]: '',
   [RoutePath[AppRoutes.Conversation]]: 'GPT Psychotherapist',
+  [RoutePath[AppRoutes.PlayerSpace]]: 'RPG Task Tracker',
   [RoutePath[AppRoutes.NotFound]]: '',
 };
 

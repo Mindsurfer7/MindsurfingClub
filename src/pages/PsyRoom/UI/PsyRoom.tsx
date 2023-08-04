@@ -21,6 +21,7 @@ import AppLink from 'shared/UI/AppLink/AppLink';
 //@ts-ignore
 import { v4 } from 'uuid';
 import { createNewDialog } from 'entities/GPT/model/services/createNewDialog';
+import TrashIcon from '../../../shared/assets/icons/trashcan.svg';
 
 interface PsyRoomProps {
   className?: string;
@@ -93,6 +94,7 @@ const PsyRoom: React.FC<PsyRoomProps> = memo(({ className }) => {
                       onClick={() => onLoadDialog(c.dialogName)}
                     >
                       {c.dialogName}
+                      {/* <TrashIcon className={cls.icon} /> */}
                     </div>
                   </AppLink>
                 ))}
