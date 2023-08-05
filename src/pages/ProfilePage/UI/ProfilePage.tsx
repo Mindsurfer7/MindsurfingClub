@@ -11,7 +11,6 @@ import {
   requestProfileData,
   updateProfile,
 } from 'entities/Profile';
-import { useAppDiscpatch } from 'App/providers/StoreProvider/config/store';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getProfileData,
@@ -23,6 +22,7 @@ import {
 import ProfilePageHeader from './Header/ProfilePageHeader';
 import { Currency } from 'entities/Currency';
 import { Country } from 'entities/Country';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 
 interface ProfilePageProps {
   className?: string;
@@ -37,7 +37,7 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
   const error = useSelector(getProfileError);
   const isLoading = useSelector(getProfileIsLoading);
   const readonly = useSelector(getProfileReadonly);
-  const dispatch = useAppDiscpatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(requestProfileData());

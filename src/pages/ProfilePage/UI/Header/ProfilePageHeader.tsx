@@ -10,8 +10,8 @@ import {
   setReadonly,
   updateProfileData,
 } from 'entities/Profile';
-import { useAppDiscpatch } from 'App/providers/StoreProvider/config/store';
 import { cancelEdit } from 'entities/Profile/model/slice/profileSlice';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 
 interface ProfilePageHeaderProps {
   className?: string;
@@ -19,7 +19,7 @@ interface ProfilePageHeaderProps {
 
 const ProfilePageHeader: React.FC<ProfilePageHeaderProps> = ({ className }) => {
   const readonly = useSelector(getProfileReadonly);
-  const dispatch = useAppDiscpatch();
+  const dispatch = useAppDispatch();
 
   const onEdit = useCallback(() => {
     dispatch(setReadonly(false));

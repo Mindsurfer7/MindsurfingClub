@@ -3,6 +3,7 @@ import { createNewHabit } from 'entities/Player/model/services/createNewHabit';
 import { TaskTrackerScheme } from 'entities/TaskTracker/types/taskTracker';
 
 const initialState: TaskTrackerScheme = {
+  showCompleted: false,
   description: '',
   difficulty: 1,
   isLoading: false,
@@ -20,6 +21,7 @@ export const TaskTrackerSlice = createSlice({
     setDescription: (state, action: PayloadAction<string>) => {
       state.description = action.payload;
     },
+
     setDifficulty: (state, action: PayloadAction<number>) => {
       state.difficulty = action.payload;
     },
@@ -30,6 +32,16 @@ export const TaskTrackerSlice = createSlice({
       state.id = action.payload;
     },
     setTags: (state, action: PayloadAction<string>) => {
+      state.tags = [];
+    },
+    setShowCompleted: (state, action: PayloadAction<boolean>) => {
+      state.showCompleted = action.payload;
+    },
+    clearInputs: (state) => {
+      state.difficulty = 1;
+      state.description = '';
+      state.title = '';
+      state.id = '';
       state.tags = [];
     },
   },
@@ -52,6 +64,13 @@ export const TaskTrackerSlice = createSlice({
   },
 });
 
-export const { setDescription, setDifficulty, setID, setTags, setTitle } =
-  TaskTrackerSlice.actions;
+export const {
+  setDescription,
+  setDifficulty,
+  setShowCompleted,
+  setID,
+  setTags,
+  setTitle,
+  clearInputs,
+} = TaskTrackerSlice.actions;
 export const { reducer: TaskTrackerReducer } = TaskTrackerSlice;

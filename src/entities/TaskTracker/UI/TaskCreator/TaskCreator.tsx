@@ -10,6 +10,7 @@ import {
 } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import {
+  clearInputs,
   setDescription,
   setDifficulty,
   setID,
@@ -20,12 +21,21 @@ import Input from 'shared/UI/Input/Input';
 import { v4 } from 'uuid';
 import { createNewHabit } from 'entities/Player/model/services/createNewHabit';
 import { requestHabits } from 'entities/Player/model/services/requestHabits';
+import { requestDailyz } from 'entities/Player/model/services/requestDailyz';
 
 interface TaskCreatorProps {
   className?: string;
+  createTask: () => Promise<void>;
+  requestData: () => any;
+  onClose?: () => void;
 }
 
-const TaskCreator: React.FC<TaskCreatorProps> = ({ className }) => {
+const TaskCreator: React.FC<TaskCreatorProps> = ({
+  createTask,
+  className,
+  requestData,
+  onClose,
+}) => {
   const dispatch = useAppDispatch();
   const trackerData = useSelector(getTaskTrackerData);
   const diffState = useSelector(getDifficulty);
@@ -50,8 +60,10 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({ className }) => {
 
   const onTaskSubmit = async () => {
     dispatch(setID(v4()));
-    await dispatch(createNewHabit());
-    dispatch(requestHabits());
+    await createTask(); //createTask
+    requestData();
+    dispatch(clearInputs());
+    onClose?.();
   };
 
   return (

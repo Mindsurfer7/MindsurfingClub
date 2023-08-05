@@ -10,17 +10,16 @@ import { NavLink } from 'react-router-dom';
 import { userLogout } from 'entities/User/model/slice/userSlice';
 import MiniModal from 'shared/UI/MiniModal/MiniModal';
 import { getGoogleData } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
-import { useAppDiscpatch } from 'App/providers/StoreProvider/config/store';
 import {
   loginWithGoogle,
   logoutWithGoogle,
 } from 'features/AuthWithGoogle/model/services/loginWithGoogle';
-import { title } from 'process';
 import {
   AppRoutes,
   RoutePath,
   routeConfig,
 } from 'shared/config/routesConfig/routesConfig';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 
 interface navprops {
   className?: string;
@@ -44,7 +43,7 @@ export const NavBar = memo(({ className }: navprops) => {
   const [MiniModal2open, setMiniModal2open] = useState(false);
   const username = useSelector(getUsername);
   const googleAcc = useSelector(getGoogleData);
-  const dispatch = useAppDiscpatch();
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const [pageTitle, setPageTitle] = useState('');
 

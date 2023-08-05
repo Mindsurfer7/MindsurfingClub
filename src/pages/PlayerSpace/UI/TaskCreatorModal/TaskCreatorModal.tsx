@@ -9,19 +9,25 @@ interface TaskCreatorModalProps {
   className?: string;
   isVisible?: boolean;
   onClose?: () => void;
+  APIcallback: () => Promise<void>; //to pass all onChange functions with one object
+  requestCallback: () => any; //to pass all onChange functions with one object
 }
 
 export const TaskCreatorModal: React.FC<TaskCreatorModalProps> = (props) => {
-  const { className, isVisible, onClose } = props;
+  const { className, isVisible, onClose, APIcallback, requestCallback } = props;
   return (
     <Modal
       isVisible={isVisible}
       onClose={onClose}
-      className={classNames(cls.LoginModal, {}, [className as string])}
+      className={classNames(cls.TaskCreatorModal, {}, [className as string])}
       lazy
     >
       <Suspense fallback={<Preloader />}>
-        <TaskCreator />
+        <TaskCreator
+          createTask={APIcallback}
+          requestData={requestCallback}
+          onClose={onClose}
+        />
       </Suspense>
     </Modal>
   );

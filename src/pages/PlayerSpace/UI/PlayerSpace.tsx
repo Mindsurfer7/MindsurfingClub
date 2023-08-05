@@ -12,7 +12,7 @@ import {
   getTasks,
 } from 'entities/Player/model/selectors/getPlayerData';
 import { requestHabits } from 'entities/Player/model/services/requestHabits';
-import SingleHabit from 'entities/TaskTracker/UI/SingleHabit/SingleHabit';
+import SingleHabit from 'entities/TaskTracker/UI/SingleEndeavor/SingleEndeavor';
 import { createNewHabit } from 'entities/Player/model/services/createNewHabit';
 import { setDifficulty } from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
 import Input from 'shared/UI/Input/Input';
@@ -24,6 +24,11 @@ import { requestPlayerData } from 'entities/Player/model/services/requestPlayerD
 import { TaskCreatorModal } from './TaskCreatorModal/TaskCreatorModal';
 import PlayerCard from 'entities/Player/UI/PlayerCard/PlayerCard';
 import { requestTasks } from 'entities/Player/model/services/requestTasks';
+import DailyWrapper from './TaskCreatorModal/DailyWrapper/DailyWrapper';
+import { requestDailyz } from 'entities/Player/model/services/requestDailyz';
+import TasksWrapper from './TaskCreatorModal/TasksWrapper/TasksWrapper';
+import HabitsWrapper from './TaskCreatorModal/HabitsWrapper/HabitsWrapper';
+import { requestCompleted } from 'entities/Player/model/services/requestCompleted';
 
 interface PlayerSpaceProps {
   className?: string;
@@ -34,20 +39,10 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
   const account = useSelector(getGoogleProfile);
   const player = useSelector(getPlayerProfile);
   const isAuth = useSelector(getGoogleIsLogged);
-  const habits = useSelector(getHabits);
-  const tasks = useSelector(getTasks);
-  const [isVisible, setVisibility] = useState(false);
 
   useEffect(() => {
     dispatch(requestPlayerData());
   }, [dispatch, isAuth]); //
-
-  const onCloseModal = useCallback(() => {
-    setVisibility(false);
-  }, []);
-  const onOpenModal = useCallback(() => {
-    setVisibility(true);
-  }, []);
 
   const signUpHandler = async () => {
     await dispatch(initializePlayer());
@@ -58,7 +53,9 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
     if (!player.new) {
       dispatch(requestHabits());
       dispatch(requestTasks());
+      dispatch(requestDailyz());
       dispatch(requestPlayerData());
+      dispatch(requestCompleted());
     }
   }, [dispatch, player.new, isAuth]);
 
@@ -77,48 +74,14 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
 
   return (
     <div className={classNames(cls.PlayerSpace, {}, [className as string])}>
-      {isVisible && (
-        <TaskCreatorModal onClose={onCloseModal} isVisible={isVisible} />
-      )}
-
       <PlayerCard />
 
-      <div className={cls.tasksWrapper}>
-        <div className={cls.taskList}>
-          {' '}
-          {habits.map((h) => {
-            return (
-              <SingleHabit
-                title={h.title}
-                isDone={h.isDone}
-                difficulty={h.difficulty}
-                description={h.description}
-              />
-            );
-          })}
-          <Button
-            onClick={onOpenModal}
-            theme={ButtonTheme.OUTLINE}
-            className={cls.addBtn}
-          >
-            Create new habit
-          </Button>
-        </div>
-        <div className={cls.daily}>dayliks</div>
-        <div className={cls.tasks}>
-          {' '}
-          {tasks.map((h) => {
-            return (
-              <SingleHabit
-                title={h.title}
-                isDone={h.isDone}
-                //@ts-ignore
-                difficulty={h.difficulty}
-                description={h.description}
-              />
-            );
-          })}
-        </div>
+      <div className={cls.TrackerWrapper}>
+        <HabitsWrapper />
+
+        <DailyWrapper />
+
+        <TasksWrapper />
       </div>
     </div>
   );

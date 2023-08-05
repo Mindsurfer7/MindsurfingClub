@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './PlayerCard.module.scss';
 import Preloader from 'shared/UI/Preloader/Preloader';
@@ -6,10 +6,17 @@ import Text, { TextAlign, TextTheme } from 'shared/UI/Text/Text';
 import { PlayerData } from 'entities/Player/types/player';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { useSelector } from 'react-redux';
-import { getPlayerProfile } from 'entities/Player/model/selectors/getPlayerData';
+import {
+  getPlayerDataError,
+  getPlayerPoints,
+  getPlayerProfile,
+} from 'entities/Player/model/selectors/getPlayerData';
 import { getGoogleProfile } from 'features/AuthWithGoogle';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { requestHabits } from 'entities/Player/model/services/requestHabits';
+import Notification from 'shared/UI/Notification/Notification';
+import { setShowCompleted } from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
+import { getShowCompleted } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
 
 interface PlayerCardProps {
   className?: string;
@@ -25,7 +32,17 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
 }) => {
   const account = useSelector(getGoogleProfile);
   const player = useSelector(getPlayerProfile);
+  const points = useSelector(getPlayerPoints);
+  const APIerror = useSelector(getPlayerDataError);
+  const completed = useSelector(getShowCompleted);
   const dispatch = useAppDispatch();
+
+  // const notificationRef = useRef(null);   <Notification ref={notificationRef} />
+
+  // useEffect(() => {
+  //   //@ts-ignore
+  //   notificationRef.current.show();
+  // }, [points, APIerror]);
 
   if (isLoading) {
     return (
@@ -52,8 +69,8 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
     );
   }
 
-  const handler2 = () => {
-    dispatch(requestHabits());
+  const onShowCompleted = () => {
+    dispatch(setShowCompleted(!completed));
   };
 
   return (
@@ -85,11 +102,17 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
             <span>{player.points}</span>
           </div>
           <div className={cls.buttnz}>
-            <Button theme={ButtonTheme.OUTLINE} onClick={handler2}>
-              Habits
-            </Button>
+            <Button theme={ButtonTheme.OUTLINE}>Habits</Button>
             <Button theme={ButtonTheme.OUTLINE}>Tasks</Button>
             <Button theme={ButtonTheme.OUTLINE}>Daily</Button>
+            <Button
+              theme={
+                completed ? ButtonTheme.OUTLINE_GREEN : ButtonTheme.OUTLINE
+              }
+              onClick={onShowCompleted}
+            >
+              Completed
+            </Button>
           </div>
         </div>
         <div className={cls.tags}>
