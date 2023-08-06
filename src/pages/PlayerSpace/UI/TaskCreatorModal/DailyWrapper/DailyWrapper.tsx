@@ -3,11 +3,11 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './DailyWrapper.module.scss';
 import {
   getDailys,
-  getHabits,
+  getFilteredDaily,
+  getIsFilterApplied,
 } from 'entities/Player/model/selectors/getPlayerData';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import SingleHabit from 'entities/TaskTracker/UI/SingleEndeavor/SingleEndeavor';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { TaskCreatorModal } from '../TaskCreatorModal';
 import { createNewDaily } from 'entities/Player/model/services/createNewDaily';
@@ -21,6 +21,8 @@ interface DailyWrapperProps {
 
 const DailyWrapper: React.FC<DailyWrapperProps> = ({ className }) => {
   const Dailys = useSelector(getDailys);
+  const filteredHDailys = useSelector(getFilteredDaily);
+  const isFilterApplied = useSelector(getIsFilterApplied);
   const dispatch = useAppDispatch();
   const [isVisible, setVisibility] = useState(false);
 
@@ -57,22 +59,40 @@ const DailyWrapper: React.FC<DailyWrapperProps> = ({ className }) => {
       )}
       <div className={cls.header}>My Daily Tasks</div>
       <div className={cls.listWrapper}>
-        {Dailys.map((h) => {
-          console.log('map function value' + h.isDone);
-
-          return (
-            <SingleEndeavor
-              id={h.id}
-              title={h.title}
-              isDaily={true}
-              isDone={h.isDone}
-              onRemove={onRemoveDaily}
-              onRequest={onRequestDailyz}
-              difficulty={h.difficulty}
-              description={h.description}
-            />
-          );
-        })}
+        {filteredHDailys.length > 0
+          ? filteredHDailys.map((h) => {
+              return (
+                <SingleEndeavor
+                  id={h.id}
+                  key={h.id}
+                  title={h.title}
+                  isDaily={true}
+                  isDone={h.isDone}
+                  tags={h.tags}
+                  onRemove={onRemoveDaily}
+                  onRequest={onRequestDailyz}
+                  difficulty={h.difficulty}
+                  description={h.description}
+                />
+              );
+            })
+          : !isFilterApplied &&
+            Dailys.map((h) => {
+              return (
+                <SingleEndeavor
+                  id={h.id}
+                  key={h.id}
+                  title={h.title}
+                  isDaily={true}
+                  isDone={h.isDone}
+                  tags={h.tags}
+                  onRemove={onRemoveDaily}
+                  onRequest={onRequestDailyz}
+                  difficulty={h.difficulty}
+                  description={h.description}
+                />
+              );
+            })}
       </div>
 
       <div className={cls.createBtn}>

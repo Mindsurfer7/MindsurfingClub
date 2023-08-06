@@ -2,30 +2,26 @@ import React, { useCallback, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './HabitsWrapper.module.scss';
 import {
-  getDailys,
+  getFilteredHabits,
   getHabits,
-  getTasks,
+  getIsFilterApplied,
 } from 'entities/Player/model/selectors/getPlayerData';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import SingleHabit from 'entities/TaskTracker/UI/SingleEndeavor/SingleEndeavor';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { TaskCreatorModal } from '../TaskCreatorModal';
-import { createNewDaily } from 'entities/Player/model/services/createNewDaily';
-import { requestDailyz } from 'entities/Player/model/services/requestDailyz';
-import { createNewTask } from 'entities/Player/model/services/createNewTask';
-import { requestTasks } from 'entities/Player/model/services/requestTasks';
 import { requestHabits } from 'entities/Player/model/services/requestHabits';
 import { createNewHabit } from 'entities/Player/model/services/createNewHabit';
 import { removeHabit } from 'entities/Player/model/services/removeHabit';
 import SingleEndeavor from 'entities/TaskTracker/UI/SingleEndeavor/SingleEndeavor';
-
 interface HabitsWrapperProps {
   className?: string;
 }
 
 const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
   const habits = useSelector(getHabits);
+  const filteredHabits = useSelector(getFilteredHabits);
+  const isFilterApplied = useSelector(getIsFilterApplied);
   const dispatch = useAppDispatch();
   const [isVisible, setVisibility] = useState(false);
 
@@ -58,19 +54,46 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
       )}
       <div className={cls.header}>My Habits</div>
       <div className={cls.listWrapper}>
-        {habits.map((h) => {
-          return (
-            <SingleEndeavor
-              title={h.title}
-              isDone={h.isDone}
-              difficulty={h.difficulty}
-              description={h.description}
-              onRequest={onRequestHabits}
-              onRemove={onRemoveHabit}
-              id={h.id}
-            />
-          );
-        })}
+        {filteredHabits.length > 0
+          ? filteredHabits.map((h) => {
+              return (
+                <div className={cls.block}>
+                  <div className={cls.singleTask}>
+                    <SingleEndeavor
+                      key={h.id}
+                      title={h.title}
+                      isDone={h.isDone}
+                      tags={h.tags}
+                      difficulty={h.difficulty}
+                      description={h.description}
+                      onRequest={onRequestHabits}
+                      onRemove={onRemoveHabit}
+                      id={h.id}
+                    />
+                  </div>
+                </div>
+              );
+            })
+          : !isFilterApplied &&
+            habits.map((h) => {
+              return (
+                <div className={cls.block}>
+                  <div className={cls.singleTask}>
+                    <SingleEndeavor
+                      key={h.id}
+                      title={h.title}
+                      isDone={h.isDone}
+                      tags={h.tags}
+                      difficulty={h.difficulty}
+                      description={h.description}
+                      onRequest={onRequestHabits}
+                      onRemove={onRemoveHabit}
+                      id={h.id}
+                    />
+                  </div>
+                </div>
+              );
+            })}
       </div>
 
       <div className={cls.createBtn}>

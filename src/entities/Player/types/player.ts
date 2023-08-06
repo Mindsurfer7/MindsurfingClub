@@ -11,8 +11,13 @@ export interface PlayerData {
 export interface PlayerScheme {
   PlayerData: PlayerData;
   isLoading: boolean;
+  isFilterApplied: boolean;
+  allTags: string[];
   completedTasks: Task[];
   habits: Habit[];
+  filteredHabits: Habit[];
+  filteredDaily: Task[];
+  filteredTasks: Task[];
   tasks: Task[];
   daily: Task[];
   error?: string;

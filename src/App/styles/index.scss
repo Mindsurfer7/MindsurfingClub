@@ -24,3 +24,23 @@
   flex-grow: 1;
   padding: 10px;
 }
+
+* {
+  scrollbar-color: gray transparent;
+  scrollbar-width: thin;
+}
+
+*::-moz-scrollbar-thumb {
+  position: absolute;
+  right: -10px;
+  background-color: gray;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+*::-moz-scrollbar-corner {
+  background-color: transparent;
+}
+*::-moz-scrollbar-track {
+  background-color: transparent;
+}

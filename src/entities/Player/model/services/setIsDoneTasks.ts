@@ -3,6 +3,8 @@ import { ThunkConfig } from 'App/providers/StoreProvider';
 import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
+import { removeTask } from './removeTask';
+import { requestTasks } from './requestTasks';
 
 export const setIsDoneTasksAPI = createAsyncThunk<
   any,
@@ -24,13 +26,14 @@ export const setIsDoneTasksAPI = createAsyncThunk<
       // Update the isDone value of the element at the found index
       tasks[elementIndex].isDone = isDone;
 
-      // Update the entire 'daily' array in the document
       await updateDoc(playerDocRef, {
         tasks: tasks,
       });
       await updateDoc(playerDocRef, {
         completed: arrayUnion(tasks[elementIndex]),
       });
+      await thunkAPI.dispatch(removeTask(taskID));
+      thunkAPI.dispatch(requestTasks());
     }
     console.log('isDone value updated');
   } catch (error) {

@@ -1,5 +1,6 @@
 export interface TaskTrackerScheme {
   showCompleted?: boolean;
+  selectedTag: string;
   description: string;
   difficulty: number;
   isLoading: boolean;

@@ -1,15 +1,64 @@
 .TaskCreator {
+  //border: 3px solid black;
+  border-radius: 5px;
+  padding: 15px;
+  height: 300px;
+  width: 600px;
 }
-
-.green {
+.difficulty {
+  display: flex;
+  //justify-content: space-between;
 }
 
 .input {
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 5px;
   padding: 5px;
-  margin: 4px 0px 4px 2px;
+  margin: 4px 0px 10px 2px;
+}
+.input2 {
+  border: 2px solid black;
+  border-radius: 5px;
+  background: transparent;
+  outline: cornsilk;
+  margin-left: 2px;
+
+  height: 35px;
+  width: 200px;
+  color: white;
+  text-shadow: 0 0 0 var(--primary-color);
 }
 .textarea {
   margin: 4px 0px 4px 2px;
+  color: white;
+}
+.tags {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 5px;
+  //padding: 10px;
+  //border: 1px solid black;
+  border-radius: 5px;
+  height: 100px;
+  width: 100%;
+}
+.tagArray {
+  display: flex;
+}
+.singleTag {
+  border: 1px solid rgb(255, 255, 255);
+  border-radius: 4px;
+  padding: 0.1px 4px;
+  //margin: 2px;
+  margin-left: 3px;
+}
+
+.btn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+.btn:hover {
+  border: 1px solid rgb(3, 201, 3);
+  color: rgb(3, 201, 3);
 }

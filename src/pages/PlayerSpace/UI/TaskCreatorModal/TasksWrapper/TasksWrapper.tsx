@@ -3,17 +3,14 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './TasksWrapper.module.scss';
 import {
   getCompletedTasks,
-  getDailys,
-  getHabits,
+  getFilteredTasks,
+  getIsFilterApplied,
   getTasks,
 } from 'entities/Player/model/selectors/getPlayerData';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import SingleHabit from 'entities/TaskTracker/UI/SingleEndeavor/SingleEndeavor';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { TaskCreatorModal } from '../TaskCreatorModal';
-import { createNewDaily } from 'entities/Player/model/services/createNewDaily';
-import { requestDailyz } from 'entities/Player/model/services/requestDailyz';
 import { createNewTask } from 'entities/Player/model/services/createNewTask';
 import { requestTasks } from 'entities/Player/model/services/requestTasks';
 import { removeTask } from 'entities/Player/model/services/removeTask';
@@ -29,6 +26,8 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
   const tasks = useSelector(getTasks);
   const completed = useSelector(getShowCompleted);
   const CompletedTasks = useSelector(getCompletedTasks);
+  const filteredTasks = useSelector(getFilteredTasks);
+  const isFilterApplied = useSelector(getIsFilterApplied);
   const dispatch = useAppDispatch();
   const [isVisible, setVisibility] = useState(false);
 
@@ -59,8 +58,10 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
             return (
               <SingleEndeavor
                 id={h.id}
+                key={h.id}
                 title={h.title}
                 isTask={true}
+                tags={h.tags}
                 isDone={h.isDone}
                 onRemove={onTaskRemove}
                 onRequest={onRequestTasks}
@@ -89,21 +90,39 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
       <div className={cls.header}>My Tasks</div>
 
       <div className={cls.listWrapper}>
-        {' '}
-        {tasks.map((h) => {
-          return (
-            <SingleEndeavor
-              id={h.id}
-              title={h.title}
-              isTask={true}
-              isDone={h.isDone}
-              onRemove={onTaskRemove}
-              onRequest={onRequestTasks}
-              difficulty={h.difficulty}
-              description={h.description}
-            />
-          );
-        })}
+        {filteredTasks.length > 0
+          ? filteredTasks.map((h) => {
+              return (
+                <SingleEndeavor
+                  id={h.id}
+                  key={h.id}
+                  tags={h.tags}
+                  title={h.title}
+                  isTask={true}
+                  isDone={h.isDone}
+                  onRemove={onTaskRemove}
+                  onRequest={onRequestTasks}
+                  difficulty={h.difficulty}
+                  description={h.description}
+                />
+              );
+            })
+          : !isFilterApplied &&
+            tasks.map((h) => {
+              return (
+                <SingleEndeavor
+                  id={h.id}
+                  tags={h.tags}
+                  title={h.title}
+                  isTask={true}
+                  isDone={h.isDone}
+                  onRemove={onTaskRemove}
+                  onRequest={onRequestTasks}
+                  difficulty={h.difficulty}
+                  description={h.description}
+                />
+              );
+            })}
         <div className={cls.createBtn}>
           <Button
             onClick={onOpenModal}

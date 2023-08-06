@@ -5,6 +5,7 @@ import { GPT_DB } from 'App/API/firebaseAPI';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import { dialogPayload } from 'pages/PsyRoom/UI/PsyRoom';
 import { getTaskTrackerData } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
+import { addNewTag } from './addNewTag';
 
 export const createNewHabit = createAsyncThunk<any, void, ThunkConfig<any>>(
   'Player/createNewHabit',
@@ -26,6 +27,7 @@ export const createNewHabit = createAsyncThunk<any, void, ThunkConfig<any>>(
       await updateDoc(habitDocRef, {
         habits: arrayUnion(newHabit),
       });
+      await thunkAPI.dispatch(addNewTag());
       console.log('habit created');
     } catch (error) {
       console.error('Error creating habit', error);

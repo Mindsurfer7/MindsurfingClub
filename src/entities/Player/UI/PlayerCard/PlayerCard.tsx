@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './PlayerCard.module.scss';
 import Preloader from 'shared/UI/Preloader/Preloader';
@@ -7,6 +7,7 @@ import { PlayerData } from 'entities/Player/types/player';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { useSelector } from 'react-redux';
 import {
+  getAllTags,
   getPlayerDataError,
   getPlayerPoints,
   getPlayerProfile,
@@ -15,8 +16,21 @@ import { getGoogleProfile } from 'features/AuthWithGoogle';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { requestHabits } from 'entities/Player/model/services/requestHabits';
 import Notification from 'shared/UI/Notification/Notification';
-import { setShowCompleted } from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
-import { getShowCompleted } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
+import {
+  clearSelectedTag,
+  setSelectedTag,
+  setShowCompleted,
+} from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
+import {
+  getSelectedTag,
+  getShowCompleted,
+} from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
+import {
+  clearTags,
+  displayTasksByTag,
+} from 'entities/Player/model/slice/playerSlice';
+import { getGoogleIsLogged } from 'entities/GoogleProfile';
+import { requestAllTags } from 'entities/Player/model/services/requestAllTags';
 
 interface PlayerCardProps {
   className?: string;
@@ -32,10 +46,22 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
 }) => {
   const account = useSelector(getGoogleProfile);
   const player = useSelector(getPlayerProfile);
+  const allTags = useSelector(getAllTags);
   const points = useSelector(getPlayerPoints);
   const APIerror = useSelector(getPlayerDataError);
   const completed = useSelector(getShowCompleted);
+  const isAuth = useSelector(getGoogleIsLogged);
+  const selectedTag = useSelector(getSelectedTag);
+
+  const sortedTags = [...allTags].sort((a, b) => a.length - b.length);
+
   const dispatch = useAppDispatch();
+
+  // useEffect(() => {
+  //   if (!player.new) {
+  //     dispatch(requestAllTags());
+  //   }
+  // }, [dispatch, player.new, isAuth]);
 
   // const notificationRef = useRef(null);   <Notification ref={notificationRef} />
 
@@ -71,6 +97,14 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
 
   const onShowCompleted = () => {
     dispatch(setShowCompleted(!completed));
+  };
+  const onDisplayByTag = (tag: string) => {
+    dispatch(displayTasksByTag(tag));
+    dispatch(setSelectedTag(tag));
+  };
+  const onClearTags = () => {
+    dispatch(clearTags());
+    dispatch(clearSelectedTag());
   };
 
   return (
@@ -117,8 +151,28 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
         </div>
         <div className={cls.tags}>
           <div className={cls.header}>Tags</div>
+          <Button
+            className={cls.singleTag} //
+            theme={ButtonTheme.CLEAR}
+            onClick={onClearTags}
+          >
+            All
+          </Button>
+          {sortedTags.map((tag) => {
+            return (
+              <Button
+                className={
+                  selectedTag === tag ? cls.tagSelected : cls.singleTag
+                }
+                theme={ButtonTheme.CLEAR}
+                onClick={() => onDisplayByTag(tag)}
+              >
+                {tag}
+              </Button>
+            );
+          })}
         </div>
-      </div>{' '}
+      </div>
     </div>
   );
 };

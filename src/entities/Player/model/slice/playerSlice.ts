@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
 import { initializePlayer } from '../services/initializePlayer';
 import { PlayerScheme } from 'entities/Player/types/player';
 import { requestHabits } from '../services/requestHabits';
@@ -8,11 +7,8 @@ import { requestTasks } from '../services/requestTasks';
 import { createNewDaily } from '../services/createNewDaily';
 import { createNewTask } from '../services/createNewTask';
 import { requestDailyz } from '../services/requestDailyz';
-import { act } from 'react-dom/test-utils';
 import { requestCompleted } from '../services/requestCompleted';
-// import { Profile, ProfileScheme } from '../types/profile';
-// import { requestProfileData } from '../services/requestProfileData';
-// import { updateProfileData } from '../services/updateProfileData';
+import { requestAllTags } from '../services/requestAllTags';
 
 const initialState: PlayerScheme = {
   PlayerData: {
@@ -24,9 +20,14 @@ const initialState: PlayerScheme = {
     username: 'username',
     new: true,
   },
+  allTags: [],
+  isFilterApplied: false,
   isLoading: false,
   completedTasks: [],
   habits: [],
+  filteredHabits: [],
+  filteredDaily: [],
+  filteredTasks: [],
   tasks: [],
   daily: [],
   error: '',
@@ -55,13 +56,45 @@ export const PlayerSlice = createSlice({
       const { taskID, isDone } = action.payload;
       console.log('reducer ' + ' ' + taskID + ' ' + isDone);
 
-      const taskIndex = state.daily.findIndex((task) => task.id === taskID);
-      if (taskIndex !== -1) {
-        state.tasks[taskIndex].isDone = isDone;
-      }
+      state.tasks = state.tasks.map((task) =>
+        task.id === taskID ? { ...task, isDone: isDone } : task,
+      );
+    },
+    displayTasksByTag: (state, action: PayloadAction<any>) => {
+      state.isFilterApplied = true;
+
+      state.filteredHabits = state.habits.filter((habit) =>
+        habit.tags.includes(action.payload),
+      );
+
+      state.filteredTasks = state.tasks.filter((task) =>
+        task.tags.includes(action.payload),
+      );
+
+      state.filteredDaily = state.daily.filter((daily) =>
+        daily.tags.includes(action.payload),
+      );
+    },
+    clearTags: (state) => {
+      state.filteredHabits = [];
+      state.filteredTasks = [];
+      state.filteredDaily = [];
+      state.isFilterApplied = false;
     },
   },
   extraReducers: (builder) => {
+    builder
+      .addCase(requestAllTags.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(requestAllTags.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.allTags = action.payload;
+      })
+      .addCase(requestAllTags.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
     builder
       .addCase(initializePlayer.pending, (state, action) => {
         state.isLoading = true;
@@ -163,5 +196,6 @@ export const PlayerSlice = createSlice({
   },
 });
 
-export const { setIsDoneDaily, setIsDoneTasks } = PlayerSlice.actions;
+export const { setIsDoneDaily, setIsDoneTasks, displayTasksByTag, clearTags } =
+  PlayerSlice.actions;
 export const { reducer: PlayerReducer } = PlayerSlice;

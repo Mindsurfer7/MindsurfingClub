@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './TaskCreator.module.scss';
 import Textarea from 'shared/UI/Textarea/Textarea';
@@ -6,6 +6,7 @@ import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { useSelector } from 'react-redux';
 import {
   getDifficulty,
+  getTags,
   getTaskTrackerData,
 } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
@@ -14,6 +15,7 @@ import {
   setDescription,
   setDifficulty,
   setID,
+  setTags,
   setTitle,
 } from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
 import Input from 'shared/UI/Input/Input';
@@ -38,6 +40,7 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const trackerData = useSelector(getTaskTrackerData);
+  const tags = useSelector(getTags);
   const diffState = useSelector(getDifficulty);
 
   const isDifficultySelected = (
@@ -64,6 +67,25 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
     requestData();
     dispatch(clearInputs());
     onClose?.();
+  };
+
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (e: any) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleTagAdd = () => {
+    if (inputValue.trim() !== '') {
+      dispatch(setTags([...tags, inputValue.trim()]));
+    }
+  };
+  const onkeyDownToProps = (e: any) => {
+    if (e.key === 'Enter') {
+      handleTagAdd();
+      setInputValue('');
+      console.log(tags);
+    }
   };
 
   return (
@@ -125,9 +147,35 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
             className={cls.textarea}
           />{' '}
         </div>
-        <Button onClick={onTaskSubmit} theme={ButtonTheme.OUTLINE}>
-          Submit
-        </Button>
+        <div className={cls.tags}>
+          <div className={cls.x}>
+            <input
+              value={inputValue}
+              placeholder={'добавьте тэги'}
+              onChange={handleInputChange}
+              className={cls.input2}
+              onKeyDown={onkeyDownToProps}
+            />
+          </div>
+
+          <div className={cls.tagArray}>
+            {tags.map((t) => (
+              <div key={t} className={cls.singleTag}>
+                {t}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className={cls.btn}>
+          {' '}
+          <Button
+            className={cls.btn}
+            onClick={onTaskSubmit}
+            theme={ButtonTheme.OUTLINE}
+          >
+            Submit
+          </Button>
+        </div>
       </div>
     </div>
   );

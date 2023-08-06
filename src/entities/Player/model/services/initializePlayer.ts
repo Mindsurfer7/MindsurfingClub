@@ -33,6 +33,7 @@ export const initializePlayer = createAsyncThunk<any, void, ThunkConfig<any>>(
           username: 'Mindsurfer',
           new: false,
         },
+        AllTags: [],
         habits: [
           {
             id: 'advwebvsqbvr',

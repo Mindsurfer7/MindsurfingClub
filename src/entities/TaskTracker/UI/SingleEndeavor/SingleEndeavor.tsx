@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './SingleEndeavor.module.scss';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
@@ -12,6 +12,7 @@ import {
 } from 'entities/Player/model/slice/playerSlice';
 import { decreasePoints } from 'entities/Player/model/services/decreasePoints';
 import { setIsDoneTasksAPI } from 'entities/Player/model/services/setIsDoneTasks';
+import { TaskDisplayModal } from 'pages/PlayerSpace/UI/TaskDisplayModal/TaskDisplayModal';
 
 interface SingleEndeavorProps {
   onRemove: (id: string) => Promise<void>;
@@ -24,27 +25,26 @@ interface SingleEndeavorProps {
   className?: string;
   title: string;
   isDone: boolean;
-  tags?: string[];
+  tags: string[];
   id: string;
 }
-//value={isDone} <input type="checkbox" />
-//этот компонент содержит в себе инфу о сложности соответственно он и может контролировать
-//сколько очков надо диспатчивть
 
-const SingleEndeavor: React.FC<SingleEndeavorProps> = ({
-  onRemove,
-  onRequest,
-  className,
-  title,
-  difficulty,
-  isDone,
-  isDaily = false,
-  isHabit = false,
-  isTask = false,
-  id,
-}) => {
+const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
+  const {
+    onRemove,
+    onRequest,
+    className,
+    title,
+    difficulty,
+    isDone,
+    isDaily = false,
+    isHabit = false,
+    isTask = false,
+    id,
+  } = props;
+
   const dispatch = useAppDispatch();
-  console.log('singl ende' + isDone);
+  const [isVisible2, setVisibility2] = useState(false);
 
   const onPlusClick = async () => {
     if (difficulty === 1) {
@@ -106,6 +106,15 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = ({
     }
   };
 
+  const onCloseModal2 = useCallback(() => {
+    console.log('aaaaaaaaaa');
+
+    setVisibility2(false);
+  }, []);
+  const onOpenModal2 = useCallback(() => {
+    setVisibility2(true);
+  }, []);
+
   const mods = {
     [cls['isDone']]: isDone,
   };
@@ -115,17 +124,32 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = ({
       <div
         className={classNames(cls.SingleEndeavor, mods, [className as string])}
       >
-        <input
-          type="checkbox"
-          checked={isDone}
-          onChange={() => {
-            onCheckBoxChangeDaily();
-          }}
-        ></input>
-        <span>{title}</span>
-        <Button onClick={removeHandler} className={cls.xIcon}>
-          X
-        </Button>
+        <div className={cls.plusBtn}>
+          <input
+            type="checkbox"
+            checked={isDone}
+            onChange={() => {
+              onCheckBoxChangeDaily();
+            }}
+          ></input>
+        </div>
+
+        <div onClick={onOpenModal2} className={cls.title}>
+          {title}
+        </div>
+        <div className={cls.deleteBtn}>
+          <Button onClick={removeHandler} className={cls.xIcon}>
+            X
+          </Button>
+        </div>
+
+        {isVisible2 && (
+          <TaskDisplayModal
+            isVisible={isVisible2}
+            onClose={onCloseModal2}
+            {...props}
+          />
+        )}
       </div>
     );
   }
@@ -135,31 +159,62 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = ({
       <div
         className={classNames(cls.SingleEndeavor, mods, [className as string])}
       >
-        <input
-          type="checkbox"
-          checked={isDone}
-          onChange={() => {
-            onCheckBoxChangeTasks();
-          }}
-        ></input>
-        <span>{title}</span>
-        <Button onClick={removeHandler} className={cls.xIcon}>
-          X
-        </Button>
+        <div className={cls.plusBtn}>
+          <input
+            type="checkbox"
+            checked={isDone}
+            onChange={() => {
+              onCheckBoxChangeTasks();
+            }}
+          ></input>
+        </div>
+
+        <div onClick={onOpenModal2} className={cls.title}>
+          {title}
+        </div>
+
+        <div className={cls.deleteBtn}>
+          <Button onClick={removeHandler} className={cls.xIcon}>
+            X
+          </Button>
+        </div>
+
+        {isVisible2 && (
+          <TaskDisplayModal
+            isVisible={isVisible2}
+            onClose={onCloseModal2}
+            {...props}
+          />
+        )}
       </div>
     );
   }
 
   return (
     <div className={classNames(cls.SingleEndeavor, {}, [className as string])}>
-      <Button onClick={onPlusClick} className={cls.Plus}>
-        +
-      </Button>{' '}
-      <span>{title}</span>
-      <Button onClick={removeHandler} className={cls.xIcon}>
-        X
-      </Button>
-      {/* <Xmark onClick={removeHandler} id="x" className={cls.xIcon} /> */}
+      <div className={cls.plusBtn}>
+        <Button onClick={onPlusClick} className={cls.Plus}>
+          +
+        </Button>
+      </div>
+
+      <div onClick={onOpenModal2} className={cls.title}>
+        {title}
+      </div>
+
+      <div className={cls.deleteBtn}>
+        <Button onClick={removeHandler} className={cls.xIcon}>
+          X
+        </Button>
+      </div>
+
+      {isVisible2 && (
+        <TaskDisplayModal
+          isVisible={isVisible2}
+          onClose={onCloseModal2}
+          {...props}
+        />
+      )}
     </div>
   );
 };

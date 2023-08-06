@@ -29,6 +29,7 @@ import { requestDailyz } from 'entities/Player/model/services/requestDailyz';
 import TasksWrapper from './TaskCreatorModal/TasksWrapper/TasksWrapper';
 import HabitsWrapper from './TaskCreatorModal/HabitsWrapper/HabitsWrapper';
 import { requestCompleted } from 'entities/Player/model/services/requestCompleted';
+import { requestAllTags } from 'entities/Player/model/services/requestAllTags';
 
 interface PlayerSpaceProps {
   className?: string;
@@ -41,7 +42,9 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
   const isAuth = useSelector(getGoogleIsLogged);
 
   useEffect(() => {
-    dispatch(requestPlayerData());
+    if (isAuth) {
+      dispatch(requestPlayerData());
+    }
   }, [dispatch, isAuth]); //
 
   const signUpHandler = async () => {
@@ -55,6 +58,7 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
       dispatch(requestTasks());
       dispatch(requestDailyz());
       dispatch(requestPlayerData());
+      dispatch(requestAllTags());
       dispatch(requestCompleted());
     }
   }, [dispatch, player.new, isAuth]);

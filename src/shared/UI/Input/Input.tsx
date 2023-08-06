@@ -18,6 +18,7 @@ interface InputProps extends HTMLinputprops {
   className?: string;
   value?: string;
   onChange?: (value: string) => void;
+  onKeyDown?: (e: any) => void;
   autoFocus?: boolean;
   readonly?: boolean;
 }
@@ -34,6 +35,7 @@ const Input: React.FC<InputProps> = memo((props) => {
     readonly,
     onChange,
     autoFocus,
+    onKeyDown,
     type = 'text',
     ...otherProps
   } = props;
@@ -84,6 +86,7 @@ const Input: React.FC<InputProps> = memo((props) => {
           onBlur={onBlur}
           onSelect={onSelect}
           onChange={onChangeHandler}
+          onKeyDown={onKeyDown}
           className={cls.input}
           {...otherProps}
         />

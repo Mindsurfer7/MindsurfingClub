@@ -4,6 +4,7 @@ import { TaskTrackerScheme } from 'entities/TaskTracker/types/taskTracker';
 
 const initialState: TaskTrackerScheme = {
   showCompleted: false,
+  selectedTag: '',
   description: '',
   difficulty: 1,
   isLoading: false,
@@ -31,8 +32,14 @@ export const TaskTrackerSlice = createSlice({
     setID: (state, action: PayloadAction<string>) => {
       state.id = action.payload;
     },
-    setTags: (state, action: PayloadAction<string>) => {
-      state.tags = [];
+    setTags: (state, action: PayloadAction<string[]>) => {
+      state.tags = action.payload;
+    },
+    setSelectedTag: (state, action: PayloadAction<string>) => {
+      state.selectedTag = action.payload;
+    },
+    clearSelectedTag: (state) => {
+      state.selectedTag = ' ';
     },
     setShowCompleted: (state, action: PayloadAction<boolean>) => {
       state.showCompleted = action.payload;
@@ -68,6 +75,8 @@ export const {
   setDescription,
   setDifficulty,
   setShowCompleted,
+  setSelectedTag,
+  clearSelectedTag,
   setID,
   setTags,
   setTitle,

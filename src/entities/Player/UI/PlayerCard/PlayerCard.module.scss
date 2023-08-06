@@ -106,7 +106,11 @@ img {
 }
 
 .tags {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   border: 2px solid black;
+
   width: 200px;
   height: 220px;
   border-radius: 5px;
@@ -114,11 +118,35 @@ img {
   background: var(--bg-color);
 }
 
+.singleTag {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background: var(--inverted-bg-color); // rebeccapurple;
+}
+.singleTag:hover {
+  background: var(--sidebar-button);
+}
+.tagSelected {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background: var(--sidebar-button); // rebeccapurple;
+}
+// .tagSelected:hover {
+//   background: var(--inverted-bg-color);
+// }
+
 .header {
+  align-self: flex-start;
+  // position: absolute;
+  // top: 0;
+  width: 100%;
+  background: var(--inverted-bg-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  background: var(--inverted-bg-color);
 }

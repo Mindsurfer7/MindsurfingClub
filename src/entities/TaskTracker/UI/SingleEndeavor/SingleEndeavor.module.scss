@@ -8,7 +8,7 @@
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  background-color: var(--darker-backg);
+  background-color: var(--inverted-bg-color);
 }
 .SingleEndeavor:hover {
   cursor: pointer;
@@ -62,24 +62,24 @@
   transform: translate(5px, 5px);
 }
 
-input {
-  width: 25px;
-  height: 25px;
-  padding: 5px;
-  border: 1px solid rgb(0, 0, 0);
-  background: blueviolet;
-  outline: none;
-}
-input:hover {
-  cursor: pointer;
-  width: 25px;
+// input {
+//   width: 25px;
+//   height: 25px;
+//   padding: 5px;
+//   border: 1px solid rgb(0, 0, 0);
+//   background: blueviolet;
+//   outline: none;
+// }
+// input:hover {
+//   cursor: pointer;
+//   width: 25px;
 
-  border: 1px solid rgb(255, 255, 255);
-  background: none;
-  outline: none;
-}
+//   border: 1px solid rgb(255, 255, 255);
+//   background: none;
+//   outline: none;
+// }
 
-input[type='checkbox']:checked {
+input:checked {
   background-color: rgb(6, 223, 6);
 }
 
