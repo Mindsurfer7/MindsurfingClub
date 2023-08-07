@@ -110,7 +110,7 @@ img {
   display: flex;
   flex-direction: column;
   border: 2px solid black;
-
+  overflow: auto;
   width: 200px;
   height: 220px;
   border-radius: 5px;

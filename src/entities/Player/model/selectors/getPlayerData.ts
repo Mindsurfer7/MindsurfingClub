@@ -6,6 +6,9 @@ export const getPlayerProfile = (state: StateScheme) => {
 export const getPlayerPoints = (state: StateScheme) => {
   return state.Player.PlayerData.points;
 };
+export const getPlayerLevel = (state: StateScheme) => {
+  return state.Player.PlayerData.level;
+};
 export const getHabits = (state: StateScheme) => {
   return state.Player.habits;
 };

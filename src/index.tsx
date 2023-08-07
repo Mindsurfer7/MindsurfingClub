@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'App/providers/ThemeProvider';
 import 'shared/config/i18next/i18n';
 import { StoreProvider } from 'App/providers/StoreProvider';
+import 'react-toastify/dist/ReactToastify.scss';
 
 //import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer"ff
 

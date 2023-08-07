@@ -9,13 +9,12 @@ import { useSelector } from 'react-redux';
 import {
   getAllTags,
   getPlayerDataError,
+  getPlayerLevel,
   getPlayerPoints,
   getPlayerProfile,
 } from 'entities/Player/model/selectors/getPlayerData';
 import { getGoogleProfile } from 'features/AuthWithGoogle';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { requestHabits } from 'entities/Player/model/services/requestHabits';
-import Notification from 'shared/UI/Notification/Notification';
 import {
   clearSelectedTag,
   setSelectedTag,
@@ -30,7 +29,7 @@ import {
   displayTasksByTag,
 } from 'entities/Player/model/slice/playerSlice';
 import { getGoogleIsLogged } from 'entities/GoogleProfile';
-import { requestAllTags } from 'entities/Player/model/services/requestAllTags';
+import { ToastContainer, toast } from 'react-toastify';
 
 interface PlayerCardProps {
   className?: string;
@@ -48,6 +47,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
   const player = useSelector(getPlayerProfile);
   const allTags = useSelector(getAllTags);
   const points = useSelector(getPlayerPoints);
+  const level = useSelector(getPlayerLevel);
   const APIerror = useSelector(getPlayerDataError);
   const completed = useSelector(getShowCompleted);
   const isAuth = useSelector(getGoogleIsLogged);
@@ -57,18 +57,34 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
 
   const dispatch = useAppDispatch();
 
+  const notify = () => {
+    toast.success(`You have been leveled up!`, {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'colored',
+    });
+  };
+
+  const isInitialRender = useRef(true);
+
+  useEffect(() => {
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+    } else {
+      notify();
+    }
+  }, [level]);
+
   // useEffect(() => {
   //   if (!player.new) {
   //     dispatch(requestAllTags());
   //   }
   // }, [dispatch, player.new, isAuth]);
-
-  // const notificationRef = useRef(null);   <Notification ref={notificationRef} />
-
-  // useEffect(() => {
-  //   //@ts-ignore
-  //   notificationRef.current.show();
-  // }, [points, APIerror]);
 
   if (isLoading) {
     return (
@@ -161,6 +177,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
           {sortedTags.map((tag) => {
             return (
               <Button
+                key={tag}
                 className={
                   selectedTag === tag ? cls.tagSelected : cls.singleTag
                 }
@@ -173,6 +190,18 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
           })}
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };

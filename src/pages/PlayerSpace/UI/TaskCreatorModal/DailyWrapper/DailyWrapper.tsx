@@ -29,17 +29,16 @@ const DailyWrapper: React.FC<DailyWrapperProps> = ({ className }) => {
   const onCloseModal = useCallback(() => {
     setVisibility(false);
   }, []);
+
   const onOpenModal = useCallback(() => {
     setVisibility(true);
   }, []);
 
   const onCreateNewDaily = async () => {
     await dispatch(createNewDaily());
-    console.log('creator');
   };
 
   const onRequestDailyz = () => {
-    console.log('requester');
     dispatch(requestDailyz());
   };
 
