@@ -119,6 +119,7 @@ img {
 }
 
 .singleTag {
+  position: relative;
   display: flex;
   width: 100%;
   align-items: center;
@@ -127,6 +128,7 @@ img {
 }
 .singleTag:hover {
   background: var(--sidebar-button);
+  cursor: pointer;
 }
 .tagSelected {
   display: flex;
@@ -135,9 +137,13 @@ img {
   justify-content: center;
   background: var(--sidebar-button); // rebeccapurple;
 }
-// .tagSelected:hover {
-//   background: var(--inverted-bg-color);
-// }
+
+.delTag {
+  position: absolute;
+  //border: 1px solid rgb(255, 255, 255);
+  padding: 2px;
+  right: 1px;
+}
 
 .header {
   align-self: flex-start;

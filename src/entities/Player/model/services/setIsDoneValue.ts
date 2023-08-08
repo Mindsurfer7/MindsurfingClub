@@ -31,6 +31,7 @@ export const setIsDoneDailyAPI = createAsyncThunk<
     if (elementIndex !== -1) {
       // Update the isDone value of the element at the found index
       daily[elementIndex].isDone = isDone;
+      daily[elementIndex].isDoneTimestamp = new Date();
 
       // Update the entire 'daily' array in the document
       await updateDoc(playerDocRef, {
@@ -39,6 +40,6 @@ export const setIsDoneDailyAPI = createAsyncThunk<
     }
     console.log('isDone value updated');
   } catch (error) {
-    console.error('Error increasing points', error);
+    console.error('Error changing IsDone', error);
   }
 });

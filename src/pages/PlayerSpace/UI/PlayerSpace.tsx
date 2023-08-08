@@ -30,6 +30,7 @@ import TasksWrapper from './TaskCreatorModal/TasksWrapper/TasksWrapper';
 import HabitsWrapper from './TaskCreatorModal/HabitsWrapper/HabitsWrapper';
 import { requestCompleted } from 'entities/Player/model/services/requestCompleted';
 import { requestAllTags } from 'entities/Player/model/services/requestAllTags';
+import { requestNotifications } from 'entities/Player/model/services/InGameActions/requestNotifications';
 
 interface PlayerSpaceProps {
   className?: string;
@@ -58,6 +59,7 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
       dispatch(requestTasks());
       dispatch(requestDailyz());
       dispatch(requestPlayerData());
+      dispatch(requestNotifications());
       dispatch(requestAllTags());
       dispatch(requestCompleted());
     }

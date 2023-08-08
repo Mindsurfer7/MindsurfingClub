@@ -12,14 +12,15 @@ export interface PlayerScheme {
   PlayerData: PlayerData;
   isLoading: boolean;
   isFilterApplied: boolean;
+  notifications: string[];
   allTags: string[];
   completedTasks: Task[];
   habits: Habit[];
   filteredHabits: Habit[];
-  filteredDaily: Task[];
+  filteredDaily: Daily[];
   filteredTasks: Task[];
   tasks: Task[];
-  daily: Task[];
+  daily: Daily[];
   error?: string;
 }
 
@@ -27,6 +28,15 @@ export type Habit = {
   id: string; // ID or any unique identifier
   description: string;
   difficulty: number;
+  isDone: boolean;
+  tags: string[];
+  title: string;
+};
+export type Daily = {
+  id: string; // ID or any unique identifier
+  description: string;
+  difficulty: number;
+  isDoneTimestamp: Date;
   isDone: boolean;
   tags: string[];
   title: string;

@@ -22,8 +22,6 @@ export const requestAllTags = createAsyncThunk<any, void, ThunkConfig<any>>(
         })
         .filter((c) => c.id === userID);
 
-      console.log(filteredResponse);
-
       if (!response) {
         throw new Error();
       }

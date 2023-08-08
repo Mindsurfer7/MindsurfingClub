@@ -30,6 +30,8 @@ import {
 } from 'entities/Player/model/slice/playerSlice';
 import { getGoogleIsLogged } from 'entities/GoogleProfile';
 import { ToastContainer, toast } from 'react-toastify';
+import { deleteTag } from 'entities/Player/model/services/deleteTag';
+import { saveNotification } from 'entities/Player/model/services/InGameActions/saveNotification';
 
 interface PlayerCardProps {
   className?: string;
@@ -68,6 +70,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
       progress: undefined,
       theme: 'colored',
     });
+    dispatch(saveNotification(`You have been leveled up!`));
   };
 
   const isInitialRender = useRef(true);
@@ -121,6 +124,9 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
   const onClearTags = () => {
     dispatch(clearTags());
     dispatch(clearSelectedTag());
+  };
+  const onDeleteTag = (tag: string) => {
+    dispatch(deleteTag(tag));
   };
 
   return (
@@ -176,16 +182,22 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
           </Button>
           {sortedTags.map((tag) => {
             return (
-              <Button
-                key={tag}
-                className={
-                  selectedTag === tag ? cls.tagSelected : cls.singleTag
-                }
-                theme={ButtonTheme.CLEAR}
-                onClick={() => onDisplayByTag(tag)}
-              >
-                {tag}
-              </Button>
+              <>
+                {' '}
+                <div
+                  key={tag}
+                  className={
+                    selectedTag === tag ? cls.tagSelected : cls.singleTag
+                  }
+                  // theme={ButtonTheme.CLEAR}
+                  onClick={() => onDisplayByTag(tag)}
+                >
+                  {tag}{' '}
+                  <div className={cls.delTag} onClick={() => onDeleteTag(tag)}>
+                    X
+                  </div>
+                </div>
+              </>
             );
           })}
         </div>

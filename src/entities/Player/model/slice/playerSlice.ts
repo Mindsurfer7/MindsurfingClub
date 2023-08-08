@@ -9,6 +9,7 @@ import { createNewTask } from '../services/createNewTask';
 import { requestDailyz } from '../services/requestDailyz';
 import { requestCompleted } from '../services/requestCompleted';
 import { requestAllTags } from '../services/requestAllTags';
+import { requestNotifications } from '../services/InGameActions/requestNotifications';
 
 const initialState: PlayerScheme = {
   PlayerData: {
@@ -21,6 +22,7 @@ const initialState: PlayerScheme = {
     new: true,
   },
   allTags: [],
+  notifications: [],
   isFilterApplied: false,
   isLoading: false,
   completedTasks: [],
@@ -148,7 +150,8 @@ export const PlayerSlice = createSlice({
       })
       .addCase(requestDailyz.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log(action.payload);
+
+        //let result = action.payload.map((t: any) => t.isDoneTimestamp.toDate());
 
         state.daily = action.payload;
       })
@@ -193,6 +196,10 @@ export const PlayerSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       });
+    builder.addCase(requestNotifications.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.notifications = action.payload;
+    });
   },
 });
 

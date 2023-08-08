@@ -39,3 +39,6 @@ export const getAllTags = (state: StateScheme) => {
 export const getIsFilterApplied = (state: StateScheme) => {
   return state.Player.isFilterApplied;
 };
+export const getNotifications = (state: StateScheme) => {
+  return state.Player.notifications;
+};

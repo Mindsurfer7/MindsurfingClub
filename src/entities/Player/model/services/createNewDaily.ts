@@ -3,7 +3,6 @@ import { ThunkConfig } from 'App/providers/StoreProvider';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
-import { dialogPayload } from 'pages/PsyRoom/UI/PsyRoom';
 import { getTaskTrackerData } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
 import { addNewTag } from './addNewTag';
 
@@ -22,6 +21,7 @@ export const createNewDaily = createAsyncThunk<any, void, ThunkConfig<any>>(
       isDone: false,
       title: trackerData.title,
       tags: trackerData.tags,
+      isDoneTimestamp: new Date(),
     };
 
     try {

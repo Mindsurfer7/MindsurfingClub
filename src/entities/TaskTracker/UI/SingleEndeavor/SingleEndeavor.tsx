@@ -15,6 +15,7 @@ import { setIsDoneTasksAPI } from 'entities/Player/model/services/setIsDoneTasks
 import { TaskDisplayModal } from 'pages/PlayerSpace/UI/TaskDisplayModal/TaskDisplayModal';
 import { ToastContainer, toast } from 'react-toastify';
 import { rewardCoins } from 'entities/Player/model/services/InGameActions/rewardCoins';
+import { saveNotification } from 'entities/Player/model/services/InGameActions/saveNotification';
 
 interface SingleEndeavorProps {
   onRemove: (id: string) => Promise<void>;
@@ -59,6 +60,7 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
       progress: undefined,
       theme: 'colored',
     });
+    dispatch(saveNotification(`You have earned ${points} points!`));
 
     toast.success(`You have earned ${coins} coins!`, {
       position: 'top-right',
@@ -70,6 +72,7 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
       progress: undefined,
       theme: 'colored',
     });
+    dispatch(saveNotification(`You have earned ${coins} coins!`));
   };
 
   const onPlusClick = async () => {

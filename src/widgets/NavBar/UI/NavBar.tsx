@@ -20,6 +20,8 @@ import {
   routeConfig,
 } from 'shared/config/routesConfig/routesConfig';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
+import NotificationBar from 'shared/UI/NotificationBar/NotificationBar';
+import NotificationIcon from 'shared/assets/icons/notification.svg';
 
 interface navprops {
   className?: string;
@@ -46,6 +48,7 @@ export const NavBar = memo(({ className }: navprops) => {
   const dispatch = useAppDispatch();
   const location = useLocation();
   const [pageTitle, setPageTitle] = useState('');
+  const [showNotify, setShowNotify] = useState(false);
 
   useEffect(() => {
     const currentRoute = location.pathname as AppRoutes;
@@ -62,6 +65,9 @@ export const NavBar = memo(({ className }: navprops) => {
   const onOpenModal = useCallback(() => {
     setVisibility(true);
   }, []);
+  const onOpenNotify = () => {
+    setShowNotify(!showNotify);
+  };
 
   const ulbiLogout = () => {
     dispatch(userLogout());
@@ -83,12 +89,18 @@ export const NavBar = memo(({ className }: navprops) => {
   return (
     <div className={classNames(cls.navbar, {}, [className as string])}>
       {isVisible && <LoginModal isVisible={isVisible} onClose={onCloseModal} />}
+      {showNotify && <NotificationBar />}
       {
         <div className={cls.title}>
           <h1>{pageTitle}</h1>
         </div>
       }
       <div className={cls.links}>
+        <div className={cls.notificationsBar} onClick={onOpenNotify}>
+          {' '}
+          <NotificationIcon />
+        </div>
+
         {!googleAcc?.isLogged ? (
           <Button
             theme={ButtonTheme.OUTLINE}

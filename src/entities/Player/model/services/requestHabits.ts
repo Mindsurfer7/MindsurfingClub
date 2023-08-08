@@ -7,8 +7,6 @@ import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGooglePro
 export const requestHabits = createAsyncThunk<any, void, ThunkConfig<any>>(
   'Player/requestHabits',
   async (_, thunkAPI) => {
-    console.log('im in');
-
     const userID = getGoogleID(thunkAPI.getState());
     const accountsRef = collection(GPT_DB, 'accounts');
 
@@ -23,8 +21,6 @@ export const requestHabits = createAsyncThunk<any, void, ThunkConfig<any>>(
           };
         })
         .filter((c) => c.id === userID);
-
-      console.log(filteredResponse);
 
       if (!response) {
         throw new Error();

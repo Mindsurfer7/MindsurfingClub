@@ -112,6 +112,7 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
               return (
                 <SingleEndeavor
                   id={h.id}
+                  key={h.id}
                   tags={h.tags}
                   title={h.title}
                   isTask={true}
