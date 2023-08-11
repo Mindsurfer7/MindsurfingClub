@@ -5,16 +5,19 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from 'App/providers/ThemeProvider';
 import 'shared/config/i18next/i18n';
 import { StoreProvider } from 'App/providers/StoreProvider';
-import 'react-toastify/dist/ReactToastify.scss';
+import 'react-toastify/dist/ReactToastify.css';
+import { ErrorBoundary } from 'App/providers/ErrorBoundary';
 
 //import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer"ff
 
 render(
   <BrowserRouter>
     <StoreProvider>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
+      <ErrorBoundary>
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
+      </ErrorBoundary>
     </StoreProvider>
   </BrowserRouter>,
 

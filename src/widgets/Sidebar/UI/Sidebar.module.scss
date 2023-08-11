@@ -19,6 +19,7 @@
     margin: 0; /* Remove margins */
     border-radius: 0; /* Remove border radius */
     z-index: 1000;
+    background: transparent;
   }
   @media (max-width: 415px) {
     width: 50%;
@@ -34,11 +35,12 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  //border: 1px solid white;
   border-radius: 7px;
 
   @media (max-width: 767px) {
     display: flex;
+    background: transparent;
+    width: 50%;
   }
   @media (max-width: 415px) {
     background: transparent;
@@ -78,11 +80,11 @@
 
   @media (max-width: 767px) {
     display: flex;
+    flex-direction: column;
   }
   @media (max-width: 415px) {
     display: flex;
     flex-direction: column;
-    // font-size: 8px;
   }
 }
 .linkWrapper:hover {
@@ -105,9 +107,7 @@
   width: var(--sidebar-width-small);
 
   @media (max-width: 767px) {
-    align-items: center;
-    // background: transparent;
-    width: 7%;
+    width: 40px;
   }
 
   .switchers {
@@ -131,13 +131,12 @@
     transition: 0.3s;
   }
   .links {
+    @media (max-width: 767px) {
+      width: 40px;
+    }
     @media (max-width: 415px) {
       display: none;
     }
-    // .collapseBtn {
-    //   @media (max-width: 415px) {
-    //     display: flex;
-    //   }
   }
 
   .icon {

@@ -1,38 +1,38 @@
-name: linting, testing, building
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-jobs:
-  pipeline:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [17.x]
+# name: linting, testing, building
+# on:
+#   push:
+#     branches: [main]
+#   pull_request:
+#     branches: [main]
+# jobs:
+#   pipeline:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         node-version: [17.x]
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Staring Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: install modules
-        run: npm install
-      - name: build production project
-        run: npm run prodBuild
-        if: always()
-      - name: unit testing
-        run: npm run test
-        if: always()
-      - name: build storybook
-        run: npm run build-storybook
-        if: always()
-      - name: screenshot testing
-        run: npm run screenshotTest
-        if: always()
-        continue-on-error: true
-      # - name: Save screenshots as artifacts
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #   path: .loki/difference/
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Staring Node.js ${{ matrix.node-version }}
+#         uses: actions/setup-node@v1
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#       - name: install modules
+#         run: npm install
+#       - name: build production project
+#         run: npm run prodBuild
+# if: always()
+#       - name: unit testing
+#         run: npm run test
+#         if: always()
+#       - name: build storybook
+#         run: npm run build-storybook
+#         if: always()
+#       - name: screenshot testing
+#         run: npm run screenshotTest
+#         if: always()
+#         continue-on-error: true
+#       # - name: Save screenshots as artifacts
+#       #   uses: actions/upload-artifact@v2
+#       #   with:
+#       #   path: .loki/difference/

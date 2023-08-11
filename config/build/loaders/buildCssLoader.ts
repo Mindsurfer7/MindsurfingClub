@@ -3,7 +3,8 @@ import 'import-glob-loader';
 
 export function buildCssLoader(isDev: boolean) {
   return {
-    test: /\.s[ac]ss$/i,
+    test: /\.(s[ac]ss|css)$/i,
+    //include: /node_modules/,
     use: [
       isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
       {
@@ -15,6 +16,7 @@ export function buildCssLoader(isDev: boolean) {
           },
         },
       },
+
       'sass-loader',
       'import-glob-loader',
     ],

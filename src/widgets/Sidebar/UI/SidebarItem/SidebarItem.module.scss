@@ -55,6 +55,9 @@
   }
   .icon {
     margin-right: 3px;
+    @media (max-width: 767px) {
+      display: none;
+    }
     @media (max-width: 415px) {
       display: none;
     }
@@ -72,6 +75,12 @@
   }
   .collapseBtn:hover {
     background: var(--sidebar-button);
+  }
+
+  @media (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    display: none;
   }
 
   @media (max-width: 415px) {

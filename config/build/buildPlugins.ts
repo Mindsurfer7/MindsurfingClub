@@ -5,6 +5,7 @@ import { BuildOptions } from './types/config';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ReactRefreshWebpachPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import DotenvWebpackPlugin from 'dotenv-webpack';
 
 export function buildPlugins({
   paths,
@@ -29,6 +30,7 @@ export function buildPlugins({
       APIkey: JSON.stringify(apiKey),
       PROJECT: JSON.stringify(project),
     }),
+    new DotenvWebpackPlugin(),
   ];
 
   if (isDev) {
