@@ -10,7 +10,26 @@ export function useTheme(): useThemeResult {
   const { theme, setTheme } = useContext(ThemeContext);
 
   const switchTheme = () => {
-    const newTheme = theme === Theme.dark ? Theme.light : Theme.dark;
+    //const newTheme = theme === Theme.dark ? Theme.light : Theme.dark;
+
+    let newTheme: Theme;
+
+    switch (theme) {
+      case Theme.dark:
+        newTheme = Theme.light;
+        break;
+      case Theme.light:
+        newTheme = Theme.purple;
+        break;
+      case Theme.purple:
+        newTheme = Theme.blue;
+        break;
+      case Theme.blue:
+        newTheme = Theme.dark;
+        break;
+      default:
+        newTheme = Theme.dark;
+    }
 
     setTheme?.(newTheme);
 

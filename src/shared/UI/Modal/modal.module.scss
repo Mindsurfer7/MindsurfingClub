@@ -8,6 +8,11 @@
   pointer-events: none;
   z-index: -1;
   color: var(--primary-color);
+
+  // @media (max-width: 415px) {
+  //   width: 400px;
+  //   align-items: center;
+  // }
 }
 
 .overlay {

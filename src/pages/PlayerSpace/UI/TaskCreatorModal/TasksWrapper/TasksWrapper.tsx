@@ -90,6 +90,22 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
       <div className={cls.header}>My Tasks</div>
 
       <div className={cls.listWrapper}>
+        {/* {tasks.map((h) => {
+          return (
+            <SingleEndeavor
+              id={h.id}
+              key={h.id}
+              tags={h.tags}
+              title={h.title}
+              isTask={true}
+              isDone={h.isDone}
+              onRemove={onTaskRemove}
+              onRequest={onRequestTasks}
+              difficulty={h.difficulty}
+              description={h.description}
+            />
+          );
+        })} */}
         {filteredTasks.length > 0
           ? filteredTasks.map((h) => {
               return (

@@ -55,6 +55,9 @@
   }
   .icon {
     margin-right: 3px;
+    @media (max-width: 415px) {
+      display: none;
+    }
   }
 
   .collapseBtn {
@@ -69,5 +72,12 @@
   }
   .collapseBtn:hover {
     background: var(--sidebar-button);
+  }
+
+  @media (max-width: 415px) {
+    display: flex;
+    flex-direction: column;
+    width: 20px;
+    // height: 20px;
   }
 }

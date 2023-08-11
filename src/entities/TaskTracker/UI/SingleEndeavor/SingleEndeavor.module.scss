@@ -4,12 +4,20 @@
   padding: 5px;
   border-radius: 5px;
   margin-bottom: 5px;
-  // display: flex;
-  // justify-content: space-between;
-  // align-items: center;
-  // text-align: center;
   background-color: var(--inverted-bg-color);
+
+  @media (max-width: 767px) {
+    font-size: 24px;
+    width: 320px;
+    height: 40px;
+  }
+  @media (max-width: 415px) {
+    font-size: 16px;
+    width: 210px;
+    height: 40px;
+  }
 }
+
 .SingleEndeavor:hover {
   cursor: pointer;
   background-color: var(--sidebar-button); //var(--hover-cursor);

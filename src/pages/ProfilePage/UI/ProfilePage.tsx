@@ -40,7 +40,9 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(requestProfileData());
+    if (PROJECT !== 'storybook') {
+      dispatch(requestProfileData());
+    }
   }, [dispatch]);
 
   const onChangeUsername = useCallback(

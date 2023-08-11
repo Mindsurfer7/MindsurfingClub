@@ -6,16 +6,44 @@
   margin-top: 3px;
   margin-left: 5px;
   border-radius: 5px;
-
   position: relative;
+  display: flex; /* Add this */
+  flex-direction: column; /* Add this */
+
+  @media (max-width: 767px) {
+    width: 100%; /* Update width */
+    height: auto; /* Update height */
+    position: fixed; /* Fix position */
+    bottom: 0; /* Place at the bottom */
+    left: 0; /* Align to the left */
+    margin: 0; /* Remove margins */
+    border-radius: 0; /* Remove border radius */
+    z-index: 1000;
+  }
+  @media (max-width: 415px) {
+    width: 50%;
+    // background: transparent;
+    display: flex;
+    border-radius: 7px;
+  }
 }
 
 .switchers {
-  position: absolute;
+  //position: absolute;
   bottom: 20px;
   display: flex;
   justify-content: center;
   width: 100%;
+  //border: 1px solid white;
+  border-radius: 7px;
+
+  @media (max-width: 767px) {
+    display: flex;
+  }
+  @media (max-width: 415px) {
+    background: transparent;
+    width: 50%;
+  }
 }
 
 .links {
@@ -25,6 +53,10 @@
   //background: rebeccapurple;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 767px) {
+    display: flex;
+  }
 }
 .link {
   margin-top: 10px;
@@ -43,6 +75,15 @@
 }
 .linkWrapper {
   width: 100%;
+
+  @media (max-width: 767px) {
+    display: flex;
+  }
+  @media (max-width: 415px) {
+    display: flex;
+    flex-direction: column;
+    // font-size: 8px;
+  }
 }
 .linkWrapper:hover {
 }
@@ -63,18 +104,47 @@
 .collapse {
   width: var(--sidebar-width-small);
 
+  @media (max-width: 767px) {
+    align-items: center;
+    // background: transparent;
+    width: 7%;
+  }
+
   .switchers {
     flex-direction: column;
     align-items: center;
+
+    @media (max-width: 767px) {
+      display: flex;
+    }
   }
+
+  // @media (max-width: 415px) {
+  //   display: flex;
+  //   flex-direction: column;
+  //   width: 10px;
+  // }
 
   .link {
     opacity: 0;
     width: 0;
     transition: 0.3s;
   }
+  .links {
+    @media (max-width: 415px) {
+      display: none;
+    }
+    // .collapseBtn {
+    //   @media (max-width: 415px) {
+    //     display: flex;
+    //   }
+  }
+
   .icon {
     margin-right: 3px;
+    @media (max-width: 415px) {
+      display: none;
+    }
   }
 
   .collapseBtn {
@@ -86,6 +156,10 @@
     margin-left: 25px;
     align-items: center;
     justify-content: center;
+    margin-bottom: 10px;
+    @media (max-width: 415px) {
+      display: flex;
+    }
   }
   .collapseBtn:hover {
     transition: background-color 0.1s, box-shadow 0.1s, transform 0.1s;

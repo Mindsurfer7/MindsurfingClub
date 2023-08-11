@@ -21,9 +21,7 @@ import {
 import Input from 'shared/UI/Input/Input';
 //@ts-ignore
 import { v4 } from 'uuid';
-import { createNewHabit } from 'entities/Player/model/services/createNewHabit';
-import { requestHabits } from 'entities/Player/model/services/requestHabits';
-import { requestDailyz } from 'entities/Player/model/services/requestDailyz';
+
 import { getAllTags } from 'entities/Player/model/selectors/getPlayerData';
 
 interface TaskCreatorProps {

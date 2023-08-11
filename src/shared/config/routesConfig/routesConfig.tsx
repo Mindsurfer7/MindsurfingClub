@@ -7,7 +7,10 @@ import Error404 from 'pages/404/Error404';
 import PracticeCenter from 'pages/PracticeCenter/UI/PracticeCenter';
 import { ProfilePageAsync } from 'pages/ProfilePage'; //import ProfilePage from 'pages/ProfilePage/UI/ProfilePage';
 import ChatWindow from 'pages/PsyRoom/UI/ChatWindow/ChatWindow';
-import PlayerSpace from 'pages/PlayerSpace/UI/PlayerSpace';
+import { ArticlesPageAsync } from 'pages/ArticlesPage';
+import { PlayerSpaceAsync } from 'pages/PlayerSpace';
+import { ArticleDetailsPageAsync } from 'pages/ArticleDetails';
+import { CommunityAsync } from 'pages/Community/UI/Community.async';
 
 type AppRoutesProps = RouteProps & {
   authOnly?: boolean;
@@ -20,6 +23,9 @@ export enum AppRoutes {
   About = 'About',
   PsyRoom = 'PsyRoom',
   Conversation = 'Conversation',
+  Community = 'Community',
+  Articles = 'articles',
+  SingleArticle = 'SingleArticle',
   Profile = 'Profile',
   PracticeCenter = 'PracticeCenter',
   PlayerSpace = 'PlayerSpace',
@@ -35,6 +41,9 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.PracticeCenter]: '/practiceCenter',
   [AppRoutes.PlayerSpace]: '/PlayerSpace',
   [AppRoutes.Conversation]: '/:conversationID',
+  [AppRoutes.Community]: '/community',
+  [AppRoutes.Articles]: '/articles',
+  [AppRoutes.SingleArticle]: '/articles/',
   [AppRoutes.NotFound]: '*',
 };
 
@@ -71,7 +80,22 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   },
   [AppRoutes.PlayerSpace]: {
     path: RoutePath[AppRoutes.PlayerSpace],
-    element: <PlayerSpace />,
+    element: <PlayerSpaceAsync />,
+  },
+  [AppRoutes.Articles]: {
+    path: RoutePath[AppRoutes.Articles],
+    element: <ArticlesPageAsync />,
+    authOnly: true,
+  },
+  [AppRoutes.SingleArticle]: {
+    path: `${RoutePath.SingleArticle}:ID`,
+    element: <ArticleDetailsPageAsync />,
+    authOnly: true,
+  },
+  [AppRoutes.Community]: {
+    path: RoutePath[AppRoutes.Community],
+    element: <CommunityAsync />,
+    authOnly: true,
   },
   [AppRoutes.NotFound]: {
     path: RoutePath[AppRoutes.NotFound],

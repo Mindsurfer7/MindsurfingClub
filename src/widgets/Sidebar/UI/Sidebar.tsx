@@ -31,7 +31,9 @@ const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
             <SidebarItem collapse={collapse} item={item} key={item.text} />
           ))}
         </div>
+      </div>
 
+      <div className={cls.switchers}>
         <Button
           onClick={onSwitch}
           data-testid={'sidebar-btn'}
@@ -42,11 +44,8 @@ const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
         >
           {collapse ? '>' : '<'}
         </Button>
-      </div>
-
-      <div className={cls.switchers}>
         <ThemeSwitcher className={className} />
-        <LangSwitcher short={collapse ? true : false} />
+        {/* <LangSwitcher short={collapse ? true : false} /> */}
       </div>
     </div>
   );

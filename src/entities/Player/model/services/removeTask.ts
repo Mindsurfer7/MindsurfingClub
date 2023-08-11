@@ -6,6 +6,7 @@ import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGooglePro
 import { dialogPayload } from 'pages/PsyRoom/UI/PsyRoom';
 import { getTaskTrackerData } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
 import { Task } from 'entities/Player/types/player';
+import { cutTask } from '../slice/playerSlice';
 
 export const removeTask = createAsyncThunk<any, string, ThunkConfig<any>>(
   'Player/removeTask',
@@ -27,7 +28,7 @@ export const removeTask = createAsyncThunk<any, string, ThunkConfig<any>>(
           tasks: tasksArray,
         });
       }
-
+      thunkAPI.dispatch(cutTask(habitID));
       console.log('task removed');
     } catch (error) {
       console.error('Error creating habit', error);

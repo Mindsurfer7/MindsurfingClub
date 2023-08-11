@@ -10,6 +10,9 @@ import { requestDailyz } from '../services/requestDailyz';
 import { requestCompleted } from '../services/requestCompleted';
 import { requestAllTags } from '../services/requestAllTags';
 import { requestNotifications } from '../services/InGameActions/requestNotifications';
+import { increasePoints } from '../services/increasePoints';
+import { removeTask } from '../services/removeTask';
+import { act } from 'react-dom/test-utils';
 
 const initialState: PlayerScheme = {
   PlayerData: {
@@ -68,7 +71,7 @@ export const PlayerSlice = createSlice({
       state.filteredHabits = state.habits.filter((habit) =>
         habit.tags.includes(action.payload),
       );
-
+      //filteredTasks
       state.filteredTasks = state.tasks.filter((task) =>
         task.tags.includes(action.payload),
       );
@@ -82,6 +85,9 @@ export const PlayerSlice = createSlice({
       state.filteredTasks = [];
       state.filteredDaily = [];
       state.isFilterApplied = false;
+    },
+    cutTask: (state, action) => {
+      state.tasks = state.tasks.filter((t) => t.id !== action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -185,24 +191,27 @@ export const PlayerSlice = createSlice({
         state.error = action.payload;
       });
     builder
-      .addCase(createNewTask.pending, (state, action) => {
+      .addCase(increasePoints.pending, (state, action) => {
         state.isLoading = true;
       })
-      .addCase(createNewTask.fulfilled, (state, action) => {
+      .addCase(increasePoints.fulfilled, (state, action) => {
         state.isLoading = false;
-        //tate.tasks = action.payload;
       })
-      .addCase(createNewTask.rejected, (state, action) => {
+      .addCase(increasePoints.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });
-    builder.addCase(requestNotifications.fulfilled, (state, action) => {
+    builder.addCase(removeTask.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.notifications = action.payload;
     });
   },
 });
 
-export const { setIsDoneDaily, setIsDoneTasks, displayTasksByTag, clearTags } =
-  PlayerSlice.actions;
+export const {
+  setIsDoneDaily,
+  setIsDoneTasks,
+  displayTasksByTag,
+  clearTags,
+  cutTask,
+} = PlayerSlice.actions;
 export const { reducer: PlayerReducer } = PlayerSlice;

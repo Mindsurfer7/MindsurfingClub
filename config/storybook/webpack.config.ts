@@ -40,6 +40,7 @@ export default ({ config }: { config: webpack.Configuration }) => {
     new DefinePlugin({
       IS_DEV: true,
       API_URL: '',
+      PROJECT: 'storybook',
     }),
   );
 

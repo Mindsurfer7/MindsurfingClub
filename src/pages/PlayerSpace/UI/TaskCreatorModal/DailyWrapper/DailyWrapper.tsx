@@ -46,36 +46,31 @@ const DailyWrapper: React.FC<DailyWrapperProps> = ({ className }) => {
   const onRemoveDaily = async (id: string) => {
     await dispatch(removeDaily(id));
   };
-  const timestampToDate = (timestamp: any) => {
-    const seconds = timestamp.seconds;
-    const milliseconds = timestamp.nanoseconds / 1000000; // Convert nanoseconds to milliseconds
-    return new Date(seconds * 1000 + milliseconds);
-  };
 
-  useEffect(() => {
-    if (Dailys.length > 0) {
-      const currentDate = new Date();
-      currentDate.setHours(0, 0, 0, 0);
+  // useEffect(() => {
+  //   if (Dailys?.length > 0) {
+  //     const currentDate = new Date();
+  //     currentDate.setHours(0, 0, 0, 0);
 
-      const processDailys = async () => {
-        for (const d of Dailys) {
-          //@ts-ignore
-          const taskDate = new Date(d.isDoneTimestamp.seconds * 1000);
-          taskDate.setHours(0, 0, 0, 0);
+  //     const processDailys = async () => {
+  //       for (const d of Dailys) {
+  //         //@ts-ignore
+  //         const taskDate = new Date(d.isDoneTimestamp.seconds * 1000);
+  //         taskDate.setHours(0, 0, 0, 0);
 
-          if (
-            taskDate.getTime() < currentDate.getTime() &&
-            taskDate.getTime() !== currentDate.getTime() &&
-            d.isDone === true
-          ) {
-            await dispatch(setIsDoneDailyAPI({ taskID: d.id, isDone: false }));
-            dispatch(requestDailyz());
-          }
-        }
-      };
-      processDailys();
-    }
-  }, [Dailys, dispatch]);
+  //         if (
+  //           taskDate.getTime() < currentDate.getTime() &&
+  //           taskDate.getTime() !== currentDate.getTime() &&
+  //           d.isDone === true
+  //         ) {
+  //           await dispatch(setIsDoneDailyAPI({ taskID: d.id, isDone: false }));
+  //           dispatch(requestDailyz());
+  //         }
+  //       }
+  //     };
+  //     processDailys();
+  //   }
+  // }, [Dailys, dispatch]);
 
   return (
     <div className={classNames(cls.DailyWrapper, {}, [className as string])}>

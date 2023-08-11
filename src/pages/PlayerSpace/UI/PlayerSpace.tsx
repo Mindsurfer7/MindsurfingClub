@@ -12,13 +12,7 @@ import {
   getTasks,
 } from 'entities/Player/model/selectors/getPlayerData';
 import { requestHabits } from 'entities/Player/model/services/requestHabits';
-import SingleHabit from 'entities/TaskTracker/UI/SingleEndeavor/SingleEndeavor';
-import { createNewHabit } from 'entities/Player/model/services/createNewHabit';
-import { setDifficulty } from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
-import Input from 'shared/UI/Input/Input';
-import { getTaskTrackerData } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
-import Textarea from 'shared/UI/Textarea/Textarea';
-import TaskCreator from 'entities/TaskTracker/UI/TaskCreator/TaskCreator';
+
 import { getGoogleIsLogged } from 'entities/GoogleProfile';
 import { requestPlayerData } from 'entities/Player/model/services/requestPlayerData';
 import { TaskCreatorModal } from './TaskCreatorModal/TaskCreatorModal';

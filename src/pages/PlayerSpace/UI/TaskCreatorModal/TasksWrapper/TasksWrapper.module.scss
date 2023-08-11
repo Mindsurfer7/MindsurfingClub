@@ -6,8 +6,17 @@
   border-radius: 5px;
   padding: 10px;
   margin: 5px;
-  width: 33%;
+  min-width: 33%;
   min-height: 300px;
+
+  @media (max-width: 767px) {
+    height: 300px;
+    width: 100%;
+  }
+  @media (max-width: 415px) {
+    height: 250px;
+    width: 100%;
+  }
 }
 
 .header {
@@ -33,6 +42,12 @@
   padding-top: 30px;
   padding-bottom: 35px;
   z-index: 3;
+  @media (max-width: 767px) {
+    align-items: center;
+  }
+  @media (max-width: 415px) {
+    align-items: center;
+  }
 }
 
 .createBtn {

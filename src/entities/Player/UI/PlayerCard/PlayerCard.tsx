@@ -32,6 +32,7 @@ import { getGoogleIsLogged } from 'entities/GoogleProfile';
 import { ToastContainer, toast } from 'react-toastify';
 import { deleteTag } from 'entities/Player/model/services/deleteTag';
 import { saveNotification } from 'entities/Player/model/services/InGameActions/saveNotification';
+import Spinner from '../../../../shared/assets/icons/Spinner.svg';
 
 interface PlayerCardProps {
   className?: string;
@@ -156,9 +157,9 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
           <div className={cls.points}>
             <span>Points</span>
             <span>{player.points}</span>
+            {/* {isLoading ? <Spinner /> :} */}
           </div>
           <div className={cls.buttnz}>
-            <Button theme={ButtonTheme.OUTLINE}>Habits</Button>
             <Button theme={ButtonTheme.OUTLINE}>Tasks</Button>
             <Button theme={ButtonTheme.OUTLINE}>Daily</Button>
             <Button
@@ -180,7 +181,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
           >
             All
           </Button>
-          {sortedTags.map((tag) => {
+          {sortedTags?.map((tag) => {
             return (
               <>
                 {' '}

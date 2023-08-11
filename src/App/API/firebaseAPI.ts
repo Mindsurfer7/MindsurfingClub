@@ -3,7 +3,7 @@ import axios from 'axios';
 import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth } from 'firebase/auth';
 
-export const newAPIkey = 'xxxxxxxxxxxxxxxxxxxxx';
+export const newAPIkey = 'xxxxxxxxxxxxxxxxx';
 
 export const GPT_API = axios.create({
   baseURL: 'https://api.openai.com/v1/chat/completions',

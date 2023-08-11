@@ -16,11 +16,13 @@ import { NavigateOptions, To } from 'react-router-dom';
 import { GoogleLoginScheme } from 'features/AuthWithGoogle/model/types/GloginSceme';
 import { PlayerScheme } from 'entities/Player/types/player';
 import { TaskTrackerScheme } from 'entities/TaskTracker/types/taskTracker';
+import { SingleArticleScheme } from 'entities/Article';
 
 export interface StateScheme {
   loginForm?: LoginScheme;
   profile?: ProfileScheme;
   Player: PlayerScheme;
+  Article?: SingleArticleScheme;
   TaskTracker: TaskTrackerScheme;
   GoogleProfile: GoogleProfileScheme;
   GoogleLogin: GoogleLoginScheme;

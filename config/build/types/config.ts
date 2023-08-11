@@ -20,4 +20,5 @@ export interface BuildOptions {
   port: number;
   API_URL: string;
   API_KEY: string;
+  project: 'storybook' | 'frontend' | 'jest';
 }

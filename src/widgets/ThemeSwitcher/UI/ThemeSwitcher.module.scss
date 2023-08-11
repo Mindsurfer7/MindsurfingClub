@@ -7,7 +7,7 @@
 
   cursor: pointer;
 
-  //   :hover {
-  //     border: 2px solid rgb(3, 209, 3);
-  //   }
+  @media (max-width: 415px) {
+    height: 10px;
+  }
 }

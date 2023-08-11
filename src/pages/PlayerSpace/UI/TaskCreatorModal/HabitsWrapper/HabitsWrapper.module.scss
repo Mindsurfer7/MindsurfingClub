@@ -6,10 +6,17 @@
   border-radius: 5px;
   padding: 10px;
   margin: 5px;
-  width: 33%;
+  min-width: 33%;
   min-height: 300px;
+  @media (max-width: 767px) {
+    height: 300px;
+    width: 100%;
+  }
+  @media (max-width: 415px) {
+    height: 250px;
+    width: 100%;
+  }
 }
-
 .header {
   display: flex;
   position: absolute;
@@ -19,7 +26,10 @@
   width: 100%;
   justify-content: center;
   align-items: center;
-  //border: 1px solid rgb(0, 0, 0);
+  // @media (max-width: 767px) {
+  //   font-size: 48px;
+  //   height: 60px;
+  // }
 }
 
 .listWrapper {
@@ -30,6 +40,13 @@
   padding-top: 30px;
   padding-bottom: 35px;
   padding-right: 2px;
+  @media (max-width: 767px) {
+    align-items: center;
+  }
+  @media (max-width: 415px) {
+    align-items: center;
+    // width: 90%;
+  }
 }
 
 .createBtn {

@@ -5,6 +5,7 @@ import AboutIcon from './../../../shared/assets/icons/about-20-20.svg';
 import PsyIcon from './../../../shared/assets/icons/psy.svg';
 import ProfileIcon from './../../../shared/assets/icons/profile-20-20.svg';
 import TaskIcon from './../../../shared/assets/icons/tasks.svg';
+import ArtIcon from './../../../shared/assets/icons/article-20-20.svg';
 
 export interface SidebarItemType {
   path: string;
@@ -17,6 +18,16 @@ export const SidebarItemsList: SidebarItemType[] = [
     path: RoutePath.PlayerSpace,
     Icon: TaskIcon,
     text: 'Task Tracker',
+  },
+  {
+    path: RoutePath.articles,
+    Icon: ArtIcon,
+    text: 'LongReads',
+  },
+  {
+    path: RoutePath.Community,
+    Icon: ProfileIcon,
+    text: 'Community',
   },
   {
     path: RoutePath.PsyRoom,
