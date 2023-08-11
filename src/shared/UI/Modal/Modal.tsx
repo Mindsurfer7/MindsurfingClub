@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 import { Mods, classNames } from 'shared/lib/classNames/classNames';
-import cls from './Modal.module.scss';
+import cls from './modal.module.scss';
 import Portal from '../Portal/Portal';
 import { useTheme } from 'App/providers/ThemeProvider';
 
