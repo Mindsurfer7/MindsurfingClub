@@ -9,7 +9,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
-import { TaskCreatorModal } from '../TaskCreatorModal';
+import { TaskCreatorModal } from '../TaskCreatorModal/TaskCreatorModal';
 import { createNewDaily } from 'entities/Player/model/services/createNewDaily';
 import { requestDailyz } from 'entities/Player/model/services/requestDailyz';
 import { removeDaily } from 'entities/Player/model/services/removeDaily';

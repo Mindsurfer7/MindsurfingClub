@@ -12,7 +12,7 @@ import { PlayerSpaceAsync } from 'pages/PlayerSpace';
 import { ArticleDetailsPageAsync } from 'pages/ArticleDetails';
 import { CommunityAsync } from 'pages/Community/UI/Community.async';
 
-type AppRoutesProps = RouteProps & {
+export type AppRoutesProps = RouteProps & {
   authOnly?: boolean;
   requiresGoogleAuth?: boolean;
 };
@@ -43,7 +43,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.Conversation]: '/:conversationID',
   [AppRoutes.Community]: '/community',
   [AppRoutes.Articles]: '/articles',
-  [AppRoutes.SingleArticle]: '/articles/',
+  [AppRoutes.SingleArticle]: '/articles/', //:articleID
   [AppRoutes.NotFound]: '*',
 };
 
@@ -66,7 +66,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     //requiresGoogleAuth: true,
   },
   [AppRoutes.Conversation]: {
-    path: `${RoutePath[AppRoutes.Conversation]}/:conversationId`,
+    path: `${RoutePath.Conversation}/:conversationId`,
     element: <ChatWindow />,
   },
   [AppRoutes.Profile]: {
@@ -88,7 +88,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     authOnly: true,
   },
   [AppRoutes.SingleArticle]: {
-    path: `${RoutePath.SingleArticle}:ID`,
+    path: `${RoutePath.SingleArticle}:articleID`, //    path: `${RoutePath.SingleArticle}:ID`,
     element: <ArticleDetailsPageAsync />,
     authOnly: true,
   },

@@ -6,3 +6,6 @@ export const getUsername = (state: StateScheme) => {
 export const getUserAuthData = (state: StateScheme) => {
   return state.user.authData;
 };
+export const getUserInited = (state: StateScheme) => {
+  return state.user.inited;
+};

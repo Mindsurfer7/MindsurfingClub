@@ -11,12 +11,25 @@ interface ArticleDetailsPageProps {
 const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
   className,
 }) => {
-  const ID = useParams();
+  const { articleID } = useParams<{ articleID: string }>();
+
+  // if (!articleID) {
+  //   return (
+  //     <div
+  //       className={classNames(cls.ArticleDetailsPage, {}, [
+  //         className as string,
+  //       ])}
+  //     >
+  //       Sorry, but article wasnt found
+  //     </div>
+  //   );
+  // }
+
   return (
     <div
       className={classNames(cls.ArticleDetailsPage, {}, [className as string])}
     >
-      <SingleArticle ID={''} />
+      <SingleArticle ID={'1'} />
     </div>
   );
 };

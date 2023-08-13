@@ -6,23 +6,13 @@ import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routesConfig/routesConfig';
 
-interface RequireAuthProps {
-  className?: string;
-}
-
-const RequireAuth: React.FC<RequireAuthProps> = ({ className }) => {
-  let auth = useSelector(getUserAuthData);
-  let location = useLocation();
+export function RequireAuth({ children }: { children: JSX.Element }) {
+  const auth = useSelector(getUserAuthData);
+  const location = useLocation();
 
   if (!auth) {
-    return <Navigate to={RoutePath.PsyRoom} />;
+    return <Navigate to={RoutePath.Main} state={{ from: location }} replace />;
   }
 
-  return (
-    <div
-      className={classNames(cls.RequireAuth, {}, [className as string])}
-    ></div>
-  );
-};
-
-export default RequireAuth;
+  return children;
+}

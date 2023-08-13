@@ -17,6 +17,7 @@ import { GoogleLoginScheme } from 'features/AuthWithGoogle/model/types/GloginSce
 import { PlayerScheme } from 'entities/Player/types/player';
 import { TaskTrackerScheme } from 'entities/TaskTracker/types/taskTracker';
 import { SingleArticleScheme } from 'entities/Article';
+import { CommunityScheme } from 'entities/Community';
 
 export interface StateScheme {
   loginForm?: LoginScheme;
@@ -24,6 +25,7 @@ export interface StateScheme {
   Player: PlayerScheme;
   Article?: SingleArticleScheme;
   TaskTracker: TaskTrackerScheme;
+  Community: CommunityScheme;
   GoogleProfile: GoogleProfileScheme;
   GoogleLogin: GoogleLoginScheme;
   user: UserScheme;

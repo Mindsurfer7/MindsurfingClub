@@ -9,7 +9,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
-import { TaskCreatorModal } from '../TaskCreatorModal';
+import { TaskCreatorModal } from '../TaskCreatorModal/TaskCreatorModal';
 import { requestHabits } from 'entities/Player/model/services/requestHabits';
 import { createNewHabit } from 'entities/Player/model/services/createNewHabit';
 import { removeHabit } from 'entities/Player/model/services/removeHabit';

@@ -153,7 +153,7 @@ img {
   display: flex;
   flex-direction: column;
   border: 2px solid black;
-  overflow: auto;
+
   width: 200px;
   height: 220px;
   border-radius: 5px;
@@ -170,6 +170,25 @@ img {
     width: 100%;
     max-height: 100px;
   }
+}
+
+.tagsWrapper {
+  margin-top: 27px;
+  overflow: auto;
+}
+
+.header {
+  //align-self: flex-start;
+  position: absolute;
+  z-index: 10;
+  //left: 0;
+  top: 0;
+  width: 100%;
+  background: var(--inverted-bg-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .singleTag {
@@ -197,16 +216,4 @@ img {
   //border: 1px solid rgb(255, 255, 255);
   padding: 2px;
   right: 1px;
-}
-
-.header {
-  align-self: flex-start;
-  // position: absolute;
-  // top: 0;
-  width: 100%;
-  background: var(--inverted-bg-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }

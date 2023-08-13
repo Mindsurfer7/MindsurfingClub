@@ -18,10 +18,10 @@ import { requestPlayerData } from 'entities/Player/model/services/requestPlayerD
 import { TaskCreatorModal } from './TaskCreatorModal/TaskCreatorModal';
 import PlayerCard from 'entities/Player/UI/PlayerCard/PlayerCard';
 import { requestTasks } from 'entities/Player/model/services/requestTasks';
-import DailyWrapper from './TaskCreatorModal/DailyWrapper/DailyWrapper';
+import DailyWrapper from './DailyWrapper/DailyWrapper';
 import { requestDailyz } from 'entities/Player/model/services/requestDailyz';
-import TasksWrapper from './TaskCreatorModal/TasksWrapper/TasksWrapper';
-import HabitsWrapper from './TaskCreatorModal/HabitsWrapper/HabitsWrapper';
+import TasksWrapper from './TasksWrapper/TasksWrapper';
+import HabitsWrapper from './HabitsWrapper/HabitsWrapper';
 import { requestCompleted } from 'entities/Player/model/services/requestCompleted';
 import { requestAllTags } from 'entities/Player/model/services/requestAllTags';
 import { requestNotifications } from 'entities/Player/model/services/InGameActions/requestNotifications';

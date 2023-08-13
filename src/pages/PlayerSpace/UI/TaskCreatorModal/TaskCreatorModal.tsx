@@ -4,6 +4,7 @@ import cls from './TaskCreatorModal.module.scss';
 import Modal from 'shared/UI/Modal/Modal';
 import Preloader from 'shared/UI/Preloader/Preloader';
 import TaskCreator from 'entities/TaskTracker/UI/TaskCreator/TaskCreator';
+import Text from 'shared/UI/Text/Text';
 
 interface TaskCreatorModalProps {
   className?: string;

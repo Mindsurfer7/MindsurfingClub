@@ -8,4 +8,5 @@ export interface User {
 export interface UserScheme {
   authData?: User;
   googleAuthData?: GoogleProfile;
+  inited: boolean;
 }

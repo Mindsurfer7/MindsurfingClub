@@ -1,11 +1,14 @@
 import LoginForm from 'features/AuthByUsername/UI/LoginForm/LoginForm';
 import { useTranslation } from 'react-i18next';
 
-import React, { memo } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './MainPage.module.scss';
 import Textarea from 'shared/UI/Textarea/Textarea';
 import TaskCreator from 'entities/TaskTracker/UI/TaskCreator/TaskCreator';
+import { GroupCreatorModal, createGroup } from 'entities/Community';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
+import Button from 'shared/UI/Button/Button';
 
 interface MainPageProps {
   className?: string;
@@ -28,7 +31,6 @@ const MainPage: React.FC<MainPageProps> = memo(({ className }) => {
         получать well-being profit база знаний цифровая гигиена: чб экран,
         удаление иконок навыки сохранения нейроресурса'
       </div>
-      <TaskCreator createTask={onS} requestData={onS} />
     </div>
   );
 });

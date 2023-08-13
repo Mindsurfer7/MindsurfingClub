@@ -17,6 +17,7 @@ import { GoogleProfileReducer } from 'entities/GoogleProfile/model/slice/GoogleP
 import { GPTReducer } from 'entities/GPT';
 import { PlayerReducer } from 'entities/Player/model/slice/playerSlice';
 import { TaskTrackerReducer } from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
+import { CommunityReducer } from 'entities/Community/model/slice/communitySlice';
 
 export function createReduxStore(
   initialState?: StateScheme,
@@ -28,6 +29,7 @@ export function createReduxStore(
     user: userReducer,
     Player: PlayerReducer,
     TaskTracker: TaskTrackerReducer,
+    Community: CommunityReducer,
     GPT: GPTReducer,
     GoogleProfile: GoogleProfileReducer,
     GoogleLogin: googleLoginReducer,

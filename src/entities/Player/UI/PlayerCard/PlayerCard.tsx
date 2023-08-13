@@ -161,7 +161,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
           </div>
           <div className={cls.buttnz}>
             <Button theme={ButtonTheme.OUTLINE}>Tasks</Button>
-            <Button theme={ButtonTheme.OUTLINE}>Daily</Button>
+            <Button theme={ButtonTheme.OUTLINE}>Challenges</Button>
             <Button
               theme={
                 completed ? ButtonTheme.OUTLINE_GREEN : ButtonTheme.OUTLINE
@@ -173,34 +173,39 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
           </div>
         </div>
         <div className={cls.tags}>
-          <div className={cls.header}>Tags</div>
-          <Button
-            className={cls.singleTag} //
-            theme={ButtonTheme.CLEAR}
-            onClick={onClearTags}
-          >
-            All
-          </Button>
-          {sortedTags?.map((tag) => {
-            return (
-              <>
-                {' '}
-                <div
-                  key={tag}
-                  className={
-                    selectedTag === tag ? cls.tagSelected : cls.singleTag
-                  }
-                  // theme={ButtonTheme.CLEAR}
-                  onClick={() => onDisplayByTag(tag)}
-                >
-                  {tag}{' '}
-                  <div className={cls.delTag} onClick={() => onDeleteTag(tag)}>
-                    X
+          <div className={cls.tagsWrapper}>
+            <div className={cls.header}>Tags</div>
+            <Button
+              className={cls.singleTag} //
+              theme={ButtonTheme.CLEAR}
+              onClick={onClearTags}
+            >
+              All
+            </Button>
+            {sortedTags?.map((tag) => {
+              return (
+                <>
+                  {' '}
+                  <div
+                    key={tag}
+                    className={
+                      selectedTag === tag ? cls.tagSelected : cls.singleTag
+                    }
+                    // theme={ButtonTheme.CLEAR}
+                    onClick={() => onDisplayByTag(tag)}
+                  >
+                    {tag}{' '}
+                    <div
+                      className={cls.delTag}
+                      onClick={() => onDeleteTag(tag)}
+                    >
+                      X
+                    </div>
                   </div>
-                </div>
-              </>
-            );
-          })}
+                </>
+              );
+            })}
+          </div>
         </div>
       </div>
       <ToastContainer
