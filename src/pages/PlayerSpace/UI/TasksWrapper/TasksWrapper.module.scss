@@ -6,7 +6,12 @@
   border-radius: 5px;
   padding: 10px;
   margin: 5px;
-  max-width: 33%;
+  min-width: 33%;
+  //max-width: 100%;
+
+  min-width: calc(33.33%);
+  max-width: calc(33.33%);
+
   min-height: 300px;
 
   @media (max-width: 767px) {

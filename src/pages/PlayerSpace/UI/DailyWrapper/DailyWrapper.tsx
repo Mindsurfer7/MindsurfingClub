@@ -14,7 +14,6 @@ import { createNewDaily } from 'entities/Player/model/services/createNewDaily';
 import { requestDailyz } from 'entities/Player/model/services/requestDailyz';
 import { removeDaily } from 'entities/Player/model/services/removeDaily';
 import SingleEndeavor from 'entities/TaskTracker/UI/SingleEndeavor/SingleEndeavor';
-import { setIsDoneDailyAPI } from 'entities/Player/model/services/setIsDoneValue';
 
 interface DailyWrapperProps {
   className?: string;

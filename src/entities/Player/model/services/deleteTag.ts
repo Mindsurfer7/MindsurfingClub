@@ -3,7 +3,6 @@ import { ThunkConfig } from 'App/providers/StoreProvider';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
-import { getAllTags } from '../selectors/getPlayerData';
 import { requestAllTags } from './requestAllTags';
 
 export const deleteTag = createAsyncThunk<any, string, ThunkConfig<any>>(

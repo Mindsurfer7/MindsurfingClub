@@ -21,9 +21,11 @@ const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
   return (
     <div
       data-testid={'sidebar'}
-      className={classNames(cls.Sidebar, { [cls.collapse]: collapse }, [
-        className as string,
-      ])}
+      className={classNames(
+        cls.Sidebar,
+        { [cls.collapse]: collapse, [cls.expanded]: !collapse },
+        [className as string],
+      )}
     >
       <div className={cls.links}>
         <div className={cls.linkWrapper}>
@@ -44,7 +46,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
         >
           {collapse ? '>' : '<'}
         </Button>
-        <ThemeSwitcher className={className} />
+        <ThemeSwitcher className={cls.themeSwitcher} />
         {/* <LangSwitcher short={collapse ? true : false} /> */}
       </div>
     </div>

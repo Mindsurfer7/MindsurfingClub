@@ -15,27 +15,27 @@ export interface ArticleBlockBase {
   type: ArticleBlockType;
 }
 
-export interface ArticleCodeBlock extends ArticleBlockBase {
+export interface ArticleCodeBlockType extends ArticleBlockBase {
   type: ArticleBlockType.CODE;
   code: string;
 }
 
-export interface ArticleImageBlock extends ArticleBlockBase {
+export interface ArticleImageBlockType extends ArticleBlockBase {
   type: ArticleBlockType.IMAGE;
   src: string;
   title: string;
 }
 
-export interface ArticleTextBlock extends ArticleBlockBase {
+export interface ArticleTextBlockType extends ArticleBlockBase {
   type: ArticleBlockType.TEXT;
   paragraphs: string[];
   title?: string;
 }
 
 export type ArticleBlock =
-  | ArticleCodeBlock
-  | ArticleImageBlock
-  | ArticleTextBlock;
+  | ArticleCodeBlockType
+  | ArticleImageBlockType
+  | ArticleTextBlockType;
 
 export enum ArticleType {
   IT = 'IT',

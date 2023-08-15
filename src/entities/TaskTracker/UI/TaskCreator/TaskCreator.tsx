@@ -61,6 +61,10 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
     dispatch(setTitle(value));
   };
 
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setTitle(e.target.value));
+  };
+
   const onTaskSubmit = async () => {
     dispatch(setID(v4()));
     await createTask(); //createTask
@@ -133,10 +137,10 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
         </Button>
       </div>
       <div className={cls.description}>
-        <Input
+        <input
           value={trackerData.title}
           placeholder={'Введите название'}
-          onChange={onSetTitle}
+          onChange={onChangeHandler}
           className={cls.input}
         />
         <Textarea
@@ -153,7 +157,7 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
               value={inputValue}
               placeholder={'добавьте тэги'}
               onChange={handleInputChange}
-              className={cls.input2}
+              className={cls.tagInput}
               onKeyDown={onkeyDownToProps}
             />
           </div>
@@ -173,6 +177,7 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
 
         <div className={cls.footer}>
           <div className={cls.selectedTags}>
+            Selected tags:
             <div className={cls.tagArray}>
               {tags.map((t) => (
                 <div key={t} className={cls.singleTag}>
@@ -181,16 +186,14 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
               ))}
             </div>
           </div>
-          <div className={cls.btn}>
-            {' '}
-            <Button
-              className={cls.btn}
-              onClick={onTaskSubmit}
-              theme={ButtonTheme.OUTLINE}
-            >
-              Submit
-            </Button>
-          </div>
+
+          <Button
+            className={cls.btn}
+            onClick={onTaskSubmit}
+            theme={ButtonTheme.OUTLINE}
+          >
+            Submit
+          </Button>
         </div>
       </div>
     </div>

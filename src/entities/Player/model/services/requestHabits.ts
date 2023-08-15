@@ -25,6 +25,8 @@ export const requestHabits = createAsyncThunk<any, void, ThunkConfig<any>>(
       if (!response) {
         throw new Error();
       }
+      console.log(response.docs);
+
       //@ts-ignore
       return filteredResponse[0].habits;
     } catch (e) {

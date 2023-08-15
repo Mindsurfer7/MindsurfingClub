@@ -1,10 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-//import { requestProfileDataProps } from 'entities/requestProfileDataProps';
 import { Profile } from '../types/profile';
 import { ThunkConfig } from 'App/providers/StoreProvider';
-
-//{ rejectValue: string }
 
 export const requestProfileData = createAsyncThunk<
   Profile,

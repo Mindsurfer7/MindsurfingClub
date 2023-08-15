@@ -39,6 +39,15 @@
     font: var(--font-m);
   }
 }
+.size_mini {
+  .title {
+    font: var(--font-l);
+  }
+
+  .text {
+    font: var(--font-mini);
+  }
+}
 
 .size_l {
   .title {

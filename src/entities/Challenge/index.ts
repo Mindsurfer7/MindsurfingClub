@@ -1,3 +1,4 @@
 import { takePart } from './model/services/takePart';
 import { createNewChallenge } from './model/services/createNewChallenge';
-export { createNewChallenge, takePart };
+import ChallengeCard from './UI/ChallengeCard/ChallengeCard';
+export { createNewChallenge, takePart, ChallengeCard };

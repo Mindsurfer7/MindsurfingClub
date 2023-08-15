@@ -1,0 +1,36 @@
+.SingleGroupPage {
+}
+
+.challenges {
+  border: 2px solid white;
+  border-radius: 7px;
+}
+
+.group {
+  border: 2px solid white;
+  border-radius: 7px;
+  width: 300px;
+  margin: 10px;
+
+  &:hover {
+    border: 2px solid rgb(4, 233, 16);
+    border-radius: 7px;
+    cursor: pointer;
+  }
+}
+.groupAbout {
+  display: flex;
+}
+
+.pic {
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+}
+
+.x {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  //   justify-content: center;
+}

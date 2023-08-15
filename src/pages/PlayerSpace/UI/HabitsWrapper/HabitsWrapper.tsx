@@ -57,41 +57,33 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
         {filteredHabits.length > 0
           ? filteredHabits.map((h) => {
               return (
-                <div className={cls.block}>
-                  <div className={cls.singleTask}>
-                    <SingleEndeavor
-                      key={h.id}
-                      title={h.title}
-                      isDone={h.isDone}
-                      tags={h.tags}
-                      difficulty={h.difficulty}
-                      description={h.description}
-                      onRequest={onRequestHabits}
-                      onRemove={onRemoveHabit}
-                      id={h.id}
-                    />
-                  </div>
-                </div>
+                <SingleEndeavor
+                  key={h.id}
+                  title={h.title}
+                  isDone={h.isDone}
+                  tags={h.tags}
+                  difficulty={h.difficulty}
+                  description={h.description}
+                  onRequest={onRequestHabits}
+                  onRemove={onRemoveHabit}
+                  id={h.id}
+                />
               );
             })
           : !isFilterApplied &&
             habits.map((h) => {
               return (
-                <div className={cls.block}>
-                  <div className={cls.singleTask}>
-                    <SingleEndeavor
-                      key={h.id}
-                      title={h.title}
-                      isDone={h.isDone}
-                      tags={h.tags}
-                      difficulty={h.difficulty}
-                      description={h.description}
-                      onRequest={onRequestHabits}
-                      onRemove={onRemoveHabit}
-                      id={h.id}
-                    />
-                  </div>
-                </div>
+                <SingleEndeavor
+                  key={h.id}
+                  title={h.title}
+                  isDone={h.isDone}
+                  tags={h.tags}
+                  difficulty={h.difficulty}
+                  description={h.description}
+                  onRequest={onRequestHabits}
+                  onRemove={onRemoveHabit}
+                  id={h.id}
+                />
               );
             })}
       </div>

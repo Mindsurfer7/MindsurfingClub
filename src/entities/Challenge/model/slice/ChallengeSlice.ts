@@ -1,10 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createNewChallenge } from '../services/createNewChallenge';
 import { ChallengeScheme } from 'entities/Challenge/types/ChallengeScheme';
+import { requestChallenges } from '../services/requestChallenges';
 
 const initialState: ChallengeScheme = {
   isLoading: false,
-
+  challenges: [],
   error: '',
 };
 
@@ -27,6 +28,18 @@ export const ChallengeSlice = createSlice({
         //state.allTags = action.payload;
       })
       .addCase(createNewChallenge.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
+    builder
+      .addCase(requestChallenges.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(requestChallenges.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.challenges = action.payload;
+      })
+      .addCase(requestChallenges.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });

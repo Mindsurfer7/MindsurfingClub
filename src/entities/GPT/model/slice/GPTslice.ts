@@ -1,12 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { GPTmessage, GPTscheme } from 'entities/GPT/types/GPTScheme';
+import { GPTscheme } from 'entities/GPT/types/GPTScheme';
 import { sendMessageToGPT } from '../services/sendMessageToGPT';
 import { requestConversations } from '../services/requestConversations';
 import { updateMessagesDB } from '../services/updateMessagesDB';
 import { create1stDialog } from '../services/create1stDialog';
-// import { Profile, ProfileScheme } from '../types/profile';
-// import { requestProfileData } from '../services/requestProfileData';
-// import { updateProfileData } from '../services/updateProfileData';
 
 const initialState: GPTscheme = {
   singleMessage: '',

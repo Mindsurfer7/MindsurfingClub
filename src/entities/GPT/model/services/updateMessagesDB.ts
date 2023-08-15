@@ -1,19 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'App/providers/StoreProvider';
 import { getMessages } from '../selectors/getGPTdata';
-import {
-  Firestore,
-  arrayUnion,
-  collection,
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-} from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
-//@ts-ignore
-import { v4 } from 'uuid';
 
 export const updateMessagesDB = createAsyncThunk<
   any,

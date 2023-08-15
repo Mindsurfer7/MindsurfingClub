@@ -162,8 +162,10 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
         <div className={cls.Wrapper}>
           <div className={cls.plusBtn}>
             <input
+              id="checkboxInputDaily"
               type="checkbox"
               checked={isDone}
+              className={cls.customCheckbox}
               onChange={() => {
                 onCheckBoxChangeDaily();
               }}

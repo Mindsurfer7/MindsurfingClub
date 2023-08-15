@@ -1,4 +1,3 @@
-import { v4 } from 'uuid';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'App/providers/StoreProvider';
 import { addDoc, collection } from 'firebase/firestore';
@@ -16,7 +15,7 @@ export const createGroup = createAsyncThunk<any, void, ThunkConfig<any>>(
     const title = getGroupTitle(thunkAPI.getState());
     const description = getGroupDescription(thunkAPI.getState());
 
-    const challangesRef = collection(GPT_DB, 'challenges');
+    const publicsRef = collection(GPT_DB, 'publics');
     //const habitDocRef = doc(GPT_DB, 'challenges', `${userID}`);
 
     //мож понадобится как темплейт для объекта челленджа
@@ -31,16 +30,18 @@ export const createGroup = createAsyncThunk<any, void, ThunkConfig<any>>(
     // };
 
     try {
-      await addDoc(challangesRef, {
-        ID: v4(),
+      await addDoc(publicsRef, {
         title: title,
         description: description,
-        participantsID: [],
+        members: [userID],
+        challenges: [],
+        posterLink:
+          'https://us.123rf.com/450wm/lkeskinen/lkeskinen1709/lkeskinen170910246/86379213-community-rubber-stamp.jpg?ver=6',
       });
 
-      console.log('challenge created');
+      console.log('public created');
     } catch (error) {
-      console.error('Error creating dailyk', error);
+      console.error('Error creating public', error);
     }
   },
 );

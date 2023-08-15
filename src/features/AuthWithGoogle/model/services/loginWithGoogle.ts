@@ -1,20 +1,9 @@
-// import {
-//   ThunkConfig,
-//   ThunkExtraArg,
-// } from './../../../../../App/providers/StoreProvider/config/stateScheme';
-// import { API } from './../../../../../shared/API/API';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { User } from 'entities/User';
-import { setAuthData } from 'entities/User/model/slice/userSlice';
+
 import { signInWithPopup, signOut } from 'firebase/auth';
 import { ThunkConfig } from 'App/providers/StoreProvider';
 import { authG, googleProvider } from 'App/API/firebaseAPI';
-import {
-  GoogleProfile,
-  logoutAccount,
-  setAccount,
-} from 'entities/GoogleProfile';
+import { GoogleProfile, logoutAccount } from 'entities/GoogleProfile';
 
 export const loginWithGoogle = createAsyncThunk<
   GoogleProfile,
@@ -28,12 +17,8 @@ export const loginWithGoogle = createAsyncThunk<
         throw new Error('User not found');
       }
 
-      // Extract the required data from the currentUser object
       const { uid, displayName, email, photoURL } = currentUser;
       const profile: GoogleProfile = { uid, displayName, email, photoURL };
-
-      //no need if fulfilled code is written in slice
-      // thunkAPI.dispatch(setAccount(profile));
 
       return Promise.resolve({
         profile,

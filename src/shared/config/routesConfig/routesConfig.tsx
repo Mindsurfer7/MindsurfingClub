@@ -11,6 +11,8 @@ import { ArticlesPageAsync } from 'pages/ArticlesPage';
 import { PlayerSpaceAsync } from 'pages/PlayerSpace';
 import { ArticleDetailsPageAsync } from 'pages/ArticleDetails';
 import { CommunityAsync } from 'pages/Community/UI/Community.async';
+import { SingleGroupPageAsync } from 'pages/SingleGroupPage';
+import ChallengePage from 'pages/ChallengePage/UI/ChallengePage';
 
 export type AppRoutesProps = RouteProps & {
   authOnly?: boolean;
@@ -28,7 +30,9 @@ export enum AppRoutes {
   SingleArticle = 'SingleArticle',
   Profile = 'Profile',
   PracticeCenter = 'PracticeCenter',
+  Challenge = 'Challenge',
   PlayerSpace = 'PlayerSpace',
+  SingleGroup = 'SingleGroup',
   NotFound = 'NotFound',
 }
 
@@ -41,9 +45,11 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.PracticeCenter]: '/practiceCenter',
   [AppRoutes.PlayerSpace]: '/PlayerSpace',
   [AppRoutes.Conversation]: '/:conversationID',
-  [AppRoutes.Community]: '/community',
+  [AppRoutes.Community]: '/communities',
   [AppRoutes.Articles]: '/articles',
-  [AppRoutes.SingleArticle]: '/articles/', //:articleID
+  [AppRoutes.SingleArticle]: '/articles/',
+  [AppRoutes.SingleGroup]: '/communities/SingleGroup/',
+  [AppRoutes.Challenge]: '/challenge/',
   [AppRoutes.NotFound]: '*',
 };
 
@@ -95,7 +101,17 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.Community]: {
     path: RoutePath[AppRoutes.Community],
     element: <CommunityAsync />,
-    authOnly: true,
+    authOnly: false,
+  },
+  [AppRoutes.SingleGroup]: {
+    path: `${RoutePath.SingleGroup}:publicID`,
+    element: <SingleGroupPageAsync />,
+    authOnly: false,
+  },
+  [AppRoutes.Challenge]: {
+    path: `${RoutePath.Challenge}:challengeID`,
+    element: <ChallengePage />,
+    authOnly: false,
   },
   [AppRoutes.NotFound]: {
     path: RoutePath[AppRoutes.NotFound],

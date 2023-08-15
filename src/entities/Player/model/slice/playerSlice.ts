@@ -5,14 +5,11 @@ import { requestHabits } from '../services/requestHabits';
 import { requestPlayerData } from '../services/requestPlayerData';
 import { requestTasks } from '../services/requestTasks';
 import { createNewDaily } from '../services/createNewDaily';
-import { createNewTask } from '../services/createNewTask';
 import { requestDailyz } from '../services/requestDailyz';
 import { requestCompleted } from '../services/requestCompleted';
 import { requestAllTags } from '../services/requestAllTags';
-import { requestNotifications } from '../services/InGameActions/requestNotifications';
 import { increasePoints } from '../services/increasePoints';
 import { removeTask } from '../services/removeTask';
-import { act } from 'react-dom/test-utils';
 
 const initialState: PlayerScheme = {
   PlayerData: {

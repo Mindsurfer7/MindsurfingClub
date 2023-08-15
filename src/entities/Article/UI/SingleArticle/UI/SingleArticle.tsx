@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useCallback, useEffect } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './SingleArticle.module.scss';
 import {
@@ -21,6 +21,10 @@ import Text, { TextSize } from 'shared/UI/Text/Text';
 import EyeIcon from 'shared/assets/icons/eye-20-20.svg';
 import CalendarIcon from 'shared/assets/icons/calendar-20-20.svg';
 import { Icon } from 'shared/UI/Icon/Icon';
+import ArticleTextBlock from '../../ArticleTextBlock/ArticleTextBlock';
+import { ArticleBlock, ArticleBlockType } from 'entities/Article/types/article';
+import ArticleCodeBlock from '../../ArticleCodeBlock/ArticleCodeBlock';
+import ArticleImageBlock from '../../ArticleImageBlock/ArticleImageBlock';
 
 interface SingleArticleProps {
   className?: string;
@@ -40,8 +44,41 @@ const SingleArticle: React.FC<SingleArticleProps> = memo(
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-      dispatch(requestArticleByID());
+      if (PROJECT !== 'storybook') {
+        dispatch(requestArticleByID());
+      }
     }, [dispatch, ID]);
+
+    const renderBlock = useCallback((block: ArticleBlock) => {
+      switch (block.type) {
+        case ArticleBlockType.CODE:
+          return (
+            <ArticleCodeBlock
+              key={block.id}
+              block={block}
+              className={cls.block}
+            />
+          );
+        case ArticleBlockType.IMAGE:
+          return (
+            <ArticleImageBlock
+              key={block.id}
+              block={block}
+              className={cls.block}
+            />
+          );
+        case ArticleBlockType.TEXT:
+          return (
+            <ArticleTextBlock
+              key={block.id}
+              className={cls.block}
+              block={block}
+            />
+          );
+        default:
+          return null;
+      }
+    }, []);
 
     let content;
 
@@ -63,6 +100,12 @@ const SingleArticle: React.FC<SingleArticleProps> = memo(
     } else if (error) {
       content = (
         <>
+          <div>err</div>;
+        </>
+      );
+    } else {
+      content = (
+        <>
           <div className={cls.avatarWrapper}>
             <Avatar size={200} src={article?.img} className={cls.avatar} />
           </div>
@@ -81,32 +124,7 @@ const SingleArticle: React.FC<SingleArticleProps> = memo(
             <Icon className={cls.icon} Svg={CalendarIcon} />
             <Text text={article?.createdAt} />
           </div>
-          {/* {article?.blocks.map(renderBlock)} */}
-        </>
-      );
-      // ) <div>err</div>;
-    } else {
-      content = (
-        <>
-          <div className={cls.avatarWrapper}>
-            <Avatar size={200} src={article?.img} className={cls.avatar} />
-          </div>
-          <Text
-            className={cls.title}
-            title={article?.title}
-            text={article?.subtitle}
-            // size={TextSize.L}
-          />
-
-          <div className={cls.articleInfo}>
-            {/* <Icon className={cls.icon} Svg={EyeIcon} /> */}
-            <Text text={String(article?.views)} />
-          </div>
-          <div className={cls.articleInfo}>
-            {/* <Icon className={cls.icon} Svg={CalendarIcon} /> */}
-            <Text text={article?.createdAt} />
-          </div>
-          {/* {article?.blocks.map(renderBlock)} */}
+          {article?.blocks.map(renderBlock)}
         </>
       );
     }
@@ -116,7 +134,7 @@ const SingleArticle: React.FC<SingleArticleProps> = memo(
         <div
           className={classNames(cls.SingleArticle, {}, [className as string])}
         >
-          {content} vwkwlc lwk q;ek
+          {content}
         </div>
       </DynamicModuleLoader>
     );

@@ -1,14 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'App/providers/StoreProvider';
-import {
-  Firestore,
-  arrayUnion,
-  collection,
-  doc,
-  getDoc,
-  setDoc,
-  updateDoc,
-} from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 

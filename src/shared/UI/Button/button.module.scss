@@ -88,6 +88,28 @@
     transform: translateY(2px);
   }
 }
+.filled-green {
+  padding: 5px;
+  border: 1px solid rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
+  border-radius: 3px;
+  background: rgb(20, 204, 3);
+
+  line-height: 1.2;
+  align-items: center; /* Center the content vertically */
+  justify-content: center; /* Center the content horizontally */
+  margin: 5px;
+
+  cursor: pointer;
+  transition: background-color 0.1s, box-shadow 0.1s, transform 0.1s;
+  &:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: scale(1.1);
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+}
 
 .square {
   padding: 0;

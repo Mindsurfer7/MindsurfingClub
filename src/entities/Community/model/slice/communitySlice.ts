@@ -1,11 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CommunityScheme } from 'entities/Community/types/CommunityScheme';
+import { CommunitiesScheme } from 'entities/Community/types/CommunityScheme';
+import { requestAllGroups } from '../services/requestAllGroups';
+import { requestCommunityByID } from '../services/requestCommunityByID';
 
-const initialState: CommunityScheme = {
+const initialState: CommunitiesScheme = {
   isLoading: false,
+  groups: [],
+  community: null,
   title: '',
-  desciption: '',
-  participants: [],
+  description: '',
+  members: [''],
   error: '',
   id: '',
   posterLink: '',
@@ -19,24 +23,44 @@ export const CommunitySlice = createSlice({
       state.title = action.payload;
     },
     setDescription: (state, action: PayloadAction<string>) => {
-      state.desciption = action.payload;
+      state.description = action.payload;
+    },
+    clearGroupModalInputs: (state) => {
+      state.title = '';
+      state.description = '';
+    },
+    setNewMember: (state, action: PayloadAction<string>) => {
+      state.members?.push(action.payload);
     },
   },
   extraReducers: (builder) => {
-    // builder
-    //   .addCase(createNewChallenge.pending, (state, action) => {
-    //     state.isLoading = true;
-    //   })
-    //   .addCase(createNewChallenge.fulfilled, (state, action) => {
-    //     state.isLoading = false;
-    //     //state.allTags = action.payload;
-    //   })
-    //   .addCase(createNewChallenge.rejected, (state, action) => {
-    //     state.isLoading = false;
-    //     state.error = action.payload;
-    //   });
+    builder
+      .addCase(requestAllGroups.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(requestAllGroups.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.groups = action.payload;
+      })
+      .addCase(requestAllGroups.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
+    builder
+      .addCase(requestCommunityByID.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(requestCommunityByID.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.community = action.payload;
+      })
+      .addCase(requestCommunityByID.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
   },
 });
 
-export const { setTitle, setDescription } = CommunitySlice.actions;
+export const { setTitle, setDescription, clearGroupModalInputs, setNewMember } =
+  CommunitySlice.actions;
 export const { reducer: CommunityReducer } = CommunitySlice;

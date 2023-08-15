@@ -1,19 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'App/providers/StoreProvider';
 import {
-  Firestore,
-  arrayUnion,
-  collection,
+
   doc,
-  getDoc,
+
   setDoc,
-  updateDoc,
+
 } from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
-//@ts-ignore
-import { v4 } from 'uuid';
-import { dialogPayload } from 'pages/PsyRoom/UI/PsyRoom';
+
 
 export const initializePlayer = createAsyncThunk<any, void, ThunkConfig<any>>(
   'Player/initializePlayer',

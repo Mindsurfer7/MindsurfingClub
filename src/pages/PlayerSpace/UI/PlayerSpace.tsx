@@ -1,21 +1,14 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './PlayerSpace.module.scss';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { initializePlayer } from 'entities/Player/model/services/initializePlayer';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { useSelector } from 'react-redux';
-import { getGoogleProfile } from 'features/AuthWithGoogle';
-import {
-  getHabits,
-  getPlayerProfile,
-  getTasks,
-} from 'entities/Player/model/selectors/getPlayerData';
+import { getPlayerProfile } from 'entities/Player/model/selectors/getPlayerData';
 import { requestHabits } from 'entities/Player/model/services/requestHabits';
-
 import { getGoogleIsLogged } from 'entities/GoogleProfile';
 import { requestPlayerData } from 'entities/Player/model/services/requestPlayerData';
-import { TaskCreatorModal } from './TaskCreatorModal/TaskCreatorModal';
 import PlayerCard from 'entities/Player/UI/PlayerCard/PlayerCard';
 import { requestTasks } from 'entities/Player/model/services/requestTasks';
 import DailyWrapper from './DailyWrapper/DailyWrapper';
@@ -32,7 +25,6 @@ interface PlayerSpaceProps {
 
 const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
   const dispatch = useAppDispatch();
-  const account = useSelector(getGoogleProfile);
   const player = useSelector(getPlayerProfile);
   const isAuth = useSelector(getGoogleIsLogged);
 

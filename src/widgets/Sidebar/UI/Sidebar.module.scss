@@ -29,21 +29,26 @@
   }
 }
 
+.expanded {
+  background: var(--inverted-bg-color);
+  align-items: center;
+}
+
 .switchers {
-  //position: absolute;
+  margin-top: 10px;
   bottom: 20px;
   display: flex;
   justify-content: center;
+  //align-items: center;
   width: 100%;
   border-radius: 7px;
 
   @media (max-width: 767px) {
     display: flex;
-    background: transparent;
     width: 50%;
   }
   @media (max-width: 415px) {
-    background: transparent;
+    justify-content: space-between;
     width: 50%;
   }
 }
@@ -52,7 +57,6 @@
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  //background: rebeccapurple;
   align-items: center;
   justify-content: center;
 
@@ -87,16 +91,12 @@
     flex-direction: column;
   }
 }
-.linkWrapper:hover {
-}
 
 .collapseBtn {
-  position: absolute;
-  margin-right: 5px;
-  font-size: large;
   color: var(--primary-color);
-  right: 10px;
-  top: 5px;
+  font-size: 32px;
+  // background: var(--inverted-bg-color);
+  border-radius: 10px;
 }
 
 .background {
@@ -105,13 +105,22 @@
 
 .collapse {
   width: var(--sidebar-width-small);
+  background: var(--inverted-bg-color);
 
   @media (max-width: 767px) {
     width: 40px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 415px) {
+    justify-content: center;
+    align-items: center;
   }
 
   .switchers {
     flex-direction: column;
+    justify-content: center;
     align-items: center;
 
     @media (max-width: 767px) {
@@ -119,11 +128,8 @@
     }
   }
 
-  // @media (max-width: 415px) {
-  //   display: flex;
-  //   flex-direction: column;
-  //   width: 10px;
-  // }
+  @media (max-width: 415px) {
+  }
 
   .link {
     opacity: 0;
@@ -148,14 +154,12 @@
 
   .collapseBtn {
     position: relative;
-    margin-right: 5px;
-    font-size: large;
+    font-size: 32px;
     transition: 0.3s opacity;
     display: flex;
-    margin-left: 25px;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     @media (max-width: 415px) {
       display: flex;
     }

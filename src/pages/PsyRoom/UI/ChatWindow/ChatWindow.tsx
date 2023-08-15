@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ChatWindow.module.scss';
-import Input from 'shared/UI/Input/Input';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { useSelector } from 'react-redux';
 import {
@@ -20,6 +19,7 @@ import {
 import { useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import Textarea from 'shared/UI/Textarea/Textarea';
+import AppLink from 'shared/UI/AppLink/AppLink';
 
 interface ChatWindowProps {
   className?: string;
@@ -87,7 +87,10 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ className }) => {
       <div className={cls.header}>
         {' '}
         <div className={cls.backlink}>
-          <NavLink to={'/psyroom'}>Back to list</NavLink>
+          <AppLink to={'/psyroom'}>
+            <Button theme={ButtonTheme.CLEAR}>{'< Back to list'}</Button>
+          </AppLink>
+          {/* <NavLink to={'/psyroom'}>Back to list</NavLink> */}
         </div>
         <div className={cls.XL}>
           <h1>Джипити Психотерапевт</h1>

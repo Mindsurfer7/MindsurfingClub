@@ -20,6 +20,7 @@ interface TextProps {
 export enum TextSize {
   M = 'size_m',
   L = 'size_l',
+  Mini = 'size_mini',
 }
 
 export enum TextAlign {

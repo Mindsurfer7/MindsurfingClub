@@ -2,14 +2,6 @@ import React from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './TaskInfoDisplay.module.scss';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { useSelector } from 'react-redux';
-import Input from 'shared/UI/Input/Input';
-import {
-  getDifficulty,
-  getTaskTrackerData,
-} from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
-import Textarea from 'shared/UI/Textarea/Textarea';
 import Text from 'shared/UI/Text/Text';
 
 interface TaskInfoDisplayProps {

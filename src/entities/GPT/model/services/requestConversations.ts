@@ -1,10 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'App/providers/StoreProvider';
-import { GPTmessage } from 'entities/GPT/types/GPTScheme';
-import { getMessages } from '../selectors/getGPTdata';
 import { collection, getDocs } from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
-import { getMessagesFromDBresponse } from '../selectors/getFirestoreData';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 
 export const requestConversations = createAsyncThunk<

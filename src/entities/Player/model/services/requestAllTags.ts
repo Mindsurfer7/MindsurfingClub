@@ -5,9 +5,7 @@ import { GPT_DB } from 'App/API/firebaseAPI';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 
 interface FilteredResponse {
-  //id: string;
   AllTags?: string[]; // The ? indicates that AllTags is optional
-  // Add other properties if needed
 }
 
 export const requestAllTags = createAsyncThunk<any, void, ThunkConfig<any>>(

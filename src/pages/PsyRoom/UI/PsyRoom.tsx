@@ -2,11 +2,9 @@ import React, { memo, useEffect, useState } from 'react';
 import cls from './PsyRoom.module.scss';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import Input from 'shared/UI/Input/Input';
-
 import { useSelector } from 'react-redux';
 import { create1stDialog } from 'entities/GPT';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-
 import { getGoogleIsLogged } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import {
   getDialogsList,
@@ -18,10 +16,8 @@ import {
   setInputValue,
 } from 'entities/GPT/model/slice/GPTslice';
 import AppLink from 'shared/UI/AppLink/AppLink';
-//@ts-ignore
 import { v4 } from 'uuid';
 import { createNewDialog } from 'entities/GPT/model/services/createNewDialog';
-import TrashIcon from '../../../shared/assets/icons/trashcan.svg';
 
 interface PsyRoomProps {
   className?: string;

@@ -163,9 +163,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
             <Button theme={ButtonTheme.OUTLINE}>Tasks</Button>
             <Button theme={ButtonTheme.OUTLINE}>Challenges</Button>
             <Button
-              theme={
-                completed ? ButtonTheme.OUTLINE_GREEN : ButtonTheme.OUTLINE
-              }
+              theme={completed ? ButtonTheme.FILLED_GREEN : ButtonTheme.OUTLINE}
               onClick={onShowCompleted}
             >
               Completed

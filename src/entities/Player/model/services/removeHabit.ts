@@ -1,11 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'App/providers/StoreProvider';
-import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
-import { dialogPayload } from 'pages/PsyRoom/UI/PsyRoom';
-import { getTaskTrackerData } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
-import { Task } from 'entities/Player/types/player';
 
 export const removeHabit = createAsyncThunk<any, string, ThunkConfig<any>>(
   'Player/removeHabit',

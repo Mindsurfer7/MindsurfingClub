@@ -1,12 +1,11 @@
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './Navbar.module.scss';
 import { memo, useCallback, useEffect, useState } from 'react';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { LoginModal } from 'features/AuthByUsername';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getUsername } from 'entities/User/model/selectors/getUsername';
-import { NavLink } from 'react-router-dom';
 import { userLogout } from 'entities/User/model/slice/userSlice';
 import MiniModal from 'shared/UI/MiniModal/MiniModal';
 import { getGoogleData } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';

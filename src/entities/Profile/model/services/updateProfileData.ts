@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { Profile } from '../types/profile';
 import { ThunkConfig } from 'App/providers/StoreProvider';
 import { getProfileForm } from '../selectors/getProfile';

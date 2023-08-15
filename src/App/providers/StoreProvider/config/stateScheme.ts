@@ -1,3 +1,7 @@
+import {
+  Challenge,
+  ChallengeScheme,
+} from './../../../../entities/Challenge/types/ChallengeScheme';
 import { GoogleProfileScheme } from 'entities/GoogleProfile/types/GoogleProfile';
 import {
   AnyAction,
@@ -17,15 +21,18 @@ import { GoogleLoginScheme } from 'features/AuthWithGoogle/model/types/GloginSce
 import { PlayerScheme } from 'entities/Player/types/player';
 import { TaskTrackerScheme } from 'entities/TaskTracker/types/taskTracker';
 import { SingleArticleScheme } from 'entities/Article';
-import { CommunityScheme } from 'entities/Community';
+import { CommunitiesScheme } from 'entities/Community';
+import { ArticleDetailsCommentsScheme } from 'pages/ArticleDetails/model/types/ArticleDetailsCommentsSceme';
 
 export interface StateScheme {
   loginForm?: LoginScheme;
   profile?: ProfileScheme;
   Player: PlayerScheme;
   Article?: SingleArticleScheme;
+  ArticleComments?: ArticleDetailsCommentsScheme;
   TaskTracker: TaskTrackerScheme;
-  Community: CommunityScheme;
+  Community: CommunitiesScheme;
+  Challenge: ChallengeScheme;
   GoogleProfile: GoogleProfileScheme;
   GoogleLogin: GoogleLoginScheme;
   user: UserScheme;
