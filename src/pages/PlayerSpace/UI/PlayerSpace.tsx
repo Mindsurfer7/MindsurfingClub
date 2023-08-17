@@ -18,6 +18,8 @@ import HabitsWrapper from './HabitsWrapper/HabitsWrapper';
 import { requestCompleted } from 'entities/Player/model/services/requestCompleted';
 import { requestAllTags } from 'entities/Player/model/services/requestAllTags';
 import { requestNotifications } from 'entities/Player/model/services/InGameActions/requestNotifications';
+import { ChallengesList, getShowChallenges } from 'entities/Challenge';
+import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 
 interface PlayerSpaceProps {
   className?: string;
@@ -27,6 +29,8 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
   const dispatch = useAppDispatch();
   const player = useSelector(getPlayerProfile);
   const isAuth = useSelector(getGoogleIsLogged);
+
+  const showChallenges = useSelector(getShowChallenges);
 
   useEffect(() => {
     if (isAuth) {
@@ -68,13 +72,17 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
     <div className={classNames(cls.PlayerSpace, {}, [className as string])}>
       <PlayerCard />
 
-      <div className={cls.TrackerWrapper}>
-        <HabitsWrapper />
+      {showChallenges ? (
+        <ChallengesList />
+      ) : (
+        <div className={cls.TrackerWrapper}>
+          <HabitsWrapper />
 
-        <DailyWrapper />
+          <DailyWrapper />
 
-        <TasksWrapper />
-      </div>
+          <TasksWrapper />
+        </div>
+      )}
     </div>
   );
 };

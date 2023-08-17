@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ArticleDetailsPage.module.scss';
 import SingleArticle from 'entities/Article/UI/SingleArticle/UI/SingleArticle';
@@ -18,6 +18,8 @@ import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEf
 import { fetchCommentsByArticleId } from '../model/services/fetchCommentsByArticleId/fetchCommentsByArticleId';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { getCommentsIsLoading } from '../model/selectors/getCommentsData';
+import AddCommentForm from 'features/AddComment/UI/AddCommentForm';
+import { addCommentForArticle } from '../model/services/addCommentForArticle';
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -32,12 +34,21 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
 }) => {
   const { articleID } = useParams<{ articleID: string }>();
   const comments = useSelector(getArticleComments.selectAll);
-  const isLoading = useSelector(getCommentsIsLoading);
+  const commentsAreLoading = useSelector(getCommentsIsLoading);
   const dispatch = useAppDispatch();
 
   useInitialEffect(() => {
+    console.log(articleID);
+
     dispatch(fetchCommentsByArticleId(articleID));
   });
+
+  const onCommentSend = useCallback(
+    (text: string) => {
+      dispatch(addCommentForArticle(text));
+    },
+    [dispatch],
+  );
 
   if (!articleID) {
     return (
@@ -59,11 +70,9 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
         ])}
       >
         <SingleArticle ID={articleID} />
+        <AddCommentForm onSendComment={onCommentSend} />
         <Text title="Comments" />
-        <CommentList
-          isLoading={false} //БРЕД!
-          comments={comments}
-        />
+        <CommentList isLoading={commentsAreLoading} comments={comments} />
       </div>
     </DynamicModuleLoader>
   );

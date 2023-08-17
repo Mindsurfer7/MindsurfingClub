@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ChallengePage.module.scss';
 import { useSelector } from 'react-redux';
-import {
-  getChallengeData,
-  getTaskTrackerData,
-} from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
+import { getTaskTrackerData } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import {
   setChallengeDescription,
@@ -14,8 +11,8 @@ import {
   setChallengePoints,
   setChallengeStartDate,
   setChallengeTitle,
-} from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
-import { createNewChallenge } from 'entities/Challenge';
+} from 'entities/Challenge';
+import { createNewChallenge, getChallengeData } from 'entities/Challenge';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 
@@ -132,7 +129,7 @@ const ChallengeForm = () => {
   );
 };
 
-const users = ['User1', 'User2', 'User3'];
+const users = ['Mindsurfer', 'Reol', 'Amura'];
 const list = [
   {
     id: 1,
@@ -168,37 +165,16 @@ const list = [
 const ChallengePage: React.FC<ChallengePageProps> = ({ className }) => {
   return (
     <div className={classNames(cls.ChallengePage, {}, [className as string])}>
-      <div className={cls.scoreboard}>
-        <div className={cls.tablewrap}>
-          <div className={cls.date}>Date</div>
-          {users.map((p) => {
-            return <div className={cls.user}>Mindsurfer</div>;
-          })}
-        </div>
-        {list.map((x) => {
-          return (
-            <div className={cls.wrapper2}>
-              <div className={cls.day} key={x.id}>
-                {/* {formatDate(x.day)} */ x.day}
-              </div>
-
-              {users.map((p) => {
-                return (
-                  <div className={cls.flexWrapper} key={p}>
-                    <div className={cls.morning}>
-                      <span>done</span>
-                    </div>
-                    <div className={cls.evening}>
-                      <span>done</span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          );
-        })}
-      </div>
-      <ChallengeForm />
+      {users.map((u) => {
+        return (
+          <div className={cls.scoreboard}>
+            <div className={cls.user}>{u}</div>
+            <div className={cls.isDone}>isDone</div>
+            <div className={cls.score}>score</div>
+            <div className={cls.day}>day</div>
+          </div>
+        );
+      })}
     </div>
   );
 };
@@ -212,9 +188,7 @@ export default ChallengePage;
 <div className={cls.scoreboard}>
   {/* <div className={cls.user}>user</div> */
 }
-{
-  (' ');
-}
+
 //   <div className={cls.userColumn}>
 //     {users.map((user) => (
 //       <div key={user} className={cls.user}>

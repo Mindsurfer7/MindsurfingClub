@@ -4,15 +4,15 @@ import { TaskTrackerScheme } from 'entities/TaskTracker/types/taskTracker';
 
 const initialState: TaskTrackerScheme = {
   showCompleted: false,
-  challengeData: {
-    title: 'string',
-    description: 'string',
-    startDate: 'string',
-    endDate: 'string',
-    executionType: 'string',
-    points: 9,
-    participants: [],
-  },
+  // challengeData: {
+  //   title: 'string',
+  //   description: 'string',
+  //   startDate: 'string',
+  //   endDate: 'string',
+  //   executionType: 'string',
+  //   points: 9,
+  //   participants: [],
+  // },
   selectedTag: '',
   description: '',
   difficulty: 1,
@@ -61,24 +61,24 @@ export const TaskTrackerSlice = createSlice({
       state.tags = [];
     },
     //////////////////////////////
-    setChallengeTitle: (state, action: PayloadAction<string>) => {
-      state.challengeData.title = action.payload;
-    },
-    setChallengeDescription: (state, action: PayloadAction<string>) => {
-      state.challengeData.description = action.payload;
-    },
-    setChallengeStartDate: (state, action: PayloadAction<string>) => {
-      state.challengeData.startDate = action.payload;
-    },
-    setChallengeEndDate: (state, action: PayloadAction<string>) => {
-      state.challengeData.endDate = action.payload;
-    },
-    setChallengeExecutionType: (state, action: PayloadAction<string>) => {
-      state.challengeData.executionType = action.payload;
-    },
-    setChallengePoints: (state, action: PayloadAction<number>) => {
-      state.challengeData.points = action.payload;
-    },
+    // setChallengeTitle: (state, action: PayloadAction<string>) => {
+    //   state.challengeData.title = action.payload;
+    // },
+    // setChallengeDescription: (state, action: PayloadAction<string>) => {
+    //   state.challengeData.description = action.payload;
+    // },
+    // setChallengeStartDate: (state, action: PayloadAction<string>) => {
+    //   state.challengeData.startDate = action.payload;
+    // },
+    // setChallengeEndDate: (state, action: PayloadAction<string>) => {
+    //   state.challengeData.endDate = action.payload;
+    // },
+    // setChallengeExecutionType: (state, action: PayloadAction<string>) => {
+    //   state.challengeData.executionType = action.payload;
+    // },
+    // setChallengePoints: (state, action: PayloadAction<number>) => {
+    //   state.challengeData.points = action.payload;
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -110,11 +110,11 @@ export const {
   setTitle,
   clearInputs,
   /////////////////////////////
-  setChallengeTitle,
-  setChallengeDescription,
-  setChallengeStartDate,
-  setChallengeEndDate,
-  setChallengeExecutionType,
-  setChallengePoints,
+  // setChallengeTitle,
+  // setChallengeDescription,
+  // setChallengeStartDate,
+  // setChallengeEndDate,
+  // setChallengeExecutionType,
+  // setChallengePoints,
 } = TaskTrackerSlice.actions;
 export const { reducer: TaskTrackerReducer } = TaskTrackerSlice;

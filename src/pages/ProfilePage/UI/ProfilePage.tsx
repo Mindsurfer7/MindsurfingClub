@@ -23,6 +23,8 @@ import ProfilePageHeader from './Header/ProfilePageHeader';
 import { Currency } from 'entities/Currency';
 import { Country } from 'entities/Country';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
+import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
+import { useParams } from 'react-router-dom';
 
 interface ProfilePageProps {
   className?: string;
@@ -37,13 +39,20 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
   const error = useSelector(getProfileError);
   const isLoading = useSelector(getProfileIsLoading);
   const readonly = useSelector(getProfileReadonly);
+  const { profileID } = useParams<{ profileID: string }>();
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (PROJECT !== 'storybook') {
-      dispatch(requestProfileData());
+  useInitialEffect(() => {
+    if (profileID) {
+      dispatch(requestProfileData(profileID));
     }
-  }, [dispatch]);
+  });
+
+  // useEffect(() => {
+  //   if (PROJECT !== 'storybook') {
+
+  //   }
+  // }, [dispatch]);
 
   const onChangeUsername = useCallback(
     (value?: string) => {

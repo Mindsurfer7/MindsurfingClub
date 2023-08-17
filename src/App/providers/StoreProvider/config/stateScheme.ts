@@ -23,6 +23,7 @@ import { TaskTrackerScheme } from 'entities/TaskTracker/types/taskTracker';
 import { SingleArticleScheme } from 'entities/Article';
 import { CommunitiesScheme } from 'entities/Community';
 import { ArticleDetailsCommentsScheme } from 'pages/ArticleDetails/model/types/ArticleDetailsCommentsSceme';
+import { AddCommentScheme } from 'features/AddComment';
 
 export interface StateScheme {
   loginForm?: LoginScheme;
@@ -30,6 +31,7 @@ export interface StateScheme {
   Player: PlayerScheme;
   Article?: SingleArticleScheme;
   ArticleComments?: ArticleDetailsCommentsScheme;
+  AddComment?: AddCommentScheme;
   TaskTracker: TaskTrackerScheme;
   Community: CommunitiesScheme;
   Challenge: ChallengeScheme;

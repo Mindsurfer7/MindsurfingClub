@@ -33,6 +33,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { deleteTag } from 'entities/Player/model/services/deleteTag';
 import { saveNotification } from 'entities/Player/model/services/InGameActions/saveNotification';
 import Spinner from '../../../../shared/assets/icons/Spinner.svg';
+import { getShowChallenges, setShowChallenges } from 'entities/Challenge';
 
 interface PlayerCardProps {
   className?: string;
@@ -55,6 +56,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
   const completed = useSelector(getShowCompleted);
   const isAuth = useSelector(getGoogleIsLogged);
   const selectedTag = useSelector(getSelectedTag);
+  const showChallenges = useSelector(getShowChallenges);
 
   const sortedTags = [...allTags].sort((a, b) => a.length - b.length);
 
@@ -118,6 +120,10 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
   const onShowCompleted = () => {
     dispatch(setShowCompleted(!completed));
   };
+  const onShowChallenges = () => {
+    dispatch(setShowChallenges(!showChallenges));
+  };
+
   const onDisplayByTag = (tag: string) => {
     dispatch(displayTasksByTag(tag));
     dispatch(setSelectedTag(tag));
@@ -161,7 +167,14 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
           </div>
           <div className={cls.buttnz}>
             <Button theme={ButtonTheme.OUTLINE}>Tasks</Button>
-            <Button theme={ButtonTheme.OUTLINE}>Challenges</Button>
+            <Button
+              theme={
+                showChallenges ? ButtonTheme.FILLED_GREEN : ButtonTheme.OUTLINE
+              }
+              onClick={onShowChallenges}
+            >
+              Challenges
+            </Button>
             <Button
               theme={completed ? ButtonTheme.FILLED_GREEN : ButtonTheme.OUTLINE}
               onClick={onShowCompleted}

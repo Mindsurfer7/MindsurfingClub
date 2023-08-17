@@ -1,3 +1,50 @@
+.ChallengePage {
+  display: flex;
+  margin: 10px;
+}
+
+.scoreboard {
+  display: grid;
+  border: 1px solid wheat;
+  grid-template-rows: auto 1fr; /* Two rows: user row and columns row */
+  grid-template-columns: 1fr 1fr 1fr; /* Three columns: day, score, isDone */
+  gap: 5px; /* Add some spacing between cells */
+  margin: 10px;
+}
+.user {
+  border: 1px solid wheat;
+  text-align: center;
+  padding: 10px;
+  grid-column: 1 / span 3; /* Make user span all three columns */
+}
+.day,
+.score,
+.isDone {
+  border: 1px solid wheat;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// .day {
+//   border: 1px solid wheat;
+//   height: 50px;
+//   width: 33.3%;
+// }
+
+// .score {
+//   border: 1px solid wheat;
+//   height: 50px;
+//   width: 33.3%;
+// }
+// .isDone {
+//   border: 1px solid wheat;
+//   height: 50px;
+//   width: 33.3%;
+// }
+
+// =========================================================================================================
 // .ChallengePage {
 // }
 
@@ -18,26 +65,7 @@
 //   grid-template-rows: repeat(auto-fill, 50px);
 //   gap: 10px;
 // }
-// .day {
-//   border: 1px solid wheat;
-//   height: 50px;
-//   width: 50px;
-// }
-// .user {
-//   border: 1px solid wheat;
-//   height: 50px;
-//   width: 50px;
-// }
-// .score {
-//   border: 1px solid wheat;
-//   height: 50px;
-//   width: 50px;
-// }
-// .isDone {
-//   border: 1px solid wheat;
-//   height: 50px;
-//   width: 50px;
-// }
+
 // .day,
 // .score,
 // .isDone {
@@ -45,89 +73,89 @@
 //   align-items: center;
 //   justify-content: center;
 // }
-.chal {
-  padding: 10px;
-  margin: 8px;
-  border: 2px solid rgb(255, 255, 255);
-  border-radius: 5px;
-  color: beige;
-  height: 100px;
-  width: 400px;
-  text-decoration: none;
-  display: inline-block;
-}
+// .chal {
+//   padding: 10px;
+//   margin: 8px;
+//   border: 2px solid rgb(255, 255, 255);
+//   border-radius: 5px;
+//   color: beige;
+//   height: 100px;
+//   width: 400px;
+//   text-decoration: none;
+//   display: inline-block;
+// }
 
-.chal:hover {
-  background-color: grey;
-}
+// .chal:hover {
+//   background-color: grey;
+// }
 
-.delbtn {
-  position: absolute;
-  top: 0;
-  right: 0;
-}
+// .delbtn {
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+// }
 
-.singleChall {
-  padding: 10px;
-  margin: 8px;
-  border: 2px solid rgb(255, 255, 255);
-  border-radius: 5px;
-  color: beige;
-  height: 300px;
-  width: 1100px;
-  text-decoration: none;
-  position: relative;
-  overflow: auto;
-  /* display: flex;
+// .singleChall {
+//   padding: 10px;
+//   margin: 8px;
+//   border: 2px solid rgb(255, 255, 255);
+//   border-radius: 5px;
+//   color: beige;
+//   height: 300px;
+//   width: 1100px;
+//   text-decoration: none;
+//   position: relative;
+//   overflow: auto;
+/* display: flex;
     position: relative; */
-  /* display: flex;
+/* display: flex;
     justify-content: flex-end; */
-}
+// }
 
-.scoreboard {
-  padding: 10px;
-  margin: 8px;
-  border: 2px solid rgb(255, 255, 255);
-  border-radius: 8px;
-  color: beige;
-  overflow: auto;
-  opacity: 70%;
-  height: 280px;
-  width: 800px;
-  text-decoration: none;
+// .scoreboard {
+//   padding: 10px;
+//   margin: 8px;
+//   border: 2px solid rgb(255, 255, 255);
+//   border-radius: 8px;
+//   color: beige;
+//   overflow: auto;
+//   opacity: 70%;
+//   height: 280px;
+//   width: 800px;
+//   text-decoration: none;
 
-  margin-right: 10px;
+//   margin-right: 10px;
 
-  /* display: flex;
-    flex-wrap: wrap; */
-}
+//   /* display: flex;
+//     flex-wrap: wrap; */
+// }
 
-.flexWrapper {
-  display: inline-flex;
-  justify-content: center;
-  background-color: cornflowerblue;
-  min-width: 200px;
-}
+// .flexWrapper {
+//   display: inline-flex;
+//   justify-content: center;
+//   background-color: cornflowerblue;
+//   min-width: 200px;
+// }
 
-.span1 {
-  padding: 10px;
-  margin: 8px;
-  border: 2px solid rgb(255, 255, 255);
-  border-radius: 8px;
-  color: beige;
-  height: 50px;
-  width: 80px;
-}
+// .span1 {
+//   padding: 10px;
+//   margin: 8px;
+//   border: 2px solid rgb(255, 255, 255);
+//   border-radius: 8px;
+//   color: beige;
+//   height: 50px;
+//   width: 80px;
+// }
 
-.span2 {
-  padding: 10px;
-  margin: 3px;
-  border: 2px solid rgb(255, 255, 255);
-  border-radius: 3px;
-  color: beige;
-  height: 2px;
-  width: 100px;
-}
+// .span2 {
+//   padding: 10px;
+//   margin: 3px;
+//   border: 2px solid rgb(255, 255, 255);
+//   border-radius: 3px;
+//   color: beige;
+//   height: 2px;
+//   width: 100px;
+// }
 /* 
   .flex {
     display: flex;

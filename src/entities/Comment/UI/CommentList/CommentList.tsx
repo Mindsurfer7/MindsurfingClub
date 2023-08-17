@@ -8,7 +8,7 @@ import Text from 'shared/UI/Text/Text';
 interface CommentListProps {
   className?: string;
   comments: CommentType[];
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 
 const CommentList: React.FC<CommentListProps> = ({

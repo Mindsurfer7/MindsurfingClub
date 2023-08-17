@@ -1,14 +1,14 @@
 {
   "posts": [
     {
-      "id": 1,
+      "id": "1",
       "title": "json-server",
-      "userId": 1
+      "userId": "1"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "json-server",
-      "userId": 2
+      "userId": "2"
     }
   ],
   "articles": [
@@ -19,7 +19,9 @@
       "img": "https://teknotower.com/wp-content/uploads/2020/11/js.png",
       "views": 1022,
       "createdAt": "26.02.2022",
-      "type": ["IT"],
+      "type": [
+        "IT"
+      ],
       "blocks": [
         {
           "id": "1",
@@ -84,44 +86,74 @@
   ],
   "comments": [
     {
-      "id": "1",
-      "text": "some comment",
       "articleId": "1",
-      "userId": "1"
+      "userId": "2",
+      "text": "123asfasf",
+      "id": "IFEOWl0"
     },
     {
-      "id": "2",
-      "text": "some comment 2",
       "articleId": "1",
-      "userId": "1"
+      "userId": "2",
+      "text": "fg",
+      "id": "cfKORrR"
     },
     {
-      "id": "3",
-      "text": "some comment 3",
       "articleId": "1",
-      "userId": "1"
+      "userId": "2",
+      "text": "ыгыгыгыгыгыг!!!!!!!!! TOOOOOOOOOFFFLLL LOOOOLLL!!! ",
+      "id": "BELmRtD"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": ";etlg ;tm g",
+      "id": "FTDJkSy"
+    },
+    {
+      "articleId": "1",
+      "userId": "2",
+      "text": "[ppaggaghhhaaaaaa!",
+      "id": "r70QGzf"
     }
   ],
   "users": [
     {
       "id": "1",
       "username": "admin",
-      "password": "123"
+      "password": "123",
+      "role": "ADMIN",
+      "avatar": "https://avatars.mds.yandex.net/get-zen_doc/3413519/pub_5ff887b2fe4e686f6ae6ba3f_5ff887d7f906b16872a69755/scale_1200"
     },
     {
       "id": "2",
-      "username": "Mindsurfer",
-      "password": "777"
+      "username": "user",
+      "password": "123",
+      "role": "USER",
+      "avatar": "https://xakep.ru/wp-content/uploads/2018/05/171485/KuroiSH-hacker.jpg"
     }
   ],
-  "profile": {
-    "first": "Mindsurfer",
-    "lastname": "X",
-    "age": "23",
-    "currency": "KZT",
-    "country": "Kazakhstan",
-    "city": "Almaty",
-    "username": "Mindsurfer",
-    "avatar": " https://avatars.dzeninfra.ru/get-zen_doc/3680683/pub_6007cdab60595f5ffd5fd0e2_6007cf2da1b97e1f1a2ed4f5/scale_1200"
-  }
+  "profile": [
+    {
+      "id": "1",
+      "first": "jgh",
+      "lastname": "asf",
+      "age": 465,
+      "currency": "RUB",
+      "country": "Belarus",
+      "city": "Moscow",
+      "username": "admin213",
+      "avatar": "https://avatars.mds.yandex.net/get-zen_doc/3413519/pub_5ff887b2fe4e686f6ae6ba3f_5ff887d7f906b16872a69755/scale_1200"
+    },
+    {
+      "id": "2",
+      "first": "ulbi tv",
+      "lastname": "asf",
+      "age": 465,
+      "currency": "RUB",
+      "country": "Russia",
+      "city": "Moscow",
+      "username": "ulbi tv",
+      "avatar": "https://xakep.ru/wp-content/uploads/2018/05/171485/KuroiSH-hacker.jpg"
+    }
+  ]
 }

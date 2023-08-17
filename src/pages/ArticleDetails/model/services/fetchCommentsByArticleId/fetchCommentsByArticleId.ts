@@ -1,21 +1,21 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'App/providers/StoreProvider';
-import axios from 'axios';
 import { CommentType } from 'entities/Comment';
 
 export const fetchCommentsByArticleId = createAsyncThunk<
   CommentType[],
   string | undefined,
   ThunkConfig<string>
->('ArticleComment/fetchCommentsByArticleId', async (articleId, thunkApi) => {
-  const { extra, rejectWithValue } = thunkApi;
+>('ArticleComments/fetchCommentsByArticleId', async (articleId, thunkAPI) => {
+  console.log(articleId + ' hello1');
 
   if (!articleId) {
-    return rejectWithValue('error');
+    console.log(articleId + ' inside !articleID');
+    return thunkAPI.rejectWithValue('error');
   }
 
   try {
-    const response = await extra.API.get<CommentType[]>('/comments', {
+    const response = await thunkAPI.extra.API.get<CommentType[]>('/comments', {
       params: {
         articleId,
         _expand: 'user',
@@ -28,6 +28,7 @@ export const fetchCommentsByArticleId = createAsyncThunk<
 
     return response.data;
   } catch (e) {
-    return rejectWithValue('error');
+    console.log(articleId + ' inside catch error');
+    return thunkAPI.rejectWithValue('error');
   }
 });

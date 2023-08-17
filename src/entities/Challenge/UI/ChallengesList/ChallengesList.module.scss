@@ -1,0 +1,11 @@
+.listWrapper {
+}
+
+.chalTitle {
+  border: 1px solid salmon;
+
+  &:hover {
+    cursor: pointer;
+    background: salmon;
+  }
+}

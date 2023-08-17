@@ -93,10 +93,15 @@ const SingleGroupPage: React.FC<SingleGroupPageProps> = ({ className }) => {
       <div className={cls.challenges}>
         <Text title={'Community Challenges:'} align={TextAlign.Center} />
         {challenges?.map((chal) => {
+          console.log(chal);
+
           return (
             <ChallengeCard
-              participants={chal.participants}
+              startDate={chal.startDate!} //УБАРТЬ ВОСКЛ ЗНАКИ!!!!!!!!!!!!!!!!!!!!!!!!!1
+              endDate={chal.endDate!}
+              participants={chal.participantsID}
               title={chal.title}
+              //@ts-ignore если поставить большими буквами будет тот айди что в4
               id={chal.id}
               description={chal.description}
             />

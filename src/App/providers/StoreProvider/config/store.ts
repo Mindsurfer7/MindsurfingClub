@@ -32,6 +32,7 @@ export function createReduxStore(
     TaskTracker: TaskTrackerReducer,
     Community: CommunityReducer,
     Challenge: ChallengeReducer,
+
     GPT: GPTReducer,
     GoogleProfile: GoogleProfileReducer,
     GoogleLogin: googleLoginReducer,

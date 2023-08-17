@@ -14,6 +14,7 @@ import { createNewDaily } from 'entities/Player/model/services/createNewDaily';
 import { requestDailyz } from 'entities/Player/model/services/requestDailyz';
 import { removeDaily } from 'entities/Player/model/services/removeDaily';
 import SingleEndeavor from 'entities/TaskTracker/UI/SingleEndeavor/SingleEndeavor';
+import { setIsDoneDailyAPI } from 'entities/Player';
 
 interface DailyWrapperProps {
   className?: string;
@@ -46,30 +47,30 @@ const DailyWrapper: React.FC<DailyWrapperProps> = ({ className }) => {
     await dispatch(removeDaily(id));
   };
 
-  // useEffect(() => {
-  //   if (Dailys?.length > 0) {
-  //     const currentDate = new Date();
-  //     currentDate.setHours(0, 0, 0, 0);
+  useEffect(() => {
+    if (Dailys?.length > 0) {
+      const currentDate = new Date();
+      currentDate.setHours(0, 0, 0, 0);
 
-  //     const processDailys = async () => {
-  //       for (const d of Dailys) {
-  //         //@ts-ignore
-  //         const taskDate = new Date(d.isDoneTimestamp.seconds * 1000);
-  //         taskDate.setHours(0, 0, 0, 0);
+      const processDailys = async () => {
+        for (const d of Dailys) {
+          //@ts-ignore
+          const taskDate = new Date(d.isDoneTimestamp.seconds * 1000);
+          taskDate.setHours(0, 0, 0, 0);
 
-  //         if (
-  //           taskDate.getTime() < currentDate.getTime() &&
-  //           taskDate.getTime() !== currentDate.getTime() &&
-  //           d.isDone === true
-  //         ) {
-  //           await dispatch(setIsDoneDailyAPI({ taskID: d.id, isDone: false }));
-  //           dispatch(requestDailyz());
-  //         }
-  //       }
-  //     };
-  //     processDailys();
-  //   }
-  // }, [Dailys, dispatch]);
+          if (
+            taskDate.getTime() < currentDate.getTime() &&
+            taskDate.getTime() !== currentDate.getTime() &&
+            d.isDone === true
+          ) {
+            await dispatch(setIsDoneDailyAPI({ taskID: d.id, isDone: false }));
+            dispatch(requestDailyz());
+          }
+        }
+      };
+      processDailys();
+    }
+  }, [Dailys, dispatch]);
 
   return (
     <div className={classNames(cls.DailyWrapper, {}, [className as string])}>

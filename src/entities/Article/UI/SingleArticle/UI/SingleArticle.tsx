@@ -14,7 +14,7 @@ import {
   getArticleError,
   getArticleIsLoading,
 } from 'entities/Article/model/selectors/getArticleData';
-import { Skeleton } from 'shared/UI/Skeleton/Skeleton';
+import Skeleton from 'shared/UI/Skeleton/Skeleton';
 //@ts-ignore
 import { Avatar } from 'shared/ui/Avatar/Avatar';
 import Text, { TextSize } from 'shared/UI/Text/Text';
@@ -25,6 +25,7 @@ import ArticleTextBlock from '../../ArticleTextBlock/ArticleTextBlock';
 import { ArticleBlock, ArticleBlockType } from 'entities/Article/types/article';
 import ArticleCodeBlock from '../../ArticleCodeBlock/ArticleCodeBlock';
 import ArticleImageBlock from '../../ArticleImageBlock/ArticleImageBlock';
+import { fetchArticleById } from 'entities/Article/model/services/fetchArticleById';
 
 interface SingleArticleProps {
   className?: string;
@@ -45,7 +46,7 @@ const SingleArticle: React.FC<SingleArticleProps> = memo(
 
     useEffect(() => {
       if (PROJECT !== 'storybook') {
-        dispatch(requestArticleByID());
+        dispatch(fetchArticleById(ID));
       }
     }, [dispatch, ID]);
 

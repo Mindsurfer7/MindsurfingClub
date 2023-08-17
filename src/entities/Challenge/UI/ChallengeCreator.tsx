@@ -12,7 +12,17 @@ import {
   getGroupTitle,
 } from 'entities/Community/model/selectors/getCommunityData';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
-import { createNewChallenge, takePart } from 'entities/Challenge';
+import {
+  createNewChallenge,
+  getChallengeData,
+  setChallengeDescription,
+  setChallengeEndDate,
+  setChallengeExecutionType,
+  setChallengePoints,
+  setChallengeStartDate,
+  setChallengeTitle,
+  takePart,
+} from 'entities/Challenge';
 import {
   clearGroupModalInputs,
   setDescription,
@@ -35,53 +45,112 @@ const ChallengeCreator: React.FC<ChallengeCreatorProps> = ({
 }) => {
   const dispatch = useAppDispatch();
 
-  const description = useSelector(getGroupDescription);
-  const title = useSelector(getGroupTitle);
-
-  const onSetTitle = (value: string) => {
-    dispatch(setTitle(value));
-  };
-  const onSetDescription = (value: string) => {
-    dispatch(setDescription(value));
-  };
-
-  const onCreateChallenge = async () => {
-    await dispatch(createNewChallenge(communityID));
-    requestData?.();
-    dispatch(clearGroupModalInputs());
-    onClose?.();
-  };
+  const { description, title, startDate, endDate, executionType, points } =
+    useSelector(getChallengeData);
 
   ////////////////////////////////////////////////////////////////////////////////////////////
 
-  // const handleInputChange = (event: any) => {
-  //   const { name, value } = event.target;
-  //   switch (name) {
-  //     case 'title':
-  //       dispatch(setChallengeTitle(value));
-  //       break;
-  //     case 'description':
-  //       dispatch(setChallengeDescription(value));
-  //       break;
-  //     case 'startDate':
-  //       dispatch(setChallengeStartDate(value));
-  //       break;
-  //     case 'endDate':
-  //       dispatch(setChallengeEndDate(value));
-  //       break;
-  //     case 'executionType':
-  //       dispatch(setChallengeExecutionType(value));
-  //       break;
-  //     case 'points':
-  //       dispatch(setChallengePoints(Number(value)));
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
+  const handleInputChange = (event: any) => {
+    const { name, value } = event.target;
+    switch (name) {
+      case 'title':
+        dispatch(setChallengeTitle(value));
+        break;
+      case 'description':
+        dispatch(setChallengeDescription(value));
+        break;
+      case 'startDate':
+        dispatch(setChallengeStartDate(value));
+        break;
+      case 'endDate':
+        dispatch(setChallengeEndDate(value));
+        break;
+      case 'executionType':
+        dispatch(setChallengeExecutionType(value));
+        break;
+      case 'points':
+        dispatch(setChallengePoints(Number(value)));
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    dispatch(createNewChallenge(communityID));
+  };
 
   return (
     <div className={classNames(cls.TaskCreator, {}, [className as string])}>
+      <form>
+        <label>
+          Title:
+          <input
+            type="text"
+            name="title"
+            value={title}
+            onChange={handleInputChange}
+          />
+        </label>
+        <br />
+        <label>
+          Description:
+          <textarea
+            name="description"
+            value={description}
+            onChange={handleInputChange}
+          />
+        </label>
+        <br />
+        <label>
+          Start Date:
+          <input
+            type="date"
+            name="startDate"
+            value={startDate}
+            onChange={handleInputChange}
+          />
+        </label>
+        <br />
+        <label>
+          End Date:
+          <input
+            type="date"
+            name="endDate"
+            value={endDate}
+            onChange={handleInputChange}
+          />
+        </label>
+        <br />
+        <label>
+          Execution Type:
+          <select
+            name="executionType"
+            value={executionType}
+            onChange={handleInputChange}
+          >
+            <option value="">Select</option>
+            <option value="once">Once a day</option>
+            <option value="twice">Twice a day</option>
+            <option value="thrice">Thrice a day</option>
+          </select>
+        </label>
+        <br />
+        <label>
+          Points per Execution:
+          <input
+            type="number"
+            name="points"
+            value={points}
+            onChange={handleInputChange}
+          />
+        </label>
+        <br />
+        <Button theme={ButtonTheme.OUTLINE} onClick={handleSubmit}>
+          Create Challenge
+        </Button>
+      </form>
       {/* <div className={cls.description}>
         <Input
           value={title}

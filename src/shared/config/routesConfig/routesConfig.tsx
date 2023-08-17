@@ -41,7 +41,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.Home]: '/home',
   [AppRoutes.About]: '/about',
   [AppRoutes.PsyRoom]: '/psyroom',
-  [AppRoutes.Profile]: '/profile',
+  [AppRoutes.Profile]: '/profile/',
   [AppRoutes.PracticeCenter]: '/practiceCenter',
   [AppRoutes.PlayerSpace]: '/PlayerSpace',
   [AppRoutes.Conversation]: '/:conversationID',
@@ -76,7 +76,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     element: <ChatWindow />,
   },
   [AppRoutes.Profile]: {
-    path: RoutePath[AppRoutes.Profile],
+    path: `${RoutePath.Profile}:profileID`,
     element: <ProfilePageAsync />,
     authOnly: true,
   },
