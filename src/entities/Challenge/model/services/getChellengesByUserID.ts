@@ -23,7 +23,7 @@ export const getChallengesByUserID = createAsyncThunk<
     querySnapshot.forEach((doc) => {
       const data = doc.data();
 
-      const participant = data.participantsID.find(
+      const participant = data.participants.find(
         (participant: Participant) => participant.ID === userID,
       );
 
@@ -31,7 +31,7 @@ export const getChallengesByUserID = createAsyncThunk<
         //@ts-ignore
         challenges.push({
           ...data,
-          ID: doc.id, // Saving the challenge document ID in the challenge object
+          id: doc.id,
         });
       }
     });

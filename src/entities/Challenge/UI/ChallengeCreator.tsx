@@ -1,16 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ChallengeCreator.module.scss';
 import Textarea from 'shared/UI/Textarea/Textarea';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 
-import Input from 'shared/UI/Input/Input';
-
-import {
-  getGroupDescription,
-  getGroupTitle,
-} from 'entities/Community/model/selectors/getCommunityData';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import {
   createNewChallenge,
@@ -21,13 +15,10 @@ import {
   setChallengePoints,
   setChallengeStartDate,
   setChallengeTitle,
-  takePart,
 } from 'entities/Challenge';
-import {
-  clearGroupModalInputs,
-  setDescription,
-  setTitle,
-} from 'entities/Community';
+import { resetChangedFields } from '../model/slice/ChallengeSlice';
+import Input from 'shared/UI/Input/Input';
+import CustomInput from 'shared/UI/CustomInput/CustomInput';
 
 interface ChallengeCreatorProps {
   className?: string;
@@ -44,135 +35,138 @@ const ChallengeCreator: React.FC<ChallengeCreatorProps> = ({
   onClose,
 }) => {
   const dispatch = useAppDispatch();
-
+  const [titleError, setTitleError] = useState('');
+  const [dateError, setDateError] = useState('');
   const { description, title, startDate, endDate, executionType, points } =
     useSelector(getChallengeData);
 
+  useEffect(() => {
+    if (title !== '') {
+      setTitleError('');
+    } else if (startDate && endDate !== '') {
+      setDateError('');
+    }
+  }, [title, startDate, endDate]);
+
   ////////////////////////////////////////////////////////////////////////////////////////////
 
-  const handleInputChange = (event: any) => {
-    const { name, value } = event.target;
-    switch (name) {
-      case 'title':
-        dispatch(setChallengeTitle(value));
-        break;
-      case 'description':
-        dispatch(setChallengeDescription(value));
-        break;
-      case 'startDate':
-        dispatch(setChallengeStartDate(value));
-        break;
-      case 'endDate':
-        dispatch(setChallengeEndDate(value));
-        break;
-      case 'executionType':
-        dispatch(setChallengeExecutionType(value));
-        break;
-      case 'points':
-        dispatch(setChallengePoints(Number(value)));
-        break;
-      default:
-        break;
-    }
+  const handleTitleChange = (value: string) => {
+    dispatch(setChallengeTitle(value));
   };
 
-  const handleSubmit = (event: any) => {
-    event.preventDefault();
-    dispatch(createNewChallenge(communityID));
+  const handleDescriptionChange = (value: string) => {
+    dispatch(setChallengeDescription(value));
+  };
+
+  const handleStartDateChange = (value: string) => {
+    dispatch(setChallengeStartDate(value));
+  };
+
+  const handleEndDateChange = (value: string) => {
+    dispatch(setChallengeEndDate(value));
+  };
+
+  const handleExecutionTypeChange = (value: string) => {
+    dispatch(setChallengeExecutionType(value));
+  };
+
+  const handlePointsChange = (value: string) => {
+    dispatch(setChallengePoints(Number(value)));
+  };
+
+  const handleSubmit = async (event: any) => {
+    if (startDate === '' || endDate === '') {
+      setDateError('Установите даты начала и конца');
+    } else if (title === '') {
+      setTitleError('Название необходимо задать');
+    } else {
+      event.preventDefault();
+      await dispatch(createNewChallenge(communityID));
+      onClose?.();
+      requestData?.();
+      dispatch(resetChangedFields());
+    }
   };
 
   return (
     <div className={classNames(cls.TaskCreator, {}, [className as string])}>
-      <form>
-        <label>
-          Title:
-          <input
-            type="text"
-            name="title"
-            value={title}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Description:
-          <textarea
-            name="description"
-            value={description}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Start Date:
-          <input
-            type="date"
-            name="startDate"
-            value={startDate}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          End Date:
-          <input
-            type="date"
-            name="endDate"
-            value={endDate}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <label>
-          Execution Type:
-          <select
-            name="executionType"
-            value={executionType}
-            onChange={handleInputChange}
-          >
-            <option value="">Select</option>
-            <option value="once">Once a day</option>
-            <option value="twice">Twice a day</option>
-            <option value="thrice">Thrice a day</option>
-          </select>
-        </label>
-        <br />
-        <label>
-          Points per Execution:
-          <input
-            type="number"
-            name="points"
-            value={points}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br />
-        <Button theme={ButtonTheme.OUTLINE} onClick={handleSubmit}>
-          Create Challenge
-        </Button>
-      </form>
-      {/* <div className={cls.description}>
-        <Input
+      <div className={cls.title}>
+        Название челленджа:
+        <CustomInput
+          textInput
+          placeholder="Название"
           value={title}
-          placeholder={'Введите название'}
-          onChange={(val) => onSetTitle(val)}
-          className={cls.input}
+          onChange={handleTitleChange}
         />
-        <Textarea
-          placeholder={'Опишите смысл челленджа, правила и цели'}
-          value={description}
-          onChange={onSetDescription}
-          className={cls.textarea}
-        />{' '}
+        {titleError && <div className={cls.error}>{titleError}</div>}
       </div>
-
-      <Button
-        className={cls.btn}
-        onClick={onCreateChallenge}
-        theme={ButtonTheme.OUTLINE}
-      >
-        Submit
-      </Button> */}
+      <div className={cls.descr}>
+        Описание:
+        <Textarea
+          placeholder="Опишите смысл, правила и цели челленджа"
+          name="description"
+          value={description}
+          onChange={handleDescriptionChange}
+        />
+      </div>
+      <div className={cls.dates}>
+        <div className={cls.startDate}>
+          Дата начала:
+          <CustomInput
+            placeholder="StartDate"
+            DatePicker
+            type="date"
+            value={startDate}
+            onChange={handleStartDateChange}
+          />
+        </div>
+        <div className={cls.endDate}>
+          Дата конца:
+          <CustomInput
+            placeholder="EndDate"
+            type="date"
+            DatePicker
+            value={endDate}
+            onChange={handleEndDateChange}
+          />
+        </div>
+      </div>
+      {dateError && <div className={cls.error}>{dateError}</div>}
+      {/* <div className={cls.timesAday}>
+        Сколько раз в день выполнять:
+        <Select
+          placeholder="Select type"
+          // la="executionType"
+          value={executionType}
+          onChange={handleExecutionTypeChange}
+        >
+          <option value="">Select</option>
+          <option value="once">Once a day</option>
+          <option value="twice">Twice a day</option>
+          <option value="thrice">Thrice a day</option>
+        </Select>
+      </div> */}
+      <div className={cls.points}>
+        Количество очков за выполнение:
+        <div className={cls.x}>
+          <CustomInput
+            placeholder="Points per Execution"
+            type="number"
+            numberInput
+            name="points"
+            //@ts-ignore
+            value={points}
+            onChange={handlePointsChange}
+          />
+          <Button
+            className={cls.btn}
+            theme={ButtonTheme.OUTLINE}
+            onClick={handleSubmit}
+          >
+            Create Challenge
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };

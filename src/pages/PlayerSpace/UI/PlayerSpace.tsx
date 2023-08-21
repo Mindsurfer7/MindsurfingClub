@@ -20,6 +20,7 @@ import { requestAllTags } from 'entities/Player/model/services/requestAllTags';
 import { requestNotifications } from 'entities/Player/model/services/InGameActions/requestNotifications';
 import { ChallengesList, getShowChallenges } from 'entities/Challenge';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
+import { useTranslation } from 'react-i18next';
 
 interface PlayerSpaceProps {
   className?: string;
@@ -55,14 +56,15 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
     }
   }, [dispatch, player.new, isAuth]);
 
+  const { t } = useTranslation();
+
   if (player.new && isAuth) {
     return (
       <div className={cls.initial}>
-        {' '}
-        <h2>Welcome to the Mindsurfing Club!</h2>
-        Here you can click the Start Gaming button to create your charachter!
+        <h2>{t('welcome.title')}</h2>
+        {t('welcome.description')}
         <Button theme={ButtonTheme.OUTLINE} onClick={signUpHandler}>
-          Start Gaming
+          {t('welcome.startGaming')}
         </Button>
       </div>
     );

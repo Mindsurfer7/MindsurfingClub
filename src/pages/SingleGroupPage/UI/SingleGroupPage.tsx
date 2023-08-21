@@ -22,6 +22,7 @@ import {
   getGoogleID,
   getGoogleProfile,
 } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
+import { useTranslation } from 'react-i18next';
 
 interface SingleGroupPageProps {
   className?: string;
@@ -34,6 +35,7 @@ const SingleGroupPage: React.FC<SingleGroupPageProps> = ({ className }) => {
   const userID = useSelector(getGoogleID);
   const { publicID } = useParams();
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('SingleGroupPage');
   const [isVisible, setVisibility] = useState(false);
 
   const challenges = challengesData.filter(
@@ -71,42 +73,53 @@ const SingleGroupPage: React.FC<SingleGroupPageProps> = ({ className }) => {
           isVisible={isVisible}
         />
       )}
-      <Text title={community?.title} align={TextAlign.Center} />
-      <div className={cls.groupAbout}>
-        <div className={cls.x}>
-          <img src={community?.posterLink} className={cls.pic} />
-          {isMember ? (
-            <Button theme={ButtonTheme.OUTLINE_GREEN}>You are a member</Button>
-          ) : (
-            <Button theme={ButtonTheme.OUTLINE} onClick={onBecomeMember}>
-              Become a member
-            </Button>
-          )}
-        </div>
+      <div className={cls.PublicWrapper}>
+        <Text title={community?.title} align={TextAlign.Center} />
+        <div className={cls.groupAbout}>
+          <div className={cls.x}>
+            <img src={community?.posterLink} className={cls.pic} />
+            {isMember ? (
+              <Button theme={ButtonTheme.OUTLINE_GREEN}>
+                {t('youAreMember')}
+              </Button>
+            ) : (
+              <Button theme={ButtonTheme.OUTLINE} onClick={onBecomeMember}>
+                {t('becomeMember')}
+              </Button>
+            )}
+          </div>
 
-        <Text title={community?.description} size={TextSize.Mini} />
+          <Text title={community?.description} />
+        </div>
       </div>
 
-      <Button theme={ButtonTheme.OUTLINE} onClick={onOpenModal}>
-        new challenge
-      </Button>
       <div className={cls.challenges}>
-        <Text title={'Community Challenges:'} align={TextAlign.Center} />
-        {challenges?.map((chal) => {
-          console.log(chal);
+        <Text title={t('communityChallenges')} align={TextAlign.Center} />
+        <Button
+          theme={ButtonTheme.OUTLINE}
+          className={cls.newChallBtn}
+          onClick={onOpenModal}
+        >
+          {t('newChallenge')}
+        </Button>
 
-          return (
-            <ChallengeCard
-              startDate={chal.startDate!} //УБАРТЬ ВОСКЛ ЗНАКИ!!!!!!!!!!!!!!!!!!!!!!!!!1
-              endDate={chal.endDate!}
-              participants={chal.participantsID}
-              title={chal.title}
-              //@ts-ignore если поставить большими буквами будет тот айди что в4
-              id={chal.id}
-              description={chal.description}
-            />
-          );
-        })}
+        <div className={cls.chalArray}>
+          {challenges?.map((chal) => {
+            console.log(chal);
+
+            return (
+              <ChallengeCard
+                startDate={chal.startDate!} //УБАРТЬ ВОСКЛ ЗНАКИ!!!!!!!!!!!!!!!!!!!!!!!!!1
+                endDate={chal.endDate!}
+                participants={chal.participants}
+                title={chal.title}
+                //@ts-ignore если поставить большими буквами будет тот айди что в4
+                id={chal.id}
+                description={chal.description}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

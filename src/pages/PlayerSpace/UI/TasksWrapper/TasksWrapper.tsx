@@ -17,6 +17,7 @@ import { removeTask } from 'entities/Player/model/services/removeTask';
 import SingleEndeavor from 'entities/TaskTracker/UI/SingleEndeavor/SingleEndeavor';
 import { getShowCompleted } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
 import { requestCompleted } from 'entities/Player/model/services/requestCompleted';
+import { useTranslation } from 'react-i18next';
 
 interface TasksWrapperProps {
   className?: string;
@@ -29,6 +30,7 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
   const filteredTasks = useSelector(getFilteredTasks);
   const isFilterApplied = useSelector(getIsFilterApplied);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('PlayerCard');
   const [isVisible, setVisibility] = useState(false);
 
   const onCloseModal = useCallback(() => {
@@ -60,7 +62,7 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
                 id={h.id}
                 key={h.id}
                 title={h.title}
-                isTask={true}
+                taskType="task"
                 tags={h.tags}
                 isDone={h.isDone}
                 onRemove={onTaskRemove}
@@ -87,7 +89,7 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
           requestCallback={onRequestTasks}
         />
       )}
-      <div className={cls.header}>My Tasks</div>
+      <div className={cls.header}>{t('myTasks')}</div>
 
       <div className={cls.listWrapper}>
         {/* {tasks.map((h) => {
@@ -114,7 +116,7 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
                   key={h.id}
                   tags={h.tags}
                   title={h.title}
-                  isTask={true}
+                  taskType="task"
                   isDone={h.isDone}
                   onRemove={onTaskRemove}
                   onRequest={onRequestTasks}
@@ -131,7 +133,7 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
                   key={h.id}
                   tags={h.tags}
                   title={h.title}
-                  isTask={true}
+                  taskType="task"
                   isDone={h.isDone}
                   onRemove={onTaskRemove}
                   onRequest={onRequestTasks}
@@ -146,7 +148,7 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
             theme={ButtonTheme.OUTLINE}
             className={cls.addBtn}
           >
-            Create new task
+            {t('createNewTask')}
           </Button>
         </div>
       </div>

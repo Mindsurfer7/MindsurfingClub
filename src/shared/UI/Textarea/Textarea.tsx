@@ -9,6 +9,7 @@ interface TextareaProps {
   autoFocus?: boolean;
   readonly?: boolean;
   placeholder?: string;
+  name?: string;
 }
 
 const Textarea: React.FC<TextareaProps> = (props) => {
@@ -18,6 +19,7 @@ const Textarea: React.FC<TextareaProps> = (props) => {
 
   const {
     className,
+    name,
     placeholder,
     value,
     readonly,
@@ -31,8 +33,10 @@ const Textarea: React.FC<TextareaProps> = (props) => {
       {/* {@ts-ignore} */}
       <textarea
         placeholder={placeholder}
+        className={cls.customTextarea}
         value={value}
         onChange={onChangeHandler}
+        name={name}
       />
     </div>
   );

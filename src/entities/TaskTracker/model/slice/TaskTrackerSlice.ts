@@ -53,12 +53,31 @@ export const TaskTrackerSlice = createSlice({
     setShowCompleted: (state, action: PayloadAction<boolean>) => {
       state.showCompleted = action.payload;
     },
+
     clearInputs: (state) => {
       state.difficulty = 1;
       state.description = '';
       state.title = '';
       state.id = '';
       state.tags = [];
+    },
+    setNewInitialState: (
+      state,
+      action: PayloadAction<{
+        title: string;
+        description: string;
+        difficulty: number;
+        tags: string[];
+        id: string;
+      }>,
+    ) => {
+      console.log(action.payload.tags);
+
+      state.difficulty = action.payload.difficulty;
+      state.description = action.payload.description;
+      state.id = action.payload.id;
+      state.title = action.payload.title;
+      state.tags = action.payload.tags;
     },
     //////////////////////////////
     // setChallengeTitle: (state, action: PayloadAction<string>) => {
@@ -109,6 +128,7 @@ export const {
   setTags,
   setTitle,
   clearInputs,
+  setNewInitialState,
   /////////////////////////////
   // setChallengeTitle,
   // setChallengeDescription,

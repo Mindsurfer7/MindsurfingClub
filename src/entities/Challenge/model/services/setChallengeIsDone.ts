@@ -1,7 +1,13 @@
 import { isDoneObject } from './../../types/ChallengeScheme';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'App/providers/StoreProvider';
-import { arrayUnion, doc, getDoc, updateDoc } from 'firebase/firestore';
+import {
+  arrayUnion,
+  doc,
+  getDoc,
+  runTransaction,
+  updateDoc,
+} from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import { Participant } from 'entities/Challenge/types/ChallengeScheme';
@@ -18,7 +24,8 @@ export const setChallengeIsDone = createAsyncThunk<
 
   try {
     const challenge = await getDoc(challengeDocRef);
-    const participants = challenge.data()?.participantsID || [];
+    const participants = challenge.data()?.participants || [];
+    const pointsToIncrease = challenge.data()?.points;
 
     const participantIndex = participants.findIndex(
       (x: Participant) => x.ID === userID,
@@ -26,6 +33,7 @@ export const setChallengeIsDone = createAsyncThunk<
 
     if (participantIndex !== -1) {
       const isDoneArray = participants[participantIndex].isDoneArray;
+      const userPoints = participants[participantIndex].points;
 
       const currentDate = new Date(); // Get the current date and time
       const year = currentDate.getFullYear();
@@ -33,8 +41,6 @@ export const setChallengeIsDone = createAsyncThunk<
       const day = currentDate.getDate();
 
       const formattedToday = new Date(year, month, day); // Create a Date object for today
-
-      console.log(isDoneArray);
 
       const isDoneIndex = isDoneArray.findIndex(
         (isDoneObj: isDoneObject) =>
@@ -46,11 +52,18 @@ export const setChallengeIsDone = createAsyncThunk<
       if (isDoneIndex !== -1) {
         isDoneArray[isDoneIndex].isDone = true;
 
-        await updateDoc(challengeDocRef, {
-          participantsID: participants,
-        });
+        const newPoints = userPoints + (pointsToIncrease || 0);
 
-        console.log('isDone value updated');
+        const updatedParticipants = participants.map(
+          (participant: Participant, idx: number) =>
+            idx === participantIndex
+              ? { ...participant, isDoneArray, points: newPoints }
+              : participant,
+        );
+
+        await updateDoc(challengeDocRef, {
+          participants: updatedParticipants,
+        });
       }
     }
   } catch (error) {

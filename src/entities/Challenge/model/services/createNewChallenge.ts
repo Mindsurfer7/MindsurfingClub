@@ -49,9 +49,10 @@ export const createNewChallenge = createAsyncThunk<
   try {
     await addDoc(challangesRef, {
       title: title,
+      isFinished: false,
       description: description,
       communityID: publicID,
-      participantsID: [participant],
+      participants: [participant],
       startDate: startDate,
       endDate: endDate,
       executionType: executionType,

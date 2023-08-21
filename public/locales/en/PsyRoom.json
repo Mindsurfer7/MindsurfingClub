@@ -1,0 +1,15 @@
+{
+  "loginToUseService": "Log in to use this service",
+  "giveNamePlaceholder": "Give it a name",
+  "submit": "Submit",
+  "startNew": "Start new one",
+  "noConversations": "You don't have any conversations",
+  "startFirst": "Start 1st conversation",
+  "backToList": " < Back to list",
+  "psychotherapist": "GPT Psychotherapist",
+  "psychotherapistTyping": "Psychotherapist is typing...",
+  "assistant": "Assistant",
+  "user": "User",
+  "describeYourProblem": "Describe your problem here...",
+  "send": "Send"
+}

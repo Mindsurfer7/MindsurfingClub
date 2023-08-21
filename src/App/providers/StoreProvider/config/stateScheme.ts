@@ -24,6 +24,7 @@ import { SingleArticleScheme } from 'entities/Article';
 import { CommunitiesScheme } from 'entities/Community';
 import { ArticleDetailsCommentsScheme } from 'pages/ArticleDetails/model/types/ArticleDetailsCommentsSceme';
 import { AddCommentScheme } from 'features/AddComment';
+import { ChallengePageScheme } from 'pages/ChallengePage';
 
 export interface StateScheme {
   loginForm?: LoginScheme;
@@ -35,6 +36,7 @@ export interface StateScheme {
   TaskTracker: TaskTrackerScheme;
   Community: CommunitiesScheme;
   Challenge: ChallengeScheme;
+  ChallengePage?: ChallengePageScheme;
   GoogleProfile: GoogleProfileScheme;
   GoogleLogin: GoogleLoginScheme;
   user: UserScheme;

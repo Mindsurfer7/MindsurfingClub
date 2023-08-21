@@ -15,6 +15,7 @@ import { requestDailyz } from 'entities/Player/model/services/requestDailyz';
 import { removeDaily } from 'entities/Player/model/services/removeDaily';
 import SingleEndeavor from 'entities/TaskTracker/UI/SingleEndeavor/SingleEndeavor';
 import { setIsDoneDailyAPI } from 'entities/Player';
+import { useTranslation } from 'react-i18next';
 
 interface DailyWrapperProps {
   className?: string;
@@ -25,6 +26,7 @@ const DailyWrapper: React.FC<DailyWrapperProps> = ({ className }) => {
   const filteredHDailys = useSelector(getFilteredDaily);
   const isFilterApplied = useSelector(getIsFilterApplied);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('PlayerCard');
   const [isVisible, setVisibility] = useState(false);
 
   const onCloseModal = useCallback(() => {
@@ -82,7 +84,7 @@ const DailyWrapper: React.FC<DailyWrapperProps> = ({ className }) => {
           requestCallback={onRequestDailyz}
         />
       )}
-      <div className={cls.header}>My Daily Tasks</div>
+      <div className={cls.header}>{t('myDailyTasks')}</div>
       <div className={cls.listWrapper}>
         {filteredHDailys.length > 0
           ? filteredHDailys.map((h) => {
@@ -91,7 +93,7 @@ const DailyWrapper: React.FC<DailyWrapperProps> = ({ className }) => {
                   id={h.id}
                   key={h.id}
                   title={h.title}
-                  isDaily={true}
+                  taskType="daily"
                   isDone={h.isDone}
                   tags={h.tags}
                   onRemove={onRemoveDaily}
@@ -108,7 +110,7 @@ const DailyWrapper: React.FC<DailyWrapperProps> = ({ className }) => {
                   id={h.id}
                   key={h.id}
                   title={h.title}
-                  isDaily={true}
+                  taskType="daily"
                   isDone={h.isDone}
                   tags={h.tags}
                   onRemove={onRemoveDaily}
@@ -126,7 +128,7 @@ const DailyWrapper: React.FC<DailyWrapperProps> = ({ className }) => {
           theme={ButtonTheme.OUTLINE}
           className={cls.addBtn}
         >
-          Create new daily
+          {t('createNewDaily')}
         </Button>
       </div>
     </div>

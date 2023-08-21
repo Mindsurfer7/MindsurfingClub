@@ -6,9 +6,6 @@ import Text from 'shared/UI/Text/Text';
 
 interface TaskInfoDisplayProps {
   className?: string;
-  isHabit?: boolean;
-  isTask?: boolean;
-  isDaily?: boolean;
   difficulty: number;
   description: string;
   title: string;
@@ -59,7 +56,7 @@ const TaskInfoDisplay: React.FC<TaskInfoDisplayProps> = (props) => {
         <div className={cls.tags}>
           Тэги:
           {tags?.map((t) => (
-            <span>{t}</span>
+            <span>{t + ', '}</span>
           ))}
         </div>
       </div>

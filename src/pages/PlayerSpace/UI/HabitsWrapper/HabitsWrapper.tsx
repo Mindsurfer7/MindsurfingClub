@@ -14,6 +14,7 @@ import { requestHabits } from 'entities/Player/model/services/requestHabits';
 import { createNewHabit } from 'entities/Player/model/services/createNewHabit';
 import { removeHabit } from 'entities/Player/model/services/removeHabit';
 import SingleEndeavor from 'entities/TaskTracker/UI/SingleEndeavor/SingleEndeavor';
+import { useTranslation } from 'react-i18next';
 interface HabitsWrapperProps {
   className?: string;
 }
@@ -23,6 +24,7 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
   const filteredHabits = useSelector(getFilteredHabits);
   const isFilterApplied = useSelector(getIsFilterApplied);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('PlayerCard');
   const [isVisible, setVisibility] = useState(false);
 
   const onCloseModal = useCallback(() => {
@@ -52,13 +54,14 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
           requestCallback={onRequestHabits}
         />
       )}
-      <div className={cls.header}>My Habits</div>
+      <div className={cls.header}>{t('myHabits')}</div>
       <div className={cls.listWrapper}>
         {filteredHabits.length > 0
           ? filteredHabits.map((h) => {
               return (
                 <SingleEndeavor
                   key={h.id}
+                  taskType="habit"
                   title={h.title}
                   isDone={h.isDone}
                   tags={h.tags}
@@ -75,6 +78,7 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
               return (
                 <SingleEndeavor
                   key={h.id}
+                  taskType="habit"
                   title={h.title}
                   isDone={h.isDone}
                   tags={h.tags}
@@ -94,7 +98,7 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
           theme={ButtonTheme.OUTLINE}
           className={cls.addBtn}
         >
-          Create new habit
+          {t('createNewHabit')}
         </Button>
       </div>
     </div>

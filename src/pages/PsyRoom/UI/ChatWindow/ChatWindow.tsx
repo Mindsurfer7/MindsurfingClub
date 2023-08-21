@@ -20,6 +20,7 @@ import { useLocation } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import Textarea from 'shared/UI/Textarea/Textarea';
 import AppLink from 'shared/UI/AppLink/AppLink';
+import { useTranslation } from 'react-i18next';
 
 interface ChatWindowProps {
   className?: string;
@@ -32,6 +33,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ className }) => {
   const isWriting = useSelector(getIsWriting);
   const location = useLocation();
   const pathname = location.pathname;
+  const { t } = useTranslation('PsyRoom');
 
   const currentID = pathname.split('/').pop();
   console.log(currentID);
@@ -85,18 +87,17 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ className }) => {
   return (
     <div className={classNames(cls.ChatWindow, {}, [className as string])}>
       <div className={cls.header}>
-        {' '}
         <div className={cls.backlink}>
           <AppLink to={'/psyroom'}>
-            <Button theme={ButtonTheme.CLEAR}>{'< Back to list'}</Button>
+            <Button theme={ButtonTheme.CLEAR}>{t('backToList')}</Button>
           </AppLink>
           {/* <NavLink to={'/psyroom'}>Back to list</NavLink> */}
         </div>
         <div className={cls.XL}>
-          <h1>Джипити Психотерапевт</h1>
+          <h1>{t('psychotherapist')}</h1>
         </div>
         <div className={cls.indicator}>
-          {isWriting && <span>Psychotherapist is typing...</span>}
+          {isWriting && <span>{t('psychotherapistTyping')}</span>}
         </div>
       </div>
 
@@ -121,7 +122,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ className }) => {
           className={cls.textarea}
           onChange={handleChange}
           value={singleMessage}
-          placeholder="describe your problem here..."
+          placeholder={t('describeYourProblem')}
         />
         {/* <Input
           onChange={handleChange}
@@ -133,7 +134,7 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ className }) => {
           className={cls.sendBtn}
           onClick={onSendtoGPT}
         >
-          send
+          {t('send')}
         </Button>
       </div>
       <div className={cls.logBtns}></div>

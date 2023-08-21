@@ -1,0 +1,17 @@
+{
+  "userAvatar": "Аватар пользователя",
+  "health": "Здоровье",
+  "level": "Уровень",
+  "points": "Очки",
+  "tasks": "Задачи",
+  "challenges": "Испытания",
+  "completed": "Завершенные",
+  "tags": "Теги",
+  "all": "Все",
+  "myTasks": "Мои задачи",
+  "createNewTask": "Создать новую задачу",
+  "createNewHabit": "Создать новую привычку",
+  "myHabits": "Мои привычки",
+  "myDailyTasks": "Мои ежедневные задачи",
+  "createNewDaily": "Создать новую ежедневку"
+}

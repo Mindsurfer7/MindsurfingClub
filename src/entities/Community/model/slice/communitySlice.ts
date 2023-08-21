@@ -32,6 +32,9 @@ export const CommunitySlice = createSlice({
     setNewMember: (state, action: PayloadAction<string>) => {
       state.members?.push(action.payload);
     },
+    onBecomeMember: (state, action: PayloadAction<string>) => {
+      state.community?.members.push(action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -61,6 +64,11 @@ export const CommunitySlice = createSlice({
   },
 });
 
-export const { setTitle, setDescription, clearGroupModalInputs, setNewMember } =
-  CommunitySlice.actions;
+export const {
+  setTitle,
+  setDescription,
+  clearGroupModalInputs,
+  setNewMember,
+  onBecomeMember,
+} = CommunitySlice.actions;
 export const { reducer: CommunityReducer } = CommunitySlice;

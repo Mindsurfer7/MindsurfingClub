@@ -1,4 +1,15 @@
 {
   "language": "english",
-  "shortLang": "en"
+  "shortLang": "en",
+
+  "Task Tracker": "Трекер задач",
+  "LongReads": "Статьи",
+  "Community": "Сообщество",
+  "PsyRoom": "Чат Джипити",
+  "Home": "Главная",
+  "About": "О нас",
+  "Profile": "Профиль",
+  "welcome.title": "Добро пожаловать в Клуб Серфинга по Разуму!",
+  "welcome.description": "Здесь вы можете нажать кнопку Начать игру, чтобы создать своего персонажа!",
+  "welcome.startGaming": "Начать игру"
 }

@@ -1,0 +1,15 @@
+{
+  "loginToUseService": "Войдите, чтобы использовать эту услугу",
+  "giveNamePlaceholder": "Дайте ему имя",
+  "submit": "Отправить",
+  "startNew": "Начать новый диалог",
+  "noConversations": "У вас нет ни одной беседы",
+  "startFirst": "Начать первую беседу",
+  "backToList": " < Назад к списку",
+  "psychotherapist": "Джипити Психотерапевт ",
+  "psychotherapistTyping": "Психотерапевт печатает...",
+  "assistant": "Ассистент",
+  "user": "Пользователь",
+  "describeYourProblem": "Опишите вашу проблему здесь...",
+  "send": "Отправить"
+}

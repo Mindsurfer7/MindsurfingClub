@@ -1,0 +1,63 @@
+// .textInput {
+//   padding: 10px;
+//   font-size: 16px;
+//   height: 10px;
+//   //border: 2px solid #ccc;
+//   border-radius: 4px;
+//   outline: none;
+//   transition: border-color 0.3s ease-in-out;
+
+//   &:focus {
+//     border-color: #007bff;
+//     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+//   }
+// }
+
+// .DatePicker {
+//   padding: 10px;
+//   align-items: center;
+//   font-size: 16px;
+//   //border: 2px solid #ccc;
+//   // background: none;
+//   border-radius: 4px;
+//   outline: none;
+//   transition: border-color 0.3s ease-in-out;
+
+//   &:focus {
+//     border-color: #007bff;
+//     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+//   }
+// }
+
+// .numberInput {
+//   padding: 10px;
+//   font-size: 16px;
+//   border: 2px solid #ccc;
+//   border-radius: 4px;
+//   outline: none;
+//   transition: border-color 0.3s ease-in-out;
+
+//   &:focus {
+//     border-color: #007bff;
+//     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+//   }
+// }
+.textInput,
+.numberInput,
+.datePickerInput {
+  padding: 0px;
+  height: 28px;
+  font-size: 16px;
+  // border: 2px solid #ccc;
+  border-radius: 7px;
+  outline: none;
+  // width: 100%;
+  transition: border-color 0.3s ease-in-out;
+}
+
+.textInput:focus,
+.numberInput:focus,
+.datePickerInput:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}

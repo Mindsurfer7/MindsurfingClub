@@ -9,15 +9,16 @@ const initialState: ChallengeScheme = {
   showChallenges: false,
   challenges: [],
   challengeData: {
-    ID: '',
+    id: '',
     communityID: '',
-    title: 'string',
-    description: 'string',
-    startDate: 'string',
-    endDate: 'string',
-    executionType: 'string',
+    title: '',
+    isFinished: false,
+    description: '',
+    startDate: '',
+    endDate: '',
+    executionType: 'once',
     points: 9,
-    participantsID: [],
+    participants: [],
   },
   error: '',
 };
@@ -46,6 +47,14 @@ export const ChallengeSlice = createSlice({
     },
     setChallengePoints: (state, action: PayloadAction<number>) => {
       state.challengeData.points = action.payload;
+    },
+    resetChangedFields: (state) => {
+      state.challengeData.title = '';
+      state.challengeData.description = '';
+      state.challengeData.startDate = '';
+      state.challengeData.endDate = '';
+      state.challengeData.executionType = '';
+      state.challengeData.points = 0;
     },
   },
   extraReducers: (builder) => {
@@ -96,5 +105,6 @@ export const {
   setChallengeEndDate,
   setChallengeExecutionType,
   setChallengePoints,
+  resetChangedFields,
 } = ChallengeSlice.actions;
 export const { reducer: ChallengeReducer } = ChallengeSlice;

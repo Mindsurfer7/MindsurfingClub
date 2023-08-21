@@ -18,6 +18,8 @@ import {
 import AppLink from 'shared/UI/AppLink/AppLink';
 import { v4 } from 'uuid';
 import { createNewDialog } from 'entities/GPT/model/services/createNewDialog';
+import { useTranslation } from 'react-i18next';
+import CustomInput from 'shared/UI/CustomInput/CustomInput';
 
 interface PsyRoomProps {
   className?: string;
@@ -34,6 +36,7 @@ const PsyRoom: React.FC<PsyRoomProps> = memo(({ className }) => {
   const DialogsList = useSelector(getDialogsList);
   const [showInput, setShowInput] = useState(false);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('PsyRoom');
 
   const onLoadDialog = (conversation: string) => {
     dispatch(loadConversation(conversation));
@@ -65,7 +68,7 @@ const PsyRoom: React.FC<PsyRoomProps> = memo(({ className }) => {
   if (!isAuth) {
     return (
       <div className={cls.ChatWindow}>
-        <h2>Log in to use this service</h2>
+        <h2>{t('loginToUseService')}</h2>
       </div>
     );
   }
@@ -97,16 +100,16 @@ const PsyRoom: React.FC<PsyRoomProps> = memo(({ className }) => {
                 <div className={cls.emptyDialogs}>
                   {showInput ? (
                     <div className={cls.buttons}>
-                      <Input
+                      <CustomInput
                         value={inputValue}
                         onChange={onInputChange}
-                        placeholder="Give it a name"
-                      ></Input>
+                        placeholder={t('giveNamePlaceholder')}
+                      ></CustomInput>
                       <Button
                         onClick={onCreateNewDialog}
                         theme={ButtonTheme.OUTLINE}
                       >
-                        Submit
+                        {t('submit')}
                       </Button>
                     </div>
                   ) : (
@@ -114,7 +117,7 @@ const PsyRoom: React.FC<PsyRoomProps> = memo(({ className }) => {
                       onClick={() => setShowInput(true)}
                       theme={ButtonTheme.OUTLINE}
                     >
-                      Start new one
+                      {t('startNew')}
                     </Button>
                   )}
                 </div>
@@ -123,16 +126,16 @@ const PsyRoom: React.FC<PsyRoomProps> = memo(({ className }) => {
           })}
         {!DialogsList.length && (
           <div className={cls.emptyDialogs}>
-            <h1>You dont have any conversations</h1>
+            <h1>{t('noConversations')}</h1>
             {showInput ? (
               <div className={cls.buttons}>
                 <Input
                   value={inputValue}
                   onChange={onInputChange}
-                  placeholder="Give it a name"
+                  placeholder={t('giveNamePlaceholder')}
                 ></Input>
                 <Button onClick={onCreateDialog} theme={ButtonTheme.OUTLINE}>
-                  Submit
+                  {t('submit')}
                 </Button>
               </div>
             ) : (
@@ -140,7 +143,7 @@ const PsyRoom: React.FC<PsyRoomProps> = memo(({ className }) => {
                 onClick={() => setShowInput(true)}
                 theme={ButtonTheme.OUTLINE}
               >
-                Start 1st conversation
+                {t('startFirst')}
               </Button>
             )}
           </div>

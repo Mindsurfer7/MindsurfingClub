@@ -1,172 +1,306 @@
 .ChallengePage {
   display: flex;
+  flex-direction: column;
   margin: 10px;
+  align-items: center;
+  // justify-content: center;
+  // overflow: auto;
+
+  @media (max-width: 1600px) {
+    width: 100%;
+    // max-width: 1300px;
+  }
+
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
+
+  @media (max-width: 767px) {
+    max-width: 740px;
+  }
+  @media (max-width: 415px) {
+    width: 100%;
+    max-width: 370px;
+  }
 }
 
+.displayInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px solid rgb(0, 0, 0);
+  background: var(--inverted-bg-color);
+  border-radius: 5px;
+  margin: 10px;
+  padding: 10px;
+  max-width: 100%;
+
+  @media (max-width: 1600px) {
+    width: 100%;
+    max-width: 1100px;
+  }
+
+  @media (max-width: 1200px) {
+    width: 100%;
+    max-width: 900px;
+  }
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+
+  @media (max-width: 415px) {
+    width: 100%;
+    max-width: 370px;
+  }
+}
+
+.date {
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  background: var(--inverted-bg-color);
+  margin: 5px;
+}
+.dates {
+  display: flex;
+}
+
+.leaderboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  border: 2px solid rgb(0, 0, 0);
+  background: var(--inverted-bg-color);
+  border-radius: 5px;
+  padding: 5px;
+  max-width: 100%;
+
+  @media (max-width: 1600px) {
+    max-width: 1100px;
+  }
+
+  @media (max-width: 1200px) {
+    width: 100%;
+    max-width: 900px;
+    margin: 0;
+  }
+  @media (max-width: 767px) {
+    // max-width: 740px;
+    width: 100%;
+  }
+  @media (max-width: 415px) {
+    overflow: auto;
+    width: 100%;
+    max-width: 370px;
+  }
+}
+.title {
+  border: 1px solid rgb(0, 0, 0);
+  background-color: rgb(107, 98, 98);
+  border-radius: 5px;
+  max-height: 42px;
+  padding: 5px;
+  margin: 5px;
+  align-self: center;
+}
+
+.tableWrapper {
+  display: flex;
+  // display: grid;
+  // grid-template-columns: repeat(3, 1fr);
+  // gap: 10px;
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  overflow: auto;
+  max-width: 100%;
+  margin: 5px;
+  padding: 5px;
+
+  @media (max-width: 1200px) {
+    overflow: auto;
+  }
+
+  @media (max-width: 767px) {
+    overflow: scroll;
+    width: auto;
+  }
+  @media (max-width: 415px) {
+    overflow: scroll;
+    width: 100%;
+    padding: 0;
+    border: none;
+  }
+}
 .scoreboard {
   display: grid;
-  border: 1px solid wheat;
-  grid-template-rows: auto 1fr; /* Two rows: user row and columns row */
-  grid-template-columns: 1fr 1fr 1fr; /* Three columns: day, score, isDone */
-  gap: 5px; /* Add some spacing between cells */
+  border: 1px solid rgb(0, 0, 0);
+  background: var(--bg-color);
+  align-items: center;
+  border-radius: 5px;
+  padding: 5px;
   margin: 10px;
+  // max-height: 100%;
+
+  gap: 5px;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-areas:
+    'name name '
+    'day value';
+
+  @media (max-width: 767px) {
+    max-width: 740px;
+  }
+  @media (max-width: 415px) {
+    width: 95%;
+  }
 }
+
+.scoreWrapper {
+  margin: 5px;
+  min-width: 300px;
+
+  @media (max-width: 767px) {
+    // max-width: 740px;
+  }
+  @media (max-width: 415px) {
+    // align-items: center;
+    width: 100%;
+  }
+}
+
 .user {
-  border: 1px solid wheat;
+  display: flex;
+
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  background: var(--inverted-bg-color);
   text-align: center;
   padding: 10px;
-  grid-column: 1 / span 3; /* Make user span all three columns */
+  grid-area: name;
+
+  @media (max-width: 767px) {
+    // max-width: 740px;
+  }
+  @media (max-width: 415px) {
+    max-width: 290px;
+  }
 }
+
+.nickname {
+  align-self: center;
+  text-align: center;
+  flex: 1;
+}
+
+.points {
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  background: var(--inverted-bg-color);
+  text-align: center;
+  align-self: flex-end;
+  width: 20%;
+  margin-left: auto;
+
+  @media (max-width: 415px) {
+    min-width: 70px;
+  }
+}
+
+.div {
+  border-radius: 5px;
+  display: flex;
+
+  @media (max-width: 415px) {
+    max-width: 290px;
+    margin-right: 30px;
+  }
+}
+
 .day,
-.score,
 .isDone {
-  border: 1px solid wheat;
+  grid-row: 1;
+  grid-column: 1 / span 2;
+  border-radius: 5px;
+  border: 1px solid rgb(0, 0, 0);
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 2px;
+  padding: 5px;
+  width: 50%;
+  background: var(--inverted-bg-color);
+
+  @media (max-width: 767px) {
+    // max-width: 740px;
+  }
+  @media (max-width: 415px) {
+    // margin: 2px 2px 2px 5px;
+    // margin-right: 10px;
+    max-width: 200px;
+  }
 }
 
-// .day {
-//   border: 1px solid wheat;
-//   height: 50px;
-//   width: 33.3%;
-// }
+.day {
+  grid-area: day;
+  //min-width: 90px;
+}
+.isDone {
+  grid-area: value;
+  // min-width: 90px;
+}
 
-// .score {
-//   border: 1px solid wheat;
-//   height: 50px;
-//   width: 33.3%;
-// }
-// .isDone {
-//   border: 1px solid wheat;
-//   height: 50px;
-//   width: 33.3%;
-// }
+input {
+  -webkit-appearance: none;
+  appearance: none;
 
-// =========================================================================================================
-// .ChallengePage {
-// }
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 0.15em;
+  margin-right: 0.5em;
+  border: 1px solid #000000;
+  outline: none;
+  cursor: pointer;
 
-// .scoreboard {
-//   border: 1px solid wheat;
-//   height: 100px;
-//   width: 200px;
-
-//   display: grid;
-//   grid-template-columns: auto auto auto auto; /* Adjust the column widths as needed */
-//   gap: 10px; /* Adjust the gap between grid items */
-//   align-items: center; /* Align items vertically in the middle */
-//   justify-items: center; /* Center items horizontally */
-//   padding-top: 20px;
-// }
-// .userColumn {
-//   display: grid;
-//   grid-template-rows: repeat(auto-fill, 50px);
-//   gap: 10px;
-// }
-
-// .day,
-// .score,
-// .isDone {
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// }
-// .chal {
-//   padding: 10px;
-//   margin: 8px;
-//   border: 2px solid rgb(255, 255, 255);
-//   border-radius: 5px;
-//   color: beige;
-//   height: 100px;
-//   width: 400px;
-//   text-decoration: none;
-//   display: inline-block;
-// }
-
-// .chal:hover {
-//   background-color: grey;
-// }
-
-// .delbtn {
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-// }
-
-// .singleChall {
-//   padding: 10px;
-//   margin: 8px;
-//   border: 2px solid rgb(255, 255, 255);
-//   border-radius: 5px;
-//   color: beige;
-//   height: 300px;
-//   width: 1100px;
-//   text-decoration: none;
-//   position: relative;
-//   overflow: auto;
-/* display: flex;
-    position: relative; */
-/* display: flex;
-    justify-content: flex-end; */
-// }
-
-// .scoreboard {
-//   padding: 10px;
-//   margin: 8px;
-//   border: 2px solid rgb(255, 255, 255);
-//   border-radius: 8px;
-//   color: beige;
-//   overflow: auto;
-//   opacity: 70%;
-//   height: 280px;
-//   width: 800px;
-//   text-decoration: none;
-
-//   margin-right: 10px;
-
-//   /* display: flex;
-//     flex-wrap: wrap; */
-// }
-
-// .flexWrapper {
-//   display: inline-flex;
-//   justify-content: center;
-//   background-color: cornflowerblue;
-//   min-width: 200px;
-// }
-
-// .span1 {
-//   padding: 10px;
-//   margin: 8px;
-//   border: 2px solid rgb(255, 255, 255);
-//   border-radius: 8px;
-//   color: beige;
-//   height: 50px;
-//   width: 80px;
-// }
-
-// .span2 {
-//   padding: 10px;
-//   margin: 3px;
-//   border: 2px solid rgb(255, 255, 255);
-//   border-radius: 3px;
-//   color: beige;
-//   height: 2px;
-//   width: 100px;
-// }
-/* 
-  .flex {
-    display: flex;
-    flex-direction: row;
+  &:checked {
+    background-color: rgb(9, 218, 20);
+    margin-bottom: 0;
+    &::after {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -3px;
+      border-color: white;
+      content: '\2713';
+      visibility: visible;
+    }
   }
-  .spandiv {
-    display: flex;
-    flex-direction: column;
+}
+.redCheckbox {
+  -webkit-appearance: none;
+  appearance: none;
+
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 0.15em;
+  margin-right: 0.5em;
+  border: 1px solid #000000;
+  outline: none;
+  cursor: pointer;
+
+  &:checked {
+    background-color: rgb(223, 15, 15); // Red background color
+    margin-bottom: 0;
+    &::after {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -3px;
+      border-color: white;
+      content: '\2716'; // Unicode character for cross
+      visibility: visible;
+    }
   }
-  .spanContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  } */
+}

@@ -15,3 +15,19 @@ textarea {
     outline: none;
   }
 }
+
+.customTextarea {
+  padding: 10px;
+  font-size: 16px;
+  background-color: rgb(117, 95, 95);
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.3s ease-in-out;
+
+  &:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+}

@@ -7,15 +7,16 @@ export interface ChallengeScheme {
 }
 
 export interface Challenge {
-  ID: string;
+  id: string;
   title: string;
   description: string;
   communityID: string;
   tags?: string[];
-  participantsID: Participant[];
+  participants: Participant[];
   startDate?: string;
   endDate?: string;
   executionType?: string;
+  isFinished: boolean;
   points?: number;
 }
 
@@ -28,5 +29,5 @@ export interface Participant {
 
 export interface isDoneObject {
   isDone: boolean;
-  day: Date;
+  date: Date;
 }

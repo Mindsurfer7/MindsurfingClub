@@ -4,8 +4,12 @@ import cls from './ChallengesList.module.scss';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { getChallengesByUserID } from 'entities/Challenge/model/services/getChellengesByUserID';
 import { useSelector } from 'react-redux';
-import { getchallenges } from 'entities/Challenge/model/selectors/getChallengeData';
+import {
+  getChallengesIsLoading,
+  getchallenges,
+} from 'entities/Challenge/model/selectors/getChallengeData';
 import PersonalChallengeDashboard from '../PersonalChallengeDashboard/PersonalChallengeDashboard';
+import Preloader from 'shared/UI/Preloader/Preloader';
 
 interface ChallengesListProps {
   className?: string;
@@ -15,6 +19,7 @@ interface ChallengesListProps {
 const ChallengesList: React.FC<ChallengesListProps> = ({ className }) => {
   const dispatch = useAppDispatch();
   const challenges = useSelector(getchallenges);
+  const isLoading = useSelector(getChallengesIsLoading);
   const [showDashboard, setShowDashboard] = useState(false);
   const [dashboardID, setDashboardID] = useState('');
 
@@ -35,9 +40,16 @@ const ChallengesList: React.FC<ChallengesListProps> = ({ className }) => {
   const onHideDashboard = () => {
     setShowDashboard(false);
   };
+
+  if (isLoading) {
+    return <Preloader />;
+  }
+
   return (
     <div className={classNames(cls.ChallengesList, {}, [className as string])}>
-      {showDashboard && <span onClick={onHideDashboard}>chal list</span>}
+      {showDashboard && (
+        <span onClick={onHideDashboard}>{' < back to list'}</span>
+      )}
       {showDashboard ? (
         <PersonalChallengeDashboard ID={dashboardID} challenges={challenges} />
       ) : (
@@ -45,7 +57,7 @@ const ChallengesList: React.FC<ChallengesListProps> = ({ className }) => {
           {challenges.map((c) => {
             return (
               <div //@ts-ignore
-                onClick={() => onShowDashboard(c.ID)}
+                onClick={() => onShowDashboard(c.id)}
                 className={cls.chalTitle}
               >
                 {c.title}

@@ -37,7 +37,7 @@ export const takePart = createAsyncThunk<any, any, ThunkConfig<any>>(
 
     try {
       await updateDoc(DocRef, {
-        participantsID: arrayUnion(participantData),
+        participants: arrayUnion(participantData),
       });
 
       console.log('particiance succeed');

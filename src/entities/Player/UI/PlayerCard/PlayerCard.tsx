@@ -34,6 +34,7 @@ import { deleteTag } from 'entities/Player/model/services/deleteTag';
 import { saveNotification } from 'entities/Player/model/services/InGameActions/saveNotification';
 import Spinner from '../../../../shared/assets/icons/Spinner.svg';
 import { getShowChallenges, setShowChallenges } from 'entities/Challenge';
+import { useTranslation } from 'react-i18next';
 
 interface PlayerCardProps {
   className?: string;
@@ -61,6 +62,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
   const sortedTags = [...allTags].sort((a, b) => a.length - b.length);
 
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('PlayerCard');
 
   const notify = () => {
     toast.success(`You have been leveled up!`, {
@@ -152,46 +154,45 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
         </div>
         <div className={cls.indicators}>
           <div className={cls.health}>
-            <span>Health</span>
+            <span>{t('health')}</span>
             <span>{player.health}</span>
           </div>
           <div className={cls.level}>
             {' '}
-            <span>Level</span>
+            <span>{t('level')}</span>
             <span>{player.level}</span>{' '}
           </div>
           <div className={cls.points}>
-            <span>Points</span>
+            <span>{t('points')}</span>
             <span>{player.points}</span>
             {/* {isLoading ? <Spinner /> :} */}
           </div>
           <div className={cls.buttnz}>
-            <Button theme={ButtonTheme.OUTLINE}>Tasks</Button>
             <Button
               theme={
                 showChallenges ? ButtonTheme.FILLED_GREEN : ButtonTheme.OUTLINE
               }
               onClick={onShowChallenges}
             >
-              Challenges
+              {t('challenges')}
             </Button>
             <Button
               theme={completed ? ButtonTheme.FILLED_GREEN : ButtonTheme.OUTLINE}
               onClick={onShowCompleted}
             >
-              Completed
+              {t('completed')}
             </Button>
           </div>
         </div>
         <div className={cls.tags}>
           <div className={cls.tagsWrapper}>
-            <div className={cls.header}>Tags</div>
+            <div className={cls.header}>{t('tags')}</div>
             <Button
               className={cls.singleTag} //
               theme={ButtonTheme.CLEAR}
               onClick={onClearTags}
             >
-              All
+              {t('all')}
             </Button>
             {sortedTags?.map((tag) => {
               return (

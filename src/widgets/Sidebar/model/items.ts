@@ -6,6 +6,7 @@ import PsyIcon from './../../../shared/assets/icons/psy.svg';
 import ProfileIcon from './../../../shared/assets/icons/profile-20-20.svg';
 import TaskIcon from './../../../shared/assets/icons/tasks.svg';
 import ArtIcon from './../../../shared/assets/icons/article-20-20.svg';
+import ClubIcon from './../../../shared/assets/icons/community.svg';
 
 export interface SidebarItemType {
   path: string;
@@ -14,26 +15,6 @@ export interface SidebarItemType {
 }
 
 export const SidebarItemsList: SidebarItemType[] = [
-  {
-    path: RoutePath.PlayerSpace,
-    Icon: TaskIcon,
-    text: 'Task Tracker',
-  },
-  {
-    path: RoutePath.articles,
-    Icon: ArtIcon,
-    text: 'LongReads',
-  },
-  {
-    path: RoutePath.Community,
-    Icon: ProfileIcon,
-    text: 'Community',
-  },
-  {
-    path: RoutePath.PsyRoom,
-    Icon: PsyIcon,
-    text: 'PsyRoom',
-  },
   {
     path: RoutePath.Main,
     Icon: HomeIcon,
@@ -44,6 +25,28 @@ export const SidebarItemsList: SidebarItemType[] = [
     Icon: AboutIcon,
     text: 'About',
   },
+  {
+    path: RoutePath.articles,
+    Icon: ArtIcon,
+    text: 'LongReads',
+  },
+
+  {
+    path: RoutePath.PsyRoom,
+    Icon: PsyIcon,
+    text: 'PsyRoom',
+  },
+  {
+    path: RoutePath.PlayerSpace,
+    Icon: TaskIcon,
+    text: 'Task Tracker',
+  },
+  {
+    path: RoutePath.Community,
+    Icon: ClubIcon,
+    text: 'Community',
+  },
+
   {
     path: RoutePath.Profile,
     Icon: ProfileIcon,

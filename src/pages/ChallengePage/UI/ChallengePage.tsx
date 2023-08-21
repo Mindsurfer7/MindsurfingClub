@@ -1,205 +1,125 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ChallengePage.module.scss';
-import { useSelector } from 'react-redux';
-import { getTaskTrackerData } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
+import { useParams } from 'react-router-dom';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import {
-  setChallengeDescription,
-  setChallengeEndDate,
-  setChallengeExecutionType,
-  setChallengePoints,
-  setChallengeStartDate,
-  setChallengeTitle,
-} from 'entities/Challenge';
-import { createNewChallenge, getChallengeData } from 'entities/Challenge';
+import { useSelector } from 'react-redux';
+import { getchallenges } from 'entities/Challenge';
+import { Challenge } from 'entities/Challenge/types/ChallengeScheme';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
-import Button, { ButtonTheme } from 'shared/UI/Button/Button';
+import Text from 'shared/UI/Text/Text';
+import { useTranslation } from 'react-i18next';
+import { requestChallengeByID } from '../model/services/requestChallengeByID';
+import { getChallengePageData } from '../model/selectors/getChallengePageData';
+import {
+  DynamicModuleLoader,
+  ReducersList,
+} from 'shared/lib/DynamicModuleLoader/DynamicModuleLoader';
+import { ChallengePageReducer } from '../model/slice/challengePageSlice';
 
 interface ChallengePageProps {
   className?: string;
 }
 
-const ChallengeForm = () => {
-  const dispatch = useAppDispatch();
-  const { description, title, startDate, endDate, executionType, points } =
-    useSelector(getChallengeData);
-
-  const handleInputChange = (event: any) => {
-    const { name, value } = event.target;
-    switch (name) {
-      case 'title':
-        dispatch(setChallengeTitle(value));
-        break;
-      case 'description':
-        dispatch(setChallengeDescription(value));
-        break;
-      case 'startDate':
-        dispatch(setChallengeStartDate(value));
-        break;
-      case 'endDate':
-        dispatch(setChallengeEndDate(value));
-        break;
-      case 'executionType':
-        dispatch(setChallengeExecutionType(value));
-        break;
-      case 'points':
-        dispatch(setChallengePoints(Number(value)));
-        break;
-      default:
-        break;
-    }
-  };
-  const userID = useSelector(getGoogleID);
-  //@ts-ignore
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(createNewChallenge('mockPublicID'));
-  };
-
-  return (
-    <form>
-      <label>
-        Title:
-        <input
-          type="text"
-          name="title"
-          value={title}
-          onChange={handleInputChange}
-        />
-      </label>
-      <br />
-      <label>
-        Description:
-        <textarea
-          name="description"
-          value={description}
-          onChange={handleInputChange}
-        />
-      </label>
-      <br />
-      <label>
-        Start Date:
-        <input
-          type="date"
-          name="startDate"
-          value={startDate}
-          onChange={handleInputChange}
-        />
-      </label>
-      <br />
-      <label>
-        End Date:
-        <input
-          type="date"
-          name="endDate"
-          value={endDate}
-          onChange={handleInputChange}
-        />
-      </label>
-      <br />
-      <label>
-        Execution Type:
-        <select
-          name="executionType"
-          value={executionType}
-          onChange={handleInputChange}
-        >
-          <option value="">Select</option>
-          <option value="once">Once a day</option>
-          <option value="twice">Twice a day</option>
-          <option value="thrice">Thrice a day</option>
-        </select>
-      </label>
-      <br />
-      <label>
-        Points per Execution:
-        <input
-          type="number"
-          name="points"
-          value={points}
-          onChange={handleInputChange}
-        />
-      </label>
-      <br />
-      <Button theme={ButtonTheme.OUTLINE} onClick={handleSubmit}>
-        Create Challenge
-      </Button>
-    </form>
-  );
-};
-
-const users = ['Mindsurfer', 'Reol', 'Amura'];
-const list = [
-  {
-    id: 1,
-    day: 'Day 1',
-    morning: {
-      User1: true,
-      User2: false,
-      User3: true,
-    },
-    evening: {
-      User1: false,
-      User2: true,
-      User3: true,
-    },
-  },
-  {
-    id: 2,
-    day: 'Day 2',
-    morning: {
-      User1: false,
-      User2: true,
-      User3: false,
-    },
-    evening: {
-      User1: true,
-      User2: true,
-      User3: true,
-    },
-  },
-  // Add more data as needed
-];
-
 const ChallengePage: React.FC<ChallengePageProps> = ({ className }) => {
+  const { challengeID } = useParams();
+  const dispatch = useAppDispatch();
+  const { t } = useTranslation('ChallengePage');
+  const theChallenge = useSelector(getChallengePageData);
+
+  useEffect(() => {
+    if (challengeID) {
+      dispatch(requestChallengeByID(challengeID));
+    }
+  }, [dispatch, challengeID]);
+
+  const scoreboard = theChallenge?.participants;
+  // const days = theChallenge?.participants[0].isDoneArray;
+  // theChallenge?.description;
+
+  const reducers: ReducersList = {
+    ChallengePage: ChallengePageReducer,
+  };
+
   return (
-    <div className={classNames(cls.ChallengePage, {}, [className as string])}>
-      {users.map((u) => {
-        return (
-          <div className={cls.scoreboard}>
-            <div className={cls.user}>{u}</div>
-            <div className={cls.isDone}>isDone</div>
-            <div className={cls.score}>score</div>
-            <div className={cls.day}>day</div>
+    <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
+      <div className={classNames(cls.ChallengePage, {}, [className as string])}>
+        <div className={cls.displayInfo}>
+          <Text title={theChallenge?.title} />
+          <span>
+            {t('Points to earn for each day: ')} {theChallenge?.points}
+          </span>
+          <div className={cls.description}>
+            {t('Description:')}
+            {theChallenge?.description}
           </div>
-        );
-      })}
-    </div>
+          <div className={cls.dates}>
+            <div className={cls.date}>
+              {t('Start day: ')} {theChallenge?.startDate}
+            </div>
+            <div className={cls.date}>
+              {t('End day:')} {theChallenge?.endDate}
+            </div>
+          </div>
+        </div>
+        <div className={cls.leaderboard}>
+          <Text className={cls.title} title={t('Leaderboard')} />
+          <div className={cls.tableWrapper}>
+            {scoreboard?.map((x) => {
+              return (
+                <div className={cls.scoreboard}>
+                  <div className={cls.user}>
+                    <div className={cls.nickname}>{x.nickname}</div>
+
+                    <div className={cls.points}>{x.points} INS</div>
+                  </div>
+
+                  <div className={cls.scoreWrapper}>
+                    <div className={cls.div}>
+                      <div className={cls.day}>{t('Day')}</div>
+                      <div className={cls.isDone}>{t('IsDone')}</div>
+                    </div>
+
+                    {x.isDoneArray.map((value) => {
+                      const date = new Date( //@ts-ignore
+                        value.date.seconds * 1000 + //@ts-ignore
+                          value.date.nanoseconds / 1000000,
+                      );
+
+                      const options = {
+                        day: 'numeric',
+                        month: 'numeric',
+                        locale: 'ru-RU',
+                      };
+                      const formattedDate = date.toLocaleDateString(
+                        'ru-RU', //@ts-ignore
+                        options,
+                      );
+                      return (
+                        <div className={cls.div}>
+                          <div className={cls.day}>{formattedDate}</div>
+                          <div className={cls.isDone}>
+                            {value.isDone ? (
+                              <input type="checkbox" checked />
+                            ) : (
+                              <input
+                                type="checkbox"
+                                className={cls.redCheckbox}
+                              />
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </DynamicModuleLoader>
   );
 };
 
 export default ChallengePage;
-
-{
-  /* <div className={cls.title}></div>
-<div className={cls.description}></div>
-
-<div className={cls.scoreboard}>
-  {/* <div className={cls.user}>user</div> */
-}
-
-//   <div className={cls.userColumn}>
-//     {users.map((user) => (
-//       <div key={user} className={cls.user}>
-//         {user}
-//       </div>
-//     ))}
-//   </div>
-//   <div className={cls.dataColumn}>
-//     <div className={cls.day}>Day</div>
-//     <div className={cls.score}>Score</div>
-//     <div className={cls.isDone}>Is Done</div>
-//   </div>
-// </div>
-// </div> */}

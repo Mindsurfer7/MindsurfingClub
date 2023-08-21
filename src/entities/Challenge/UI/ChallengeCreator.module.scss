@@ -13,89 +13,91 @@
     //border: 3px solid black;
   }
 }
-.difficulty {
-  display: flex;
-  //justify-content: space-between;
-}
 
-.description {
-  @media (max-width: 415px) {
-    display: flex;
-    flex-direction: column;
-    width: 200px;
+.title {
+  width: 300px;
+  margin: 5px;
+  input {
+    margin-top: 6px;
+    width: 300px;
+
+    @media (max-width: 415px) {
+      width: 250px;
+    }
   }
 }
 
-.input {
-  border: 2px solid black;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 4px 0px 10px 2px;
-}
-.input2 {
-  border: 2px solid black;
-  border-radius: 5px;
-  background: transparent;
-  outline: cornsilk;
-  margin-left: 2px;
-
-  height: 35px;
-  width: 200px;
-  color: white;
-  text-shadow: 0 0 0 var(--primary-color);
-}
-.textarea {
-  margin: 4px 0px 4px 2px;
-  color: white;
-}
-.tags {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 5px;
-  //padding: 10px;
-  //border: 1px solid black;
-  border-radius: 5px;
-  height: 100px;
-  width: 100%;
-
-  @media (max-width: 415px) {
-    display: flex;
-    flex-direction: column;
+.descr {
+  width: 300px;
+  margin: 5px;
+  textarea {
+    margin-top: 5px;
+    @media (max-width: 415px) {
+      width: 250px;
+    }
   }
 }
 
-.Y {
+.dates {
   display: flex;
+  width: 300px;
+  margin: 5px;
 
-  @media (max-width: 415px) {
+  .startDate {
+    input {
+      margin-top: 4px;
+      width: 150px;
+
+      @media (max-width: 415px) {
+        width: 120px;
+        margin-right: 4px;
+      }
+    }
+    margin-right: 10px;
+  }
+  .endDate {
+    input {
+      margin-top: 4px;
+      width: 150px;
+
+      @media (max-width: 415px) {
+        width: 120px;
+        margin-left: 0px;
+      }
+    }
+    margin-left: 5px;
+  }
+}
+.points {
+  margin: 5px;
+  input {
+    margin-top: 4px;
+    width: 150px;
+
+    @media (max-width: 415px) {
+      width: 90px;
+    }
+  }
+
+  .x {
+    margin-top: 6px;
     display: flex;
-    flex-direction: column;
   }
 }
 
-.tagArray {
-  display: flex;
-}
-.singleTag {
-  border: 1px solid rgb(255, 255, 255);
-  border-radius: 4px;
-  padding: 0.1px 4px;
-  //margin: 2px;
-  margin-left: 3px;
+.timesAday {
+  select {
+    margin-left: 4px;
+  }
 }
 
 .btn {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
+  margin-left: 10px;
 }
 .btn:hover {
-  border: 1px solid rgb(3, 201, 3);
-  color: rgb(3, 201, 3);
+  background: rgb(3, 201, 3);
 }
 
-.footer {
-  display: flex;
-  justify-content: space-between;
+.error {
+  color: red;
 }

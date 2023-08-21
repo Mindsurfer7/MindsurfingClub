@@ -21,6 +21,7 @@ import {
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import NotificationBar from 'shared/UI/NotificationBar/NotificationBar';
 import NotificationIcon from 'shared/assets/icons/notification.svg';
+import { useTranslation } from 'react-i18next';
 
 interface navprops {
   className?: string;
@@ -35,6 +36,8 @@ export const PageTitles = {
   [RoutePath[AppRoutes.PracticeCenter]]: '',
   [RoutePath[AppRoutes.Conversation]]: 'GPT Psychotherapist',
   [RoutePath[AppRoutes.PlayerSpace]]: 'RPG Task Tracker',
+  [RoutePath[AppRoutes.Challenge]]: 'Challenges',
+  [RoutePath[AppRoutes.Community]]: 'Community',
   [RoutePath[AppRoutes.NotFound]]: '',
 };
 
@@ -45,6 +48,7 @@ export const NavBar = memo(({ className }: navprops) => {
   const username = useSelector(getUsername);
   const googleAcc = useSelector(getGoogleData);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('navbar');
   const location = useLocation();
   const [pageTitle, setPageTitle] = useState('');
   const [showNotify, setShowNotify] = useState(false);
@@ -55,7 +59,7 @@ export const NavBar = memo(({ className }: navprops) => {
       ([key, config]) => config.path === currentRoute,
     );
 
-    setPageTitle(matchedRoute ? PageTitles[currentRoute] : 'Practice Center');
+    setPageTitle(matchedRoute ? PageTitles[currentRoute] : 'Mindsurfing Club');
   }, [location]);
 
   const onCloseModal = useCallback(() => {
@@ -91,12 +95,11 @@ export const NavBar = memo(({ className }: navprops) => {
       {showNotify && <NotificationBar />}
       {
         <div className={cls.title}>
-          <h1>{pageTitle}</h1>
+          <h1>{t(pageTitle)}</h1>
         </div>
       }
       <div className={cls.links}>
         <div className={cls.notificationsBar} onClick={onOpenNotify}>
-          {' '}
           <NotificationIcon />
         </div>
 
@@ -106,7 +109,7 @@ export const NavBar = memo(({ className }: navprops) => {
             className={cls.login}
             onClick={onGoogleLogin}
           >
-            login
+            {t('login')}
           </Button>
         ) : (
           <Button
@@ -119,7 +122,7 @@ export const NavBar = memo(({ className }: navprops) => {
             {googleAcc.account?.displayName}
           </Button>
         )}
-        {username ? (
+        {/* {username ? (
           <Button
             theme={ButtonTheme.OUTLINE}
             //className={cls.nickname}
@@ -137,7 +140,7 @@ export const NavBar = memo(({ className }: navprops) => {
           >
             login
           </Button>
-        )}
+        )} */}
       </div>
       {/* по хорошему весь сей код над выделить в компонентик для шейред слоя + add onblur*/}
       {isLogged && (

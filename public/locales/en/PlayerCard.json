@@ -1,0 +1,17 @@
+{
+  "userAvatar": "User Avatar",
+  "health": "Health",
+  "level": "Level",
+  "points": "Points",
+  "tasks": "Tasks",
+  "challenges": "Challenges",
+  "completed": "Completed",
+  "tags": "Tags",
+  "all": "All",
+  "myTasks": "My Tasks",
+  "createNewTask": "Create new task",
+  "createNewHabit": "Create new habit",
+  "myHabits": "My Habits",
+  "myDailyTasks": "My Daily Tasks",
+  "createNewDaily": "Create new daily"
+}

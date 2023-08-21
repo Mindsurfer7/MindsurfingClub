@@ -1,25 +1,62 @@
 .SingleGroupPage {
+  @media (max-width: 415px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+  }
+}
+
+.PublicWrapper {
+  background-color: var(--inverted-bg-color);
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 7px;
+  padding: 10px;
+  font-size: 8px;
+  margin: 10px;
+
+  @media (max-width: 415px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .challenges {
-  border: 2px solid white;
+  position: relative;
+  background-color: var(--inverted-bg-color);
+  border: 2px solid rgb(0, 0, 0);
   border-radius: 7px;
-}
-
-.group {
-  border: 2px solid white;
-  border-radius: 7px;
-  width: 300px;
+  padding: 10px;
   margin: 10px;
 
-  &:hover {
-    border: 2px solid rgb(4, 233, 16);
-    border-radius: 7px;
-    cursor: pointer;
+  @media (max-width: 415px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
+
+.chalArray {
+  display: flex;
+
+  @media (max-width: 415px) {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .groupAbout {
   display: flex;
+
+  @media (max-width: 415px) {
+    width: 100%;
+
+    flex-direction: column;
+  }
 }
 
 .pic {
@@ -33,4 +70,19 @@
   flex-direction: column;
   align-items: center;
   //   justify-content: center;
+}
+
+.newChallBtn {
+  position: absolute;
+  margin: 6px;
+  top: 0;
+  right: 0;
+
+  @media (max-width: 415px) {
+    position: relative;
+
+    // width: 100%;
+    // display: flex;
+    // flex-direction: column;
+  }
 }

@@ -12,7 +12,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
-  const [collapse, setCollapse] = useState(false);
+  const [collapse, setCollapse] = useState(true);
 
   const onSwitch = () => {
     setCollapse((prev) => !prev);
@@ -47,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
           {collapse ? '>' : '<'}
         </Button>
         <ThemeSwitcher className={cls.themeSwitcher} />
-        {/* <LangSwitcher short={collapse ? true : false} /> */}
+        <LangSwitcher short={collapse ? true : false} />
       </div>
     </div>
   );

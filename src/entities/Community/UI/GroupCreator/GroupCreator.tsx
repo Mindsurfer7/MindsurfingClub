@@ -18,6 +18,7 @@ import {
   setDescription,
   setTitle,
 } from 'entities/Community';
+import { useTranslation } from 'react-i18next';
 
 interface GroupCreatorProps {
   className?: string;
@@ -37,6 +38,7 @@ const GroupCreator: React.FC<GroupCreatorProps> = ({
   const CommunityData = useSelector(getCommunityData);
   const description = useSelector(getGroupDescription);
   const title = useSelector(getGroupTitle);
+  const { t } = useTranslation('SingleGroupPage');
 
   const onSubmit = async () => {
     //dispatch(setID(v4()));
@@ -80,12 +82,12 @@ const GroupCreator: React.FC<GroupCreatorProps> = ({
       <div className={cls.description}>
         <Input
           value={title}
-          placeholder={'Введите название'}
+          placeholder={t('enterGroupName')}
           onChange={(val) => onSetTitle(val)}
           className={cls.input}
         />
         <Textarea
-          placeholder={'Опишите смысл объединения и цели'}
+          placeholder={t('describeGroupPurpose')}
           value={description}
           onChange={onSetDescription}
           className={cls.textarea}
@@ -97,7 +99,7 @@ const GroupCreator: React.FC<GroupCreatorProps> = ({
         onClick={onCreateGroup}
         theme={ButtonTheme.OUTLINE}
       >
-        Submit
+        {t('submit')}
       </Button>
     </div>
   );

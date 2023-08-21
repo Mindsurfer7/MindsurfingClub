@@ -20,9 +20,6 @@ import { saveNotification } from 'entities/Player/model/services/InGameActions/s
 interface SingleEndeavorProps {
   onRemove: (id: string) => Promise<void>;
   onRequest: () => void;
-  isHabit?: boolean;
-  isTask?: boolean;
-  isDaily?: boolean;
   difficulty: number;
   description: string;
   className?: string;
@@ -30,6 +27,7 @@ interface SingleEndeavorProps {
   isDone: boolean;
   tags: string[];
   id: string;
+  taskType: 'task' | 'daily' | 'habit';
 }
 
 const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
@@ -40,9 +38,7 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
     title,
     difficulty,
     isDone,
-    isDaily = false,
-    isHabit = false,
-    isTask = false,
+    taskType,
     id,
   } = props;
 
@@ -154,7 +150,7 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
     [cls['isDone']]: isDone,
   };
 
-  if (isDaily) {
+  if (taskType === 'daily') {
     return (
       <div
         className={classNames(cls.SingleEndeavor, mods, [className as string])}
@@ -205,7 +201,7 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
     );
   }
 
-  if (isTask) {
+  if (taskType === 'task') {
     return (
       <div
         className={classNames(cls.SingleEndeavor, mods, [className as string])}

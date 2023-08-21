@@ -1,3 +1,4 @@
+import { Challenge } from './types/ChallengeScheme';
 import { setChallengeIsDone } from './model/services/setChallengeIsDone';
 import { Participant } from 'entities/Challenge/types/ChallengeScheme';
 import { getChallengeData } from 'entities/Challenge/model/selectors/getChallengeData';
@@ -34,5 +35,6 @@ export {
   setChallengeExecutionType,
   setChallengePoints,
   Participant,
+  Challenge,
   setChallengeIsDone,
 };

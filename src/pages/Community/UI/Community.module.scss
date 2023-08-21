@@ -1,3 +1,9 @@
+.Community {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .Publics {
   display: flex;
   flex-wrap: wrap;
@@ -8,12 +14,13 @@
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
-  border-radius: 2px;
+  border-radius: 7px;
   padding: 7px;
   width: 300px;
   margin: 10px;
   flex: 1 0 calc(33.33% - 20px);
   align-items: center;
+  min-height: 380px;
 
   transition: box-shadow 0.1s ease;
   &:hover {
@@ -25,6 +32,8 @@
 .pic {
   width: 200px;
   height: 200px;
+  margin-bottom: 8px;
+  border-radius: 20px;
 }
 
 .button {

@@ -13,6 +13,7 @@ import { ArticleDetailsPageAsync } from 'pages/ArticleDetails';
 import { CommunityAsync } from 'pages/Community/UI/Community.async';
 import { SingleGroupPageAsync } from 'pages/SingleGroupPage';
 import ChallengePage from 'pages/ChallengePage/UI/ChallengePage';
+import { ChallengePageAsync } from 'pages/ChallengePage';
 
 export type AppRoutesProps = RouteProps & {
   authOnly?: boolean;
@@ -49,7 +50,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.Articles]: '/articles',
   [AppRoutes.SingleArticle]: '/articles/',
   [AppRoutes.SingleGroup]: '/communities/SingleGroup/',
-  [AppRoutes.Challenge]: '/challenge/',
+  [AppRoutes.Challenge]: 'communities/SingleGroup/:publicID/challenge/',
   [AppRoutes.NotFound]: '*',
 };
 
@@ -110,7 +111,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   },
   [AppRoutes.Challenge]: {
     path: `${RoutePath.Challenge}:challengeID`,
-    element: <ChallengePage />,
+    element: <ChallengePageAsync />,
     authOnly: false,
   },
   [AppRoutes.NotFound]: {

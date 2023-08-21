@@ -1,4 +1,15 @@
 {
   "language": "русский",
-  "shortLang": "ru"
+  "shortLang": "ru",
+  "login": "Login",
+  "Task Tracker": "Task Tracker",
+  "LongReads": "LongReads",
+  "Community": "Community",
+  "PsyRoom": "Chat GPT",
+  "Home": "Home",
+  "About": "About",
+  "Profile": "Profile",
+  "welcome.title": "Welcome to the Mindsurfing Club!",
+  "welcome.description": "Here you can click the Start Gaming button to create your character!",
+  "welcome.startGaming": "Start Gaming"
 }

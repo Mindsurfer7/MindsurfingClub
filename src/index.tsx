@@ -8,7 +8,23 @@ import { StoreProvider } from 'App/providers/StoreProvider';
 import 'react-toastify/dist/ReactToastify.css';
 import { ErrorBoundary } from 'App/providers/ErrorBoundary';
 
-//import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer"ff
+//import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer"
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('../service-worker.js')
+      .then((registration) => {
+        console.log(
+          'Service Worker зарегистрирован с областью видимости:',
+          registration.scope,
+        );
+      })
+      .catch((error) => {
+        console.log('Ошибка при регистрации Service Worker:', error);
+      });
+  });
+}
 
 render(
   <BrowserRouter>

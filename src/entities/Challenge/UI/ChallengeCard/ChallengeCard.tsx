@@ -8,6 +8,10 @@ import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import AppLink from 'shared/UI/AppLink/AppLink';
 import { AppRoutes } from 'shared/config/routesConfig/routesConfig';
 import { Participant } from 'entities/Challenge/types/ChallengeScheme';
+import { requestChallenges } from 'entities/Challenge/model/services/requestChallenges';
+import { useSelector } from 'react-redux';
+import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
+import { useTranslation } from 'react-i18next';
 
 interface ChallengeCardProps {
   className?: string;
@@ -32,25 +36,43 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({
   id,
 }) => {
   const dispatch = useAppDispatch();
-  console.log(id);
+  const { t } = useTranslation('SingleGroupPage');
+  const userID = useSelector(getGoogleID);
 
-  const onTakePart = () => {
-    dispatch(takePart({ chalID: id, startDate: startDate, endDate: endDate }));
+  // let isParticipant;
+  // if (participants.length > 0) {
+  //   isParticipant = participants?.find((x) => x.ID === userID) || false;
+  // }
+
+  const isParticipant = participants?.find((x) => x.ID === userID) || false;
+
+  const onTakePart = async () => {
+    await dispatch(
+      takePart({ chalID: id, startDate: startDate, endDate: endDate }),
+    );
+    dispatch(requestChallenges());
   };
 
-  //<AppLink to={`${AppRoutes.Challenge}/cdskjclwk`}>
   return (
     <div className={classNames(cls.ChallengeCard, {}, [className as string])}>
-      <Text title={title} />
+      <AppLink to={`${AppRoutes.Challenge}/${id}`}>
+        {' '}
+        <Text title={title} />
+      </AppLink>
+
       <Text text={description} />
-      <div className={cls.participants}>
+      {/* <div className={cls.participants}>
         {participants.map((p) => {
           return <span>{p.nickname}</span>;
         })}
-      </div>
-      <Button theme={ButtonTheme.OUTLINE} onClick={onTakePart}>
-        Take Part!
-      </Button>
+      </div> */}
+      {isParticipant ? (
+        <Button theme={ButtonTheme.OUTLINE_GREEN}>{t('participant')}</Button>
+      ) : (
+        <Button theme={ButtonTheme.OUTLINE} onClick={onTakePart}>
+          {t('takePart')}
+        </Button>
+      )}
     </div>
   );
 };

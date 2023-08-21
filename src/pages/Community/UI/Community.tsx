@@ -16,6 +16,7 @@ import { useSelector } from 'react-redux';
 import Text, { TextAlign, TextSize } from 'shared/UI/Text/Text';
 import AppLink from 'shared/UI/AppLink/AppLink';
 import { AppRoutes } from 'shared/config/routesConfig/routesConfig';
+import { useTranslation } from 'react-i18next';
 
 interface CommunityProps {
   className?: string;
@@ -25,6 +26,7 @@ const Community: React.FC<CommunityProps> = ({ className }) => {
   const [isVisible, setVisibility] = useState(false);
   const groups = useSelector(getCommunityData);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('SingleGroupPage');
 
   const onCloseModal = useCallback(() => {
     setVisibility(false);
@@ -35,10 +37,11 @@ const Community: React.FC<CommunityProps> = ({ className }) => {
 
   useEffect(() => {
     dispatch(requestAllGroups());
-  }, [dispatch, groups]);
+  }, [dispatch]);
 
   const onCreateGroup = async () => {
     await dispatch(createGroup());
+    dispatch(requestAllGroups());
   };
 
   return (
@@ -54,15 +57,19 @@ const Community: React.FC<CommunityProps> = ({ className }) => {
         {groups?.map((group: PublicScheme) => {
           return (
             <AppLink to={`${AppRoutes.SingleGroup}/${group.id}`}>
-              {' '}
               <div className={cls.group}>
-                <Text title={group.title} align={TextAlign.Center} />
-
                 <img src={group.posterLink} className={cls.pic} />
 
-                <Button className={cls.button} theme={ButtonTheme.OUTLINE}>
+                <Text title={group.title} align={TextAlign.Center} />
+
+                <span>
+                  {t('subscribers')}: {group.members.length}
+                </span>
+
+                <Text text={group.description} align={TextAlign.Center} />
+                {/* <Button className={cls.button} theme={ButtonTheme.OUTLINE}>
                   Become a member
-                </Button>
+                </Button> */}
               </div>
             </AppLink>
           );
@@ -70,7 +77,7 @@ const Community: React.FC<CommunityProps> = ({ className }) => {
       </div>
 
       <Button theme={ButtonTheme.OUTLINE} onClick={onOpenModal}>
-        Start Community
+        {t('startCommunity')}
       </Button>
     </div>
   );
