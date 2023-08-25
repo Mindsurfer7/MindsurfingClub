@@ -25,6 +25,7 @@ import { CommunitiesScheme } from 'entities/Community';
 import { ArticleDetailsCommentsScheme } from 'pages/ArticleDetails/model/types/ArticleDetailsCommentsSceme';
 import { AddCommentScheme } from 'features/AddComment';
 import { ChallengePageScheme } from 'pages/ChallengePage';
+import { ChatScheme } from 'entities/Chat';
 
 export interface StateScheme {
   loginForm?: LoginScheme;
@@ -40,6 +41,7 @@ export interface StateScheme {
   GoogleProfile: GoogleProfileScheme;
   GoogleLogin: GoogleLoginScheme;
   user: UserScheme;
+  Chat?: ChatScheme;
   GPT: GPTscheme;
 }
 

@@ -3,6 +3,7 @@ import { PublicScheme } from './types/CommunityScheme';
 import {
   getCommunityData,
   getSinglePublicData,
+  getClubsAreLoading,
 } from './model/selectors/getCommunityData';
 import { requestAllGroups } from './model/services/requestAllGroups';
 import { createGroup } from './model/services/createGroup';
@@ -28,4 +29,5 @@ export {
   getCommunityData,
   requestCommunityByID,
   getSinglePublicData,
+  getClubsAreLoading,
 };

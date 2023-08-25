@@ -14,7 +14,7 @@ const initialState: ChallengePageScheme = {
     startDate: '',
     endDate: '',
     executionType: 'once',
-    points: 9,
+    points: 10,
     participants: [],
   },
   error: '',
@@ -35,6 +35,8 @@ export const ChallengePageSlice = createSlice({
       })
       .addCase(requestChallengeByID.fulfilled, (state, action) => {
         state.isLoading = false;
+        console.log('geeeeeeeeeeeezzzzzz');
+
         state.challengeData = action.payload;
       })
       .addCase(requestChallengeByID.rejected, (state, action) => {

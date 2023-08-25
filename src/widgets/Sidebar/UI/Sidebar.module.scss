@@ -7,17 +7,17 @@
   margin-left: 5px;
   border-radius: 5px;
   position: relative;
-  display: flex; /* Add this */
-  flex-direction: column; /* Add this */
+  display: flex;
+  flex-direction: column;
 
   @media (max-width: 767px) {
-    width: 100%; /* Update width */
-    height: auto; /* Update height */
-    position: fixed; /* Fix position */
-    bottom: 0; /* Place at the bottom */
-    left: 0; /* Align to the left */
-    margin: 0; /* Remove margins */
-    border-radius: 0; /* Remove border radius */
+    width: 100%;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    border-radius: 0;
     z-index: 1000;
     background: transparent;
   }
@@ -32,6 +32,10 @@
 .expanded {
   background: var(--inverted-bg-color);
   align-items: center;
+}
+
+.SidebarItem {
+  width: 100%;
 }
 
 .switchers {
@@ -59,12 +63,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 100%;
 
   @media (max-width: 767px) {
     display: flex;
   }
 }
 .link {
+  width: 100%;
   margin-top: 10px;
   opacity: 1;
 }
@@ -74,11 +80,9 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  background: var(--inverted-bg-color); // rebeccapurple;
+  // background: var(--inverted-bg-color); // rebeccapurple;
 }
-.element:hover {
-  background: var(--sidebar-button);
-}
+
 .linkWrapper {
   width: 100%;
 
@@ -132,11 +136,13 @@
   }
 
   .link {
+    width: 100%;
     opacity: 0;
     width: 0;
     transition: 0.3s;
   }
   .links {
+    width: 100%;
     @media (max-width: 767px) {
       width: 40px;
     }

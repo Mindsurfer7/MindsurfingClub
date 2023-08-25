@@ -35,12 +35,12 @@ export const setChallengeIsDone = createAsyncThunk<
       const isDoneArray = participants[participantIndex].isDoneArray;
       const userPoints = participants[participantIndex].points;
 
-      const currentDate = new Date(); // Get the current date and time
+      const currentDate = new Date();
       const year = currentDate.getFullYear();
       const month = currentDate.getMonth();
       const day = currentDate.getDate();
 
-      const formattedToday = new Date(year, month, day); // Create a Date object for today
+      const formattedToday = new Date(year, month, day);
 
       const isDoneIndex = isDoneArray.findIndex(
         (isDoneObj: isDoneObject) =>

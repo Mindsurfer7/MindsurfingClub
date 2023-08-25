@@ -1,0 +1,45 @@
+.wallWrapper {
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  //   width: 1000px;
+  //   height: 700px;
+  width: 100%;
+}
+.content {
+}
+
+.send {
+  margin-top: auto;
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  padding: 10px;
+  // border: 2px solid rgb(112, 101, 101);
+  background: var(--inverted-bg-color);
+  border-radius: 5px;
+  position: sticky;
+  bottom: 0;
+  align-items: center;
+}
+.textarea {
+  flex: 1;
+  width: 100%;
+}
+
+.sendBtn {
+  width: 60px;
+  height: 30px;
+
+  cursor: pointer;
+  transition: background-color 0.1s, box-shadow 0.1s, transform 0.1s;
+
+  &:hover {
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: translateY(2px);
+  }
+}

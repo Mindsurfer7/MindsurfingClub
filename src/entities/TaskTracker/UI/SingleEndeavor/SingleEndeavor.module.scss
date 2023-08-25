@@ -42,13 +42,18 @@
   border: 1px solid black;
   border-radius: 4px;
   font-weight: 900;
-
   transition: width 0.2s, height 0.2s, transform 0.1s, fill 0.2s;
-}
 
-.xIcon:hover {
-  color: white;
-  border: 1px solid rgb(255, 255, 255);
+  &:hover {
+    color: rgb(236, 4, 4);
+    border: 1px solid rgb(238, 6, 6);
+  }
+
+  &:active {
+    width: 25px;
+    height: 25px;
+    transform: translate(2px, 2px);
+  }
 }
 
 .xIcon:active {
@@ -76,7 +81,7 @@
   &:active {
     width: 25px;
     height: 25px;
-    transform: translate(5px, 5px);
+    transform: translate(2px, 2px);
   }
 }
 

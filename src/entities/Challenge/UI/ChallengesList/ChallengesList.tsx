@@ -27,13 +27,7 @@ const ChallengesList: React.FC<ChallengesListProps> = ({ className }) => {
     dispatch(getChallengesByUserID());
   }, [dispatch]);
 
-  const onLoadChallenges = () => {
-    dispatch(getChallengesByUserID());
-  };
-
   const onShowDashboard = (id: string) => {
-    console.log(id);
-
     setDashboardID(id);
     setShowDashboard(true);
   };

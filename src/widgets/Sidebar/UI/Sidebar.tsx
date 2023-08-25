@@ -4,8 +4,9 @@ import cls from './Sidebar.module.scss';
 import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
 import LangSwitcher from 'widgets/LangSwitcher/LangSwitcher';
 import Button, { ButtonSize, ButtonTheme } from 'shared/UI/Button/Button';
-import { SidebarItemsList } from '../model/items';
 import SidebarItem from './SidebarItem/SidebarItem';
+import { useSelector } from 'react-redux';
+import { getSideBarItems } from '../model/selectors/getSidebarItems';
 
 interface SidebarProps {
   className?: string;
@@ -13,6 +14,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
   const [collapse, setCollapse] = useState(true);
+  const SidebarItemsList = useSelector(getSideBarItems);
 
   const onSwitch = () => {
     setCollapse((prev) => !prev);
@@ -30,7 +32,12 @@ const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
       <div className={cls.links}>
         <div className={cls.linkWrapper}>
           {SidebarItemsList.map((item) => (
-            <SidebarItem collapse={collapse} item={item} key={item.text} />
+            <SidebarItem
+              className={cls.SidebarItem}
+              collapse={collapse}
+              item={item}
+              key={item.text}
+            />
           ))}
         </div>
       </div>

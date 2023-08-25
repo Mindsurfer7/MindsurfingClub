@@ -54,7 +54,7 @@ const TaskInfoDisplay: React.FC<TaskInfoDisplayProps> = (props) => {
           <Text title={title} text={description} />
         </div>
         <div className={cls.tags}>
-          Тэги:
+          Тэги:{' '}
           {tags?.map((t) => (
             <span>{t + ', '}</span>
           ))}

@@ -1,4 +1,4 @@
-import { Challenge } from 'entities/Challenge/';
+import { Challenge, setChallengeData } from 'entities/Challenge/';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'App/providers/StoreProvider';
 import { doc, getDoc } from 'firebase/firestore';
@@ -15,10 +15,21 @@ export const requestChallengeByID = createAsyncThunk<
 
   try {
     const challenge = await getDoc(challengeDocRef);
-    console.log(challenge.data());
+    const challengeData = challenge.data();
 
-    return challenge.data();
+    thunkAPI.dispatch(
+      //@ts-ignore
+      setChallengeData({
+        ...challengeData,
+        id: challenge.id,
+      }),
+    );
+
+    return {
+      ...challengeData,
+      id: challenge.id,
+    };
   } catch (error) {
-    console.error('Error isDone value updating', error);
+    console.error('Error requesting challenge by ID', error);
   }
 });

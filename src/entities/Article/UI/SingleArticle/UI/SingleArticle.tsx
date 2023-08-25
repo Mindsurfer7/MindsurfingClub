@@ -15,8 +15,7 @@ import {
   getArticleIsLoading,
 } from 'entities/Article/model/selectors/getArticleData';
 import Skeleton from 'shared/UI/Skeleton/Skeleton';
-//@ts-ignore
-import { Avatar } from 'shared/ui/Avatar/Avatar';
+import { Avatar } from 'shared/UI/Avatar/Avatar';
 import Text, { TextSize } from 'shared/UI/Text/Text';
 import EyeIcon from 'shared/assets/icons/eye-20-20.svg';
 import CalendarIcon from 'shared/assets/icons/calendar-20-20.svg';

@@ -3,6 +3,9 @@ import { StateScheme } from 'App/providers/StoreProvider';
 export const getCommunityData = (state: StateScheme) => {
   return state.Community.groups;
 };
+export const getClubsAreLoading = (state: StateScheme) => {
+  return state.Community.isLoading;
+};
 export const getSinglePublicData = (state: StateScheme) => {
   return state.Community.community;
 };

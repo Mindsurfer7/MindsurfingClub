@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './PersonalChallengeDashboard.module.scss';
 import { Challenge } from 'entities/Challenge/types/ChallengeScheme';
@@ -7,6 +7,13 @@ import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { setChallengeIsDone } from 'entities/Challenge/model/services/setChallengeIsDone';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { requestChallengeByID } from 'pages/ChallengePage';
+import { useSelector } from 'react-redux';
+import { getChallengeData } from 'entities/Challenge/model/selectors/getChallengeData';
+import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
+import { checkIsDoneValue } from 'shared/lib/checkIsDoneValue/checkIsDoneValue';
+import { useTranslation } from 'react-i18next';
 
 interface PersonalChallengeDashboardProps {
   className?: string;
@@ -16,16 +23,30 @@ interface PersonalChallengeDashboardProps {
 
 const PersonalChallengeDashboard: React.FC<PersonalChallengeDashboardProps> = ({
   className,
-  challenges,
   ID,
 }) => {
   const dispatch = useAppDispatch();
-  const [isDone, setIsDone] = useState(false); //по факту над делать запрос на сервак и искать конкретное значение по дате
-  const theChellenge = challenges.find((x) => x.id === ID);
+  const theChellenge = useSelector(getChallengeData);
+  const [isDoneTodayValue, setIsDoneTodayValue] = useState(false);
+  const userID = useSelector(getGoogleID);
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (theChellenge && userID) {
+      setIsDoneTodayValue(checkIsDoneValue(theChellenge, userID));
+    }
+  }, [theChellenge, userID]);
+
+  useEffect(() => {
+    dispatch(requestChallengeByID(ID));
+  }, [dispatch, ID]);
+
   const onDone = async () => {
     if (theChellenge) {
       await dispatch(setChallengeIsDone(theChellenge.id));
-      setIsDone(true);
+      dispatch(requestChallengeByID(ID));
+
       toast.success(`Ежедневный челлендж выполнен!`, {
         position: 'top-right',
         autoClose: 3000,
@@ -38,18 +59,31 @@ const PersonalChallengeDashboard: React.FC<PersonalChallengeDashboardProps> = ({
       });
     }
   };
+  const onChallengeLinkClick = () => {
+    navigate(
+      `/communities/SingleGroup/${theChellenge.communityID}/Challenge/${theChellenge.id}`,
+    );
+  };
+
   return (
     <div
       className={classNames(cls.PersonalChallengeDashboard, {}, [
         className as string,
       ])}
     >
+      <Button
+        onClick={onChallengeLinkClick}
+        theme={ButtonTheme.OUTLINE}
+        className={cls.chalLinkBTN}
+      >
+        {t('Страница Испытания')}
+      </Button>
       <Text title={theChellenge?.title} />
       <Text text={theChellenge?.description} />
       <Text text={'Начало: ' + theChellenge?.startDate} />
       <Text text={'Конец: ' + theChellenge?.endDate} />
 
-      {!isDone ? (
+      {!isDoneTodayValue ? (
         <Button onClick={onDone} theme={ButtonTheme.OUTLINE}>
           Я Выполнил!
         </Button>

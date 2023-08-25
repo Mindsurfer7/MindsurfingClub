@@ -1,4 +1,5 @@
 {
+  "Back to list": "",
   "Day": "",
   "IsDone": "",
   "Leaderboard": "",
@@ -31,6 +32,7 @@
   "points": "",
   "psychotherapist": "",
   "psychotherapistTyping": "",
+  "say hello to your community": "",
   "send": "",
   "startCommunity": "",
   "startFirst": "",
@@ -46,7 +48,16 @@
     "startGaming": "",
     "title": ""
   },
+  "write some useful information": "",
   "youAreMember": "",
+  "Страница Испытания": "",
   "Укажите валюту": "",
-  "Укажите страну": ""
+  "Укажите страну": "",
+  "Читать далее": {
+    "": {
+      "": {
+        "": ""
+      }
+    }
+  }
 }

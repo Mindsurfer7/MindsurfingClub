@@ -23,6 +23,7 @@ import Input from 'shared/UI/Input/Input';
 import { v4 } from 'uuid';
 
 import { getAllTags } from 'entities/Player/model/selectors/getPlayerData';
+import { useEnterPress } from 'shared/lib/hooks/useEnterPress';
 
 interface TaskCreatorProps {
   className?: string;
@@ -42,6 +43,8 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
   const allTags = useSelector(getAllTags);
   const tags = useSelector(getTags);
   const diffState = useSelector(getDifficulty);
+  const [inputValue, setInputValue] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
 
   const isDifficultySelected = (
     buttonDifficulty: number,
@@ -73,8 +76,6 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
     onClose?.();
   };
 
-  const [inputValue, setInputValue] = useState('');
-
   const handleInputChange = (e: any) => {
     setInputValue(e.target.value);
   };
@@ -88,8 +89,11 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
     if (e.key === 'Enter') {
       handleTagAdd();
       setInputValue('');
-      console.log(tags);
     }
+  };
+
+  const handleToggleChange = () => {
+    setIsChecked(!isChecked);
   };
 
   return (
@@ -137,12 +141,32 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
         </Button>
       </div>
       <div className={cls.description}>
-        <input
-          value={trackerData.title}
-          placeholder={'Введите название'}
-          onChange={onChangeHandler}
-          className={cls.input}
-        />
+        <div className={cls.titleWrapper}>
+          <input
+            value={trackerData.title}
+            placeholder={'Введите название'}
+            onChange={onChangeHandler}
+            className={cls.input}
+          />
+          <label className={cls.switch}>
+            <input
+              type="checkbox"
+              checked={isChecked}
+              onChange={handleToggleChange}
+            />
+            <span className={cls.sliderRound}></span>
+          </label>
+        </div>
+        {isChecked && (
+          <div className={cls.subtasks}>
+            <input
+              // value={trackerData.title}
+              placeholder={'Подзадача'}
+              // onChange={onChangeHandler}
+              className={cls.input}
+            />
+          </div>
+        )}
         <Textarea
           placeholder={'Введите описание привычки и мотивацию для привычки'}
           value={trackerData.description}

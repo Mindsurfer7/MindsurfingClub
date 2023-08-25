@@ -1,7 +1,7 @@
 import React from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './CommentCard.module.scss';
-import { Avatar } from 'shared/ui/Avatar/Avatar';
+import { Avatar } from 'shared/UI/Avatar/Avatar';
 import Text from 'shared/UI/Text/Text';
 import { CommentType } from 'entities/Comment/model/types/comment';
 import Skeleton from 'shared/UI/Skeleton/Skeleton';

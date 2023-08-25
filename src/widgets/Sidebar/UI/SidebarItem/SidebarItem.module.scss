@@ -1,3 +1,7 @@
+.SidebarItem {
+  width: 100%;
+}
+
 .links {
   margin-top: 20px;
   display: flex;
@@ -17,14 +21,14 @@
   align-items: center;
   justify-content: center;
   background: var(--inverted-bg-color); // rebeccapurple;
+
+  &:hover {
+    background: var(--sidebar-button);
+  }
 }
-.element:hover {
-  background: var(--sidebar-button);
-}
+
 .linkWrapper {
   width: 100%;
-}
-.linkWrapper:hover {
 }
 
 .collapseBtn {

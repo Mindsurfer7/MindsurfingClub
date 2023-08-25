@@ -4,10 +4,11 @@ import cls from './SidebarItem.module.scss';
 import { NavLink } from 'react-router-dom';
 import AppLink, { AppLinkTheme } from 'shared/UI/AppLink/AppLink';
 import { RoutePath } from 'shared/config/routesConfig/routesConfig';
-import { SidebarItemType } from 'widgets/Sidebar/model/items';
 import { useTranslation } from 'react-i18next';
+import { SidebarItemType } from 'widgets/Sidebar/model/types/sidebar';
 
 interface SidebarItemProps {
+  className?: string;
   item: SidebarItemType;
   collapse: boolean;
 }
@@ -15,7 +16,7 @@ interface SidebarItemProps {
 const SidebarItem: React.FC<SidebarItemProps> = memo(({ item, collapse }) => {
   const { t } = useTranslation();
   return (
-    <div className={cls.account}>
+    <div className={cls.SidebarItem}>
       <AppLink
         theme={AppLinkTheme.primary}
         to={item.path}

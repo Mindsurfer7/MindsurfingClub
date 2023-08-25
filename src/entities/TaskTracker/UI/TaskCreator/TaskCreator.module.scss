@@ -64,6 +64,18 @@
   }
 }
 
+.titleWrapper {
+  display: flex;
+  align-items: center;
+  //justify-content: center;
+}
+
+.input {
+  @media (max-width: 415px) {
+    width: 80%;
+  }
+}
+
 .textarea {
   margin: 4px 0px 4px 2px;
   color: white;
@@ -135,4 +147,54 @@
   display: flex;
 
   justify-content: space-between;
+}
+
+/////////////////////////////////// SWICTHER \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+
+  input[type='checkbox'] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .sliderRound {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.2s;
+    border-radius: 25px;
+
+    &:before {
+      position: absolute;
+      content: '';
+      height: 18px;
+      width: 18px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: 0.2s;
+      border-radius: 50%;
+    }
+  }
+
+  input:checked + .sliderRound {
+    background-color: #007bff;
+
+    &:before {
+      transform: translateX(25px);
+    }
+  }
+}
+
+.subtasks {
+  margin-top: 5px;
 }

@@ -1,7 +1,14 @@
+import { User } from 'entities/User';
+
 export enum ArticleBlockType {
   CODE = 'CODE',
   IMAGE = 'IMAGE',
   TEXT = 'TEXT',
+}
+
+export enum ArticleViewType {
+  Square = 'square',
+  Rectangle = 'rectangle',
 }
 
 export interface SingleArticleScheme {
@@ -45,6 +52,7 @@ export enum ArticleType {
 
 export interface Article {
   id: string;
+  user: User;
   title: string;
   subtitle: string;
   img: string;

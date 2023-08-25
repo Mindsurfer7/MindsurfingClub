@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createNewChallenge } from '../services/createNewChallenge';
-import { ChallengeScheme } from 'entities/Challenge/types/ChallengeScheme';
+import {
+  Challenge,
+  ChallengeScheme,
+} from 'entities/Challenge/types/ChallengeScheme';
 import { requestChallenges } from '../services/requestChallenges';
 import { getChallengesByUserID } from '../services/getChellengesByUserID';
 
@@ -17,7 +20,7 @@ const initialState: ChallengeScheme = {
     startDate: '',
     endDate: '',
     executionType: 'once',
-    points: 9,
+    points: 10,
     participants: [],
   },
   error: '',
@@ -55,6 +58,9 @@ export const ChallengeSlice = createSlice({
       state.challengeData.endDate = '';
       state.challengeData.executionType = '';
       state.challengeData.points = 0;
+    },
+    setChallengeData: (state, action: PayloadAction<Challenge>) => {
+      state.challengeData = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -106,5 +112,6 @@ export const {
   setChallengeExecutionType,
   setChallengePoints,
   resetChangedFields,
+  setChallengeData,
 } = ChallengeSlice.actions;
 export const { reducer: ChallengeReducer } = ChallengeSlice;

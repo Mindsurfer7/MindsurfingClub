@@ -3,8 +3,8 @@ import * as webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { BuildOptions } from './types/config';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import ReactRefreshWebpachPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import DotenvWebpackPlugin from 'dotenv-webpack';
 import { InjectManifest } from 'workbox-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
@@ -73,13 +73,136 @@ export function buildPlugins({
           from: path.resolve(publicFolderPath, 'apple-splash-1125-2436.jpg'),
           to: '',
         },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-2048-2732.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-2732-2048.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-1668-2388.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-2388-1668.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-1536-2048.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-2048-1536.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-1668-2224.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-2224-1668.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-1620-2160.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-2160-1620.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-1290-2796.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-2796-1290.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-1179-2556.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-2556-1179.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-1284-2778.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-2778-1284.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-1170-2532.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-2532-1170.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-2436-1125.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-1242-2688.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-2688-1242.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-828-1792.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-1792-828.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-1242-2208.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-2208-1242.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-750-1334.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-1334-750.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-640-1136.jpg'),
+          to: '',
+        },
+        {
+          from: path.resolve(publicFolderPath, 'apple-splash-1136-640.jpg'),
+          to: '',
+        },
+        { from: path.resolve(publicFolderPath, 'mstile-icon-128.png'), to: '' },
+        { from: path.resolve(publicFolderPath, 'mstile-icon-270.png'), to: '' },
+        { from: path.resolve(publicFolderPath, 'mstile-icon-558.png'), to: '' },
+        {
+          from: path.resolve(publicFolderPath, 'mstile-icon-558-270.png'),
+          to: '',
+        },
       ],
     }),
   ];
 
   if (isDev) {
     plugins.push(new webpack.HotModuleReplacementPlugin());
-    plugins.push(new ReactRefreshWebpachPlugin());
+    plugins.push(new ReactRefreshWebpackPlugin());
 
     // plugins.push(
     //   new BundleAnalyzerPlugin({

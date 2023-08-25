@@ -9,6 +9,8 @@ import { takePart } from './model/services/takePart';
 import { createNewChallenge } from './model/services/createNewChallenge';
 import ChallengeCard from './UI/ChallengeCard/ChallengeCard';
 import ChallengesList from './UI/ChallengesList/ChallengesList';
+import { setChallengeData } from './model/slice/ChallengeSlice';
+
 import {
   setShowChallenges,
   setChallengeTitle,
@@ -37,4 +39,5 @@ export {
   Participant,
   Challenge,
   setChallengeIsDone,
+  setChallengeData,
 };

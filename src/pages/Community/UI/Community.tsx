@@ -8,6 +8,7 @@ import {
   GroupCreatorModal,
   PublicScheme,
   createGroup,
+  getClubsAreLoading,
   getCommunityData,
   requestAllGroups,
 } from 'entities/Community';
@@ -17,6 +18,10 @@ import Text, { TextAlign, TextSize } from 'shared/UI/Text/Text';
 import AppLink from 'shared/UI/AppLink/AppLink';
 import { AppRoutes } from 'shared/config/routesConfig/routesConfig';
 import { useTranslation } from 'react-i18next';
+import { Card } from 'shared/UI/Card/Card';
+import Skeleton from 'shared/UI/Skeleton/Skeleton';
+import ClubCardSkeleton from './ClubCardSkeleton';
+import { useNavigate } from 'react-router-dom';
 
 interface CommunityProps {
   className?: string;
@@ -25,7 +30,9 @@ interface CommunityProps {
 const Community: React.FC<CommunityProps> = ({ className }) => {
   const [isVisible, setVisibility] = useState(false);
   const groups = useSelector(getCommunityData);
+  const isLoading = useSelector(getClubsAreLoading);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { t } = useTranslation('SingleGroupPage');
 
   const onCloseModal = useCallback(() => {
@@ -44,6 +51,13 @@ const Community: React.FC<CommunityProps> = ({ className }) => {
     dispatch(requestAllGroups());
   };
 
+  const getSkeletons = () =>
+    new Array(6).fill(0).map((item, index) => <ClubCardSkeleton key={index} />);
+
+  if (isLoading) {
+    return <div className={cls.Publics}>{getSkeletons()};</div>;
+  }
+
   return (
     <div className={classNames(cls.Community, {}, [className as string])}>
       {isVisible && (
@@ -55,23 +69,38 @@ const Community: React.FC<CommunityProps> = ({ className }) => {
       )}
       <div className={cls.Publics}>
         {groups?.map((group: PublicScheme) => {
+          const onOpenClub = () => {
+            navigate(`${AppRoutes.SingleGroup}/${group.id}`);
+          };
+
           return (
-            <AppLink to={`${AppRoutes.SingleGroup}/${group.id}`}>
-              <div className={cls.group}>
-                <img src={group.posterLink} className={cls.pic} />
+            <div className={cls.group}>
+              <Card className={cls.card} onClick={onOpenClub}>
+                <div className={cls.imageWrapper}>
+                  <img src={group.posterLink} className={cls.img} />
+                </div>
 
-                <Text title={group.title} align={TextAlign.Center} />
-
-                <span>
+                <Text
+                  title={group.title}
+                  align={TextAlign.Center}
+                  className={cls.title}
+                />
+                <div className={cls.infoWrapper}>
+                  <Text
+                    text={group.description}
+                    align={TextAlign.Center}
+                    className={cls.description}
+                  />
+                </div>
+                <div className={cls.subs}>
                   {t('subscribers')}: {group.members.length}
-                </span>
+                </div>
 
-                <Text text={group.description} align={TextAlign.Center} />
                 {/* <Button className={cls.button} theme={ButtonTheme.OUTLINE}>
-                  Become a member
-                </Button> */}
-              </div>
-            </AppLink>
+  Become a member
+</Button> */}
+              </Card>
+            </div>
           );
         })}
       </div>

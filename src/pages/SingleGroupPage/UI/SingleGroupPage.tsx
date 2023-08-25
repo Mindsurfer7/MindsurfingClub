@@ -23,6 +23,8 @@ import {
   getGoogleProfile,
 } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import { useTranslation } from 'react-i18next';
+import { Wall } from 'entities/Wall';
+import { WebChat } from 'entities/Chat';
 
 interface SingleGroupPageProps {
   className?: string;
@@ -90,8 +92,13 @@ const SingleGroupPage: React.FC<SingleGroupPageProps> = ({ className }) => {
           </div>
 
           <Text title={community?.description} />
+          <WebChat
+            chatName={community?.title ? community?.title : 'Club Chat'}
+          />
         </div>
       </div>
+
+      <Wall />
 
       <div className={cls.challenges}>
         <Text title={t('communityChallenges')} align={TextAlign.Center} />

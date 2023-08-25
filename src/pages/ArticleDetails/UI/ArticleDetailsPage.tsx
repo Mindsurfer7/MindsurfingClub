@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ArticleDetailsPage.module.scss';
 import SingleArticle from 'entities/Article/UI/SingleArticle/UI/SingleArticle';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Text from 'shared/UI/Text/Text';
 import { CommentList } from 'entities/Comment';
 import {
@@ -20,6 +20,9 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { getCommentsIsLoading } from '../model/selectors/getCommentsData';
 import AddCommentForm from 'features/AddComment/UI/AddCommentForm';
 import { addCommentForArticle } from '../model/services/addCommentForArticle';
+import Button, { ButtonTheme } from 'shared/UI/Button/Button';
+import { useTranslation } from 'react-i18next';
+import { RoutePath } from 'shared/config/routesConfig/routesConfig';
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -36,6 +39,8 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
   const comments = useSelector(getArticleComments.selectAll);
   const commentsAreLoading = useSelector(getCommentsIsLoading);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
 
   useInitialEffect(() => {
     console.log(articleID);
@@ -49,6 +54,10 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
     },
     [dispatch],
   );
+
+  const onBackToList = useCallback(() => {
+    navigate(RoutePath.articles);
+  }, [navigate]);
 
   if (!articleID) {
     return (
@@ -69,6 +78,9 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
           className as string,
         ])}
       >
+        <Button onClick={onBackToList} theme={ButtonTheme.OUTLINE}>
+          {t('Back to list')}
+        </Button>
         <SingleArticle ID={articleID} />
         <AddCommentForm onSendComment={onCommentSend} />
         <Text title="Comments" />
