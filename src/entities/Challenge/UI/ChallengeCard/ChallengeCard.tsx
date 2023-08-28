@@ -59,13 +59,6 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({
         {' '}
         <Text title={title} />
       </AppLink>
-
-      <Text text={description} />
-      {/* <div className={cls.participants}>
-        {participants.map((p) => {
-          return <span>{p.nickname}</span>;
-        })}
-      </div> */}
       {isParticipant ? (
         <Button theme={ButtonTheme.OUTLINE_GREEN}>{t('participant')}</Button>
       ) : (
@@ -73,6 +66,13 @@ const ChallengeCard: React.FC<ChallengeCardProps> = ({
           {t('takePart')}
         </Button>
       )}
+
+      <Text text={description} className={cls.description} />
+      {/* <div className={cls.participants}>
+        {participants.map((p) => {
+          return <span>{p.nickname}</span>;
+        })}
+      </div> */}
     </div>
   );
 };

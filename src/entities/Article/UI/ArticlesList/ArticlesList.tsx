@@ -22,7 +22,7 @@ const ArticlesList: React.FC<ArticlesListProps> = ({
   className,
   articles,
   isLoading,
-  view = ArticleViewType.Rectangle,
+  view = ArticleViewType.Square,
 }) => {
   const renderArticle = (article: Article) => (
     <ArticleItem

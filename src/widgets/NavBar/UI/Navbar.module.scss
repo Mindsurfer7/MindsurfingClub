@@ -9,6 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
   // z-index: 10;
 
   @media (max-width: 1200px) {
@@ -16,11 +17,41 @@
   }
 
   @media (max-width: 767px) {
-    min-width: 400px;
+    // min-width: 400px;
+    margin: 0;
+    border-radius: 2px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    height: 50px;
+    width: 375px;
   }
   @media (max-width: 415px) {
-    min-width: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    height: 50px;
+    width: 100%;
+    // background-color: red;
   }
+
+  @media screen and (display-mode: standalone) {
+    padding-top: 40px;
+    justify-content: initial;
+    height: 80px;
+
+    // position: fixed;
+    // bottom: 7px;
+  }
+  // @media (max-width: 415px) {
+  //   min-width: 10px;
+  // }
 }
 
 .title {

@@ -51,7 +51,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
           size={ButtonSize.XL}
           square={true}
         >
-          {collapse ? '>' : '<'}
+          {collapse ? '<' : '>'}
         </Button>
         <ThemeSwitcher className={cls.themeSwitcher} />
         <LangSwitcher short={collapse ? true : false} />

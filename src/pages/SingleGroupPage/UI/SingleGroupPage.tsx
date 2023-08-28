@@ -76,10 +76,10 @@ const SingleGroupPage: React.FC<SingleGroupPageProps> = ({ className }) => {
         />
       )}
       <div className={cls.PublicWrapper}>
-        <Text title={community?.title} align={TextAlign.Center} />
         <div className={cls.groupAbout}>
           <div className={cls.x}>
             <img src={community?.posterLink} className={cls.pic} />
+            <Text title={community?.title} align={TextAlign.Center} />
             {isMember ? (
               <Button theme={ButtonTheme.OUTLINE_GREEN}>
                 {t('youAreMember')}
@@ -89,16 +89,15 @@ const SingleGroupPage: React.FC<SingleGroupPageProps> = ({ className }) => {
                 {t('becomeMember')}
               </Button>
             )}
+            <Text title={community?.description} />
           </div>
-
-          <Text title={community?.description} />
-          <WebChat
-            chatName={community?.title ? community?.title : 'Club Chat'}
-          />
         </div>
-      </div>
 
-      <Wall />
+        <WebChat chatName={community?.title ? community?.title : 'Club Chat'} />
+      </div>
+      <div className={cls.Wall}>
+        <Wall />
+      </div>
 
       <div className={cls.challenges}>
         <Text title={t('communityChallenges')} align={TextAlign.Center} />

@@ -1,4 +1,4 @@
-.Rectangle {
+.rectangle {
   .views {
     margin-left: auto;
   }
@@ -21,7 +21,7 @@
   }
 
   .img {
-    width: 100%;
+    width: 10%;
     max-height: 250px;
     object-fit: cover;
     margin: 16px 0;
@@ -39,7 +39,7 @@
   }
 }
 
-.Square {
+.square {
   width: 230px;
   transition: 0.2s;
   cursor: pointer;
@@ -64,12 +64,13 @@
     width: 200px;
     height: 200px;
     position: relative;
-  }
-
-  .img {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
+    img {
+      width: 100%;
+      height: 100%;
+      // width: 200px;
+      // height: 200px;
+      object-fit: cover;
+    }
   }
 
   .infoWrapper {

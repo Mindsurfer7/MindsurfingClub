@@ -2,7 +2,7 @@
   height: calc(100vh - var(--navbar--height));
   width: var(--sidebar-width);
   background: var(--inverted-bg-color);
-  transition: width 0.5s;
+  transition: width 0.5s, height 0.5s;
   margin-top: 3px;
   margin-left: 5px;
   border-radius: 5px;
@@ -22,8 +22,7 @@
     background: transparent;
   }
   @media (max-width: 415px) {
-    width: 50%;
-    // background: transparent;
+    width: 100%;
     display: flex;
     border-radius: 7px;
   }
@@ -32,6 +31,7 @@
 .expanded {
   background: var(--inverted-bg-color);
   align-items: center;
+  transition: width 0.5s, height 0.5s;
 }
 
 .SidebarItem {
@@ -110,6 +110,7 @@
 .collapse {
   width: var(--sidebar-width-small);
   background: var(--inverted-bg-color);
+  transition: width 0.5s, height 0.5s;
 
   @media (max-width: 767px) {
     width: 40px;
@@ -118,13 +119,21 @@
   }
 
   @media (max-width: 415px) {
-    justify-content: center;
-    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    // justify-content: center;
+    // align-items: center;
+    position: absolute;
+    bottom: 0;
+    // background-color: red;
   }
 
   .switchers {
-    flex-direction: column;
-    justify-content: center;
+    display: flex;
+    color: var(--primary-color);
+    // flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 
     @media (max-width: 767px) {
@@ -133,6 +142,19 @@
   }
 
   @media (max-width: 415px) {
+    display: flex;
+    justify-content: space-between;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
+    width: 100%;
+    align-items: center;
+    height: 60px;
+    //min-height: 60px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
   }
 
   .link {

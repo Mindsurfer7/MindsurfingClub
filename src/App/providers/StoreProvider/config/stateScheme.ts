@@ -26,12 +26,14 @@ import { ArticleDetailsCommentsScheme } from 'pages/ArticleDetails/model/types/A
 import { AddCommentScheme } from 'features/AddComment';
 import { ChallengePageScheme } from 'pages/ChallengePage';
 import { ChatScheme } from 'entities/Chat';
+import { ArticlesPageScheme } from 'pages/ArticlesPage';
 
 export interface StateScheme {
   loginForm?: LoginScheme;
   profile?: ProfileScheme;
   Player: PlayerScheme;
   Article?: SingleArticleScheme;
+  ArticlesPage?: ArticlesPageScheme;
   ArticleComments?: ArticleDetailsCommentsScheme;
   AddComment?: AddCommentScheme;
   TaskTracker: TaskTrackerScheme;
