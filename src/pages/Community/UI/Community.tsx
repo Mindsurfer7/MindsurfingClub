@@ -22,6 +22,7 @@ import { Card } from 'shared/UI/Card/Card';
 import Skeleton from 'shared/UI/Skeleton/Skeleton';
 import ClubCardSkeleton from './ClubCardSkeleton';
 import { useNavigate } from 'react-router-dom';
+import { Page } from 'widgets/Page';
 
 interface CommunityProps {
   className?: string;
@@ -59,7 +60,7 @@ const Community: React.FC<CommunityProps> = ({ className }) => {
   }
 
   return (
-    <div className={classNames(cls.Community, {}, [className as string])}>
+    <Page className={classNames(cls.Community, {}, [className as string])}>
       {isVisible && (
         <GroupCreatorModal
           APIcallback={onCreateGroup}
@@ -108,7 +109,7 @@ const Community: React.FC<CommunityProps> = ({ className }) => {
       <Button theme={ButtonTheme.OUTLINE} onClick={onOpenModal}>
         {t('startCommunity')}
       </Button>
-    </div>
+    </Page>
   );
 };
 

@@ -4,7 +4,7 @@ import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import { getTaskTrackerData } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
-import { addNewTag } from './addNewTag';
+import { addNewTag } from '../addNewTag';
 
 export const createNewDaily = createAsyncThunk<any, void, ThunkConfig<any>>(
   'Player/createNewDaily',
@@ -18,6 +18,7 @@ export const createNewDaily = createAsyncThunk<any, void, ThunkConfig<any>>(
       id: trackerData.id,
       description: trackerData.description,
       difficulty: trackerData.difficulty,
+      subtasks: trackerData.subtasks,
       isDone: false,
       title: trackerData.title,
       tags: trackerData.tags,

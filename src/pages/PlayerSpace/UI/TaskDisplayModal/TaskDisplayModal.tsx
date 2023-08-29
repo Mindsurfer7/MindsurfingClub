@@ -10,6 +10,7 @@ import { setNewInitialState } from 'entities/TaskTracker';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { updateTaskData } from 'entities/Player';
 import { clearInputs } from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
+import { Subtask } from 'entities/TaskTracker/types/taskTracker';
 
 interface TaskCreatorModalProps {
   className?: string;
@@ -23,6 +24,7 @@ interface TaskCreatorModalProps {
   title: string;
   isDone: boolean;
   tags?: string[];
+  subtasks?: Subtask[];
   id: string;
 }
 
@@ -33,6 +35,7 @@ export const TaskDisplayModal: React.FC<TaskCreatorModalProps> = (props) => {
     title,
     description,
     difficulty,
+    subtasks,
     tags,
     taskType,
     isVisible,

@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { TaskCreatorModal } from '../TaskCreatorModal/TaskCreatorModal';
-import { createNewDaily } from 'entities/Player/model/services/createNewDaily';
+import { createNewDaily } from 'entities/Player/model/services/daily/createNewDaily';
 import { requestDailyz } from 'entities/Player/model/services/requestDailyz';
 import { removeDaily } from 'entities/Player/model/services/removeDaily';
 import SingleEndeavor from 'entities/TaskTracker/UI/SingleEndeavor/SingleEndeavor';
@@ -95,6 +95,7 @@ const DailyWrapper: React.FC<DailyWrapperProps> = ({ className }) => {
                   title={h.title}
                   taskType="daily"
                   isDone={h.isDone}
+                  subtasks={h.subtasks}
                   tags={h.tags}
                   onRemove={onRemoveDaily}
                   onRequest={onRequestDailyz}
@@ -112,6 +113,7 @@ const DailyWrapper: React.FC<DailyWrapperProps> = ({ className }) => {
                   title={h.title}
                   taskType="daily"
                   isDone={h.isDone}
+                  subtasks={h.subtasks}
                   tags={h.tags}
                   onRemove={onRemoveDaily}
                   onRequest={onRequestDailyz}

@@ -16,6 +16,7 @@ import {
   ReducersList,
 } from 'shared/lib/DynamicModuleLoader/DynamicModuleLoader';
 import { ChallengePageReducer } from '../model/slice/challengePageSlice';
+import { Page } from 'widgets/Page';
 
 interface ChallengePageProps {
   className?: string;
@@ -43,7 +44,9 @@ const ChallengePage: React.FC<ChallengePageProps> = ({ className }) => {
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-      <div className={classNames(cls.ChallengePage, {}, [className as string])}>
+      <Page
+        className={classNames(cls.ChallengePage, {}, [className as string])}
+      >
         <div className={cls.displayInfo}>
           <Text title={theChallenge?.title} />
           <span>
@@ -117,7 +120,7 @@ const ChallengePage: React.FC<ChallengePageProps> = ({ className }) => {
             })}
           </div>
         </div>
-      </div>
+      </Page>
     </DynamicModuleLoader>
   );
 };

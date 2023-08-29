@@ -20,6 +20,7 @@ import { v4 } from 'uuid';
 import { createNewDialog } from 'entities/GPT/model/services/createNewDialog';
 import { useTranslation } from 'react-i18next';
 import CustomInput from 'shared/UI/CustomInput/CustomInput';
+import { Page } from 'widgets/Page';
 
 interface PsyRoomProps {
   className?: string;
@@ -78,7 +79,7 @@ const PsyRoom: React.FC<PsyRoomProps> = memo(({ className }) => {
   };
 
   return (
-    <div className={cls.PsyRoom}>
+    <Page className={cls.PsyRoom}>
       <div className={cls.dialogsList}>
         {DialogsList.length > 0 &&
           DialogsList.map((dialogObject: any) => {
@@ -149,7 +150,7 @@ const PsyRoom: React.FC<PsyRoomProps> = memo(({ className }) => {
           </div>
         )}
       </div>
-    </div>
+    </Page>
   );
 });
 

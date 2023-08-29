@@ -10,7 +10,7 @@ export const getArtilcesPageLimit = (state: StateScheme) => {
   return state.ArticlesPage?.limit;
 };
 export const getArtilcesPageNum = (state: StateScheme) => {
-  return state.ArticlesPage?.page;
+  return state.ArticlesPage?.page || 1;
 };
 export const getArtilcesPageHasMore = (state: StateScheme) => {
   return state.ArticlesPage?.hasMore;

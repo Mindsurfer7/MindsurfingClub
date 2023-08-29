@@ -31,10 +31,10 @@ export const PageTitles = {
   [RoutePath[AppRoutes.Main]]: 'Main Page',
   [RoutePath[AppRoutes.Home]]: 'Home Page',
   [RoutePath[AppRoutes.About]]: 'About Us',
-  [RoutePath[AppRoutes.PsyRoom]]: 'GPT Psychotherapist',
+  [RoutePath[AppRoutes.PsyRoom]]: 'GPT Assistant',
   [RoutePath[AppRoutes.Profile]]: 'My Profile',
   [RoutePath[AppRoutes.PracticeCenter]]: '',
-  [RoutePath[AppRoutes.Conversation]]: 'GPT Psychotherapist',
+  [RoutePath[AppRoutes.Conversation]]: 'GPT Assistant',
   [RoutePath[AppRoutes.PlayerSpace]]: 'RPG Task Tracker',
   [RoutePath[AppRoutes.Challenge]]: 'Challenges',
   [RoutePath[AppRoutes.Community]]: 'Community',
@@ -90,7 +90,7 @@ export const NavBar = memo(({ className }: navprops) => {
   }, [username]);
 
   return (
-    <div className={classNames(cls.navbar, {}, [className as string])}>
+    <header className={classNames(cls.navbar, {}, [className as string])}>
       {isVisible && <LoginModal isVisible={isVisible} onClose={onCloseModal} />}
       {showNotify && <NotificationBar />}
       {
@@ -149,6 +149,6 @@ export const NavBar = memo(({ className }: navprops) => {
       {MiniModal2open && (
         <MiniModal setIsLogged={setMiniModal2open} onLogout={onGoogleLogout} />
       )}
-    </div>
+    </header>
   );
 });

@@ -1,6 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createNewHabit } from 'entities/Player/model/services/createNewHabit';
-import { TaskTrackerScheme } from 'entities/TaskTracker/types/taskTracker';
+import {
+  Subtask,
+  TaskTrackerScheme,
+} from 'entities/TaskTracker/types/taskTracker';
 
 const initialState: TaskTrackerScheme = {
   showCompleted: false,
@@ -19,6 +22,8 @@ const initialState: TaskTrackerScheme = {
   isLoading: false,
   title: '',
   isDone: false,
+  subtasks: [],
+  subtaskTitle: '',
   tags: [],
   id: '',
   error: '',
@@ -38,6 +43,19 @@ export const TaskTrackerSlice = createSlice({
     setTitle: (state, action: PayloadAction<string>) => {
       state.title = action.payload;
     },
+    setSubtaskTitle: (
+      state,
+      action: PayloadAction<{ value: string; index: number }>,
+    ) => {
+      const { value, index } = action.payload;
+
+      console.log('reducer' + value);
+      if (state.subtasks) {
+        const updatedSubtasks = [...state.subtasks];
+        updatedSubtasks[index].title = value;
+        state.subtasks = updatedSubtasks;
+      }
+    },
     setID: (state, action: PayloadAction<string>) => {
       state.id = action.payload;
     },
@@ -53,6 +71,9 @@ export const TaskTrackerSlice = createSlice({
     setShowCompleted: (state, action: PayloadAction<boolean>) => {
       state.showCompleted = action.payload;
     },
+    setSubtask: (state, action: PayloadAction<Subtask>) => {
+      state.subtasks?.push(action.payload);
+    },
 
     clearInputs: (state) => {
       state.difficulty = 1;
@@ -60,6 +81,7 @@ export const TaskTrackerSlice = createSlice({
       state.title = '';
       state.id = '';
       state.tags = [];
+      state.subtasks = [];
     },
     setNewInitialState: (
       state,
@@ -71,8 +93,6 @@ export const TaskTrackerSlice = createSlice({
         id: string;
       }>,
     ) => {
-      console.log(action.payload.tags);
-
       state.difficulty = action.payload.difficulty;
       state.description = action.payload.description;
       state.id = action.payload.id;
@@ -124,9 +144,11 @@ export const {
   setShowCompleted,
   setSelectedTag,
   clearSelectedTag,
+  setSubtaskTitle,
   setID,
   setTags,
   setTitle,
+  setSubtask,
   clearInputs,
   setNewInitialState,
   /////////////////////////////

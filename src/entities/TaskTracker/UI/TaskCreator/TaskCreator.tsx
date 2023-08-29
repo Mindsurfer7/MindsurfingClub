@@ -6,6 +6,8 @@ import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { useSelector } from 'react-redux';
 import {
   getDifficulty,
+  getSubtaskTitle,
+  getSubtasks,
   getTags,
   getTaskTrackerData,
 } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
@@ -15,15 +17,13 @@ import {
   setDescription,
   setDifficulty,
   setID,
+  setSubtask,
+  setSubtaskTitle,
   setTags,
   setTitle,
 } from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
-import Input from 'shared/UI/Input/Input';
-//@ts-ignore
 import { v4 } from 'uuid';
-
 import { getAllTags } from 'entities/Player/model/selectors/getPlayerData';
-import { useEnterPress } from 'shared/lib/hooks/useEnterPress';
 
 interface TaskCreatorProps {
   className?: string;
@@ -43,6 +43,7 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
   const allTags = useSelector(getAllTags);
   const tags = useSelector(getTags);
   const diffState = useSelector(getDifficulty);
+  const subtasks = useSelector(getSubtasks);
   const [inputValue, setInputValue] = useState('');
   const [isChecked, setIsChecked] = useState(false);
 
@@ -60,8 +61,21 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
     dispatch(setDescription(value));
   };
 
-  const onSetTitle = (value: string) => {
-    dispatch(setTitle(value));
+  const onSetSubtaskTitle = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number,
+  ) => {
+    dispatch(setSubtaskTitle({ value: e.target.value, index: index }));
+  };
+  const onSetSubtask = () => {
+    //value: string
+    const subtask = {
+      id: v4(),
+      title: '',
+      isDone: false,
+    };
+
+    dispatch(setSubtask(subtask));
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,6 +108,9 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
 
   const handleToggleChange = () => {
     setIsChecked(!isChecked);
+    if (subtasks?.length === 0) {
+      onSetSubtask();
+    }
   };
 
   return (
@@ -159,12 +176,21 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
         </div>
         {isChecked && (
           <div className={cls.subtasks}>
-            <input
-              // value={trackerData.title}
-              placeholder={'Подзадача'}
-              // onChange={onChangeHandler}
-              className={cls.input}
-            />
+            {subtasks?.map((sub, i) => {
+              return (
+                <div className={cls.sub}>
+                  <input
+                    value={sub.title}
+                    placeholder={'Подзадача'}
+                    onChange={(e) => onSetSubtaskTitle(e, i)}
+                    className={cls.input}
+                  />
+                  <Button onClick={onSetSubtask} className={cls.plusButton}>
+                    +
+                  </Button>
+                </div>
+              );
+            })}
           </div>
         )}
         <Textarea

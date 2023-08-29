@@ -1,3 +1,5 @@
+import { Subtask } from 'entities/TaskTracker/types/taskTracker';
+
 export interface PlayerData {
   UID: string;
   coins: number;
@@ -37,6 +39,7 @@ export type Daily = {
   description: string;
   difficulty: number;
   isDoneTimestamp: Date;
+  subtasks?: Subtask[];
   isDone: boolean;
   tags: string[];
   title: string;
@@ -48,6 +51,7 @@ export type Task = {
   description: string;
   difficulty: number; // Assuming the difficulty can be represented as a string
   isDone: boolean;
+  subtasks?: Subtask[];
   tags: string[]; // Array of tags
   title: string;
 };

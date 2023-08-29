@@ -25,6 +25,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { Wall } from 'entities/Wall';
 import { WebChat } from 'entities/Chat';
+import { Page } from 'widgets/Page';
 
 interface SingleGroupPageProps {
   className?: string;
@@ -66,7 +67,9 @@ const SingleGroupPage: React.FC<SingleGroupPageProps> = ({ className }) => {
   }, [dispatch, publicID]);
 
   return (
-    <div className={classNames(cls.SingleGroupPage, {}, [className as string])}>
+    <Page
+      className={classNames(cls.SingleGroupPage, {}, [className as string])}
+    >
       {isVisible && publicID && (
         <ChallengeCreatorModal
           communityID={publicID}
@@ -127,7 +130,7 @@ const SingleGroupPage: React.FC<SingleGroupPageProps> = ({ className }) => {
           })}
         </div>
       </div>
-    </div>
+    </Page>
   );
 };
 

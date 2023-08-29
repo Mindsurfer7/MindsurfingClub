@@ -25,6 +25,7 @@ import { Country } from 'entities/Country';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { useParams } from 'react-router-dom';
+import { Page } from 'widgets/Page';
 
 interface ProfilePageProps {
   className?: string;
@@ -94,7 +95,7 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-      <div className={classNames(cls.ProfilePage, {}, [className as string])}>
+      <Page className={classNames(cls.ProfilePage, {}, [className as string])}>
         <ProfilePageHeader />
         <ProfileCard
           onChangeUsername={onChangeUsername}
@@ -108,7 +109,7 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
           readonly={readonly}
           error={error}
         />
-      </div>
+      </Page>
     </DynamicModuleLoader>
   );
 });

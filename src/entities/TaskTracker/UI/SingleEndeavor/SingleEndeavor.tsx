@@ -16,6 +16,7 @@ import { TaskDisplayModal } from 'pages/PlayerSpace/UI/TaskDisplayModal/TaskDisp
 import { ToastContainer, toast } from 'react-toastify';
 import { rewardCoins } from 'entities/Player/model/services/InGameActions/rewardCoins';
 import { saveNotification } from 'entities/Player/model/services/InGameActions/saveNotification';
+import { Subtask } from 'entities/TaskTracker/types/taskTracker';
 
 interface SingleEndeavorProps {
   onRemove: (id: string) => Promise<void>;
@@ -24,6 +25,7 @@ interface SingleEndeavorProps {
   description: string;
   className?: string;
   title: string;
+  subtasks?: Subtask[];
   isDone: boolean;
   tags: string[];
   id: string;

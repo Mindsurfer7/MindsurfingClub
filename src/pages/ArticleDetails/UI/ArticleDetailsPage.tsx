@@ -23,6 +23,7 @@ import { addCommentForArticle } from '../model/services/addCommentForArticle';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { useTranslation } from 'react-i18next';
 import { RoutePath } from 'shared/config/routesConfig/routesConfig';
+import { Page } from 'widgets/Page';
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -73,7 +74,7 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-      <div
+      <Page
         className={classNames(cls.ArticleDetailsPage, {}, [
           className as string,
         ])}
@@ -85,7 +86,7 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
         <AddCommentForm onSendComment={onCommentSend} />
         <Text title="Comments" />
         <CommentList isLoading={commentsAreLoading} comments={comments} />
-      </div>
+      </Page>
     </DynamicModuleLoader>
   );
 };

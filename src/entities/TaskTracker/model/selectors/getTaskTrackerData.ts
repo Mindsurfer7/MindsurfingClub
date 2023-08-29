@@ -15,3 +15,9 @@ export const getSelectedTag = (state: StateScheme) => {
 export const getDifficulty = (state: StateScheme) => {
   return state.TaskTracker.difficulty;
 };
+export const getSubtaskTitle = (state: StateScheme) => {
+  return state.TaskTracker.subtaskTitle;
+};
+export const getSubtasks = (state: StateScheme) => {
+  return state.TaskTracker.subtasks;
+};

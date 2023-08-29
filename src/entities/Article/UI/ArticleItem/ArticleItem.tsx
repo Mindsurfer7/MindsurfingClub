@@ -31,7 +31,6 @@ const ArticleItem: React.FC<ArticleItemProps> = ({
 }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  console.log(view);
 
   const onOpenArticle = useCallback(() => {
     navigate(RoutePath.SingleArticle + article.id);

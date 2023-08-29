@@ -4,7 +4,7 @@ import { PlayerScheme } from 'entities/Player/types/player';
 import { requestHabits } from '../services/requestHabits';
 import { requestPlayerData } from '../services/requestPlayerData';
 import { requestTasks } from '../services/requestTasks';
-import { createNewDaily } from '../services/createNewDaily';
+import { createNewDaily } from '../services/daily/createNewDaily';
 import { requestDailyz } from '../services/requestDailyz';
 import { requestCompleted } from '../services/requestCompleted';
 import { requestAllTags } from '../services/requestAllTags';

@@ -94,10 +94,10 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ className }) => {
           {/* <NavLink to={'/psyroom'}>Back to list</NavLink> */}
         </div>
         <div className={cls.XL}>
-          <h1>{t('psychotherapist')}</h1>
+          <h1>{t('Assistant')}</h1>
         </div>
         <div className={cls.indicator}>
-          {isWriting && <span>{t('psychotherapistTyping')}</span>}
+          {isWriting && <span>{t('AssistantTyping')}</span>}
         </div>
       </div>
 

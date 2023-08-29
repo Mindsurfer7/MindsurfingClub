@@ -21,6 +21,7 @@ import { requestNotifications } from 'entities/Player/model/services/InGameActio
 import { ChallengesList, getShowChallenges } from 'entities/Challenge';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import { useTranslation } from 'react-i18next';
+import { Page } from 'widgets/Page';
 
 interface PlayerSpaceProps {
   className?: string;
@@ -71,7 +72,7 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
   }
 
   return (
-    <div className={classNames(cls.PlayerSpace, {}, [className as string])}>
+    <Page className={classNames(cls.PlayerSpace, {}, [className as string])}>
       <PlayerCard />
 
       {showChallenges ? (
@@ -85,7 +86,7 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
           <TasksWrapper />
         </div>
       )}
-    </div>
+    </Page>
   );
 };
 

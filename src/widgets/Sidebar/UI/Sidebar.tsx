@@ -21,7 +21,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
   };
 
   return (
-    <div
+    <menu
       data-testid={'sidebar'}
       className={classNames(
         cls.Sidebar,
@@ -56,7 +56,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
         <ThemeSwitcher className={cls.themeSwitcher} />
         <LangSwitcher short={collapse ? true : false} />
       </div>
-    </div>
+    </menu>
   );
 });
 
