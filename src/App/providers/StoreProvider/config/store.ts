@@ -19,6 +19,7 @@ import { PlayerReducer } from 'entities/Player/model/slice/playerSlice';
 import { TaskTrackerReducer } from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
 import { CommunityReducer } from 'entities/Community/model/slice/communitySlice';
 import { ChallengeReducer } from 'entities/Challenge/model/slice/ChallengeSlice';
+import { ChatReducer } from 'entities/Chat/model/slice/chatSlice';
 
 export function createReduxStore(
   initialState?: StateScheme,
@@ -32,7 +33,7 @@ export function createReduxStore(
     TaskTracker: TaskTrackerReducer,
     Community: CommunityReducer,
     Challenge: ChallengeReducer,
-
+    Chat: ChatReducer,
     GPT: GPTReducer,
     GoogleProfile: GoogleProfileReducer,
     GoogleLogin: googleLoginReducer,

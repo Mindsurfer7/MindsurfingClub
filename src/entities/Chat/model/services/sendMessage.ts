@@ -14,14 +14,15 @@ import {
 } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import { getChallengeData } from 'entities/Challenge/model/selectors/getChallengeData';
 import { v4 } from 'uuid';
+import { getChatMessage } from '../selectors/getChatData';
 
 export const sendMessage = createAsyncThunk<any, string, ThunkConfig<any>>(
   'Chat/sendMessage',
-  async (messageText, thunkAPI) => {
-    const userID = getGoogleID(thunkAPI.getState());
+  async (publicID, thunkAPI) => {
+    const messageText = getChatMessage(thunkAPI.getState());
     const profileG = getGoogleProfile(thunkAPI.getState());
 
-    const chatRef = doc(GPT_DB, 'chat', `x4sIrZP5xda9FQpBVSXT`);
+    const chatRef = doc(GPT_DB, 'chat', publicID);
 
     const newMessage = {
       text: messageText,

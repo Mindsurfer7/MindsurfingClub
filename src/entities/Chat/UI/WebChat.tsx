@@ -10,12 +10,14 @@ import {
 } from 'shared/lib/DynamicModuleLoader/DynamicModuleLoader';
 import {
   ChatReducer,
+  clearChatData,
   clearMessage,
   setChatMessage,
 } from '../model/slice/chatSlice';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import {
+  getChatIsIDExist,
   getChatMessage,
   getChatMessages,
 } from '../model/selectors/getChatData';
@@ -23,21 +25,24 @@ import { sendMessage } from '../model/services/sendMessage';
 import { requestChatMessages } from '../model/services/requestChatMessages';
 import { setConnection } from '../model/services/setConnection';
 import { getGoogleProfile } from 'features/AuthWithGoogle';
+import { setNewClubChat } from '../model/services/setNewClubChat';
+import { checkChatExistence } from '../model/services/checkChatIdExistence';
+import { getGoogleIsLogged } from 'entities/GoogleProfile';
 
 interface WebChatProps {
   className?: string;
   chatName: string;
+  publicID: string | undefined;
 }
 
-const reducers: ReducersList = {
-  Chat: ChatReducer,
-};
-
-const WebChat: React.FC<WebChatProps> = ({ className, chatName }) => {
+const WebChat: React.FC<WebChatProps> = ({ className, chatName, publicID }) => {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('chat');
   const message = useSelector(getChatMessage);
   const messages = useSelector(getChatMessages);
   const profile = useSelector(getGoogleProfile);
+  const isLogged = useSelector(getGoogleIsLogged);
+  const isIDExist = useSelector(getChatIsIDExist);
 
   // useEffect(() => {
   //   dispatch(requestChatMessages());
@@ -46,66 +51,89 @@ const WebChat: React.FC<WebChatProps> = ({ className, chatName }) => {
   const messageContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const unsubscribe = dispatch(setConnection());
+    if (publicID) {
+      dispatch(checkChatExistence(publicID));
+    }
 
-    // return unsubscribe()
-  }, [dispatch]);
+    // return unsubscribe()  Я ПОКА НЕ ЗНАЮ КАК РЕАЛЗОВАТЬ ОТПИСКУ const unsubscribe = dispatch(setConnection(publicID));
+    return () => {
+      dispatch(clearChatData());
+    };
+  }, [dispatch, publicID]);
 
   const onTypeMessage = (value: string) => {
     dispatch(setChatMessage(value));
   };
+
   const onMessageSend = async () => {
-    if (message) {
-      await dispatch(sendMessage(message));
+    if (!isLogged) {
+      alert('log in plz');
+    }
+    if (publicID) {
+      await dispatch(sendMessage(publicID));
       dispatch(clearMessage());
     }
   };
 
-  const { t } = useTranslation('chat');
-  return (
-    <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
-      <div className={classNames(cls.WebChat, {}, [className as string])}>
-        <div className={cls.header}>{`${chatName} Club Chat`}</div>
-        <div className={cls.chatWrapper}>
-          {messages?.map((mess, idx) => (
-            <div
-              key={idx}
-              className={classNames(cls.message, {
-                [cls.msg]: mess.username !== profile?.displayName,
-                [cls.Mymsg]: mess.username === profile?.displayName,
-              })}
-            >
-              {' '}
-              <div className={cls.contentWrapper}>
-                <span>{mess.username}</span>
-                {mess.text}
-              </div>
-            </div>
-          ))}
-        </div>
+  const onStartClubChat = () => {
+    if (publicID) {
+      dispatch(setNewClubChat(publicID));
+    }
+  };
 
-        <div className={cls.send}>
-          <Textarea
-            className={cls.textarea}
-            onChange={onTypeMessage}
-            value={message}
-            placeholder={t('say hello to your community')}
-          />
-          {/* <Input
+  if (!isIDExist) {
+    return (
+      <div className={classNames(cls.WebChat, {}, [className as string])}>
+        <Button onClick={onStartClubChat} theme={ButtonTheme.OUTLINE}>
+          {' '}
+          start a club chat
+        </Button>
+      </div>
+    );
+  }
+
+  return (
+    <div className={classNames(cls.WebChat, {}, [className as string])}>
+      <div className={cls.header}>{`${chatName} Club Chat`}</div>
+      <div className={cls.chatWrapper}>
+        {messages?.map((mess, idx) => (
+          <div
+            key={idx}
+            className={classNames(cls.message, {
+              [cls.msg]: mess.username !== profile?.displayName,
+              [cls.Mymsg]: mess.username === profile?.displayName,
+            })}
+          >
+            {' '}
+            <div className={cls.contentWrapper}>
+              <span>{mess.username}</span>
+              {mess.text}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className={cls.send}>
+        <Textarea
+          className={cls.textarea}
+          onChange={onTypeMessage}
+          value={message}
+          placeholder={t('say hello to your community')}
+        />
+        {/* <Input
           onChange={handleChange}
           value={singleMessage}
           placeholder="describe your problem here..."
         /> */}
-          <Button
-            theme={ButtonTheme.OUTLINE}
-            className={cls.sendBtn}
-            onClick={onMessageSend}
-          >
-            {t('send')}
-          </Button>
-        </div>
+        <Button
+          theme={ButtonTheme.OUTLINE}
+          className={cls.sendBtn}
+          onClick={onMessageSend}
+        >
+          {t('send')}
+        </Button>
       </div>
-    </DynamicModuleLoader>
+    </div>
   );
 };
 

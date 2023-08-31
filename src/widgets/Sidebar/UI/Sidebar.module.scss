@@ -125,7 +125,8 @@
     // align-items: center;
     position: absolute;
     bottom: 0;
-    // background-color: red;
+    background-color: var(--inverted-bg-color);
+    border: 1px solid var(--primary-color);
   }
 
   .switchers {

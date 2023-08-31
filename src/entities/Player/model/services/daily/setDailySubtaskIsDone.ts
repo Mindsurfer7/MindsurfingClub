@@ -20,7 +20,7 @@ export const setDailySubtaskIsDone = createAsyncThunk<
 
     // Find the daily task containing the target subtask
     const targetDailyTask = dailyTasks.find((dailyTask: any) =>
-      dailyTask.subtasks.some((subtask: any) => subtask.id === taskID),
+      dailyTask.subtasks.find((subtask: any) => subtask.id === taskID),
     );
 
     if (targetDailyTask) {

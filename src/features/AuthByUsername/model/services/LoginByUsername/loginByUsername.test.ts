@@ -15,11 +15,11 @@ describe('loginByUsername.test', () => {
 
     const thunk = new TestAsyncThunk(loginByUsername);
 
-    thunk.API.post.mockReturnValue(Promise.resolve({ data: userValue }));
+    thunk.api.post.mockReturnValue(Promise.resolve({ data: userValue }));
 
     const result = await thunk.callThunk({ username: '444', password: 'xxx' });
 
-    expect(thunk.API.post).toHaveBeenCalled();
+    expect(thunk.api.post).toHaveBeenCalled();
 
     expect(thunk.dispatch).toHaveBeenCalledWith(setAuthData(userValue));
     expect(thunk.dispatch).toHaveBeenCalledTimes(3);
@@ -30,10 +30,10 @@ describe('loginByUsername.test', () => {
     const userValue = { data: { username: '134', id: 1 } };
 
     const thunk = new TestAsyncThunk(loginByUsername);
-    thunk.API.post.mockReturnValue(Promise.resolve({ status: 403 }));
+    thunk.api.post.mockReturnValue(Promise.resolve({ status: 403 }));
     const result = await thunk.callThunk({ username: '444', password: 'xxx' });
 
-    expect(thunk.API.post).toHaveBeenCalled();
+    expect(thunk.api.post).toHaveBeenCalled();
     expect(thunk.dispatch).toHaveBeenCalledTimes(2);
     expect(result.meta.requestStatus).toBe('rejected');
     expect(result.payload).toEqual('Wrong password or login');

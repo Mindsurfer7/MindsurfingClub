@@ -6,3 +6,6 @@ export const getChatMessage = (state: StateScheme) => {
 export const getChatMessages = (state: StateScheme) => {
   return state.Chat?.messages;
 };
+export const getChatIsIDExist = (state: StateScheme) => {
+  return state.Chat?.isIDExist;
+};

@@ -7,6 +7,7 @@ const initialState: ChatScheme = {
   isLoading: false,
   message: '',
   messages: [],
+  isIDExist: false,
 };
 
 export const ChatSlice = createSlice({
@@ -19,8 +20,15 @@ export const ChatSlice = createSlice({
     setMessagesArray: (state, action: PayloadAction<Message[]>) => {
       state.messages = action.payload; //.push(action.payload);
     },
+    setChatIDExistence: (state) => {
+      state.isIDExist = true; // action: PayloadAction<boolean>
+    },
     clearMessage: (state) => {
       state.message = '';
+    },
+    clearChatData: (state) => {
+      state.isIDExist = false;
+      state.messages = [];
     },
   },
   extraReducers: (builder) => {
@@ -51,6 +59,11 @@ export const ChatSlice = createSlice({
   },
 });
 
-export const { setChatMessage, clearMessage, setMessagesArray } =
-  ChatSlice.actions;
+export const {
+  setChatMessage,
+  clearMessage,
+  setMessagesArray,
+  setChatIDExistence,
+  clearChatData,
+} = ChatSlice.actions;
 export const { reducer: ChatReducer } = ChatSlice;

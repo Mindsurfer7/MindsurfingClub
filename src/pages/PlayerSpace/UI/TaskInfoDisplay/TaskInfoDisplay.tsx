@@ -66,8 +66,6 @@ const TaskInfoDisplay: React.FC<TaskInfoDisplayProps> = (props) => {
         </div>
         <div className={cls.subtasks}>
           {subtasks?.map((sub, i) => {
-            console.log(subtasks);
-
             return (
               <div className={cls.sub}>
                 <input

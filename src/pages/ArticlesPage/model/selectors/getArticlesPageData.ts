@@ -15,3 +15,6 @@ export const getArtilcesPageNum = (state: StateScheme) => {
 export const getArtilcesPageHasMore = (state: StateScheme) => {
   return state.ArticlesPage?.hasMore;
 };
+export const getArtilcesPageError = (state: StateScheme) => {
+  return state.ArticlesPage?.error;
+};

@@ -13,18 +13,18 @@ describe('requestProfileData.test', () => {
 
     const thunk = new TestAsyncThunk(requestProfileData);
 
-    thunk.API.get.mockReturnValue(Promise.resolve({ data: data }));
+    thunk.api.get.mockReturnValue(Promise.resolve({ data: data }));
 
     const result = await thunk.callThunk('1');
 
-    expect(thunk.API.get).toHaveBeenCalled();
+    expect(thunk.api.get).toHaveBeenCalled();
 
     expect(result.meta.requestStatus).toBe('fulfilled');
     expect(result.payload).toEqual(data);
   });
   test('error log', async () => {
     const thunk = new TestAsyncThunk(requestProfileData);
-    thunk.API.get.mockReturnValue(Promise.resolve({ status: 403 }));
+    thunk.api.get.mockReturnValue(Promise.resolve({ status: 403 }));
     const result = await thunk.callThunk('1');
 
     expect(result.meta.requestStatus).toBe('rejected');

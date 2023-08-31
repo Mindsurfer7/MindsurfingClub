@@ -11,15 +11,11 @@ export function useInfiniteScroll({
   callback,
 }: UseInfiniteScrollOptions) {
   let observer: IntersectionObserver | null;
-  console.log('hooked');
   useEffect(() => {
-    console.log('inside useeffect');
     const wrapperElement = wrapperRef.current;
     const triggerElement = triggerRef.current;
 
     if (callback) {
-      console.log('if callback');
-
       const options = {
         root: null,
         rootMargin: '100px',

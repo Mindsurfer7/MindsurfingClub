@@ -96,7 +96,10 @@ const SingleGroupPage: React.FC<SingleGroupPageProps> = ({ className }) => {
           </div>
         </div>
 
-        <WebChat chatName={community?.title ? community?.title : 'Club Chat'} />
+        <WebChat
+          publicID={publicID}
+          chatName={community?.title ? community?.title : 'Club Chat'}
+        />
       </div>
       <div className={cls.Wall}>
         <Wall />

@@ -16,13 +16,12 @@ import {
 } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import { setMessagesArray } from '../slice/chatSlice';
 
-export const setConnection = createAsyncThunk<any, void, ThunkConfig<any>>(
-  'Chat/setConnection',
-  async (messageText, thunkAPI) => {
-    const userID = getGoogleID(thunkAPI.getState());
-    const profileG = getGoogleProfile(thunkAPI.getState());
+//соединение должно устанавливаться с чатом который имеет такой же айди как и паблик айди.
 
-    const chatDocRef = doc(GPT_DB, 'chat', 'x4sIrZP5xda9FQpBVSXT');
+export const setConnection = createAsyncThunk<any, string, ThunkConfig<any>>(
+  'Chat/setConnection',
+  async (publicID, thunkAPI) => {
+    const chatDocRef = doc(GPT_DB, 'chat', publicID);
 
     try {
       const unsubscribe = onSnapshot(chatDocRef, (docSnapshot) => {

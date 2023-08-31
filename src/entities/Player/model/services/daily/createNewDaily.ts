@@ -19,9 +19,9 @@ export const createNewDaily = createAsyncThunk<any, void, ThunkConfig<any>>(
       description: trackerData.description,
       difficulty: trackerData.difficulty,
       subtasks: trackerData.subtasks,
-      isDone: false,
       title: trackerData.title,
       tags: trackerData.tags,
+      isDone: false,
       isDoneTimestamp: new Date(),
     };
 

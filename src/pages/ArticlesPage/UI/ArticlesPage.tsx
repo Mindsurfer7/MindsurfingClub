@@ -19,12 +19,14 @@ import { requestArticlesList } from '../model/services/requestArticlesList';
 import { useSelector } from 'react-redux';
 import {
   getArtilcesPageData,
+  getArtilcesPageError,
   getArtilcesPageHasMore,
   getArtilcesPageIsLoading,
   getArtilcesPageNum,
 } from '../model/selectors/getArticlesPageData';
 import { ArticleViewSelector } from 'features/ArticleViewSelector';
 import { Page } from 'widgets/Page';
+import { requestNextArticlesPage } from '../model/services/requestNextArticlesPage';
 
 interface ArticlesPageProps {
   className?: string;
@@ -41,6 +43,7 @@ const ArticlesPage: React.FC<ArticlesPageProps> = ({ className }) => {
   const articles = useSelector(getArticles.selectAll);
   const page = useSelector(getArtilcesPageNum);
   const hasMore = useSelector(getArtilcesPageHasMore);
+  const error = useSelector(getArtilcesPageError);
 
   useInitialEffect(() => {
     dispatch(initState());
@@ -59,11 +62,12 @@ const ArticlesPage: React.FC<ArticlesPageProps> = ({ className }) => {
   );
 
   const onLoadNextPart = useCallback(() => {
-    dispatch(setPage(page + 1));
-    dispatch(requestArticlesList({ page: page + 1 }));
-    if (hasMore && !isLoading) {
-    }
-  }, [dispatch, page, isLoading, hasMore]);
+    dispatch(requestNextArticlesPage());
+  }, [dispatch]);
+
+  if (error) {
+    return <span>sorry error</span>;
+  }
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>

@@ -43,7 +43,7 @@ export interface StateScheme {
   GoogleProfile: GoogleProfileScheme;
   GoogleLogin: GoogleLoginScheme;
   user: UserScheme;
-  Chat?: ChatScheme;
+  Chat: ChatScheme;
   GPT: GPTscheme;
 }
 

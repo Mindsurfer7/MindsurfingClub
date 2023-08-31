@@ -38,7 +38,9 @@
 
     height: 50px;
     width: 100%;
-    // background-color: red;
+    background-color: var(--inverted-bg-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
   }
 
   @media screen and (display-mode: standalone) {
