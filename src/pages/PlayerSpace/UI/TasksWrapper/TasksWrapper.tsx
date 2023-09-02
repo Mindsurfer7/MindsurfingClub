@@ -18,6 +18,7 @@ import SingleEndeavor from 'entities/TaskTracker/UI/SingleEndeavor/SingleEndeavo
 import { getShowCompleted } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
 import { requestCompleted } from 'entities/Player/model/services/requestCompleted';
 import { useTranslation } from 'react-i18next';
+import { setSubtaskIsDone } from 'entities/Player/model/services/tasks/setSubtaskIsDone';
 
 interface TasksWrapperProps {
   className?: string;
@@ -65,6 +66,7 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
                 taskType="task"
                 tags={h.tags}
                 isDone={h.isDone}
+                subtasks={h.subtasks}
                 onRemove={onTaskRemove}
                 onRequest={onRequestTasks}
                 difficulty={h.difficulty}
@@ -92,22 +94,6 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
       <div className={cls.header}>{t('myTasks')}</div>
 
       <div className={cls.listWrapper}>
-        {/* {tasks.map((h) => {
-          return (
-            <SingleEndeavor
-              id={h.id}
-              key={h.id}
-              tags={h.tags}
-              title={h.title}
-              isTask={true}
-              isDone={h.isDone}
-              onRemove={onTaskRemove}
-              onRequest={onRequestTasks}
-              difficulty={h.difficulty}
-              description={h.description}
-            />
-          );
-        })} */}
         {filteredTasks.length > 0
           ? filteredTasks.map((h) => {
               return (
@@ -118,6 +104,7 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
                   title={h.title}
                   taskType="task"
                   isDone={h.isDone}
+                  subtasks={h.subtasks}
                   onRemove={onTaskRemove}
                   onRequest={onRequestTasks}
                   difficulty={h.difficulty}
@@ -135,6 +122,7 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
                   title={h.title}
                   taskType="task"
                   isDone={h.isDone}
+                  subtasks={h.subtasks}
                   onRemove={onTaskRemove}
                   onRequest={onRequestTasks}
                   difficulty={h.difficulty}

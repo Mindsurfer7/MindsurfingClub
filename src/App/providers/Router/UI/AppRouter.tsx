@@ -16,7 +16,10 @@ const AppRouter = () => {
   const isAuthG = useSelector(getGoogleIsLogged);
 
   const renderWithWrapper = useCallback((route: AppRoutesProps) => {
-    const element = <div className="page-wrapper">{route.element}</div>;
+    const element = (
+      <Suspense fallback={<Preloader />}>{route.element}</Suspense>
+    );
+
     return (
       <Route
         key={route.path}

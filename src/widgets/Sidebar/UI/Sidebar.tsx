@@ -7,6 +7,8 @@ import Button, { ButtonSize, ButtonTheme } from 'shared/UI/Button/Button';
 import SidebarItem from './SidebarItem/SidebarItem';
 import { useSelector } from 'react-redux';
 import { getSideBarItems } from '../model/selectors/getSidebarItems';
+import { Icon } from 'shared/UI/Icon/Icon';
+import CollapseBtn from '../../../shared/assets/icons/collapseBtn.svg';
 
 interface SidebarProps {
   className?: string;
@@ -29,6 +31,7 @@ const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
         [className as string],
       )}
     >
+      {/* <div className={cls.iconAndSwitchers}> */}
       <div className={cls.links}>
         <div className={cls.linkWrapper}>
           {SidebarItemsList.map((item) => (
@@ -41,8 +44,15 @@ const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
           ))}
         </div>
       </div>
-
       <div className={cls.switchers}>
+        {!collapse && <ThemeSwitcher className={cls.themeSwitcher} />}
+        {!collapse && (
+          <LangSwitcher
+            className={cls.LangSwitcher}
+            short={collapse ? true : false}
+          />
+        )}
+
         <Button
           onClick={onSwitch}
           data-testid={'sidebar-btn'}
@@ -51,11 +61,13 @@ const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
           size={ButtonSize.XL}
           square={true}
         >
-          {collapse ? '<' : '>'}
+          <Icon
+            Svg={CollapseBtn}
+            className={collapse ? cls.collapseIcon : cls.expandIcon}
+          />
         </Button>
-        <ThemeSwitcher className={cls.themeSwitcher} />
-        <LangSwitcher short={collapse ? true : false} />
       </div>
+      {/* </div> */}
     </menu>
   );
 });

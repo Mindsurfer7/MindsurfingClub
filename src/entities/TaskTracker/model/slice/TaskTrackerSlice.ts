@@ -7,15 +7,6 @@ import {
 
 const initialState: TaskTrackerScheme = {
   showCompleted: false,
-  // challengeData: {
-  //   title: 'string',
-  //   description: 'string',
-  //   startDate: 'string',
-  //   endDate: 'string',
-  //   executionType: 'string',
-  //   points: 9,
-  //   participants: [],
-  // },
   selectedTag: '',
   description: '',
   difficulty: 1,
@@ -23,7 +14,6 @@ const initialState: TaskTrackerScheme = {
   title: '',
   isDone: false,
   subtasks: [],
-  subtaskTitle: '',
   tags: [],
   id: '',
   error: '',
@@ -49,7 +39,6 @@ export const TaskTrackerSlice = createSlice({
     ) => {
       const { value, index } = action.payload;
 
-      console.log('reducer' + value);
       if (state.subtasks) {
         const updatedSubtasks = [...state.subtasks];
         updatedSubtasks[index].title = value;
@@ -73,6 +62,9 @@ export const TaskTrackerSlice = createSlice({
     },
     setSubtask: (state, action: PayloadAction<Subtask>) => {
       state.subtasks?.push(action.payload);
+    },
+    setSubtasks: (state, action: PayloadAction<Subtask[]>) => {
+      state.subtasks = action.payload;
     },
 
     clearInputs: (state) => {
@@ -102,22 +94,6 @@ export const TaskTrackerSlice = createSlice({
     //////////////////////////////
     // setChallengeTitle: (state, action: PayloadAction<string>) => {
     //   state.challengeData.title = action.payload;
-    // },
-    // setChallengeDescription: (state, action: PayloadAction<string>) => {
-    //   state.challengeData.description = action.payload;
-    // },
-    // setChallengeStartDate: (state, action: PayloadAction<string>) => {
-    //   state.challengeData.startDate = action.payload;
-    // },
-    // setChallengeEndDate: (state, action: PayloadAction<string>) => {
-    //   state.challengeData.endDate = action.payload;
-    // },
-    // setChallengeExecutionType: (state, action: PayloadAction<string>) => {
-    //   state.challengeData.executionType = action.payload;
-    // },
-    // setChallengePoints: (state, action: PayloadAction<number>) => {
-    //   state.challengeData.points = action.payload;
-    // },
   },
   extraReducers: (builder) => {
     builder
@@ -150,6 +126,7 @@ export const {
   setTitle,
   setSubtask,
   clearInputs,
+  setSubtasks,
   setNewInitialState,
   /////////////////////////////
   // setChallengeTitle,

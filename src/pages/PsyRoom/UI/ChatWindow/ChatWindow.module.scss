@@ -9,6 +9,10 @@
   scroll-behavior: auto;
   box-sizing: content-box;
   max-width: 1200px;
+
+  @media (max-width: 415px) {
+    width: 95%;
+  }
 }
 
 h1 {

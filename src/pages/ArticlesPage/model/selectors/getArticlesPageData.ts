@@ -18,3 +18,6 @@ export const getArtilcesPageHasMore = (state: StateScheme) => {
 export const getArtilcesPageError = (state: StateScheme) => {
   return state.ArticlesPage?.error;
 };
+export const getArtilcesInited = (state: StateScheme) => {
+  return state.ArticlesPage?._inited;
+};

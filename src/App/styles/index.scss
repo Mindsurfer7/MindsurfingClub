@@ -14,7 +14,7 @@
   border: 2px solid black;
   border-radius: 12px;
 
-  padding: 15px;
+  padding: 10px;
   min-height: 100vh;
   width: 100%;
 
@@ -41,13 +41,17 @@
     width: 100%;
     padding: 5px;
     border-radius: 4px;
-    margin-bottom: 34px;
+    margin-bottom: 36px;
     margin-top: 50px;
     overflow-x: hidden;
   }
 
   @media screen and (display-mode: standalone) {
-    margin-bottom: 34px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 36px;
     margin-top: 65px;
     overflow-x: hidden; //можнт ломать что то но по идее убирает лишние скроллы по бокам
   }
@@ -55,7 +59,7 @@
 
 .content-page {
   display: flex;
-  max-width: 1400px; //
+  max-width: 1400px;
 
   @media (max-width: 1700px) {
     width: 1200px;
@@ -70,35 +74,14 @@
     max-width: 640px;
   }
   @media (max-width: 415px) {
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 340px;
     padding: 5px;
   }
 }
-
-// .page-wrapper {
-//   flex-grow: 1;
-//   padding: 10px;
-//   width: 100%;
-
-//   @media (max-width: 1700px) {
-//     width: 1100px;
-//   }
-//   @media (max-width: 1200px) {
-//     max-width: 950px;
-//   }
-//   @media (max-width: 767px) {
-//     max-width: 640px;
-//   }
-//   @media (max-width: 415px) {
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     width: 340px;
-//     padding: 5px;
-//   }
-// }
 
 * {
   scrollbar-color: gray transparent;

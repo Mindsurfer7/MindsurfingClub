@@ -18,6 +18,7 @@ import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEf
 import { requestArticlesList } from '../model/services/requestArticlesList';
 import { useSelector } from 'react-redux';
 import {
+  getArtilcesInited,
   getArtilcesPageData,
   getArtilcesPageError,
   getArtilcesPageHasMore,
@@ -44,6 +45,7 @@ const ArticlesPage: React.FC<ArticlesPageProps> = ({ className }) => {
   const page = useSelector(getArtilcesPageNum);
   const hasMore = useSelector(getArtilcesPageHasMore);
   const error = useSelector(getArtilcesPageError);
+  const inited = useSelector(getArtilcesInited);
 
   useInitialEffect(() => {
     dispatch(initState());

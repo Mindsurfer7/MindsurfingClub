@@ -4,4 +4,12 @@
 
 .paragraph {
   margin-top: 8px;
+
+  @media (max-width: 415px) {
+    width: 320px;
+    .title,
+    .paragraph {
+      margin: 0;
+    }
+  }
 }

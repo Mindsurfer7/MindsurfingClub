@@ -1,5 +1,15 @@
 .MainPage {
   height: 800px;
   width: 700px;
-  margin: 40px;
+
+  overflow: auto;
+
+  @media (max-width: 415px) {
+    width: 100%;
+    padding: 15px;
+  }
+}
+
+.textWrapper {
+  padding: 40px;
 }

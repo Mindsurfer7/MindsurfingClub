@@ -18,6 +18,7 @@ export const createNewTask = createAsyncThunk<any, void, ThunkConfig<any>>(
       id: trackerData.id,
       description: trackerData.description,
       difficulty: trackerData.difficulty,
+      subtasks: trackerData.subtasks,
       isDone: false,
       title: trackerData.title,
       tags: trackerData.tags,

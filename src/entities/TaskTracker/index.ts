@@ -1,2 +1,5 @@
 import { Subtask } from './types/taskTracker';
-export { setNewInitialState } from './model/slice/TaskTrackerSlice';
+export {
+  setNewInitialState,
+  setSubtasks,
+} from './model/slice/TaskTrackerSlice';

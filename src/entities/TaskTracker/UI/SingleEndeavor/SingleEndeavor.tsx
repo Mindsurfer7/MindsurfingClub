@@ -41,6 +41,7 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
     difficulty,
     isDone,
     taskType,
+    subtasks,
     id,
   } = props;
 
@@ -234,6 +235,7 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
           <TaskDisplayModal
             isVisible={isVisible2}
             onClose={onCloseModal2}
+            subtasks={subtasks}
             {...props}
           />
         )}

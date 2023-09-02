@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './TaskCreator.module.scss';
 import Textarea from 'shared/UI/Textarea/Textarea';
@@ -6,7 +6,6 @@ import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { useSelector } from 'react-redux';
 import {
   getDifficulty,
-  getSubtaskTitle,
   getSubtasks,
   getTags,
   getTaskTrackerData,
@@ -19,25 +18,25 @@ import {
   setID,
   setSubtask,
   setSubtaskTitle,
+  setSubtasks,
   setTags,
   setTitle,
 } from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
 import { v4 } from 'uuid';
 import { getAllTags } from 'entities/Player/model/selectors/getPlayerData';
+import { Subtask } from 'entities/TaskTracker/types/taskTracker';
 
 interface TaskCreatorProps {
   className?: string;
   createTask: () => Promise<void>;
   requestData: () => any;
   onClose?: () => void;
+  subtasksFromDB?: Subtask[];
 }
 
-const TaskCreator: React.FC<TaskCreatorProps> = ({
-  createTask,
-  className,
-  requestData,
-  onClose,
-}) => {
+const TaskCreator: React.FC<TaskCreatorProps> = (props) => {
+  const { createTask, className, requestData, onClose, subtasksFromDB } = props;
+
   const dispatch = useAppDispatch();
   const trackerData = useSelector(getTaskTrackerData);
   const allTags = useSelector(getAllTags);
@@ -46,6 +45,12 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
   const subtasks = useSelector(getSubtasks);
   const [inputValue, setInputValue] = useState('');
   const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    if (subtasks && subtasks?.length > 0) {
+      setIsChecked(true);
+    }
+  }, [dispatch, subtasks]);
 
   const isDifficultySelected = (
     buttonDifficulty: number,
@@ -67,14 +72,13 @@ const TaskCreator: React.FC<TaskCreatorProps> = ({
   ) => {
     dispatch(setSubtaskTitle({ value: e.target.value, index: index }));
   };
+
   const onSetSubtask = () => {
-    //value: string
     const subtask = {
       id: v4(),
       title: '',
       isDone: false,
     };
-
     dispatch(setSubtask(subtask));
   };
 

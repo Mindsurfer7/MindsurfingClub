@@ -24,7 +24,6 @@ import { ChatReducer } from 'entities/Chat/model/slice/chatSlice';
 export function createReduxStore(
   initialState?: StateScheme,
   asyncReducers?: ReducersMapObject<StateScheme>,
-  navigate?: (to: To, options?: NavigateOptions) => void,
 ) {
   const rootReducers: ReducersMapObject<StateScheme> = {
     ...asyncReducers,
@@ -44,7 +43,6 @@ export function createReduxStore(
   const extraArg: ThunkExtraArg = {
     API: API,
     GPT_API: GPT_API,
-    navigate,
   };
 
   const store = configureStore({

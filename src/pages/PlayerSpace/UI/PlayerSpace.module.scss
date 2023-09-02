@@ -19,8 +19,11 @@
     max-width: 740px;
   }
   @media (max-width: 415px) {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    width: 100%;
+    align-self: center;
+    width: 95%;
     padding: 5px;
   }
 }

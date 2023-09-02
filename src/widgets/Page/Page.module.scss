@@ -19,9 +19,9 @@
   }
   @media (max-width: 415px) {
     display: flex;
-    align-items: center;
+    // align-items: center;
     justify-content: center;
-    width: 340px;
     padding: 5px;
+    width: 100%;
   }
 }

@@ -122,7 +122,7 @@ export const NavBar = memo(({ className }: navprops) => {
             {googleAcc.account?.displayName}
           </Button>
         )}
-        {username ? (
+        {/* {username ? (
           <Button
             theme={ButtonTheme.OUTLINE}
             //className={cls.nickname}
@@ -140,7 +140,7 @@ export const NavBar = memo(({ className }: navprops) => {
           >
             login
           </Button>
-        )}
+        )} */}
       </div>
       {/* по хорошему весь сей код над выделить в компонентик для шейред слоя + add onblur*/}
       {isLogged && (

@@ -15,18 +15,22 @@ interface TaskInfoDisplayProps {
   isDone: boolean;
   tags?: string[];
   subtasks?: Subtask[];
+  setSubtaskIsDone: (taskID: string) => void;
   id: string;
 }
 
 const TaskInfoDisplay: React.FC<TaskInfoDisplayProps> = (props) => {
-  const { difficulty, description, title, tags, isDone, className, subtasks } =
-    props;
-  console.log(subtasks);
+  const {
+    difficulty,
+    description,
+    title,
+    tags,
+    isDone,
+    className,
+    subtasks,
+    setSubtaskIsDone,
+  } = props;
   const dispatch = useAppDispatch();
-
-  const onSetDailySubtaskIsDone = (taskID: string) => {
-    dispatch(setDailySubtaskIsDone(taskID));
-  };
 
   return (
     <div className={classNames(cls.TaskInfoDisplay, {}, [className as string])}>
@@ -71,7 +75,7 @@ const TaskInfoDisplay: React.FC<TaskInfoDisplayProps> = (props) => {
                 <input
                   checked={sub.isDone}
                   type="checkbox"
-                  onChange={() => onSetDailySubtaskIsDone(sub.id)}
+                  onChange={() => setSubtaskIsDone(sub.id)} ///повесттттттб онлклик
                   className={cls.input}
                 />
                 <Text text={sub.title} />

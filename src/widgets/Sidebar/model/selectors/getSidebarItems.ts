@@ -3,9 +3,9 @@ import { getUserAuthData } from 'entities/User';
 import { RoutePath } from 'shared/config/routesConfig/routesConfig';
 import HomeIcon from '../../../../shared/assets/icons/main-20-20.svg';
 import AboutIcon from '../../../../shared/assets/icons/about-20-20.svg';
-import PsyIcon from '../../../../shared/assets/icons/psy.svg';
+import PsyIcon from '../../../../shared/assets/icons/chatGPT.svg';
 import ProfileIcon from '../../../../shared/assets/icons/profile-20-20.svg';
-import TaskIcon from '../../../../shared/assets/icons/tasks.svg';
+import TaskIcon from '../../../../shared/assets/icons/TaskTracker.svg';
 import ArtIcon from '../../../../shared/assets/icons/article-20-20.svg';
 import ClubIcon from '../../../../shared/assets/icons/community.svg';
 import { SidebarItemType } from '../types/sidebar';
@@ -16,11 +16,6 @@ export const getSideBarItems = createSelector(getUserAuthData, (userData) => {
       path: RoutePath.Main,
       Icon: HomeIcon,
       text: 'Home',
-    },
-    {
-      path: RoutePath.About,
-      Icon: AboutIcon,
-      text: 'About',
     },
 
     {
@@ -50,6 +45,11 @@ export const getSideBarItems = createSelector(getUserAuthData, (userData) => {
         path: RoutePath.articles,
         Icon: ArtIcon,
         text: 'LongReads',
+      },
+      {
+        path: RoutePath.About,
+        Icon: AboutIcon,
+        text: 'About',
       },
     );
   }

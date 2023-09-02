@@ -10,12 +10,11 @@ export interface TaskTrackerScheme {
   title: string;
   isDone: boolean;
   subtasks?: Subtask[];
-  subtaskTitle?: string;
   habits?: [];
   tasks?: [];
   tags: string[];
   id: string;
-  error: string;
+  error?: string;
 }
 
 export interface Subtask {

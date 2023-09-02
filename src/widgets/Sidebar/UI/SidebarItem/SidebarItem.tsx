@@ -20,7 +20,10 @@ const SidebarItem: React.FC<SidebarItemProps> = memo(({ item, collapse }) => {
       <AppLink
         theme={AppLinkTheme.primary}
         to={item.path}
-        className={classNames(cls.element, { [cls.collapse]: collapse })}
+        className={classNames(cls.element, {
+          [cls.collapse]: collapse,
+          [cls.expanded]: !collapse,
+        })}
       >
         <item.Icon className={cls.icon} />
         <span className={cls.link}>{t(item.text)}</span>

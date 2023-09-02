@@ -8,9 +8,19 @@ import TaskCreator from 'entities/TaskTracker/UI/TaskCreator/TaskCreator';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { setNewInitialState } from 'entities/TaskTracker';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
-import { updateTaskData } from 'entities/Player';
-import { clearInputs } from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
-import { Subtask } from 'entities/TaskTracker/types/taskTracker';
+import {
+  setDailySubtaskIsDone,
+  setSubtaskIsDone,
+  updateTaskData,
+} from 'entities/Player';
+import {
+  clearInputs,
+  setSubtasks,
+} from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
+import {
+  Subtask,
+  TaskTrackerScheme,
+} from 'entities/TaskTracker/types/taskTracker';
 
 interface TaskCreatorModalProps {
   className?: string;
@@ -46,17 +56,23 @@ export const TaskDisplayModal: React.FC<TaskCreatorModalProps> = (props) => {
   const [editMode, setEditMode] = useState(false);
   const dispatch = useAppDispatch();
 
+  console.log(subtasks);
+
   useEffect(() => {
-    dispatch(
-      setNewInitialState({
-        title,
-        description,
-        difficulty,
-        tags: tags || [],
-        id,
-      }),
-    );
-  });
+    const initialState: any = {
+      title,
+      description,
+      difficulty,
+      tags: tags || [],
+      id,
+    };
+
+    if (subtasks) {
+      dispatch(setSubtasks(subtasks));
+    }
+
+    dispatch(setNewInitialState(initialState));
+  }, [dispatch]);
 
   const onUpdateTask = async () => {
     await dispatch(updateTaskData({ id, taskType }));
@@ -66,6 +82,14 @@ export const TaskDisplayModal: React.FC<TaskCreatorModalProps> = (props) => {
   const onCloseWithClearInputs = () => {
     dispatch(clearInputs());
     onClose?.();
+  };
+
+  const onSetSubtaskIsDone = (taskID: string) => {
+    if (taskType === 'task') {
+      dispatch(setSubtaskIsDone(taskID));
+    } else if (taskType === 'daily') {
+      dispatch(setDailySubtaskIsDone(taskID));
+    }
   };
 
   return (
@@ -88,9 +112,10 @@ export const TaskDisplayModal: React.FC<TaskCreatorModalProps> = (props) => {
             onClose={onClose}
             requestData={onRequest}
             createTask={onUpdateTask}
+            {...props}
           />
         ) : (
-          <TaskInfoDisplay {...props} />
+          <TaskInfoDisplay setSubtaskIsDone={onSetSubtaskIsDone} {...props} />
         )}
       </Suspense>
     </Modal>

@@ -16,15 +16,15 @@ export const updateTaskData = createAsyncThunk<any, any, ThunkConfig<any>>(
   async ({ id, taskType }, thunkAPI) => {
     const userID = getGoogleID(thunkAPI.getState());
     const trackerData = getTaskTrackerData(thunkAPI.getState());
-
     const playerDocRef = doc(GPT_DB, 'accounts', `${userID}`);
 
     //принимать должна данные таска она хэбит или дейлик
-    const updatedTask = {
+    const updatedTask: any = {
       id: id,
       description: trackerData.description,
       difficulty: trackerData.difficulty,
       isDone: false,
+      subtasks: trackerData.subtasks,
       title: trackerData.title,
       tags: trackerData.tags,
     };
@@ -61,6 +61,8 @@ export const updateTaskData = createAsyncThunk<any, any, ThunkConfig<any>>(
         }
       } else if (taskType === 'daily') {
         const dailys = playerDoc.data()?.daily || [];
+
+        updatedTask.isDoneTimestamp = new Date();
 
         const elementIndexD = dailys.findIndex((x: any) => x.id === id);
 

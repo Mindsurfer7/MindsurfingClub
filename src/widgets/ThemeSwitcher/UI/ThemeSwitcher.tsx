@@ -19,7 +19,11 @@ const ThemeSwitcher: React.FC<ThemeSwitcherProps> = memo(({ className }) => {
       //className={classNames(cls.ThemeSwitcher, {}, [className as string])}
       onClick={switchTheme}
     >
-      {theme === Theme.dark ? <ThemeLight /> : <ThemeDark />}
+      {theme === Theme.dark ? (
+        <ThemeLight className={className} />
+      ) : (
+        <ThemeDark className={className} />
+      )}
     </Button>
   );
 });

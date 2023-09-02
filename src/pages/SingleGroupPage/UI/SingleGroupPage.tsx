@@ -101,9 +101,9 @@ const SingleGroupPage: React.FC<SingleGroupPageProps> = ({ className }) => {
           chatName={community?.title ? community?.title : 'Club Chat'}
         />
       </div>
-      <div className={cls.Wall}>
-        <Wall />
-      </div>
+      {/* <div className={cls.Wall}> */}
+      <Wall className={cls.Wall} />
+      {/* </div> */}
 
       <div className={cls.challenges}>
         <Text title={t('communityChallenges')} align={TextAlign.Center} />
