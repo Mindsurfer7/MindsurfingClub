@@ -1,4 +1,5 @@
 .rectangle {
+  margin-top: 10px;
   .card {
     margin-bottom: 30px;
   }
@@ -7,6 +8,7 @@
 .square {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 10px;
 
   .card {
     margin-right: 30px;

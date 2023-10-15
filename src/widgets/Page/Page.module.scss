@@ -5,7 +5,7 @@
 
   padding: 20px 20px 20px 45px;
   height: calc(100vh - var(--navbar-height));
-  // overflow-y: auto;
+  overflow-y: auto;
   flex-shrink: 100;
 
   @media (max-width: 1700px) {
@@ -24,4 +24,9 @@
     padding: 5px;
     width: 100%;
   }
+}
+
+.trigger {
+  height: 20px;
+  margin: 10px;
 }

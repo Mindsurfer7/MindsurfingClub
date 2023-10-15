@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ArticleDetailsPage.module.scss';
 import SingleArticle from 'entities/Article/UI/SingleArticle/UI/SingleArticle';
@@ -24,6 +24,7 @@ import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { useTranslation } from 'react-i18next';
 import { RoutePath } from 'shared/config/routesConfig/routesConfig';
 import { Page } from 'widgets/Page';
+import { requestCommentsByArticleID } from '../model/services/fetchCommentsByArticleId/requestCommentsByArticleID';
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -43,11 +44,16 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  useInitialEffect(() => {
-    console.log(articleID);
+  // useInitialEffect(() => {
+  // dispatch(fetchCommentsByArticleId(articleID));
 
-    dispatch(fetchCommentsByArticleId(articleID));
-  });
+  // });
+
+  useEffect(() => {
+    if (articleID) {
+      dispatch(requestCommentsByArticleID(articleID));
+    }
+  }, [articleID]);
 
   const onCommentSend = useCallback(
     (text: string) => {

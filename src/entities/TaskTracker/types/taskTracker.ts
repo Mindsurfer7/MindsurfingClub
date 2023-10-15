@@ -1,3 +1,4 @@
+import { Task } from 'entities/Player/types/player';
 import { title } from './../../../shared/UI/Text/Text.stories';
 import { Challenge } from 'entities/Challenge/types/ChallengeScheme';
 export interface TaskTrackerScheme {
@@ -10,6 +11,8 @@ export interface TaskTrackerScheme {
   title: string;
   isDone: boolean;
   subtasks?: Subtask[];
+  ShowTodayTasks: boolean;
+  todayTasks: Task[];
   habits?: [];
   tasks?: [];
   tags: string[];

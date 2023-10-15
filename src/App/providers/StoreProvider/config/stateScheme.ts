@@ -27,10 +27,12 @@ import { AddCommentScheme } from 'features/AddComment';
 import { ChallengePageScheme } from 'pages/ChallengePage';
 import { ChatScheme } from 'entities/Chat';
 import { ArticlesPageScheme } from 'pages/ArticlesPage';
+import { ScrollSaverScheme } from 'features/ScrollSaver';
 
 export interface StateScheme {
   loginForm?: LoginScheme;
   profile?: ProfileScheme;
+  ScrollSaver: ScrollSaverScheme;
   Player: PlayerScheme;
   Article?: SingleArticleScheme;
   ArticlesPage?: ArticlesPageScheme;
@@ -48,12 +50,14 @@ export interface StateScheme {
 }
 
 export type StateSchemeKey = keyof StateScheme;
+export type MountedReducers = OptionalRecord<StateSchemeKey, boolean>;
 
 export interface ReducerManager {
   getReducerMap: () => ReducersMapObject<StateScheme>;
   reduce: (state: StateScheme, action: AnyAction) => CombinedState<StateScheme>;
   add: (key: StateSchemeKey, reducer: Reducer) => void;
   remove: (key: StateSchemeKey) => void;
+  getMountedReducers: () => MountedReducers;
 }
 
 export interface ReduxStoreWithManager extends EnhancedStore<StateScheme> {

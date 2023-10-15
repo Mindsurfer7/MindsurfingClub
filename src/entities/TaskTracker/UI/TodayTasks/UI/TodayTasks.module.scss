@@ -1,0 +1,75 @@
+.TodayTasks {
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  border: 2px solid black;
+  border-radius: 4px;
+  width: 100%;
+  margin: 10px 0px 10px 0px;
+  background: var(--bg-color);
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  //   border: 2px solid black;
+  //   border-radius: 4px;
+  overflow: auto;
+  min-width: 300px;
+  min-height: 350px;
+  padding: 30px 5px 35px 5px;
+
+  z-index: 3;
+  @media (max-width: 767px) {
+    align-items: center;
+  }
+  @media (max-width: 415px) {
+    align-items: center;
+  }
+}
+
+.tasksWrapper {
+  border: 2px solid black;
+  border-radius: 4px;
+  position: relative;
+}
+
+.header {
+  background-color: var(--inverted-bg-color);
+  text-align: center;
+}
+.footer {
+  background-color: var(--inverted-bg-color);
+  text-align: center;
+}
+
+input {
+  -webkit-appearance: none;
+  appearance: none;
+
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 0.15em;
+  margin-right: 0.5em;
+  border: 1px solid #000000;
+  outline: none;
+  cursor: pointer;
+
+  &:checked {
+    background-color: rgb(9, 218, 20);
+    margin-bottom: 0;
+    &::after {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: -3px;
+      border-color: white;
+      content: '\2713';
+      visibility: visible;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import {
   Subtask,
   TaskTrackerScheme,
 } from 'entities/TaskTracker/types/taskTracker';
+import { requestTodayTasks } from '../services/requestTodayTasks';
 
 const initialState: TaskTrackerScheme = {
   showCompleted: false,
@@ -11,6 +12,8 @@ const initialState: TaskTrackerScheme = {
   description: '',
   difficulty: 1,
   isLoading: false,
+  ShowTodayTasks: false,
+  todayTasks: [],
   title: '',
   isDone: false,
   subtasks: [],
@@ -66,6 +69,9 @@ export const TaskTrackerSlice = createSlice({
     setSubtasks: (state, action: PayloadAction<Subtask[]>) => {
       state.subtasks = action.payload;
     },
+    setShowTodayTasks: (state, action: PayloadAction<boolean>) => {
+      state.ShowTodayTasks = action.payload;
+    },
 
     clearInputs: (state) => {
       state.difficulty = 1;
@@ -111,6 +117,17 @@ export const TaskTrackerSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       });
+    builder
+      .addCase(requestTodayTasks.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(requestTodayTasks.fulfilled, (state, action) => {
+        state.todayTasks = action.payload;
+      })
+      .addCase(requestTodayTasks.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
   },
 });
 
@@ -121,6 +138,7 @@ export const {
   setSelectedTag,
   clearSelectedTag,
   setSubtaskTitle,
+  setShowTodayTasks,
   setID,
   setTags,
   setTitle,

@@ -22,7 +22,8 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import NotificationBar from 'shared/UI/NotificationBar/NotificationBar';
 import NotificationIcon from 'shared/assets/icons/notification.svg';
 import { useTranslation } from 'react-i18next';
-
+import { Icon } from 'shared/UI/Icon/Icon';
+import logo from '../../../../public/LogoTransparent.svg';
 interface navprops {
   className?: string;
 }
@@ -93,6 +94,7 @@ export const NavBar = memo(({ className }: navprops) => {
     <header className={classNames(cls.navbar, {}, [className as string])}>
       {isVisible && <LoginModal isVisible={isVisible} onClose={onCloseModal} />}
       {showNotify && <NotificationBar />}
+      <Icon Svg={logo} className={cls.logo} />
       {
         <div className={cls.title}>
           <h1>{t(pageTitle)}</h1>
@@ -100,7 +102,7 @@ export const NavBar = memo(({ className }: navprops) => {
       }
       <div className={cls.links}>
         <div className={cls.notificationsBar} onClick={onOpenNotify}>
-          <NotificationIcon />
+          <Icon Svg={NotificationIcon} className={cls.notificationsBar} />
         </div>
 
         {!googleAcc?.isLogged ? (
@@ -122,7 +124,7 @@ export const NavBar = memo(({ className }: navprops) => {
             {googleAcc.account?.displayName}
           </Button>
         )}
-        {/* {username ? (
+        {username ? (
           <Button
             theme={ButtonTheme.OUTLINE}
             //className={cls.nickname}
@@ -140,7 +142,7 @@ export const NavBar = memo(({ className }: navprops) => {
           >
             login
           </Button>
-        )} */}
+        )}
       </div>
       {/* по хорошему весь сей код над выделить в компонентик для шейред слоя + add onblur*/}
       {isLogged && (

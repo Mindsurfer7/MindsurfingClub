@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './TaskCreator.module.scss';
 import Textarea from 'shared/UI/Textarea/Textarea';
@@ -25,6 +25,7 @@ import {
 import { v4 } from 'uuid';
 import { getAllTags } from 'entities/Player/model/selectors/getPlayerData';
 import { Subtask } from 'entities/TaskTracker/types/taskTracker';
+import CustomInput from 'shared/UI/CustomInput/CustomInput';
 
 interface TaskCreatorProps {
   className?: string;
@@ -66,11 +67,8 @@ const TaskCreator: React.FC<TaskCreatorProps> = (props) => {
     dispatch(setDescription(value));
   };
 
-  const onSetSubtaskTitle = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    dispatch(setSubtaskTitle({ value: e.target.value, index: index }));
+  const onSetSubtaskTitle = (value: string, index: number) => {
+    dispatch(setSubtaskTitle({ value: value, index: index }));
   };
 
   const onSetSubtask = () => {
@@ -82,8 +80,8 @@ const TaskCreator: React.FC<TaskCreatorProps> = (props) => {
     dispatch(setSubtask(subtask));
   };
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setTitle(e.target.value));
+  const onChangeHandler = (value: string) => {
+    dispatch(setTitle(value));
   };
 
   const onTaskSubmit = async () => {
@@ -94,8 +92,9 @@ const TaskCreator: React.FC<TaskCreatorProps> = (props) => {
     onClose?.();
   };
 
-  const handleInputChange = (e: any) => {
-    setInputValue(e.target.value);
+  const handleInputChange = (value: string) => {
+    //event: ChangeEvent<HTMLInputElement>
+    setInputValue(value);
   };
 
   const handleTagAdd = () => {
@@ -163,7 +162,7 @@ const TaskCreator: React.FC<TaskCreatorProps> = (props) => {
       </div>
       <div className={cls.description}>
         <div className={cls.titleWrapper}>
-          <input
+          <CustomInput
             value={trackerData.title}
             placeholder={'Введите название'}
             onChange={onChangeHandler}
@@ -183,7 +182,8 @@ const TaskCreator: React.FC<TaskCreatorProps> = (props) => {
             {subtasks?.map((sub, i) => {
               return (
                 <div className={cls.sub}>
-                  <input
+                  <div className={cls.subtaskNumber}>{i + 1}</div>
+                  <CustomInput
                     value={sub.title}
                     placeholder={'Подзадача'}
                     onChange={(e) => onSetSubtaskTitle(e, i)}
@@ -207,7 +207,7 @@ const TaskCreator: React.FC<TaskCreatorProps> = (props) => {
       <div className={cls.tags}>
         <div className={cls.Y}>
           <div className={cls.x}>
-            <input
+            <CustomInput
               value={inputValue}
               placeholder={'добавьте тэги'}
               onChange={handleInputChange}

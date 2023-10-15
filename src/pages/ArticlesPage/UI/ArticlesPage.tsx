@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ArticlesPage.module.scss';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
@@ -28,6 +28,10 @@ import {
 import { ArticleViewSelector } from 'features/ArticleViewSelector';
 import { Page } from 'widgets/Page';
 import { requestNextArticlesPage } from '../model/services/requestNextArticlesPage';
+import { initArticlesPage } from '../model/services/initArticlesPage';
+import ArticlesPageFilters from './ArticlesPageFilters/ArticlesPageFilters';
+import { useSearchParams } from 'react-router-dom';
+import { requestArticlesFirebaseTEST } from '../model/services/firebaseTestArticlesRequest';
 
 interface ArticlesPageProps {
   className?: string;
@@ -46,22 +50,15 @@ const ArticlesPage: React.FC<ArticlesPageProps> = ({ className }) => {
   const hasMore = useSelector(getArtilcesPageHasMore);
   const error = useSelector(getArtilcesPageError);
   const inited = useSelector(getArtilcesInited);
+  const [searchParams] = useSearchParams();
 
-  useInitialEffect(() => {
-    dispatch(initState());
-    dispatch(
-      requestArticlesList({
-        page: 1,
-      }),
-    );
-  });
+  // useInitialEffect(() => {
+  //   dispatch(initArticlesPage(searchParams));
+  // });
 
-  const onViewChange = useCallback(
-    (view: ArticleViewType) => {
-      dispatch(setView(view));
-    },
-    [dispatch],
-  );
+  useEffect(() => {
+    dispatch(requestArticlesFirebaseTEST(''));
+  }, []);
 
   const onLoadNextPart = useCallback(() => {
     dispatch(requestNextArticlesPage());
@@ -72,15 +69,12 @@ const ArticlesPage: React.FC<ArticlesPageProps> = ({ className }) => {
   }
 
   return (
-    <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
+    <DynamicModuleLoader reducers={reducers}>
       <Page
         onScrollEnd={onLoadNextPart}
         className={classNames(cls.ArticlesPage, {}, [className as string])}
       >
-        <ArticleViewSelector
-          view={articlesPageData?.view}
-          onViewClick={onViewChange}
-        />
+        <ArticlesPageFilters />
         <ArticlesList
           //@ts-ignore
           isLoading={isLoading}

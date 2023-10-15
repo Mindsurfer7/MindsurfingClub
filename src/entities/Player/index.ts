@@ -1,3 +1,4 @@
+import { queryUsernameByID } from './model/services/queryUsernameByID';
 import { setDailySubtaskIsDone } from './model/services/daily/setDailySubtaskIsDone';
 import { setSubtaskIsDone } from './model/services/tasks/setSubtaskIsDone';
 import { setIsDoneDailyAPI } from 'entities/Player/model/services/setIsDoneValue';
@@ -9,4 +10,5 @@ export {
   updateTaskData,
   setSubtaskIsDone,
   setDailySubtaskIsDone,
+  queryUsernameByID,
 };

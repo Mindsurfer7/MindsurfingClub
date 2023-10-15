@@ -1,4 +1,5 @@
 import React, {
+  ChangeEvent,
   InputHTMLAttributes,
   memo,
   useEffect,
@@ -16,7 +17,7 @@ type HTMLinputprops = Omit<
 interface InputProps extends HTMLinputprops {
   className?: string;
   value?: string;
-  onChange?: (value: string) => void;
+  onChange?: (value: string, index?: number) => void;
   onKeyDown?: (e: any) => void;
   autoFocus?: boolean;
   readonly?: boolean;
@@ -45,8 +46,11 @@ const CustomInput: React.FC<InputProps> = memo((props) => {
     ...otherProps
   } = props;
 
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e.target.value);
+  const onChangeHandler = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index?: number,
+  ) => {
+    onChange?.(e.target.value, index);
   };
 
   useEffect(() => {
@@ -69,10 +73,11 @@ const CustomInput: React.FC<InputProps> = memo((props) => {
     [cls.DatePicker]: DatePicker,
     [cls.textInput]: textInput,
     [cls.numberInput]: numberInput,
+    [cls.offPlaceholder]: value || type === 'date',
   };
 
   return (
-    <div className={classNames(cls.InputWrapper, mods, [className as string])}>
+    <div className={classNames(cls.InputWrapper, mods)}>
       <input
         ref={ref}
         type={type}
@@ -82,10 +87,15 @@ const CustomInput: React.FC<InputProps> = memo((props) => {
         onBlur={onBlur}
         onChange={onChangeHandler}
         onKeyDown={onKeyDown}
-        className={cls.input}
-        placeholder={placeholder}
+        className={classNames(cls.input, mods, [className as string])}
+        //placeholder={placeholder}
         name={name}
       />
+      <span
+        className={classNames(cls.placeholder, mods, [className as string])}
+      >
+        {placeholder}
+      </span>
     </div>
   );
 });

@@ -4,6 +4,7 @@ import cls from './ArticlesList.module.scss';
 import { Article, ArticleViewType } from 'entities/Article/types/article';
 import ArticleItem from '../ArticleItem/ArticleItem';
 import { ArticleItemSkeleton } from '../ArticleItem/ArticleItemSkeleton';
+import Text from 'shared/UI/Text/Text';
 
 interface ArticlesListProps {
   className?: string;
@@ -24,6 +25,8 @@ const ArticlesList: React.FC<ArticlesListProps> = ({
   isLoading,
   view = ArticleViewType.Square,
 }) => {
+  console.log(articles.length);
+
   const renderArticle = (article: Article) => (
     <ArticleItem
       article={article}
@@ -32,6 +35,14 @@ const ArticlesList: React.FC<ArticlesListProps> = ({
       key={article.id}
     />
   );
+
+  // if (!isLoading && articles.length) {
+  //   return (
+  //     <div className={classNames(cls.ArticleList, {}, [className, cls[view]])}>
+  //       <Text title="No articles found" />
+  //     </div>
+  //   );
+  // }
 
   // if (isLoading) {
   //   return (

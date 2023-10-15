@@ -13,5 +13,6 @@
   "createNewHabit": "Create new habit",
   "myHabits": "My Habits",
   "myDailyTasks": "My Daily Tasks",
-  "createNewDaily": "Create new daily"
+  "createNewDaily": "Create new daily",
+  "today": "Today"
 }

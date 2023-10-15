@@ -13,5 +13,6 @@
   "createNewHabit": "Создать новую привычку",
   "myHabits": "Мои привычки",
   "myDailyTasks": "Мои ежедневные задачи",
-  "createNewDaily": "Создать новую ежедневку"
+  "createNewDaily": "Создать новую ежедневку",
+  "today": "Сегодня"
 }

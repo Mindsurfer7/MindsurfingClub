@@ -21,6 +21,7 @@ import {
   Subtask,
   TaskTrackerScheme,
 } from 'entities/TaskTracker/types/taskTracker';
+import { setTodaySubtaskIsDone } from 'entities/TaskTracker/model/services/setTodaySubtaskIsDone';
 
 interface TaskCreatorModalProps {
   className?: string;
@@ -28,7 +29,7 @@ interface TaskCreatorModalProps {
   onClose?: () => void;
   APIcallback?: () => Promise<void>; //to pass all onChange functions with one object
   requestCallback?: () => any; //to pass all onChange functions with one object
-  taskType: 'task' | 'daily' | 'habit';
+  taskType: 'task' | 'daily' | 'habit' | 'today';
   difficulty: number;
   description: string;
   title: string;
@@ -77,6 +78,7 @@ export const TaskDisplayModal: React.FC<TaskCreatorModalProps> = (props) => {
   const onUpdateTask = async () => {
     await dispatch(updateTaskData({ id, taskType }));
   };
+
   const onRequest = async () => {};
 
   const onCloseWithClearInputs = () => {
@@ -89,6 +91,8 @@ export const TaskDisplayModal: React.FC<TaskCreatorModalProps> = (props) => {
       dispatch(setSubtaskIsDone(taskID));
     } else if (taskType === 'daily') {
       dispatch(setDailySubtaskIsDone(taskID));
+    } else if (taskType === 'today') {
+      dispatch(setTodaySubtaskIsDone(taskID));
     }
   };
 

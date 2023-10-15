@@ -16,7 +16,7 @@
 
 .title {
   width: 300px;
-  margin: 5px;
+  // text-align: center;
   input {
     margin-top: 6px;
     width: 300px;
@@ -26,7 +26,13 @@
     }
   }
 }
-
+.titleInput {
+  margin-top: 15px;
+}
+.textarea {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
 .descr {
   width: 300px;
   margin: 5px;
@@ -69,7 +75,7 @@
   }
 }
 .points {
-  margin: 5px;
+  margin-top: 10px;
   input {
     margin-top: 4px;
     width: 150px;

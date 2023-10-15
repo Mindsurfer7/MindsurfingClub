@@ -20,6 +20,7 @@ import { TaskTrackerReducer } from 'entities/TaskTracker/model/slice/TaskTracker
 import { CommunityReducer } from 'entities/Community/model/slice/communitySlice';
 import { ChallengeReducer } from 'entities/Challenge/model/slice/ChallengeSlice';
 import { ChatReducer } from 'entities/Chat/model/slice/chatSlice';
+import { scrollSaverReducer } from 'features/ScrollSaver/model/slice/scrollSaverSlice';
 
 export function createReduxStore(
   initialState?: StateScheme,
@@ -30,6 +31,7 @@ export function createReduxStore(
     user: userReducer,
     Player: PlayerReducer,
     TaskTracker: TaskTrackerReducer,
+    ScrollSaver: scrollSaverReducer,
     Community: CommunityReducer,
     Challenge: ChallengeReducer,
     Chat: ChatReducer,

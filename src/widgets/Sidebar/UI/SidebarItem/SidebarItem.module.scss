@@ -40,8 +40,8 @@
 
 .expanded {
   .link {
-    flex-grow: 1;
-    text-align: center;
+    // flex-grow: 1;
+    // text-align: center;
   }
 
   &:hover {
@@ -58,7 +58,8 @@
 .icon {
   fill: var(--primary-color);
   transition: fill 0.1s;
-  margin-left: 10px;
+  // margin-left: 10px;
+  margin-right: 10px;
 }
 
 .background {

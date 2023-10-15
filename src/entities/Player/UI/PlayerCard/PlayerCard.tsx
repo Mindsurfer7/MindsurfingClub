@@ -19,10 +19,12 @@ import {
   clearSelectedTag,
   setSelectedTag,
   setShowCompleted,
+  setShowTodayTasks,
 } from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
 import {
   getSelectedTag,
   getShowCompleted,
+  getShowTodayTasks,
 } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
 import {
   clearTags,
@@ -58,6 +60,7 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
   const isAuth = useSelector(getGoogleIsLogged);
   const selectedTag = useSelector(getSelectedTag);
   const showChallenges = useSelector(getShowChallenges);
+  const showTodayTasks = useSelector(getShowTodayTasks);
 
   const sortedTags = [...allTags].sort((a, b) => a.length - b.length);
 
@@ -125,6 +128,9 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
   const onShowChallenges = () => {
     dispatch(setShowChallenges(!showChallenges));
   };
+  const onShowToday = () => {
+    dispatch(setShowTodayTasks(!showTodayTasks));
+  };
 
   const onDisplayByTag = (tag: string) => {
     dispatch(displayTasksByTag(tag));
@@ -181,6 +187,14 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
               onClick={onShowCompleted}
             >
               {t('completed')}
+            </Button>
+            <Button
+              theme={
+                showTodayTasks ? ButtonTheme.FILLED_GREEN : ButtonTheme.OUTLINE
+              }
+              onClick={onShowToday}
+            >
+              {t('today')}
             </Button>
           </div>
         </div>

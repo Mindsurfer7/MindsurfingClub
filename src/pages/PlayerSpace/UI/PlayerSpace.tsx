@@ -22,6 +22,8 @@ import { ChallengesList, getShowChallenges } from 'entities/Challenge';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import { useTranslation } from 'react-i18next';
 import { Page } from 'widgets/Page';
+import TodayTasks from 'entities/TaskTracker/UI/TodayTasks/UI/TodayTasks';
+import { getShowTodayTasks } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
 
 interface PlayerSpaceProps {
   className?: string;
@@ -33,6 +35,7 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
   const isAuth = useSelector(getGoogleIsLogged);
 
   const showChallenges = useSelector(getShowChallenges);
+  const showTodayTasks = useSelector(getShowTodayTasks);
 
   useEffect(() => {
     if (isAuth) {
@@ -74,7 +77,7 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
   return (
     <Page className={classNames(cls.PlayerSpace, {}, [className as string])}>
       <PlayerCard />
-
+      {showTodayTasks && <TodayTasks />}
       {showChallenges ? (
         <ChallengesList />
       ) : (

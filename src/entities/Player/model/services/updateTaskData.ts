@@ -8,6 +8,8 @@ import { addNewTag } from './addNewTag';
 import { requestTasks } from './requestTasks';
 import { requestHabits } from './requestHabits';
 import { requestDailyz } from './requestDailyz';
+import { Daily, Task } from 'entities/Player/types/player';
+import { requestTodayTasks } from 'entities/TaskTracker/model/services/requestTodayTasks';
 
 // {id: string, taskTypeArray: boolean[]}
 
@@ -18,7 +20,7 @@ export const updateTaskData = createAsyncThunk<any, any, ThunkConfig<any>>(
     const trackerData = getTaskTrackerData(thunkAPI.getState());
     const playerDocRef = doc(GPT_DB, 'accounts', `${userID}`);
 
-    //принимать должна данные таска она хэбит или дейлик
+    //trackerData берет данные из инпута в состоянии edit / create task
     const updatedTask: any = {
       id: id,
       description: trackerData.description,
@@ -73,6 +75,19 @@ export const updateTaskData = createAsyncThunk<any, any, ThunkConfig<any>>(
             daily: dailys,
           });
           thunkAPI.dispatch(requestDailyz());
+        }
+      } else if (taskType === 'today') {
+        const todays = playerDoc.data()?.today || [];
+
+        const elementIndexD = todays.findIndex((x: Task) => x.id === id);
+
+        if (elementIndexD !== -1) {
+          todays[elementIndexD] = updatedTask;
+
+          await updateDoc(playerDocRef, {
+            today: todays,
+          });
+          thunkAPI.dispatch(requestTodayTasks());
         }
       }
     } catch (error) {

@@ -1,0 +1,28 @@
+.logo {
+  margin-top: 100px;
+  rotate: (-180deg);
+  fill: transparent; // var(--inverted-bg-color);
+  width: 400px;
+  height: 400px;
+  fill: var(--bg-color);
+  transition: transform 0.9s;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+    transform: rotate(180deg);
+  }
+  &:active {
+    transform: translateY(1px);
+  }
+
+  //   &:hover {
+  //     rotate: (180deg);
+  //     transform: (360deg);
+  //     transition: all 0.7s;
+  //     cursor: pointer;
+  //   }
+}
+
+.about {
+  //   background-color: rgb(43, 42, 42);
+}

@@ -5,6 +5,11 @@ export enum ArticleBlockType {
   IMAGE = 'IMAGE',
   TEXT = 'TEXT',
 }
+export enum ArticleSortField {
+  VIEWS = 'views',
+  TITLE = 'title',
+  CREATED = 'createdAt',
+}
 
 export enum ArticleViewType {
   Square = 'square',
@@ -45,6 +50,7 @@ export type ArticleBlock =
   | ArticleTextBlockType;
 
 export enum ArticleType {
+  ALL = 'ALL',
   IT = 'IT',
   SCIENCE = 'SCIENCE',
   ECONOMICS = 'PSYCHOLOGY',

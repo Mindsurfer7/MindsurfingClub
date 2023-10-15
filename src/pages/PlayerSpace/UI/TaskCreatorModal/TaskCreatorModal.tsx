@@ -10,8 +10,8 @@ interface TaskCreatorModalProps {
   className?: string;
   isVisible?: boolean;
   onClose?: () => void;
-  APIcallback: () => Promise<void>; //to pass all onChange functions with one object
-  requestCallback: () => any; //to pass all onChange functions with one object
+  APIcallback: () => Promise<void>; //сабмит формы
+  requestCallback: () => any; //чтобы запросить новый json с обновленными тасками
 }
 
 export const TaskCreatorModal: React.FC<TaskCreatorModalProps> = (props) => {

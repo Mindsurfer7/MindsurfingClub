@@ -146,6 +146,10 @@ img {
 
 .buttnz {
   display: flex;
+
+  @media (max-width: 415px) {
+    flex-wrap: wrap;
+  }
 }
 
 .tags {

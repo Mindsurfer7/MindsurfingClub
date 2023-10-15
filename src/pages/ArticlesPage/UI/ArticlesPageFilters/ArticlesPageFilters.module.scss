@@ -1,0 +1,29 @@
+.SortWrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+}
+
+.Search {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: var(--bg-color);
+  background: transparent;
+}
+
+.searchInput {
+  border-radius: 4px;
+  // background: var(--bg-color) !important;
+  background: transparent !important;
+  // color: white !important;
+
+  span {
+    display: none !important;
+    // position: absolute;
+    // top: 0;
+    background: transparent !important; // var(--bg-color) !important;
+    // color: white !important; //var(--primary-color)
+  }
+}

@@ -19,6 +19,7 @@ import {
 import { resetChangedFields } from '../model/slice/ChallengeSlice';
 import Input from 'shared/UI/Input/Input';
 import CustomInput from 'shared/UI/CustomInput/CustomInput';
+import { useTranslation } from 'react-i18next';
 
 interface ChallengeCreatorProps {
   className?: string;
@@ -35,6 +36,7 @@ const ChallengeCreator: React.FC<ChallengeCreatorProps> = ({
   onClose,
 }) => {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation('ChallengePage');
   const [titleError, setTitleError] = useState('');
   const [dateError, setDateError] = useState('');
   const { description, title, startDate, endDate, executionType, points } =
@@ -76,9 +78,9 @@ const ChallengeCreator: React.FC<ChallengeCreatorProps> = ({
 
   const handleSubmit = async (event: any) => {
     if (startDate === '' || endDate === '') {
-      setDateError('Установите даты начала и конца');
+      setDateError(t('Set start and end dates'));
     } else if (title === '') {
-      setTitleError('Название необходимо задать');
+      setTitleError(t('Title is required'));
     } else {
       event.preventDefault();
       await dispatch(createNewChallenge(communityID));
@@ -91,29 +93,29 @@ const ChallengeCreator: React.FC<ChallengeCreatorProps> = ({
   return (
     <div className={classNames(cls.TaskCreator, {}, [className as string])}>
       <div className={cls.title}>
-        Название челленджа:
+        <span className={cls.titleText}>{t('challengeName')}</span>
         <CustomInput
           textInput
           placeholder="Название"
           value={title}
           onChange={handleTitleChange}
+          className={cls.titleInput}
         />
         {titleError && <div className={cls.error}>{titleError}</div>}
       </div>
       <div className={cls.descr}>
-        Описание:
         <Textarea
           placeholder="Опишите смысл, правила и цели челленджа"
           name="description"
           value={description}
           onChange={handleDescriptionChange}
+          className={cls.textarea}
         />
       </div>
       <div className={cls.dates}>
         <div className={cls.startDate}>
-          Дата начала:
           <CustomInput
-            placeholder="StartDate"
+            placeholder={t('Start Date')}
             DatePicker
             type="date"
             value={startDate}
@@ -121,9 +123,8 @@ const ChallengeCreator: React.FC<ChallengeCreatorProps> = ({
           />
         </div>
         <div className={cls.endDate}>
-          Дата конца:
           <CustomInput
-            placeholder="EndDate"
+            placeholder={t('End Date')}
             type="date"
             DatePicker
             value={endDate}
@@ -147,10 +148,9 @@ const ChallengeCreator: React.FC<ChallengeCreatorProps> = ({
         </Select>
       </div> */}
       <div className={cls.points}>
-        Количество очков за выполнение:
         <div className={cls.x}>
           <CustomInput
-            placeholder="Points per Execution"
+            placeholder={t('Points per Execution')}
             type="number"
             numberInput
             name="points"
@@ -163,7 +163,7 @@ const ChallengeCreator: React.FC<ChallengeCreatorProps> = ({
             theme={ButtonTheme.OUTLINE}
             onClick={handleSubmit}
           >
-            Create Challenge
+            {t('Create Challenge')}
           </Button>
         </div>
       </div>

@@ -1,33 +1,24 @@
-textarea {
-  background: transparent;
-  border: 2px solid black;
-  border-radius: 6px;
-  outline: none;
-  width: 100%;
-  text-shadow: 0 0 0 var(--primary-color);
-  padding: 10px;
-  color: white;
-  // min-height: 100px;
-  max-width: 100%;
-  max-height: 55px;
-
-  &:focus {
-    outline: none;
-  }
-}
-
 .customTextarea {
   padding: 10px;
   font-size: 16px;
-  background-color: rgb(117, 95, 95);
-  border: 2px solid #ccc;
+  background-color: var(--inverted-bg-color);
+  border: 1px solid var(--inv-secondary-color);
+  color: var(--input-color);
   border-radius: 4px;
   outline: none;
   resize: vertical;
-  transition: border-color 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  overflow-y: hidden;
+  width: 100%;
+  min-height: 55px;
+
+  &:hover {
+    background-color: var(--light-bg-color);
+  }
 
   &:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-color: var(--inv-secondary-color);
+    box-shadow: 0 0 5px var(--inv-secondary-color);
+    background-color: var(--inv-primary-color);
   }
 }

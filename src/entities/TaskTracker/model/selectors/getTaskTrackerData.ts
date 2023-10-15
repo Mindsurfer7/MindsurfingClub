@@ -9,6 +9,9 @@ export const getTags = (state: StateScheme) => {
 export const getShowCompleted = (state: StateScheme) => {
   return state.TaskTracker.showCompleted;
 };
+export const getShowTodayTasks = (state: StateScheme) => {
+  return state.TaskTracker.ShowTodayTasks;
+};
 export const getSelectedTag = (state: StateScheme) => {
   return state.TaskTracker.selectedTag;
 };
@@ -18,4 +21,7 @@ export const getDifficulty = (state: StateScheme) => {
 
 export const getSubtasks = (state: StateScheme) => {
   return state.TaskTracker.subtasks;
+};
+export const getTodayTasks = (state: StateScheme) => {
+  return state.TaskTracker.todayTasks;
 };

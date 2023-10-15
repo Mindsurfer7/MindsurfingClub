@@ -7,7 +7,7 @@ import {
 } from 'shared/lib/DynamicModuleLoader/DynamicModuleLoader';
 import { ArticleReducer } from 'entities/Article/model/slice/ArticleSlice';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { requestArticleByID } from 'entities/Article/model/services/requestArticleByID';
+import { requestArticleByID } from 'entities/Article/model/services/firebaseAPI/requestArticleByID';
 import { useSelector } from 'react-redux';
 import {
   getArticleData,
@@ -45,7 +45,8 @@ const SingleArticle: React.FC<SingleArticleProps> = memo(
 
     useEffect(() => {
       if (PROJECT !== 'storybook') {
-        dispatch(fetchArticleById(ID));
+        // dispatch(fetchArticleById(ID));
+        dispatch(requestArticleByID(ID));
       }
     }, [dispatch, ID]);
 

@@ -64,10 +64,24 @@
   }
 }
 
+.logo {
+  rotate: (360deg);
+  fill: transparent; // var(--inverted-bg-color);
+  width: 50px;
+  height: 50px;
+  &:hover {
+    rotate: (-360deg);
+    transform: (360deg);
+    transition: all 0.5s;
+    cursor: pointer;
+  }
+}
+
 .links {
   display: flex;
   margin: 5px;
   margin-left: auto;
+  align-items: center;
 }
 
 .login {
@@ -109,6 +123,12 @@
 }
 
 .notificationsBar {
+  display: flex;
+  align-items: center;
+  margin-right: 4px;
+  svg {
+    fill: var(--primary-color);
+  }
 }
 .notificationsBar:hover {
   cursor: pointer;

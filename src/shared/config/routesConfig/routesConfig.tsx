@@ -1,19 +1,17 @@
-import AboutPage from 'pages/about/UI/AboutPage';
-
 import { RouteProps } from 'react-router-dom';
 import { MainPage } from 'pages/main';
 import { PsyRoom } from 'pages/PsyRoom';
 import Error404 from 'pages/404/Error404';
-import PracticeCenter from 'pages/PracticeCenter/UI/PracticeCenter';
-import { ProfilePageAsync } from 'pages/ProfilePage'; //import ProfilePage from 'pages/ProfilePage/UI/ProfilePage';
+import { ProfilePageAsync } from 'pages/ProfilePage';
 import ChatWindow from 'pages/PsyRoom/UI/ChatWindow/ChatWindow';
 import { ArticlesPageAsync } from 'pages/ArticlesPage';
 import { PlayerSpaceAsync } from 'pages/PlayerSpace';
 import { ArticleDetailsPageAsync } from 'pages/ArticleDetails';
 import { CommunityAsync } from 'pages/Community/UI/Community.async';
 import { SingleGroupPageAsync } from 'pages/SingleGroupPage';
-import ChallengePage from 'pages/ChallengePage/UI/ChallengePage';
 import { ChallengePageAsync } from 'pages/ChallengePage';
+import { AboutPageLazy } from 'pages/about';
+import { PracticeCenterAsync } from 'pages/PracticeCenter';
 
 export type AppRoutesProps = RouteProps & {
   authOnly?: boolean;
@@ -65,7 +63,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   },
   [AppRoutes.About]: {
     path: RoutePath[AppRoutes.About],
-    element: <AboutPage />,
+    element: <AboutPageLazy />,
   },
   [AppRoutes.PsyRoom]: {
     path: RoutePath[AppRoutes.PsyRoom],
@@ -83,7 +81,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   },
   [AppRoutes.PracticeCenter]: {
     path: RoutePath[AppRoutes.PracticeCenter],
-    element: <PracticeCenter />,
+    element: <PracticeCenterAsync />,
   },
   [AppRoutes.PlayerSpace]: {
     path: RoutePath[AppRoutes.PlayerSpace],

@@ -19,6 +19,7 @@ import {
   setTitle,
 } from 'entities/Community';
 import { useTranslation } from 'react-i18next';
+import CustomInput from 'shared/UI/CustomInput/CustomInput';
 
 interface GroupCreatorProps {
   className?: string;
@@ -80,7 +81,7 @@ const GroupCreator: React.FC<GroupCreatorProps> = ({
   return (
     <div className={classNames(cls.TaskCreator, {}, [className as string])}>
       <div className={cls.description}>
-        <Input
+        <CustomInput
           value={title}
           placeholder={t('enterGroupName')}
           onChange={(val) => onSetTitle(val)}

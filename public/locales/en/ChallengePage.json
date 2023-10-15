@@ -5,5 +5,14 @@
   "End day:": "End day:",
   "Leaderboard": "Leaderboard",
   "Day": "Day",
-  "IsDone": "Is Done"
+  "IsDone": "Is Done",
+  "Challenge Title": "Challenge Title",
+  "challengeName": "Create your own challenge!",
+  "Description": "Description",
+  "Start Date": "Start Date",
+  "End Date": "End Date",
+  "Points per Execution": "Points per Execution",
+  "Set start and end dates": "Set start and end dates",
+  "Title is required": "Title is required",
+  "Create Challenge": "Create Challenge"
 }

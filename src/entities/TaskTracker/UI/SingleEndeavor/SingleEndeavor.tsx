@@ -17,9 +17,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import { rewardCoins } from 'entities/Player/model/services/InGameActions/rewardCoins';
 import { saveNotification } from 'entities/Player/model/services/InGameActions/saveNotification';
 import { Subtask } from 'entities/TaskTracker/types/taskTracker';
+import { Icon } from 'shared/UI/Icon/Icon';
+import OpenSubtasksIcon from '../../../../shared/assets/icons/collapseBtn.svg';
 
 interface SingleEndeavorProps {
   onRemove: (id: string) => Promise<void>;
+  APIcallback?: () => Promise<void>;
   onRequest: () => void;
   difficulty: number;
   description: string;
@@ -29,13 +32,14 @@ interface SingleEndeavorProps {
   isDone: boolean;
   tags: string[];
   id: string;
-  taskType: 'task' | 'daily' | 'habit';
+  taskType: 'task' | 'daily' | 'habit' | 'today';
 }
 
 const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
   const {
     onRemove,
     onRequest,
+    APIcallback,
     className,
     title,
     difficulty,
@@ -47,6 +51,7 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
 
   const dispatch = useAppDispatch();
   const [isVisible2, setVisibility2] = useState(false);
+  const [openSubtasks, setOpenSubtasks] = useState(false);
 
   const notify = (points?: number, coins?: number) => {
     toast.success(`You have earned ${points} points!`, {
@@ -153,6 +158,15 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
     [cls['isDone']]: isDone,
   };
 
+  const onSubtasksOpen = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
+    console.log(subtasks);
+
+    setOpenSubtasks(!openSubtasks);
+  };
+
   if (taskType === 'daily') {
     return (
       <div
@@ -172,8 +186,18 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
           </div>
 
           <div onClick={onOpenModal2} className={cls.title}>
-            {title}
+            {title}{' '}
+            {subtasks && subtasks?.length > 0 && (
+              <div
+                className={cls.openSubtasks}
+                onClick={(event) => onSubtasksOpen(event)}
+              >
+                {' '}
+                <Icon className={cls.icon} Svg={OpenSubtasksIcon} />
+              </div>
+            )}
           </div>
+
           <div className={cls.deleteBtn}>
             <Button onClick={removeHandler} className={cls.xIcon}>
               X
@@ -200,6 +224,13 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
           pauseOnHover
           theme="colored"
         />
+        {openSubtasks && (
+          <div className={cls.subtasksMap}>
+            {subtasks?.map((s) => {
+              return <div className={cls.singleSubtask}>{s.title}</div>;
+            })}
+          </div>
+        )}
       </div>
     );
   }
@@ -214,14 +245,21 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
             <input
               type="checkbox"
               checked={isDone}
-              onChange={() => {
-                onCheckBoxChangeTasks();
-              }}
+              onChange={onCheckBoxChangeTasks}
             ></input>
           </div>
 
           <div onClick={onOpenModal2} className={cls.title}>
             {title}
+            {subtasks && subtasks?.length > 0 && (
+              <div
+                className={cls.openSubtasks}
+                onClick={(event) => onSubtasksOpen(event)}
+              >
+                {' '}
+                <Icon className={cls.icon} Svg={OpenSubtasksIcon} />
+              </div>
+            )}
           </div>
 
           <div className={cls.deleteBtn}>
@@ -251,6 +289,76 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
           pauseOnHover
           theme="colored"
         />
+        {openSubtasks && (
+          <div className={cls.subtasksMap}>
+            {subtasks?.map((s) => {
+              return <div className={cls.singleSubtask}>{s.title}</div>;
+            })}
+          </div>
+        )}
+      </div>
+    );
+  } else if (taskType === 'today') {
+    return (
+      <div
+        className={classNames(cls.SingleEndeavor, mods, [className as string])}
+      >
+        <div className={cls.Wrapper}>
+          <div className={cls.plusBtn}>
+            <input
+              type="checkbox"
+              checked={isDone}
+              onChange={APIcallback}
+            ></input>
+          </div>
+
+          <div onClick={onOpenModal2} className={cls.title}>
+            {title}
+            {subtasks && subtasks?.length > 0 && (
+              <div
+                className={cls.openSubtasks}
+                onClick={(event) => onSubtasksOpen(event)}
+              >
+                {' '}
+                <Icon className={cls.icon} Svg={OpenSubtasksIcon} />
+              </div>
+            )}
+          </div>
+
+          <div className={cls.deleteBtn}>
+            <Button onClick={removeHandler} className={cls.xIcon}>
+              X
+            </Button>
+          </div>
+        </div>
+
+        {isVisible2 && (
+          <TaskDisplayModal
+            isVisible={isVisible2}
+            onClose={onCloseModal2}
+            subtasks={subtasks}
+            {...props}
+          />
+        )}
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
+        {openSubtasks && (
+          <div className={cls.subtasksMap}>
+            {subtasks?.map((s) => {
+              return <div className={cls.singleSubtask}>{s.title}</div>;
+            })}
+          </div>
+        )}
       </div>
     );
   }
@@ -266,6 +374,15 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
 
         <div onClick={onOpenModal2} className={cls.title}>
           {title}
+          {subtasks && subtasks?.length > 0 && (
+            <div
+              className={cls.openSubtasks}
+              onClick={(event) => onSubtasksOpen(event)}
+            >
+              {' '}
+              <Icon className={cls.icon} Svg={OpenSubtasksIcon} />
+            </div>
+          )}
         </div>
 
         <div className={cls.deleteBtn}>
@@ -294,6 +411,13 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
         pauseOnHover
         theme="colored"
       />
+      {openSubtasks && (
+        <div className={cls.subtasksMap}>
+          {subtasks?.map((s) => {
+            return <div className={cls.singleSubtask}>{s.title}</div>;
+          })}
+        </div>
+      )}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Article, SingleArticleScheme } from 'entities/Article/types/article';
-import { requestArticleByID } from '../services/requestArticleByID';
+import { requestArticleByID } from '../services/firebaseAPI/requestArticleByID';
 import { fetchArticleById } from '../services/fetchArticleById';
 
 const initialState: SingleArticleScheme = {
@@ -25,6 +25,20 @@ export const ArticleSlice = createSlice({
         },
       )
       .addCase(fetchArticleById.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(requestArticleByID.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        requestArticleByID.fulfilled,
+        (state, action: PayloadAction<Article>) => {
+          state.isLoading = false;
+          state.data = action.payload;
+        },
+      )
+      .addCase(requestArticleByID.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });

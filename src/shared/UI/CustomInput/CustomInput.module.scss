@@ -42,22 +42,58 @@
 //     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 //   }
 // }
-.textInput,
-.numberInput,
-.datePickerInput {
-  padding: 0px;
-  height: 28px;
-  font-size: 16px;
-  // border: 2px solid #ccc;
-  border-radius: 7px;
-  outline: none;
-  // width: 100%;
-  transition: border-color 0.3s ease-in-out;
+
+.InputWrapper {
+  position: relative;
 }
 
-.textInput:focus,
-.numberInput:focus,
-.datePickerInput:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+.InputWrapper input {
+  border: 1px solid var(--inv-secondary-color);
+  background: var(--inverted-bg-color);
+  width: 100%;
+  height: 35px;
+  cursor: text;
+  padding: 10px;
+  outline: none;
+  // color: var(--primary-color);
+  // color: var(--secondary-color);
+  color: var(--input-color);
+  transition: 0.3s;
+  &:hover {
+    background-color: var(--light-bg-color);
+  }
+
+  // &:valid .placeholder,
+  // &:focus .placeholder {
+  //   color: rgb(50, 195, 240);
+  //   transform: translateX(10px);
+  // }
+}
+
+.InputWrapper input:focus + span {
+  color: var(--inv-secondary-color); //50, 195, 240
+  transform: translateX(10px) translateY(-19px);
+  background-color: var(--inverted-bg-color);
+}
+
+.offPlaceholder span {
+  color: var(--inv-secondary-color);
+  transform: translateX(10px) translateY(-19px);
+  background-color: var(--inverted-bg-color);
+}
+
+.InputWrapper span {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  font-family: inherit;
+  pointer-events: none;
+  font-size: 14px;
+  color: var(--secondary-color);
+  transition: 0.3s;
+  &:valid,
+  &:focus {
+    color: rgb(50, 195, 240);
+    transform: translateX(10px);
+  }
 }

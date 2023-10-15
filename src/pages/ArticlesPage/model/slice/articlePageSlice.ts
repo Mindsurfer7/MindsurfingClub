@@ -1,3 +1,4 @@
+import { SortOrder } from './../../../../shared/types/index';
 import {
   createEntityAdapter,
   createSlice,
@@ -10,6 +11,8 @@ import { CommentType } from 'entities/Comment';
 import { ArticlesPageScheme } from '../types/articlesPageScheme';
 import { requestArticlesList } from '../services/requestArticlesList';
 import { ARTICLE_VIEW_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
+import { ArticleSortField, ArticleType } from 'entities/Article/types/article';
+import { requestArticlesFirebaseTEST } from '../services/firebaseTestArticlesRequest';
 
 const articlesAdapter = createEntityAdapter<Article>({
   selectId: (article) => article.id,
@@ -30,6 +33,10 @@ const articlesPageSlice = createSlice({
     page: 1,
     hasMore: true,
     _inited: false,
+    sort: ArticleSortField.VIEWS,
+    search: '',
+    order: 'desc',
+    type: ArticleType.ALL,
   }),
   reducers: {
     setView: (state, action: PayloadAction<ArticleViewType>) => {
@@ -40,35 +47,62 @@ const articlesPageSlice = createSlice({
     setPage: (state, action: PayloadAction<number>) => {
       state.page = action.payload;
     },
+    setSearch: (state, action: PayloadAction<string>) => {
+      state.search = action.payload;
+    },
+    setOrder: (state, action: PayloadAction<SortOrder>) => {
+      state.order = action.payload;
+    },
+    setSort: (state, action: PayloadAction<ArticleSortField>) => {
+      state.sort = action.payload;
+    },
+    setType: (state, action: PayloadAction<ArticleType>) => {
+      state.type = action.payload;
+    },
     initState: (state) => {
       const view = localStorage.getItem(
         ARTICLE_VIEW_LOCALSTORAGE_KEY,
       ) as ArticleViewType;
       state.view = view;
-      // state.limit = state.view === ArticleViewType.Rectangle ? 4 : 9;
       state.limit = view === ArticleViewType.Rectangle ? 4 : 9;
       state._inited = true;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(requestArticlesList.pending, (state) => {
+      .addCase(requestArticlesFirebaseTEST.pending, (state, action) => {
+        //requestArticlesList
         state.error = undefined;
         state.isLoading = true;
+
+        if (action.meta.arg.replace) {
+          articlesAdapter.removeAll(state);
+        }
       })
-      .addCase(
-        requestArticlesList.fulfilled,
-        (state, action: PayloadAction<Article[]>) => {
-          state.isLoading = false;
+      .addCase(requestArticlesFirebaseTEST.fulfilled, (state, action) => {
+        //PayloadAction<Article[]>
+        state.isLoading = false;
+        state.hasMore = action.payload.length > 0;
+
+        if (action.meta.arg.replace) {
+          articlesAdapter.setAll(state, action.payload);
+        } else {
           articlesAdapter.addMany(state, action.payload);
-          state.hasMore = action.payload.length > 0;
-        },
-      )
-      .addCase(requestArticlesList.rejected, (state, action) => {
+        }
+      })
+      .addCase(requestArticlesFirebaseTEST.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });
   },
 });
-export const { setPage, setView, initState } = articlesPageSlice.actions;
+export const {
+  setPage,
+  setView,
+  initState,
+  setOrder,
+  setSearch,
+  setSort,
+  setType,
+} = articlesPageSlice.actions;
 export const { reducer: articlesPageReducer } = articlesPageSlice;

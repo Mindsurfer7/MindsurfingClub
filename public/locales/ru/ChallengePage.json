@@ -5,5 +5,14 @@
   "End day:": "Конец:",
   "Leaderboard": "Таблица лидеров",
   "Day": "День",
-  "IsDone": "Сделано"
+  "IsDone": "Сделано",
+  "Challenge Title": "Название испытания",
+  "challengeName": "Создайте свое испытание!",
+  "Description": "Описание",
+  "Start Date": "Дата начала",
+  "End Date": "Дата конца",
+  "Points per Execution": "Очки за выполнение",
+  "Set start and end dates": "Установите даты начала и конца",
+  "Title is required": "Название необходимо задать",
+  "Create Challenge": "Создать испытание"
 }
