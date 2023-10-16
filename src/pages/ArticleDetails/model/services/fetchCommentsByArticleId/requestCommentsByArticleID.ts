@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'App/providers/StoreProvider';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
+import { queryUsernameByID } from 'entities/Player';
 
 export const requestCommentsByArticleID = createAsyncThunk<
   any,
@@ -13,15 +14,34 @@ export const requestCommentsByArticleID = createAsyncThunk<
   try {
     const q = query(commentsRef, where('articleID', '==', articleID));
     const response = await getDocs(q);
+    const comments = [];
 
-    const filteredResponse = response.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    }));
+    for (const doc of response.docs) {
+      const commentData = doc.data();
+      const userID = commentData.userID;
 
-    console.log(filteredResponse);
+      // Fetch username for the current user ID
+      const usernameResponse = await thunkAPI.dispatch(
+        queryUsernameByID(userID),
+      );
 
-    return filteredResponse;
+      console.log(usernameResponse);
+
+      // Assuming your queryUsernameByID thunk returns an array, get the first item
+      const username = usernameResponse ? usernameResponse.payload : 'Unknown';
+
+      // Replace user ID with username in the comment data
+      const commentWithUsername = {
+        ...commentData,
+        username,
+      };
+
+      comments.push(commentWithUsername);
+    }
+
+    console.log(comments);
+
+    return comments;
   } catch (e) {
     console.log(e);
     return thunkAPI.rejectWithValue('error');

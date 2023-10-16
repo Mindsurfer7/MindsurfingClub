@@ -12,6 +12,7 @@ import {
 import {
   articleDetailsCommentsReducer,
   getArticleComments,
+  setArticleID,
 } from '../model/slice/ArticleDetailsCommentsSlice';
 import { useSelector } from 'react-redux';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
@@ -25,6 +26,9 @@ import { useTranslation } from 'react-i18next';
 import { RoutePath } from 'shared/config/routesConfig/routesConfig';
 import { Page } from 'widgets/Page';
 import { requestCommentsByArticleID } from '../model/services/fetchCommentsByArticleId/requestCommentsByArticleID';
+import { addComment } from 'features/AddComment/model/services/addComment';
+import { v4 } from 'uuid';
+import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -39,6 +43,7 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
 }) => {
   const { articleID } = useParams<{ articleID: string }>();
   const comments = useSelector(getArticleComments.selectAll);
+  const userID = useSelector(getGoogleID);
   const commentsAreLoading = useSelector(getCommentsIsLoading);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -52,14 +57,19 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
   useEffect(() => {
     if (articleID) {
       dispatch(requestCommentsByArticleID(articleID));
+      dispatch(setArticleID(articleID));
     }
   }, [articleID]);
 
   const onCommentSend = useCallback(
     (text: string) => {
-      dispatch(addCommentForArticle(text));
+      if (!userID) {
+        alert('Please, log in');
+      }
+      dispatch(addCommentForArticle(text)); //mock server
+      dispatch(addComment({ ID: v4() })); //firebase server
     },
-    [dispatch],
+    [dispatch, userID],
   );
 
   const onBackToList = useCallback(() => {

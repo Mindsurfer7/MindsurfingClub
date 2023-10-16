@@ -1,20 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'App/providers/StoreProvider';
-import {
-
-  doc,
-
-  setDoc,
-
-} from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
-import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
-
+import {
+  getGoogleID,
+  getGoogleProfile,
+} from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 
 export const initializePlayer = createAsyncThunk<any, void, ThunkConfig<any>>(
   'Player/initializePlayer',
   async (payload, thunkAPI) => {
     const userID = getGoogleID(thunkAPI.getState());
+    const profile = getGoogleProfile(thunkAPI.getState());
 
     const playerDocRef = doc(GPT_DB, 'accounts', `${userID}`);
 
@@ -26,7 +23,7 @@ export const initializePlayer = createAsyncThunk<any, void, ThunkConfig<any>>(
           health: 100,
           level: 0,
           points: 10,
-          username: 'Mindsurfer',
+          username: profile?.displayName || 'Unknown',
           new: false,
         },
         AllTags: ['Monday'],

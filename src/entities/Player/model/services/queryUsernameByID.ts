@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'App/providers/StoreProvider';
-import { collection, getDocs, query, where } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
 
 export const queryUsernameByID = createAsyncThunk<
@@ -8,19 +8,22 @@ export const queryUsernameByID = createAsyncThunk<
   string,
   ThunkConfig<any>
 >('ArticleComments/queryUsernameByID', async (userID, thunkAPI) => {
-  const accRef = collection(GPT_DB, 'accounts');
+  const accRef = doc(GPT_DB, 'accounts', userID);
 
   try {
-    const q = query(accRef, where('UID', '==', userID));
-    const response = await getDocs(q);
+    const docSnap = await getDoc(accRef);
 
-    const filteredResponse = response.docs.map((doc) => ({
-      ...doc.data(),
-    }));
+    if (docSnap.exists()) {
+      const userData = docSnap.data().Player;
+      const username = userData.username;
 
-    console.log(filteredResponse);
+      console.log(userData);
 
-    return filteredResponse;
+      return username;
+    } else {
+      console.log('Пользователь не найден');
+      return 'Unknown User';
+    }
   } catch (e) {
     console.log(e);
     return thunkAPI.rejectWithValue('error');

@@ -7,10 +7,6 @@ import { CommentType } from 'entities/Comment/model/types/comment';
 import Skeleton from 'shared/UI/Skeleton/Skeleton';
 import AppLink from 'shared/UI/AppLink/AppLink';
 import { RoutePath } from 'shared/config/routesConfig/routesConfig';
-import { useSelector } from 'react-redux';
-import { getPlayerProfile } from 'entities/Player/model/selectors/getPlayerData';
-import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { queryUsernameByID } from 'entities/Player';
 
 interface CommentCardProps {
   className?: string;
@@ -23,12 +19,6 @@ const CommentCard: React.FC<CommentCardProps> = ({
   comment,
   isLoading,
 }) => {
-  const dispatch = useAppDispatch();
-
-  // useEffect(() => {
-  //   dispatch(queryUsernameByID(comment.userID));
-  // }, []);
-
   if (isLoading) {
     return (
       <div className={classNames(cls.CommentCard, {}, [className])}>
@@ -45,14 +35,12 @@ const CommentCard: React.FC<CommentCardProps> = ({
     <div className={classNames(cls.CommentCard, {}, [className as string])}>
       <AppLink
         to={`${RoutePath.Profile}${
-          comment.user ? comment.user.id : 'player.UID'
+          comment.user ? comment.user.id : comment.username
         }`}
         className={cls.header}
       >
         <Avatar size={30} />
-        <Text
-          title={comment.user ? comment.user.username : 'player.username'}
-        />
+        <Text title={comment.user ? comment.user.username : comment.username} />
       </AppLink>
       <Text text={comment.text} />
     </div>

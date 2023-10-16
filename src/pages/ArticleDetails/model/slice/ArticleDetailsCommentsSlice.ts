@@ -13,7 +13,8 @@ import { requestCommentsByArticleID } from '../services/fetchCommentsByArticleId
 import { queryUsernameByID } from 'entities/Player';
 
 const commentsAdapter = createEntityAdapter<CommentType>({
-  selectId: (comment) => comment.id,
+  //@ts-ignore
+  selectId: (comment) => comment.ID,
 });
 
 export const getArticleComments = commentsAdapter.getSelectors<StateScheme>(
@@ -24,11 +25,18 @@ const articleDetailsCommentsSlice = createSlice({
   name: 'ArticleComments',
   initialState: commentsAdapter.getInitialState<ArticleDetailsCommentsScheme>({
     isLoading: false,
+    articleID: '',
     error: undefined,
     ids: [],
     entities: {},
   }),
-  reducers: {},
+  reducers: {
+    setArticleID: (state, action: PayloadAction<string>) => {
+      console.log(action.payload);
+
+      state.articleID = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCommentsByArticleId.pending, (state) => {
@@ -57,7 +65,8 @@ const articleDetailsCommentsSlice = createSlice({
         requestCommentsByArticleID.fulfilled,
         (state, action: PayloadAction<CommentType[]>) => {
           state.isLoading = false;
-          commentsAdapter.setAll(state, action.payload);
+
+          commentsAdapter.addMany(state, action.payload);
         },
       )
       .addCase(requestCommentsByArticleID.rejected, (state, action) => {
@@ -65,19 +74,10 @@ const articleDetailsCommentsSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       });
-    // .addCase(queryUsernameByID.pending, (state) => {
-    //   state.isLoading = true;
-    // })
-    // .addCase(queryUsernameByID.fulfilled, (state, action) => {
-    //   state.isLoading = false;
-    //   commentsAdapter.setOne(state, action.payload);
-    // })
-    // .addCase(queryUsernameByID.rejected, (state, action) => {
-    //   state.isLoading = false;
-    //   state.error = action.payload;
-    // });
   },
 });
+
+export const { setArticleID } = articleDetailsCommentsSlice.actions;
 
 export const { reducer: articleDetailsCommentsReducer } =
   articleDetailsCommentsSlice;

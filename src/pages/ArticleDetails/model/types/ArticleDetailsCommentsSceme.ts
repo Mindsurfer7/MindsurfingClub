@@ -6,4 +6,5 @@ export interface ArticleDetailsCommentsScheme extends EntityState<CommentType> {
   isLoading?: boolean;
   error?: string;
   data?: Article;
+  articleID: string;
 }
