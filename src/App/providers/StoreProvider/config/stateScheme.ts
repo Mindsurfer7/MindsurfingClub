@@ -1,12 +1,8 @@
-import {
-  Challenge,
-  ChallengeScheme,
-} from './../../../../entities/Challenge/types/ChallengeScheme';
+import { ChallengeScheme } from './../../../../entities/Challenge/types/ChallengeScheme';
 import { GoogleProfileScheme } from 'entities/GoogleProfile/types/GoogleProfile';
 import {
   AnyAction,
   CombinedState,
-  Dispatch,
   EnhancedStore,
   Reducer,
   ReducersMapObject,
@@ -16,7 +12,6 @@ import { GPTscheme } from 'entities/GPT/types/GPTScheme';
 import { ProfileScheme } from 'entities/Profile';
 import { UserScheme } from 'entities/User';
 import { LoginScheme } from 'features/AuthByUsername';
-import { NavigateOptions, To } from 'react-router-dom';
 import { GoogleLoginScheme } from 'features/AuthWithGoogle/model/types/GloginSceme';
 import { PlayerScheme } from 'entities/Player/types/player';
 import { TaskTrackerScheme } from 'entities/TaskTracker/types/taskTracker';
@@ -28,6 +23,7 @@ import { ChallengePageScheme } from 'pages/ChallengePage';
 import { ChatScheme } from 'entities/Chat';
 import { ArticlesPageScheme } from 'pages/ArticlesPage';
 import { ScrollSaverScheme } from 'features/ScrollSaver';
+import { ArticleDetailsRecomendationsScheme } from 'pages/ArticleDetails';
 
 export interface StateScheme {
   loginForm?: LoginScheme;
@@ -37,6 +33,7 @@ export interface StateScheme {
   Article?: SingleArticleScheme;
   ArticlesPage?: ArticlesPageScheme;
   ArticleComments?: ArticleDetailsCommentsScheme;
+  ArticleRecomendations?: ArticleDetailsRecomendationsScheme;
   AddComment?: AddCommentScheme;
   TaskTracker: TaskTrackerScheme;
   Community: CommunitiesScheme;

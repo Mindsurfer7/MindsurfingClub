@@ -1,4 +1,17 @@
 /* Ваши стили для страницы "ArticleDetailsPage" */
 .ArticleDetailsPage {
-/* Стили для "ArticleDetailsPage" */
+  /* Стили для "ArticleDetailsPage" */
+}
+
+.recTitle {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.recs {
+  margin-top: 20px;
+
+  flex-wrap: nowrap;
+  overflow-y: hidden;
+  overflow-x: auto;
 }

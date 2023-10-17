@@ -10,6 +10,15 @@ export interface Profile {
   city?: string;
   username?: string;
   avatar?: string;
+  //////   Firebase   //////
+
+  photoURL?: string;
+  UID?: string;
+  coins?: number;
+  health?: number;
+  level?: number;
+  points?: number;
+  displayName?: string;
 }
 
 export interface ProfileScheme {

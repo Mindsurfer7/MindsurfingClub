@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HTMLAttributeAnchorTarget } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ArticlesList.module.scss';
 import { Article, ArticleViewType } from 'entities/Article/types/article';
@@ -11,6 +11,7 @@ interface ArticlesListProps {
   articles: Article[];
   isLoading: boolean;
   view?: ArticleViewType;
+  target?: HTMLAttributeAnchorTarget;
 }
 const getSkeletons = (view: ArticleViewType) =>
   new Array(view === ArticleViewType.Square ? 9 : 3)
@@ -23,6 +24,7 @@ const ArticlesList: React.FC<ArticlesListProps> = ({
   className,
   articles,
   isLoading,
+  target,
   view = ArticleViewType.Square,
 }) => {
   console.log(articles.length);
@@ -33,6 +35,7 @@ const ArticlesList: React.FC<ArticlesListProps> = ({
       view={view}
       className={cls.card}
       key={article.id}
+      target={target}
     />
   );
 

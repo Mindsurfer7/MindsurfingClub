@@ -45,7 +45,7 @@
 
   &:hover {
     transform: rotate(-270deg);
-    fill: salmon;
+    fill: var(--sidebar-text-hover);
   }
 }
 .expandIcon {
@@ -56,7 +56,7 @@
 
   &:hover {
     transform: rotate(270deg);
-    fill: salmon;
+    fill: var(--sidebar-text-hover);
   }
 }
 
@@ -74,8 +74,8 @@
   border-radius: 7px;
 
   &:hover {
-    fill: salmon;
-    color: salmon;
+    fill: var(--sidebar-text-hover);
+    color: var(--sidebar-text-hover);
   }
 
   @media (max-width: 767px) {
@@ -136,7 +136,7 @@
   border-radius: 10px;
 
   &:hover {
-    fill: salmon;
+    fill: var(--sidebar-text-hover);
   }
   @media (max-width: 415px) {
     transform: rotate(-90deg);
@@ -242,7 +242,7 @@
   .collapseBtn:hover {
     transition: background-color 0.1s, box-shadow 0.1s, transform 0.1s;
     &:hover {
-      fill: salmon;
+      fill: var(--sidebar-text-hover);
     }
     &:active {
       transform: translateY(1.2px);
@@ -263,6 +263,6 @@
 .LangSwitcher {
   transition: transform 0.15s;
   &:hover {
-    color: salmon;
+    color: var(--sidebar-text-hover);
   }
 }

@@ -3,6 +3,9 @@ import { StateScheme } from 'App/providers/StoreProvider';
 export const getGoogleProfile = (state: StateScheme) => {
   return state.GoogleProfile?.account;
 };
+export const getGoogleAvatar = (state: StateScheme) => {
+  return state.GoogleProfile?.account?.photoURL;
+};
 export const getGoogleData = (state: StateScheme) => {
   return state.GoogleProfile;
 };

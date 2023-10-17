@@ -7,4 +7,5 @@ export interface CommentType {
   user: User;
   text: string;
   username?: string;
+  userID?: string;
 }

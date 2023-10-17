@@ -1,9 +1,11 @@
 .AddCommentForm {
   border: 1px solid var(--primary-color);
+  border-radius: 8px;
   padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: rgb(150, 150, 150);
 }
 
 .input {

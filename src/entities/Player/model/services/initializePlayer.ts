@@ -23,6 +23,7 @@ export const initializePlayer = createAsyncThunk<any, void, ThunkConfig<any>>(
           health: 100,
           level: 0,
           points: 10,
+          photoURL: profile?.photoURL,
           username: profile?.displayName || 'Unknown',
           new: false,
         },
@@ -48,14 +49,14 @@ export const initializePlayer = createAsyncThunk<any, void, ThunkConfig<any>>(
           },
         ],
         daily: [
-          {
-            id: 'advwebvsqbvr',
-            description: 'create ur 1st task',
-            difficulty: 4,
-            isDone: false,
-            title: 'onboarding task',
-            tags: [],
-          },
+          // {
+          //   id: 'advwebvsqbvr',
+          //   description: 'create ur 1st task',
+          //   difficulty: 4,
+          //   isDone: false,
+          //   title: 'onboarding task',
+          //   tags: [],
+          // },
         ],
         completed: [],
       });

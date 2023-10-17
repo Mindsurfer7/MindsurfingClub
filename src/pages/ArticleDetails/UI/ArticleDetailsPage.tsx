@@ -3,7 +3,7 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ArticleDetailsPage.module.scss';
 import SingleArticle from 'entities/Article/UI/SingleArticle/UI/SingleArticle';
 import { useNavigate, useParams } from 'react-router-dom';
-import Text from 'shared/UI/Text/Text';
+import Text, { TextAlign } from 'shared/UI/Text/Text';
 import { CommentList } from 'entities/Comment';
 import {
   DynamicModuleLoader,
@@ -29,6 +29,13 @@ import { requestCommentsByArticleID } from '../model/services/fetchCommentsByArt
 import { addComment } from 'features/AddComment/model/services/addComment';
 import { v4 } from 'uuid';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
+import { getRecomendationsIsLoading } from '../model/selectors/getRecomendations';
+import { ArticlesList } from 'entities/Article';
+import {
+  articleDetailsRecomendationsReducer,
+  getArticleRecomendations,
+} from '../model/slice/ArticleRecomendationsSlice';
+import { requestArticleRecomendations } from '../model/services/requestArticleRecomendations';
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -36,6 +43,7 @@ interface ArticleDetailsPageProps {
 
 const reducers: ReducersList = {
   ArticleComments: articleDetailsCommentsReducer,
+  ArticleRecomendations: articleDetailsRecomendationsReducer,
 };
 
 const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
@@ -43,8 +51,10 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
 }) => {
   const { articleID } = useParams<{ articleID: string }>();
   const comments = useSelector(getArticleComments.selectAll);
+  const recs = useSelector(getArticleRecomendations.selectAll);
   const userID = useSelector(getGoogleID);
   const commentsAreLoading = useSelector(getCommentsIsLoading);
+  const recsAreLoading = useSelector(getRecomendationsIsLoading);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -57,6 +67,7 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
   useEffect(() => {
     if (articleID) {
       dispatch(requestCommentsByArticleID(articleID));
+      dispatch(requestArticleRecomendations());
       dispatch(setArticleID(articleID));
     }
   }, [articleID]);
@@ -99,9 +110,23 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
           {t('Back to list')}
         </Button>
         <SingleArticle ID={articleID} />
+        <Text
+          align={TextAlign.Center}
+          title="Комментарии"
+          className={cls.recTitle}
+        />
         <AddCommentForm onSendComment={onCommentSend} />
-        <Text title="Comments" />
         <CommentList isLoading={commentsAreLoading} comments={comments} />
+        <Text
+          align={TextAlign.Center}
+          title="Рекомендации"
+          className={cls.recTitle}
+        />
+        <ArticlesList
+          articles={recs}
+          target="_blank"
+          isLoading={recsAreLoading ? true : false}
+        />
       </Page>
     </DynamicModuleLoader>
   );

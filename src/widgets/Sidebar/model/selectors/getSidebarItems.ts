@@ -37,7 +37,7 @@ export const getSideBarItems = createSelector(getUserAuthData, (userData) => {
   if (userData) {
     SidebarItemsList.push(
       {
-        path: RoutePath.Profile + userData?.id,
+        path: RoutePath.Profile + userData?.id, // userData?.id,
         Icon: ProfileIcon,
         text: 'Profile',
       },

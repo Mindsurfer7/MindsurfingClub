@@ -17,11 +17,11 @@
 
   &:hover {
     background: var(--sidebar-button);
-    fill: salmon;
-    color: salmon;
+    fill: var(--sidebar-text-hover);
+    color: var(--sidebar-text-hover);
 
     .icon {
-      fill: salmon;
+      fill: var(--sidebar-text-hover);
     }
   }
 
@@ -30,9 +30,9 @@
 
     &:hover {
       background: var(--inverted-bg-color);
-      fill: salmon;
+      fill: var(--sidebar-text-hover);
       .icon {
-        fill: salmon;
+        fill: var(--sidebar-text-hover);
       }
     }
   }
@@ -46,7 +46,7 @@
 
   &:hover {
     .icon {
-      fill: salmon;
+      fill: var(--sidebar-text-hover);
     }
   }
 
@@ -84,7 +84,7 @@
     align-items: center; /* Выравнивание по центру по вертикали */
     justify-content: center;
     &:hover {
-      fill: salmon;
+      fill: var(--sidebar-text-hover);
     }
 
     @media (max-width: 415px) {
@@ -104,8 +104,8 @@
     margin-top: 10px;
 
     &:hover {
-      fill: salmon;
-      color: salmon;
+      fill: var(--sidebar-text-hover);
+      color: var(--sidebar-text-hover);
     }
 
     @media (max-width: 767px) {

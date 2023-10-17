@@ -7,9 +7,11 @@ import {
 } from 'shared/lib/DynamicModuleLoader/DynamicModuleLoader';
 import {
   ProfileCard,
+  NewProfileCard,
   profileReducer,
   requestProfileData,
   updateProfile,
+  requestGoogleProfileData,
 } from 'entities/Profile';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -26,6 +28,8 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { useParams } from 'react-router-dom';
 import { Page } from 'widgets/Page';
+import { getGoogleProfile } from 'features/AuthWithGoogle';
+import { getPlayerProfile } from 'entities/Player/model/selectors/getPlayerData';
 
 interface ProfilePageProps {
   className?: string;
@@ -36,18 +40,28 @@ const reducers: ReducersList = {
 };
 
 const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
+  /////////// old hooks //////////////////////////////////////////////////
   const formData = useSelector(getProfileForm);
   const error = useSelector(getProfileError);
   const isLoading = useSelector(getProfileIsLoading);
   const readonly = useSelector(getProfileReadonly);
   const { profileID } = useParams<{ profileID: string }>();
   const dispatch = useAppDispatch();
+  ///////////firebase version hooks ////////////////////////////////////////
+  const profileData = useSelector(getProfileData);
+  ///////////////////////////////////////////////////////////////////////////
 
   useInitialEffect(() => {
     if (profileID) {
-      dispatch(requestProfileData(profileID));
+      // dispatch(requestProfileData(profileID));
     }
   });
+
+  useEffect(() => {
+    if (profileID) {
+      dispatch(requestGoogleProfileData(profileID));
+    }
+  }, [profileID]);
 
   // useEffect(() => {
   //   if (PROJECT !== 'storybook') {
@@ -97,7 +111,7 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
       <Page className={classNames(cls.ProfilePage, {}, [className as string])}>
         <ProfilePageHeader />
-        <ProfileCard
+        {/* <ProfileCard
           onChangeUsername={onChangeUsername}
           onChangeAge={onChangeAge}
           onChangePic={onChangePic}
@@ -105,6 +119,18 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
           onChangeCountry={onChangeCountry}
           onChangeCurrency={onChangeCurrency}
           profileData={formData}
+          isLoading={isLoading}
+          readonly={readonly}
+          error={error}
+        /> */}
+        <NewProfileCard
+          onChangeUsername={onChangeUsername}
+          onChangeAge={onChangeAge}
+          onChangePic={onChangePic}
+          onChangeCity={onChangeCity}
+          onChangeCountry={onChangeCountry}
+          onChangeCurrency={onChangeCurrency}
+          profileData={profileData}
           isLoading={isLoading}
           readonly={readonly}
           error={error}
