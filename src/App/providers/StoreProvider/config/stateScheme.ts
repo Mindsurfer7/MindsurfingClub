@@ -24,6 +24,7 @@ import { ChatScheme } from 'entities/Chat';
 import { ArticlesPageScheme } from 'pages/ArticlesPage';
 import { ScrollSaverScheme } from 'features/ScrollSaver';
 import { ArticleDetailsRecomendationsScheme } from 'pages/ArticleDetails';
+import { TextEditorScheme } from 'widgets/TextEditor/model/types/textEditor';
 
 export interface StateScheme {
   loginForm?: LoginScheme;
@@ -41,6 +42,7 @@ export interface StateScheme {
   ChallengePage?: ChallengePageScheme;
   GoogleProfile: GoogleProfileScheme;
   GoogleLogin: GoogleLoginScheme;
+  TextEditor?: TextEditorScheme;
   user: UserScheme;
   Chat: ChatScheme;
   GPT: GPTscheme;

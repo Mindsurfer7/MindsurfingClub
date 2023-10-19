@@ -32,12 +32,12 @@ const ArticleTypeTabs: React.FC<ArticleTypeTabsProps> = ({
         content: 'IT',
       },
       {
-        value: ArticleType.ECONOMICS,
-        content: 'ecomonics',
+        value: ArticleType.PSYCHOLOGY,
+        content: 'psychology',
       },
       {
         value: ArticleType.SCIENCE,
-        content: 'science bitch',
+        content: 'science',
       },
     ],
     [],

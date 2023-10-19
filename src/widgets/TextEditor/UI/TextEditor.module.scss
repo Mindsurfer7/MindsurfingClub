@@ -1,0 +1,24 @@
+.TextEditor {
+  //   width: 800px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quill {
+  height: 100%;
+  width: 100%;
+  background-color: rebeccapurple;
+  border-radius: 12px;
+  color: white;
+
+  margin-bottom: 20px;
+}
+
+.published {
+  background-color: rgb(25, 223, 41);
+}

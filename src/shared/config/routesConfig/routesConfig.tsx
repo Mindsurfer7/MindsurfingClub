@@ -12,6 +12,7 @@ import { SingleGroupPageAsync } from 'pages/SingleGroupPage';
 import { ChallengePageAsync } from 'pages/ChallengePage';
 import { AboutPageLazy } from 'pages/about';
 import { PracticeCenterAsync } from 'pages/PracticeCenter';
+import { TextEditor } from 'widgets/TextEditor';
 
 export type AppRoutesProps = RouteProps & {
   authOnly?: boolean;
@@ -32,6 +33,7 @@ export enum AppRoutes {
   Challenge = 'Challenge',
   PlayerSpace = 'PlayerSpace',
   SingleGroup = 'SingleGroup',
+  TextEditor = 'TextEditor',
   NotFound = 'NotFound',
 }
 
@@ -41,6 +43,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.About]: '/about',
   [AppRoutes.PsyRoom]: '/psyroom',
   [AppRoutes.Profile]: '/profile/',
+  [AppRoutes.TextEditor]: '/TextEditor',
   [AppRoutes.PracticeCenter]: '/practiceCenter',
   [AppRoutes.PlayerSpace]: '/PlayerSpace',
   [AppRoutes.Conversation]: '/:conversationID',
@@ -60,6 +63,10 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.Home]: {
     path: RoutePath[AppRoutes.Home],
     element: <MainPage />,
+  },
+  [AppRoutes.TextEditor]: {
+    path: RoutePath[AppRoutes.TextEditor],
+    element: <TextEditor />,
   },
   [AppRoutes.About]: {
     path: RoutePath[AppRoutes.About],

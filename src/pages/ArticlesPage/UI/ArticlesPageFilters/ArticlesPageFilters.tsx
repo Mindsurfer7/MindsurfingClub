@@ -30,6 +30,9 @@ import { requestArticlesList } from 'pages/ArticlesPage/model/services/requestAr
 import { useDebounce } from 'shared/lib/hooks/useDebounce';
 import Tabs, { TabItem } from 'shared/UI/Tabs/Tabs';
 import ArticleTypeTabs from 'features/ArticleTypeTabs/ArticleTypeTabs';
+import Button, { ButtonTheme } from 'shared/UI/Button/Button';
+import { useNavigate } from 'react-router-dom';
+import { requestArticlesFirebaseTEST } from 'pages/ArticlesPage/model/services/firebaseTestArticlesRequest';
 
 interface ArticlesPageFiltersProps {
   className?: string;
@@ -45,9 +48,11 @@ const ArticlesPageFilters: React.FC<ArticlesPageFiltersProps> = ({
   const sort = useSelector(getArtilcesSort);
   const order = useSelector(getArtilcesOrder);
   const type = useSelector(getArticleType);
+  const navigate = useNavigate();
 
   const requestData = useCallback(() => {
-    dispatch(requestArticlesList({ replace: true }));
+    // dispatch(requestArticlesList({ replace: true }));
+    dispatch(requestArticlesFirebaseTEST(''));
   }, [dispatch]);
 
   const debouncedRequestData = useDebounce(requestData, 500);
@@ -93,6 +98,10 @@ const ArticlesPageFilters: React.FC<ArticlesPageFiltersProps> = ({
     [dispatch, debouncedRequestData],
   );
 
+  const onCreateArticle = () => {
+    navigate('/textEditor');
+  };
+
   return (
     <div
       className={classNames(cls.ArticlesPageFilters, {}, [className as string])}
@@ -104,11 +113,16 @@ const ArticlesPageFilters: React.FC<ArticlesPageFiltersProps> = ({
           onChangeOrder={onOrderChange}
           onChangeSort={onSortChange}
         />
+
+        <Button onClick={onCreateArticle} theme={ButtonTheme.OUTLINE}>
+          Написать статью
+        </Button>
         <ArticleViewSelector
           view={articlesPageData?.view}
           onViewClick={onViewChange}
         />
       </div>
+
       <Card className={cls.Search}>
         <CustomInput
           placeholder={t('Search')}
@@ -117,6 +131,7 @@ const ArticlesPageFilters: React.FC<ArticlesPageFiltersProps> = ({
           onChange={onSearchChange}
         />
       </Card>
+
       <ArticleTypeTabs value={type} onChangeType={onTypeChange} />
     </div>
   );
