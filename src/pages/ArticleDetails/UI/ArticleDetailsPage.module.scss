@@ -1,7 +1,17 @@
 /* Ваши стили для страницы "ArticleDetailsPage" */
 .ArticleDetailsPage {
-  /* Стили для "ArticleDetailsPage" */
+  // align-items: center;
+  // justify-content: center;
+  @media (max-width: 375px) {
+    display: flex;
+    flex-direction: column;
+    max-width: 375px;
+  }
 }
+
+// .singleArticle {
+//   align-items: center;
+// }
 
 .recTitle {
   margin-top: 20px;

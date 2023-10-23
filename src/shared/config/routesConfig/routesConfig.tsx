@@ -13,6 +13,7 @@ import { ChallengePageAsync } from 'pages/ChallengePage';
 import { AboutPageLazy } from 'pages/about';
 import { PracticeCenterAsync } from 'pages/PracticeCenter';
 import { TextEditor } from 'widgets/TextEditor';
+import { ArticleCreatePage } from 'pages/ArticleCreatePage';
 
 export type AppRoutesProps = RouteProps & {
   authOnly?: boolean;
@@ -66,7 +67,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   },
   [AppRoutes.TextEditor]: {
     path: RoutePath[AppRoutes.TextEditor],
-    element: <TextEditor />,
+    element: <ArticleCreatePage />,
   },
   [AppRoutes.About]: {
     path: RoutePath[AppRoutes.About],
@@ -84,7 +85,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.Profile]: {
     path: `${RoutePath.Profile}:profileID`,
     element: <ProfilePageAsync />,
-    authOnly: true,
+    authOnly: false,
   },
   [AppRoutes.PracticeCenter]: {
     path: RoutePath[AppRoutes.PracticeCenter],
@@ -97,12 +98,12 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.Articles]: {
     path: RoutePath[AppRoutes.Articles],
     element: <ArticlesPageAsync />,
-    authOnly: true,
+    authOnly: false,
   },
   [AppRoutes.SingleArticle]: {
     path: `${RoutePath.SingleArticle}:articleID`, //    path: `${RoutePath.SingleArticle}:ID`,
     element: <ArticleDetailsPageAsync />,
-    authOnly: true,
+    authOnly: false,
   },
   [AppRoutes.Community]: {
     path: RoutePath[AppRoutes.Community],

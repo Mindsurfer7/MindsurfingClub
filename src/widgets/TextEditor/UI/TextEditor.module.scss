@@ -3,10 +3,21 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 50%;
-  display: flex;
+  width: 70%;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 1200px) {
+    width: 1000px;
+  }
+
+  @media (max-width: 500px) {
+    max-width: 490px;
+  }
+
+  @media (max-width: 375px) {
+    width: 370px;
+  }
 }
 
 .quill {
@@ -15,8 +26,24 @@
   background-color: rebeccapurple;
   border-radius: 12px;
   color: white;
-
   margin-bottom: 20px;
+  box-sizing: border-box;
+  // max-width: 500px;
+
+  @media (max-width: 1200px) {
+    width: 1000px;
+  }
+
+  @media (max-width: 500px) {
+    max-width: 370px;
+    margin-right: auto;
+  }
+
+  @media (max-width: 375px) {
+    //border: 2px solid black;
+
+    width: 340px;
+  }
 }
 
 .published {

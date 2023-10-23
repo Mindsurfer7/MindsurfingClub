@@ -1,0 +1,20 @@
+.AddPost {
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 5px;
+  background: var(--inverted-bg-color);
+  margin-bottom: 10px;
+}
+
+.send {
+  // margin-top: auto;
+  width: 100%;
+  justify-content: space-between;
+  display: flex;
+  padding: 10px;
+  // border: 2px solid rgb(112, 101, 101);
+  background: var(--inverted-bg-color);
+  border-radius: 5px;
+  position: sticky;
+  bottom: 0;
+  align-items: center;
+}

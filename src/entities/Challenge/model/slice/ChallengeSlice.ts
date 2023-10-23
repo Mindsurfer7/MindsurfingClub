@@ -6,6 +6,7 @@ import {
 } from 'entities/Challenge/types/ChallengeScheme';
 import { requestChallenges } from '../services/requestChallenges';
 import { getChallengesByUserID } from '../services/getChellengesByUserID';
+import { requestChallengesByPublicID } from 'pages/SingleGroupPage';
 
 const initialState: ChallengeScheme = {
   isLoading: false,
@@ -97,6 +98,18 @@ export const ChallengeSlice = createSlice({
         state.challenges = action.payload;
       })
       .addCase(getChallengesByUserID.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
+    builder
+      .addCase(requestChallengesByPublicID.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(requestChallengesByPublicID.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.challenges = action.payload;
+      })
+      .addCase(requestChallengesByPublicID.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });

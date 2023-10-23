@@ -18,22 +18,31 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { getGoogleIsLogged } from 'entities/GoogleProfile';
 import { publishArticle } from '../model/services/publishArticle';
+import Text, { TextAlign } from 'shared/UI/Text/Text';
+import { useTranslation } from 'react-i18next';
 
 interface TextEditorProps {
   className?: string;
+  //text: string;
+  onPublish?: () => void;
+  // onChangeText: (value: string) => void;
+  clsModification: any;
 }
 
-const reducers: ReducersList = {
-  TextEditor: textEditorReducer,
-};
+// removeAfterUnmount https://tiptap.dev/installation/react
 
-// removeAfterUnmount
+const TextEditor: React.FC<TextEditorProps> = ({
+  className,
+  clsModification,
+}) => {
+  const text = useSelector(getTextEditorValue) || '';
+  const { t } = useTranslation();
+  var dispatch = useAppDispatch();
+  // const isPublished = useSelector(getArticleIsPublished);
 
-const TextEditor: React.FC<TextEditorProps> = ({ className }) => {
-  const text = useSelector(getTextEditorValue);
-  const isLogged = useSelector(getGoogleIsLogged);
-  const isPublished = useSelector(getArticleIsPublished);
-  const dispatch = useAppDispatch();
+  // const mods = {
+  //   [cls['published']]: isPublished,
+  // };
 
   const onChangeText = useCallback(
     (value: string) => {
@@ -41,32 +50,15 @@ const TextEditor: React.FC<TextEditorProps> = ({ className }) => {
     },
     [dispatch],
   );
-  const onPublish = useCallback(() => {
-    if (!isLogged) {
-      alert('Log in');
-    } else {
-      dispatch(publishArticle());
-    }
-  }, [dispatch, isLogged]);
 
-  const mods = {
-    [cls['published']]: isPublished,
-  };
   return (
-    <DynamicModuleLoader reducers={reducers}>
-      <Page className={classNames(cls.TextEditor, {}, [className as string])}>
-        <ReactQuill
-          value={text}
-          onChange={onChangeText}
-          placeholder="Write your best ideas here...)"
-          theme="snow"
-          className={classNames(cls.quill, mods, [className as string])}
-        />
-        <Button onClick={onPublish} theme={ButtonTheme.OUTLINE}>
-          Publish
-        </Button>
-      </Page>
-    </DynamicModuleLoader>
+    <ReactQuill
+      value={text}
+      onChange={onChangeText}
+      placeholder="Write your best ideas here...)"
+      theme="snow"
+      className={classNames(cls.quill, clsModification, [className as string])}
+    />
   );
 };
 

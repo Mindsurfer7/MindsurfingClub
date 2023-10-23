@@ -1,0 +1,11 @@
+.ProfilePage {
+  @media (max-width: 415px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.profile {
+  margin-bottom: 20px;
+}

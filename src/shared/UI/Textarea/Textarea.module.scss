@@ -10,7 +10,7 @@
   transition: all 0.3s ease-in-out;
   overflow-y: hidden;
   width: 100%;
-  min-height: 55px;
+  // min-height: 55px;
 
   &:hover {
     background-color: var(--light-bg-color);
@@ -20,5 +20,10 @@
     border-color: var(--inv-secondary-color);
     box-shadow: 0 0 5px var(--inv-secondary-color);
     background-color: var(--inv-primary-color);
+  }
+
+  @media (max-width: 415px) {
+    max-height: 50px;
+    // width: 200px;
   }
 }

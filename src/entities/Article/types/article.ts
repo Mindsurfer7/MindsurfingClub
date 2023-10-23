@@ -61,6 +61,7 @@ export interface Article {
   user: User;
   title: string;
   subtitle: string;
+  authorID: string;
   img: string;
   views: number;
   createdAt: string;

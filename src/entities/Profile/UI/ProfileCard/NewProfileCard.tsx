@@ -70,11 +70,18 @@ const NewProfileCard: React.FC<ProfileCardProps> = ({
 
   return (
     <div className={classNames(cls.ProfileCard, mods, [className as string])}>
-      {profileData?.photoURL && <ProfilePic src={profileData?.photoURL} />}
-      <div>coins {profileData?.coins}</div>
-      <div>points {profileData?.points}</div>
-      <div>level {profileData?.level}</div>
+      <div className={cls.header}>
+        {' '}
+        {profileData?.photoURL && <ProfilePic src={profileData?.photoURL} />}
+        <Text title={profileData?.username} />
+      </div>
+
       <div className={cls.data}>
+        <div className={cls.inGameData}>
+          Insight Coins: {profileData?.coins}
+        </div>
+        <div className={cls.inGameData}>Points: {profileData?.points}</div>
+        <div className={cls.inGameData}>Level: {profileData?.level}</div>
         <Input
           onChange={onChangeUsername}
           value={profileData?.displayName}

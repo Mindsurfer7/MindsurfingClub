@@ -9,8 +9,9 @@ import TaskIcon from '../../../../shared/assets/icons/TaskTracker.svg';
 import ArtIcon from '../../../../shared/assets/icons/article-20-20.svg';
 import ClubIcon from '../../../../shared/assets/icons/community.svg';
 import { SidebarItemType } from '../types/sidebar';
+import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 
-export const getSideBarItems = createSelector(getUserAuthData, (userData) => {
+export const getSideBarItems = createSelector(getGoogleID, (id) => {
   const SidebarItemsList: SidebarItemType[] = [
     {
       path: RoutePath.Main,
@@ -33,25 +34,40 @@ export const getSideBarItems = createSelector(getUserAuthData, (userData) => {
       Icon: ClubIcon,
       text: 'Community',
     },
+    {
+      path: RoutePath.Profile + id, // userData?.id,
+      Icon: ProfileIcon,
+      text: 'Profile',
+    },
+    {
+      path: RoutePath.articles,
+      Icon: ArtIcon,
+      text: 'LongReads',
+    },
+    {
+      path: RoutePath.About,
+      Icon: AboutIcon,
+      text: 'About',
+    },
   ];
-  if (userData) {
-    SidebarItemsList.push(
-      {
-        path: RoutePath.Profile + userData?.id, // userData?.id,
-        Icon: ProfileIcon,
-        text: 'Profile',
-      },
-      {
-        path: RoutePath.articles,
-        Icon: ArtIcon,
-        text: 'LongReads',
-      },
-      {
-        path: RoutePath.About,
-        Icon: AboutIcon,
-        text: 'About',
-      },
-    );
-  }
+  // if (userData) {
+  //   SidebarItemsList.push(
+  //     {
+  //       path: RoutePath.Profile + userData?.id, // userData?.id,
+  //       Icon: ProfileIcon,
+  //       text: 'Profile',
+  //     },
+  //     {
+  //       path: RoutePath.articles,
+  //       Icon: ArtIcon,
+  //       text: 'LongReads',
+  //     },
+  //     {
+  //       path: RoutePath.About,
+  //       Icon: AboutIcon,
+  //       text: 'About',
+  //     },
+  //   );
+  // }
   return SidebarItemsList;
 });

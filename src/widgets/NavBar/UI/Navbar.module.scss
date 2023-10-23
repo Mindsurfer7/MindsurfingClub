@@ -29,6 +29,19 @@
     height: 50px;
     width: 375px;
   }
+  @media (max-width: 500px) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+
+    height: 50px;
+    width: 100%;
+    background-color: var(--inverted-bg-color);
+    border-bottom: 1px solid var(--primary-color);
+    border-radius: 5px;
+  }
   @media (max-width: 415px) {
     position: fixed;
     top: 0;

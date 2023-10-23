@@ -1,0 +1,87 @@
+import React, { useCallback } from 'react';
+import { classNames } from 'shared/lib/classNames/classNames';
+import cls from './Post.module.scss';
+import { PostBlock, PostType } from '../model/types/post';
+import ArticleImageBlock from 'entities/Article/UI/ArticleImageBlock/ArticleImageBlock';
+import ArticleTextBlock from 'entities/Article/UI/ArticleTextBlock/ArticleTextBlock';
+import { Avatar } from 'shared/UI/Avatar/Avatar';
+import { PublicType } from 'entities/Community';
+import Text from 'shared/UI/Text/Text';
+import Skeleton from 'shared/UI/Skeleton/Skeleton';
+
+interface PostProps {
+  className?: string;
+  isLoading: boolean;
+  post: PostType;
+  renderData: PublicType | null; // ИЛИ ПРОФИЛЬ ЮЗЕРА ТАЙП
+}
+
+const Post: React.FC<PostProps> = ({
+  className,
+  post,
+  renderData,
+  isLoading = true,
+}) => {
+  const renderBlock = useCallback((block: PostBlock) => {
+    switch (block.type) {
+      case 'IMAGE':
+        return (
+          <></>
+          //   <ArticleImageBlock
+          //     key={block.id}
+          //     block={block}
+          //     className={cls.block}
+          //   />
+        );
+      case 'TEXT':
+        return (
+          <ArticleTextBlock
+            key={block.id}
+            className={cls.block}
+            //@ts-ignore
+            block={block}
+          />
+        );
+      default:
+        return null;
+    }
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className={classNames(cls.Post, {}, [className])}>
+        <div className={cls.title}>
+          <Skeleton width={30} height={30} border="50%" />
+          <Skeleton
+            height={16}
+            width={100}
+            className={cls.username}
+            border="20%"
+          />
+        </div>
+        <Skeleton className={cls.text} width="100%" height={50} />
+      </div>
+    );
+  }
+
+  return (
+    <div className={classNames(cls.Post, {}, [className as string])}>
+      <div className={cls.title}>
+        <Avatar
+          size={30}
+          src={
+            renderData
+              ? renderData.posterLink
+              : 'https://cdn.iconscout.com/icon/free/png-256/free-laptop-user-1-1179329.png?f=webp'
+          }
+          alt="ava"
+        />
+        <Text title={renderData ? renderData.title : 'Community Name'} />
+      </div>
+
+      {post.blocks.map(renderBlock)}
+    </div>
+  );
+};
+
+export default Post;

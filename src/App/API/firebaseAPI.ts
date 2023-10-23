@@ -11,7 +11,7 @@ export const GPT_API = axios.create({
   headers: {
     'Authorization': `Bearer ${GPT_API_KEY}`, //prettier-ignore
     'Content-Type': 'application/json',
-    organization_id: 'org-v0i5enWH525ivYkYCD9msIqZ',
+    'organization_id': 'org-v0i5enWH525ivYkYCD9msIqZ', //prettier-ignore
   },
   method: 'POST',
 });

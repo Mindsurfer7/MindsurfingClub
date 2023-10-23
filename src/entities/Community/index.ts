@@ -1,5 +1,5 @@
 import { requestCommunityByID } from './model/services/requestCommunityByID';
-import { PublicScheme } from './types/CommunityScheme';
+import { PublicType } from './types/CommunityScheme';
 import {
   getCommunityData,
   getSinglePublicData,
@@ -18,7 +18,6 @@ import { CommunitiesScheme } from 'entities/Community/types/CommunityScheme';
 
 export {
   CommunitiesScheme,
-  PublicScheme,
   GroupCreatorModal,
   CommunityReducer,
   createGroup,
@@ -30,4 +29,5 @@ export {
   requestCommunityByID,
   getSinglePublicData,
   getClubsAreLoading,
+  PublicType,
 };

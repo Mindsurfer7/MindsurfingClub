@@ -1,3 +1,11 @@
+.ArticleList {
+  @media (max-width: 429px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .rectangle {
   margin-top: 10px;
   .card {

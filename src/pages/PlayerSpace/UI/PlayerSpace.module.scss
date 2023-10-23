@@ -16,7 +16,12 @@
     //max-width: 950px;
   }
   @media (max-width: 767px) {
-    max-width: 740px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    width: 760px;
+    padding: 5px;
   }
   @media (max-width: 415px) {
     display: flex;

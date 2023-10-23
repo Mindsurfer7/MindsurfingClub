@@ -1,3 +1,4 @@
+import { WallScheme } from './model/types/wall';
 import Wall from './UI/Wall';
 
-export { Wall };
+export { Wall, WallScheme };

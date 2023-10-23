@@ -1,0 +1,20 @@
+.ArticleCreatePage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 70%;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 1200px) {
+    width: 800px;
+  }
+
+  @media (max-width: 500px) {
+    max-width: 490px;
+  }
+
+  @media (max-width: 375px) {
+    width: 370px;
+  }
+}

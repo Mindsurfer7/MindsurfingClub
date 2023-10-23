@@ -36,6 +36,8 @@ import {
   getArticleRecomendations,
 } from '../model/slice/ArticleRecomendationsSlice';
 import { requestArticleRecomendations } from '../model/services/requestArticleRecomendations';
+import ArticleDetailsHeader from './ArticleDetailsHeader/ArticleDetailsHeader';
+import { getArticleData } from 'entities/Article/model/selectors/getArticleData';
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -55,9 +57,9 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
   const userID = useSelector(getGoogleID);
   const commentsAreLoading = useSelector(getCommentsIsLoading);
   const recsAreLoading = useSelector(getRecomendationsIsLoading);
+
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   // useInitialEffect(() => {
   // dispatch(fetchCommentsByArticleId(articleID));
@@ -83,10 +85,6 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
     [dispatch, userID],
   );
 
-  const onBackToList = useCallback(() => {
-    navigate(RoutePath.articles);
-  }, [navigate]);
-
   if (!articleID) {
     return (
       <div
@@ -106,10 +104,8 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
           className as string,
         ])}
       >
-        <Button onClick={onBackToList} theme={ButtonTheme.OUTLINE}>
-          {t('Back to list')}
-        </Button>
-        <SingleArticle ID={articleID} />
+        <ArticleDetailsHeader />
+        <SingleArticle ID={articleID} className={cls.singleArticle} />
         <Text
           align={TextAlign.Center}
           title="Комментарии"

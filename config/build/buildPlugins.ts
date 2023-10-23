@@ -53,6 +53,7 @@ export function buildPlugins({
 
     // new CopyPlugin({
     //   patterns: [
+    //     { from: paths.locales, to: paths.buildLocales },
     //     { from: path.resolve(publicFolderPathRoot, 'manifest.json'), to: '' },
     //     {
     //       from: path.resolve(

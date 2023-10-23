@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './Sidebar.module.scss';
 import { ThemeSwitcher } from 'widgets/ThemeSwitcher';
@@ -17,6 +17,24 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
   const [collapse, setCollapse] = useState(true);
   const SidebarItemsList = useSelector(getSideBarItems);
+
+  const handleResize = () => {
+    if (window.innerWidth <= 375) {
+      setCollapse(true);
+    } else {
+      setCollapse(false);
+    }
+  };
+
+  useEffect(() => {
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const onSwitch = () => {
     setCollapse((prev) => !prev);

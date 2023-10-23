@@ -19,16 +19,8 @@ const AppRouter = () => {
     const element = (
       <Suspense fallback={<Preloader />}>{route.element}</Suspense>
     );
-
-    return (
-      <Route
-        key={route.path}
-        element={
-          route.authOnly ? <RequireAuth>{element}</RequireAuth> : element
-        }
-        path={route.path}
-      />
-    );
+    //route.authOnly ? <RequireAuth>{element}</RequireAuth> :
+    return <Route key={route.path} element={element} path={route.path} />;
   }, []);
 
   // const routes = useMemo(() => {

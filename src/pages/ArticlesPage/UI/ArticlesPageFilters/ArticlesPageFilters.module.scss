@@ -1,9 +1,21 @@
+.ArticlePageFilters {
+  @media (max-width: 375px) {
+    display: flex;
+    flex-wrap: wrap;
+    // flex-direction: column;
+    max-width: 370px;
+  }
+}
+
 .SortWrap {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
   margin-bottom: 10px;
+
+  @media (max-width: 375px) {
+    flex-direction: column;
+  }
 }
 
 .Search {

@@ -30,6 +30,8 @@ import { useParams } from 'react-router-dom';
 import { Page } from 'widgets/Page';
 import { getGoogleProfile } from 'features/AuthWithGoogle';
 import { getPlayerProfile } from 'entities/Player/model/selectors/getPlayerData';
+import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
+import { Wall } from 'entities/Wall';
 
 interface ProfilePageProps {
   className?: string;
@@ -111,7 +113,35 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
       <Page className={classNames(cls.ProfilePage, {}, [className as string])}>
         <ProfilePageHeader />
-        {/* <ProfileCard
+
+        <NewProfileCard
+          onChangeUsername={onChangeUsername}
+          onChangeAge={onChangeAge}
+          onChangePic={onChangePic}
+          onChangeCity={onChangeCity}
+          onChangeCountry={onChangeCountry}
+          onChangeCurrency={onChangeCurrency}
+          profileData={profileData}
+          className={cls.profile}
+          isLoading={isLoading}
+          readonly={readonly}
+          error={error}
+        />
+
+        <Wall
+          //@ts-ignore
+          renderData={profileData}
+          authorID={profileData?.UID}
+        />
+      </Page>
+    </DynamicModuleLoader>
+  );
+});
+
+export default ProfilePage;
+
+{
+  /* <ProfileCard
           onChangeUsername={onChangeUsername}
           onChangeAge={onChangeAge}
           onChangePic={onChangePic}
@@ -122,22 +152,5 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
           isLoading={isLoading}
           readonly={readonly}
           error={error}
-        /> */}
-        <NewProfileCard
-          onChangeUsername={onChangeUsername}
-          onChangeAge={onChangeAge}
-          onChangePic={onChangePic}
-          onChangeCity={onChangeCity}
-          onChangeCountry={onChangeCountry}
-          onChangeCurrency={onChangeCurrency}
-          profileData={profileData}
-          isLoading={isLoading}
-          readonly={readonly}
-          error={error}
-        />
-      </Page>
-    </DynamicModuleLoader>
-  );
-});
-
-export default ProfilePage;
+        /> */
+}

@@ -26,6 +26,7 @@ import { useTranslation } from 'react-i18next';
 import { Wall } from 'entities/Wall';
 import { WebChat } from 'entities/Chat';
 import { Page } from 'widgets/Page';
+import { requestChallengesByPublicID } from '../model/services/requestChallengesByPublicID';
 
 interface SingleGroupPageProps {
   className?: string;
@@ -63,7 +64,7 @@ const SingleGroupPage: React.FC<SingleGroupPageProps> = ({ className }) => {
 
   useEffect(() => {
     publicID && dispatch(requestCommunityByID(publicID));
-    dispatch(requestChallenges()); //по идее надо здесь тож паблик айди кидать и только те грузить что принадлежат группе
+    publicID && dispatch(requestChallengesByPublicID(publicID));
   }, [dispatch, publicID]);
 
   return (
@@ -101,9 +102,7 @@ const SingleGroupPage: React.FC<SingleGroupPageProps> = ({ className }) => {
           chatName={community?.title ? community?.title : 'Club Chat'}
         />
       </div>
-      {/* <div className={cls.Wall}> */}
-      <Wall className={cls.Wall} />
-      {/* </div> */}
+      <Wall className={cls.Wall} publicID={publicID} renderData={community} />
 
       <div className={cls.challenges}>
         <Text title={t('communityChallenges')} align={TextAlign.Center} />

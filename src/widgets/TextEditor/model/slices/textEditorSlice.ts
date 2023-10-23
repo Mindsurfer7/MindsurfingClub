@@ -23,13 +23,10 @@ export const textEditorSlice = createSlice({
         state.error = undefined;
         state.isLoading = true;
       })
-      .addCase(
-        publishArticle.fulfilled,
-        (state, action: PayloadAction<any>) => {
-          state.isLoading = false;
-          state.isPublished = true;
-        },
-      )
+      .addCase(publishArticle.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isPublished = true;
+      })
       .addCase(publishArticle.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;

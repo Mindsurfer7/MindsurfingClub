@@ -110,12 +110,12 @@ const SingleArticle: React.FC<SingleArticleProps> = memo(
           <div className={cls.avatarWrapper}>
             <Avatar size={200} src={article?.img} className={cls.avatar} />
           </div>
-          <Text
+          {/* <Text
             className={cls.title}
             title={article?.title}
             text={article?.subtitle}
             size={TextSize.L}
-          />
+          /> */}
 
           <div className={cls.articleInfo}>
             <Icon className={cls.icon} Svg={EyeIcon} />

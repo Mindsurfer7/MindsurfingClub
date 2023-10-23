@@ -4,6 +4,22 @@
   border-radius: 8px;
 }
 
+.header {
+  display: flex;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 200px;
+  gap: 5px;
+}
+.inGameData {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
 .input {
   margin-top: 10px;
 }

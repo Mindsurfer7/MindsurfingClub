@@ -6,7 +6,7 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 
 import {
   GroupCreatorModal,
-  PublicScheme,
+  PublicType,
   createGroup,
   getClubsAreLoading,
   getCommunityData,
@@ -69,7 +69,7 @@ const Community: React.FC<CommunityProps> = ({ className }) => {
         />
       )}
       <div className={cls.Publics}>
-        {groups?.map((group: PublicScheme) => {
+        {groups?.map((group: PublicType) => {
           const onOpenClub = () => {
             navigate(`${AppRoutes.SingleGroup}/${group.id}`);
           };
