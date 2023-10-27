@@ -1,5 +1,4 @@
 import { getGoogleIsLogged } from 'entities/GoogleProfile';
-import { getUserAuthData, getUserInited, getUsername } from 'entities/User';
 import { Suspense, memo, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
@@ -9,10 +8,9 @@ import {
   AppRoutesProps,
   routeConfig,
 } from 'shared/config/routesConfig/routesConfig';
-import { RequireAuth } from './RequireAuth';
+// import { RequireAuth } from './RequireAuth';
 
 const AppRouter = () => {
-  const isAuth = useSelector(getUserAuthData);
   const isAuthG = useSelector(getGoogleIsLogged);
 
   const renderWithWrapper = useCallback((route: AppRoutesProps) => {
@@ -34,14 +32,14 @@ const AppRouter = () => {
   //   });
   // }, [isAuthG, isAuth]);
 
-  const routes = useMemo(() => {
-    return Object.values(routeConfig).filter((route) => {
-      if (route.authOnly && !isAuth) {
-        return false;
-      }
-      return true;
-    });
-  }, [isAuth]);
+  // const routes = useMemo(() => {
+  //   return Object.values(routeConfig).filter((route) => {
+  //     if (route.authOnly && !isAuth) {
+  //       return false;
+  //     }
+  //     return true;
+  //   });
+  // }, [isAuth]);
 
   return (
     <Suspense fallback={<Preloader />}>

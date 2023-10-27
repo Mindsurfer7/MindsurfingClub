@@ -5,17 +5,29 @@ import { AppRouter } from './providers/Router';
 import { NavBar } from 'widgets/NavBar';
 import { Sidebar } from 'widgets/Sidebar';
 import { useDispatch, useSelector } from 'react-redux';
-import { initAuthData } from 'entities/User/model/slice/userSlice';
 import { useNavigate } from 'react-router-dom';
-import { getUserInited } from 'entities/User';
+import { initGoogleAuthData, logUserIn } from 'entities/GoogleProfile';
+import { onAuthStateChanged } from 'firebase/auth';
+import { authG } from './API/firebaseAPI';
+import { PROFILE_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 
 const App = () => {
   const { theme } = useTheme();
   const dispatch = useDispatch();
-  const inited = useSelector(getUserInited);
+  // const inited = useSelector(getUserInited); {inited && <AppRouter />}
 
   useEffect(() => {
-    dispatch(initAuthData());
+    dispatch(initGoogleAuthData());
+
+    onAuthStateChanged(authG, (user) => {
+      if (user) {
+        dispatch(logUserIn());
+        localStorage.setItem(PROFILE_LOCALSTORAGE_KEY, JSON.stringify(user));
+      } else {
+        console.log('user logged out');
+        localStorage.removeItem(PROFILE_LOCALSTORAGE_KEY);
+      }
+    });
   }, []);
 
   return (
@@ -25,7 +37,7 @@ const App = () => {
 
         <div className="content-page">
           <Sidebar />
-          {inited && <AppRouter />}
+          <AppRouter />
         </div>
       </Suspense>
     </div>

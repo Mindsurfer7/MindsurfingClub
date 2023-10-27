@@ -6,7 +6,10 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routesConfig/routesConfig';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
-import { getArticleData } from 'entities/Article/model/selectors/getArticleData';
+import {
+  getArticleData,
+  getCanEditArticle,
+} from 'entities/Article/model/selectors/getArticleData';
 import { useSelector } from 'react-redux';
 
 interface ArticleDetailsHeaderProps {
@@ -20,10 +23,16 @@ const ArticleDetailsHeader: React.FC<ArticleDetailsHeaderProps> = ({
   const navigate = useNavigate();
   const article = useSelector(getArticleData);
   const userID = useSelector(getGoogleID);
+  const canEdit = useSelector(getCanEditArticle);
 
   const onBackToList = useCallback(() => {
     navigate(RoutePath.articles);
   }, [navigate]);
+
+  const onEditClick = useCallback(() => {
+    navigate(`${RoutePath.articles}/${article?.id}/edit`);
+    console.log(`${article?.id}/edit`);
+  }, [navigate, article?.id]);
 
   return (
     <div
@@ -37,7 +46,7 @@ const ArticleDetailsHeader: React.FC<ArticleDetailsHeaderProps> = ({
       {article?.authorID === userID && (
         <Button
           className={cls.editBtn}
-          onClick={onBackToList}
+          onClick={onEditClick}
           theme={ButtonTheme.OUTLINE}
         >
           {t('Edit')}

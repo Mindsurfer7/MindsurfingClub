@@ -1,4 +1,5 @@
 .Post {
+  position: relative;
   //   border: 1px solid black;
   //   margin: 10px;
   padding: 10px;
@@ -13,4 +14,31 @@
 .text {
   margin-top: 5px;
   border-radius: 5px;
+}
+
+.like {
+  position: absolute;
+  bottom: 7px;
+  right: 10px;
+  fill: white;
+  margin-right: auto;
+  transition: ease 0.2s;
+
+  &:hover {
+    fill: rgb(230, 20, 149);
+    cursor: pointer;
+  }
+}
+.x {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  fill: white;
+  margin-right: auto;
+  transition: ease 0.2s;
+
+  &:hover {
+    fill: rgb(0, 0, 0);
+    cursor: pointer;
+  }
 }

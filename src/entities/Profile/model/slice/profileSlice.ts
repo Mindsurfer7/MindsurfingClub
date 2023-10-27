@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Profile, ProfileScheme } from '../types/profile';
 import { requestProfileData } from '../services/requestProfileData';
-import { updateProfileData } from '../services/updateProfileData';
-import { requestGoogleProfileData } from '../services/requestGoogleProfileData';
+import { requestGoogleProfileData } from '../../../GoogleProfile/model/services/requestGoogleProfileData';
 
 const initialState: ProfileScheme = {
   isLoading: false,
@@ -47,42 +46,26 @@ export const profileSlice = createSlice({
         state.isLoading = false;
 
         state.error = action.payload;
-      })
-      .addCase(requestGoogleProfileData.pending, (state, action) => {
-        state.error = undefined;
-        state.isLoading = true;
-      })
-      .addCase(
-        requestGoogleProfileData.fulfilled,
-        (state, action: PayloadAction<Profile>) => {
-          state.isLoading = false;
-          state.data = action.payload;
-          state.form = action.payload;
-        },
-      )
-      .addCase(requestGoogleProfileData.rejected, (state, action) => {
-        state.isLoading = false;
-
-        state.error = action.payload;
-      })
-      .addCase(updateProfileData.pending, (state, action) => {
-        state.error = undefined;
-        state.isLoading = true;
-      })
-      .addCase(
-        updateProfileData.fulfilled,
-        (state, action: PayloadAction<Profile>) => {
-          state.isLoading = false;
-          state.data = action.payload;
-          state.form = action.payload;
-          state.readonly = true;
-        },
-      )
-      .addCase(updateProfileData.rejected, (state, action) => {
-        state.isLoading = false;
-
-        state.error = action.payload;
       });
+
+    // .addCase(updateProfileData.pending, (state, action) => {
+    //   state.error = undefined;
+    //   state.isLoading = true;
+    // })
+    // .addCase(
+    //   updateProfileData.fulfilled,
+    //   (state, action: PayloadAction<Profile>) => {
+    //     state.isLoading = false;
+    //     state.data = action.payload;
+    //     state.form = action.payload;
+    //     state.readonly = true;
+    //   },
+    // )
+    // .addCase(updateProfileData.rejected, (state, action) => {
+    //   state.isLoading = false;
+
+    //   state.error = action.payload;
+    // });
   },
 });
 

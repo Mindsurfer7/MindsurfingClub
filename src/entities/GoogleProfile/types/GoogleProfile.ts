@@ -10,4 +10,5 @@ export interface GoogleProfileScheme {
   isLogged: boolean;
   account?: GoogleProfile;
   error?: string;
+  inited: boolean;
 }

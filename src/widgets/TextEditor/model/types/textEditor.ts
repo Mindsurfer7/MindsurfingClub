@@ -3,4 +3,5 @@ export interface TextEditorScheme {
   error: string | undefined;
   text: string;
   isPublished: boolean;
+  imageLink: string;
 }

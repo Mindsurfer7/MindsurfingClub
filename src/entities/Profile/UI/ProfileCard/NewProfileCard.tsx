@@ -12,10 +12,12 @@ import { useSelector } from 'react-redux';
 import { getGoogleProfile } from 'features/AuthWithGoogle';
 import { getPlayerProfile } from 'entities/Player/model/selectors/getPlayerData';
 import { PlayerData } from 'entities/Player/types/player';
+import { GoogleProfile } from 'entities/GoogleProfile';
+import { ProfileInterface } from 'pages/ProfilePage/model/types/profilePageScheme';
 
 interface ProfileCardProps {
   className?: string;
-  profileData?: Profile; // ?????/ ili string??
+  profileData?: ProfileInterface; // ?????/ ili string??
   isLoading?: boolean;
   error?: string;
   readonly?: boolean;
@@ -84,7 +86,7 @@ const NewProfileCard: React.FC<ProfileCardProps> = ({
         <div className={cls.inGameData}>Level: {profileData?.level}</div>
         <Input
           onChange={onChangeUsername}
-          value={profileData?.displayName}
+          value={profileData?.username}
           placeholder={readonly ? '' : 'Your Name'}
           className={cls.input}
           readonly={readonly}
@@ -93,7 +95,7 @@ const NewProfileCard: React.FC<ProfileCardProps> = ({
         {!readonly && (
           <Input
             onChange={onChangePic}
-            value={profileData?.avatar}
+            value={profileData?.photoURL}
             placeholder={readonly ? '' : 'Your avatar link'}
             className={cls.input}
             readonly={readonly}

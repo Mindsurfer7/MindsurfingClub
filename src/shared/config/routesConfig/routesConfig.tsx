@@ -27,14 +27,14 @@ export enum AppRoutes {
   PsyRoom = 'PsyRoom',
   Conversation = 'Conversation',
   Community = 'Community',
+  SingleGroup = 'SingleGroup',
   Articles = 'articles',
   SingleArticle = 'SingleArticle',
+  ArticleCreate = 'ArticleCreate',
+  ArticleEdit = 'ArticleEdit',
   Profile = 'Profile',
-  PracticeCenter = 'PracticeCenter',
   Challenge = 'Challenge',
   PlayerSpace = 'PlayerSpace',
-  SingleGroup = 'SingleGroup',
-  TextEditor = 'TextEditor',
   NotFound = 'NotFound',
 }
 
@@ -44,13 +44,13 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.About]: '/about',
   [AppRoutes.PsyRoom]: '/psyroom',
   [AppRoutes.Profile]: '/profile/',
-  [AppRoutes.TextEditor]: '/TextEditor',
-  [AppRoutes.PracticeCenter]: '/practiceCenter',
   [AppRoutes.PlayerSpace]: '/PlayerSpace',
   [AppRoutes.Conversation]: '/:conversationID',
   [AppRoutes.Community]: '/communities',
   [AppRoutes.Articles]: '/articles',
   [AppRoutes.SingleArticle]: '/articles/',
+  [AppRoutes.ArticleCreate]: 'articles/new',
+  [AppRoutes.ArticleEdit]: '/articles/:id/edit',
   [AppRoutes.SingleGroup]: '/communities/SingleGroup/',
   [AppRoutes.Challenge]: 'communities/SingleGroup/:publicID/challenge/',
   [AppRoutes.NotFound]: '*',
@@ -64,10 +64,6 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.Home]: {
     path: RoutePath[AppRoutes.Home],
     element: <MainPage />,
-  },
-  [AppRoutes.TextEditor]: {
-    path: RoutePath[AppRoutes.TextEditor],
-    element: <ArticleCreatePage />,
   },
   [AppRoutes.About]: {
     path: RoutePath[AppRoutes.About],
@@ -87,10 +83,6 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     element: <ProfilePageAsync />,
     authOnly: false,
   },
-  [AppRoutes.PracticeCenter]: {
-    path: RoutePath[AppRoutes.PracticeCenter],
-    element: <PracticeCenterAsync />,
-  },
   [AppRoutes.PlayerSpace]: {
     path: RoutePath[AppRoutes.PlayerSpace],
     element: <PlayerSpaceAsync />,
@@ -104,6 +96,14 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     path: `${RoutePath.SingleArticle}:articleID`, //    path: `${RoutePath.SingleArticle}:ID`,
     element: <ArticleDetailsPageAsync />,
     authOnly: false,
+  },
+  [AppRoutes.ArticleCreate]: {
+    path: RoutePath[AppRoutes.ArticleCreate],
+    element: <ArticleCreatePage />,
+  },
+  [AppRoutes.ArticleEdit]: {
+    path: RoutePath[AppRoutes.ArticleEdit],
+    element: <ArticleCreatePage />,
   },
   [AppRoutes.Community]: {
     path: RoutePath[AppRoutes.Community],

@@ -26,6 +26,6 @@ export const AuthNavbar = Template.bind({});
 AuthNavbar.args = {};
 AuthNavbar.decorators = [
   StoreDecorator({
-    user: { authData: { id: 1, username: 'admin' } },
+    // user: { authData: { id: 1, username: 'admin' } },
   }),
 ];

@@ -2,6 +2,9 @@
   padding: 20px;
   border: 2px solid var(--inverted-bg-color);
   border-radius: 8px;
+  @media (max-width: 415px) {
+    max-width: 100%;
+  }
 }
 
 .header {

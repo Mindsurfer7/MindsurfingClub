@@ -2,10 +2,22 @@
   @media (max-width: 415px) {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    max-width: 375px;
+  }
+}
+
+.wall {
+  @media (max-width: 415px) {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
   }
 }
 
 .profile {
   margin-bottom: 20px;
+
+  @media (max-width: 415px) {
+    max-width: 100%;
+  }
 }

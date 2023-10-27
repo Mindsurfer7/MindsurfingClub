@@ -9,10 +9,6 @@ import {
 } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { GPTscheme } from 'entities/GPT/types/GPTScheme';
-import { ProfileScheme } from 'entities/Profile';
-import { UserScheme } from 'entities/User';
-import { LoginScheme } from 'features/AuthByUsername';
-import { GoogleLoginScheme } from 'features/AuthWithGoogle/model/types/GloginSceme';
 import { PlayerScheme } from 'entities/Player/types/player';
 import { TaskTrackerScheme } from 'entities/TaskTracker/types/taskTracker';
 import { SingleArticleScheme } from 'entities/Article';
@@ -26,26 +22,31 @@ import { ScrollSaverScheme } from 'features/ScrollSaver';
 import { ArticleDetailsRecomendationsScheme } from 'pages/ArticleDetails';
 import { TextEditorScheme } from 'widgets/TextEditor/model/types/textEditor';
 import { WallScheme } from 'entities/Wall';
+import { SingleGroupPageScheme } from 'pages/SingleGroupPage';
+import { ProfilePageScheme } from 'pages/ProfilePage';
 
 export interface StateScheme {
-  loginForm?: LoginScheme;
-  profile?: ProfileScheme;
-  ScrollSaver: ScrollSaverScheme;
-  Player: PlayerScheme;
+  //Article
   Article?: SingleArticleScheme;
   ArticlesPage?: ArticlesPageScheme;
+  ProfilePage?: ProfilePageScheme;
   ArticleComments?: ArticleDetailsCommentsScheme;
   ArticleRecomendations?: ArticleDetailsRecomendationsScheme;
   AddComment?: AddCommentScheme;
+  //profile
+  GoogleProfile: GoogleProfileScheme;
+  Player: PlayerScheme;
   TaskTracker: TaskTrackerScheme;
+  //community & chalenges
   Community: CommunitiesScheme;
+  SingleGroupPage?: SingleGroupPageScheme;
   Challenge: ChallengeScheme;
   ChallengePage?: ChallengePageScheme;
-  GoogleProfile: GoogleProfileScheme;
-  GoogleLogin: GoogleLoginScheme;
+  //settings & widgets
+  ScrollSaver: ScrollSaverScheme;
   TextEditor?: TextEditorScheme;
   Wall?: WallScheme;
-  user: UserScheme;
+  //GPT
   Chat: ChatScheme;
   GPT: GPTscheme;
 }

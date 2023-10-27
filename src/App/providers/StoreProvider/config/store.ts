@@ -12,7 +12,6 @@ import { useDispatch } from 'react-redux';
 import { API } from 'shared/API/API';
 import { NavigateOptions, To } from 'react-router-dom';
 import { GPT_API } from 'App/API/firebaseAPI';
-import { googleLoginReducer } from 'features/AuthWithGoogle/model/slice/googleLoginSlice';
 import { GoogleProfileReducer } from 'entities/GoogleProfile/model/slice/GoogleProfileSlice';
 import { GPTReducer } from 'entities/GPT';
 import { PlayerReducer } from 'entities/Player/model/slice/playerSlice';
@@ -28,7 +27,6 @@ export function createReduxStore(
 ) {
   const rootReducers: ReducersMapObject<StateScheme> = {
     ...asyncReducers,
-    user: userReducer,
     Player: PlayerReducer,
     TaskTracker: TaskTrackerReducer,
     ScrollSaver: scrollSaverReducer,
@@ -37,7 +35,6 @@ export function createReduxStore(
     Chat: ChatReducer,
     GPT: GPTReducer,
     GoogleProfile: GoogleProfileReducer,
-    GoogleLogin: googleLoginReducer,
   };
 
   const reducerManager = createReducerManager(rootReducers);

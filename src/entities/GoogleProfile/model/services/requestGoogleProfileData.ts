@@ -7,7 +7,7 @@ export const requestGoogleProfileData = createAsyncThunk<
   any,
   string,
   ThunkConfig<any>
->('profile/requestGoogleProfileData', async (userID, thunkAPI) => {
+>('GoogleProfile/requestGoogleProfileData', async (userID, thunkAPI) => {
   const accRef = doc(GPT_DB, 'accounts', userID);
 
   try {

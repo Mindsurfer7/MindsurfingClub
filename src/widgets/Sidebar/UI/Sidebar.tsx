@@ -18,24 +18,6 @@ const Sidebar: React.FC<SidebarProps> = memo(({ className }) => {
   const [collapse, setCollapse] = useState(true);
   const SidebarItemsList = useSelector(getSideBarItems);
 
-  const handleResize = () => {
-    if (window.innerWidth <= 375) {
-      setCollapse(true);
-    } else {
-      setCollapse(false);
-    }
-  };
-
-  useEffect(() => {
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   const onSwitch = () => {
     setCollapse((prev) => !prev);
   };

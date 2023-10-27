@@ -6,7 +6,6 @@ import {
   ReducersList,
 } from 'shared/lib/DynamicModuleLoader/DynamicModuleLoader';
 import {
-  ProfileCard,
   NewProfileCard,
   profileReducer,
   requestProfileData,
@@ -14,100 +13,66 @@ import {
   requestGoogleProfileData,
 } from 'entities/Profile';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  getProfileData,
-  getProfileError,
-  getProfileForm,
-  getProfileIsLoading,
-  getProfileReadonly,
-} from 'entities/Profile/model/selectors/getProfile';
 import ProfilePageHeader from './Header/ProfilePageHeader';
-import { Currency } from 'entities/Currency';
-import { Country } from 'entities/Country';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
-import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
 import { useParams } from 'react-router-dom';
 import { Page } from 'widgets/Page';
 import { getGoogleProfile } from 'features/AuthWithGoogle';
 import { getPlayerProfile } from 'entities/Player/model/selectors/getPlayerData';
-import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
+import {
+  getGoogleID,
+  getGoogleIsLogged,
+} from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import { Wall } from 'entities/Wall';
+import { profilePageReducer } from '../model/slice/profilePageSlice';
+import { publishPostInProfile } from '../model/services/publishPostInProfile';
+import { requestPostsByUserID } from '../model/services/requestPostsByUserID';
+import {
+  getProfilePageError,
+  getProfilePageForm,
+  getProfilePageIsLoading,
+  getProfilePagePosts,
+  getProfilePageProfile,
+  getProfilePageReadonly,
+} from '../model/selectors/getProfilePageData';
 
 interface ProfilePageProps {
   className?: string;
 }
 
 const reducers: ReducersList = {
-  profile: profileReducer,
+  ProfilePage: profilePageReducer,
 };
 
 const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
   /////////// old hooks //////////////////////////////////////////////////
-  const formData = useSelector(getProfileForm);
-  const error = useSelector(getProfileError);
-  const isLoading = useSelector(getProfileIsLoading);
-  const readonly = useSelector(getProfileReadonly);
   const { profileID } = useParams<{ profileID: string }>();
   const dispatch = useAppDispatch();
   ///////////firebase version hooks ////////////////////////////////////////
-  const profileData = useSelector(getProfileData);
+  const isLogged = useSelector(getGoogleIsLogged);
+  const profile = useSelector(getProfilePageProfile);
+  const posts = useSelector(getProfilePagePosts);
   ///////////////////////////////////////////////////////////////////////////
-
-  useInitialEffect(() => {
-    if (profileID) {
-      // dispatch(requestProfileData(profileID));
-    }
-  });
+  const formData = useSelector(getProfilePageForm);
+  const error = useSelector(getProfilePageError);
+  const isLoading = useSelector(getProfilePageIsLoading);
+  const readonly = useSelector(getProfilePageReadonly);
 
   useEffect(() => {
     if (profileID) {
       dispatch(requestGoogleProfileData(profileID));
+      dispatch(requestPostsByUserID(profileID));
     }
   }, [profileID]);
 
-  // useEffect(() => {
-  //   if (PROJECT !== 'storybook') {
-
-  //   }
-  // }, [dispatch]);
-
-  const onChangeUsername = useCallback(
-    (value?: string) => {
-      dispatch(updateProfile({ first: value || '' }));
-    },
-    [dispatch],
-  );
-
-  const onChangeAge = useCallback(
-    (value?: string) => {
-      dispatch(updateProfile({ age: value || '' }));
-    },
-    [dispatch],
-  );
-  const onChangeCity = useCallback(
-    (value?: string) => {
-      dispatch(updateProfile({ city: value || '' }));
-    },
-    [dispatch],
-  );
-  const onChangePic = useCallback(
-    (value?: string) => {
-      dispatch(updateProfile({ avatar: value || '' }));
-    },
-    [dispatch],
-  );
-  const onChangeCurrency = useCallback(
-    (currency?: Currency) => {
-      dispatch(updateProfile({ currency }));
-    },
-    [dispatch],
-  );
-  const onChangeCountry = useCallback(
-    (country?: Country) => {
-      dispatch(updateProfile({ country }));
-    },
-    [dispatch],
-  );
+  const onCreatePost = useCallback(() => {
+    if (!isLogged) {
+      alert('Log in');
+    }
+    if (profileID) {
+      dispatch(publishPostInProfile(profileID));
+    }
+  }, [dispatch, isLogged, profileID]);
 
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
@@ -115,13 +80,7 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
         <ProfilePageHeader />
 
         <NewProfileCard
-          onChangeUsername={onChangeUsername}
-          onChangeAge={onChangeAge}
-          onChangePic={onChangePic}
-          onChangeCity={onChangeCity}
-          onChangeCountry={onChangeCountry}
-          onChangeCurrency={onChangeCurrency}
-          profileData={profileData}
+          profileData={profile}
           className={cls.profile}
           isLoading={isLoading}
           readonly={readonly}
@@ -129,9 +88,11 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
         />
 
         <Wall
+          posts={posts}
+          onCreatePost={onCreatePost}
+          className={cls.wall}
           //@ts-ignore
-          renderData={profileData}
-          authorID={profileData?.UID}
+          renderData={profile}
         />
       </Page>
     </DynamicModuleLoader>
@@ -154,3 +115,54 @@ export default ProfilePage;
           error={error}
         /> */
 }
+
+// onChangeUsername={onChangeUsername}
+// onChangeAge={onChangeAge}
+// onChangePic={onChangePic}
+// onChangeCity={onChangeCity}
+// onChangeCountry={onChangeCountry}
+// onChangeCurrency={onChangeCurrency}
+
+// const onChangeUsername = useCallback(
+//   (value?: string) => {
+//     dispatch(updateProfile({ first: value || '' }));
+//   },
+//   [dispatch],
+// );
+
+// const onChangeAge = useCallback(
+//   (value?: string) => {
+//     dispatch(updateProfile({ age: value || '' }));
+//   },
+//   [dispatch],
+// );
+// const onChangeCity = useCallback(
+//   (value?: string) => {
+//     dispatch(updateProfile({ city: value || '' }));
+//   },
+//   [dispatch],
+// );
+// const onChangePic = useCallback(
+//   (value?: string) => {
+//     dispatch(updateProfile({ avatar: value || '' }));
+//   },
+//   [dispatch],
+// );
+// const onChangeCurrency = useCallback(
+//   (currency?: Currency) => {
+//     dispatch(updateProfile({ currency }));
+//   },
+//   [dispatch],
+// );
+// const onChangeCountry = useCallback(
+//   (country?: Country) => {
+//     dispatch(updateProfile({ country }));
+//   },
+//   [dispatch],
+// );
+
+// useInitialEffect(() => {
+//   if (profileID) {
+// dispatch(requestProfileData(profileID));
+//   }
+// });

@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ArticleCreatePage.module.scss';
 import { useSelector } from 'react-redux';
@@ -22,6 +22,11 @@ import Text, { TextAlign } from 'shared/UI/Text/Text';
 import { Page } from 'widgets/Page';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { TextEditor } from 'widgets/TextEditor';
+import { useParams } from 'react-router-dom';
+import { getCanEditArticle } from 'entities/Article';
+import { getArticleData } from 'entities/Article/model/selectors/getArticleData';
+import { uploadImage } from 'features/UploadImage/model/services/uploadImage';
+import { ImageUploader } from 'features/UploadImage';
 
 interface ArticleCreatePageProps {
   className?: string;
@@ -35,8 +40,18 @@ const ArticleCreatePage: React.FC<ArticleCreatePageProps> = ({ className }) => {
   const text = useSelector(getTextEditorValue) || '';
   const isLogged = useSelector(getGoogleIsLogged);
   const isPublished = useSelector(getArticleIsPublished);
+  const article = useSelector(getArticleData);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const { id } = useParams<{ id: string }>();
+  const isEdit = Boolean(id);
+
+  useEffect(() => {
+    if (isEdit) {
+      // @ts-ignore
+      dispatch(setText(article?.blocks[0].paragraphs[0]));
+    }
+  }, [dispatch, isEdit, article]);
 
   const onChangeText = useCallback(
     (value: string) => {
@@ -62,18 +77,15 @@ const ArticleCreatePage: React.FC<ArticleCreatePageProps> = ({ className }) => {
         className={classNames(cls.ArticleCreatePage, {}, [className as string])}
       >
         <Text title={t('TextEditor')} align={TextAlign.Center} />
+        {isEdit && <>hi</>}
         <TextEditor
+          className={cls.textEditor}
           // text={text}
           // onChangeText={onChangeText}
           clsModification={mods}
         />
-        {/* <ReactQuill
-          value={text}
-          onChange={onChangeText}
-          placeholder="Write your best ideas here...)"
-          theme="snow"
-          className={classNames(cls.quill, mods, [className as string])}
-        /> */}
+        <ImageUploader />
+
         <Button onClick={onPublish} theme={ButtonTheme.OUTLINE}>
           {t('Publish')}
         </Button>

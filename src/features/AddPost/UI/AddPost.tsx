@@ -6,20 +6,14 @@ import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { useTranslation } from 'react-i18next';
 import Text, { TextAlign } from 'shared/UI/Text/Text';
 
-type IDtype = {
-  publicID: string | undefined;
-  authorID: string | undefined;
-};
-
 interface AddPostProps {
   className?: string;
   onPostClick: () => void;
-  id: string | undefined;
+  // id: string | undefined;
 }
 
-const AddPost: React.FC<AddPostProps> = ({ className, onPostClick, id }) => {
+const AddPost: React.FC<AddPostProps> = ({ className, onPostClick }) => {
   const { t } = useTranslation('wall');
-  console.log(id);
 
   return (
     <div className={classNames(cls.AddPost, {}, [className as string])}>
@@ -32,7 +26,7 @@ const AddPost: React.FC<AddPostProps> = ({ className, onPostClick, id }) => {
           theme={ButtonTheme.OUTLINE}
           className={cls.sendBtn}
           onClick={onPostClick}
-          disabled={!id}
+          // disabled={!id}
         >
           {t('send')}
         </Button>

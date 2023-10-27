@@ -99,7 +99,7 @@ const ArticlesPageFilters: React.FC<ArticlesPageFiltersProps> = ({
   );
 
   const onCreateArticle = () => {
-    navigate('/textEditor');
+    navigate('/articles/new');
   };
 
   return (

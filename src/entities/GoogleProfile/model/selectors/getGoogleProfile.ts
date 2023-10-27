@@ -6,6 +6,9 @@ export const getGoogleProfile = (state: StateScheme) => {
 export const getGoogleAvatar = (state: StateScheme) => {
   return state.GoogleProfile?.account?.photoURL;
 };
+export const getGoogleNickname = (state: StateScheme) => {
+  return state.GoogleProfile?.account?.displayName;
+};
 export const getGoogleData = (state: StateScheme) => {
   return state.GoogleProfile;
 };

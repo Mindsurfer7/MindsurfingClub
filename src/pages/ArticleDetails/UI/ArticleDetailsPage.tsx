@@ -20,8 +20,6 @@ import { fetchCommentsByArticleId } from '../model/services/fetchCommentsByArtic
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { getCommentsIsLoading } from '../model/selectors/getCommentsData';
 import AddCommentForm from 'features/AddComment/UI/AddCommentForm';
-import { addCommentForArticle } from '../model/services/addCommentForArticle';
-import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { useTranslation } from 'react-i18next';
 import { RoutePath } from 'shared/config/routesConfig/routesConfig';
 import { Page } from 'widgets/Page';
@@ -79,7 +77,6 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
       if (!userID) {
         alert('Please, log in');
       }
-      dispatch(addCommentForArticle(text)); //mock server
       dispatch(addComment({ ID: v4() })); //firebase server
     },
     [dispatch, userID],

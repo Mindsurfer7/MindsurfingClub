@@ -131,7 +131,7 @@ const SingleArticle: React.FC<SingleArticleProps> = memo(
     }
 
     return (
-      <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
+      <DynamicModuleLoader reducers={reducers}>
         <div
           className={classNames(cls.SingleArticle, {}, [className as string])}
         >

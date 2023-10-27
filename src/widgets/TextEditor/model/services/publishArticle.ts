@@ -6,7 +6,10 @@ import {
   getGoogleID,
   getGoogleProfile,
 } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
-import { getTextEditorValue } from '../selectors/getTextEditorData';
+import {
+  getArticleImageLink,
+  getTextEditorValue,
+} from '../selectors/getTextEditorData';
 
 export function extractFirstHtmlTagContent(htmlString: any) {
   const parser = new DOMParser();
@@ -23,6 +26,7 @@ export const publishArticle = createAsyncThunk<any, void, ThunkConfig<any>>(
     const text = getTextEditorValue(thunkAPI.getState());
     const authorID = getGoogleID(thunkAPI.getState());
     const articlesRef = collection(GPT_DB, 'articles');
+    const imageLink = getArticleImageLink(thunkAPI.getState());
 
     const currentDate = new Date();
 
@@ -32,7 +36,7 @@ export const publishArticle = createAsyncThunk<any, void, ThunkConfig<any>>(
 
     const article = {
       createdAt: formattedDate,
-      img: 'https://textis.ru/wp-content/uploads/2015/03/28.png',
+      img: imageLink || 'https://textis.ru/wp-content/uploads/2015/03/28.png',
       publicID: '',
       authorID: authorID,
       title: extractFirstHtmlTagContent(text),

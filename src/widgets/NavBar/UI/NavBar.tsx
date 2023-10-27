@@ -3,12 +3,13 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './Navbar.module.scss';
 import { memo, useCallback, useEffect, useState } from 'react';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
-import { LoginModal } from 'features/AuthByUsername';
 import { useSelector } from 'react-redux';
-import { getUsername } from 'entities/User/model/selectors/getUsername';
-import { userLogout } from 'entities/User/model/slice/userSlice';
 import MiniModal from 'shared/UI/MiniModal/MiniModal';
-import { getGoogleData } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
+import {
+  getGoogleData,
+  getGoogleIsLogged,
+  getGoogleNickname,
+} from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import {
   loginWithGoogle,
   logoutWithGoogle,
@@ -34,7 +35,6 @@ export const PageTitles = {
   [RoutePath[AppRoutes.About]]: 'About Us',
   [RoutePath[AppRoutes.PsyRoom]]: 'GPT Assistant',
   [RoutePath[AppRoutes.Profile]]: 'My Profile',
-  [RoutePath[AppRoutes.PracticeCenter]]: '',
   [RoutePath[AppRoutes.Conversation]]: 'GPT Assistant',
   [RoutePath[AppRoutes.PlayerSpace]]: 'RPG Task Tracker',
   [RoutePath[AppRoutes.Challenge]]: 'Challenges',
@@ -44,10 +44,9 @@ export const PageTitles = {
 
 export const NavBar = memo(({ className }: navprops) => {
   const [isVisible, setVisibility] = useState(false);
-  const [isLogged, setIsLogged] = useState(false);
   const [MiniModal2open, setMiniModal2open] = useState(false);
-  const username = useSelector(getUsername);
-  const googleAcc = useSelector(getGoogleData);
+  const isLogged = useSelector(getGoogleIsLogged);
+  const nickname = useSelector(getGoogleNickname);
   const dispatch = useAppDispatch();
   const { t } = useTranslation('navbar');
   const location = useLocation();
@@ -73,9 +72,9 @@ export const NavBar = memo(({ className }: navprops) => {
     setShowNotify(!showNotify);
   };
 
-  const ulbiLogout = () => {
-    dispatch(userLogout());
-  };
+  // const ulbiLogout = () => {
+  //   dispatch(userLogout());
+  // };
 
   const onGoogleLogin = () => {
     dispatch(loginWithGoogle());
@@ -84,15 +83,14 @@ export const NavBar = memo(({ className }: navprops) => {
     dispatch(logoutWithGoogle());
   };
 
-  useEffect(() => {
-    if (username) {
-      setVisibility(false);
-    }
-  }, [username]);
+  // useEffect(() => {
+  //   if (username) {
+  //     setVisibility(false);
+  //   }
+  // }, [username]);
 
   return (
     <header className={classNames(cls.navbar, {}, [className as string])}>
-      {isVisible && <LoginModal isVisible={isVisible} onClose={onCloseModal} />}
       {showNotify && <NotificationBar />}
       <Icon Svg={logo} className={cls.logo} />
       {
@@ -105,7 +103,7 @@ export const NavBar = memo(({ className }: navprops) => {
           <Icon Svg={NotificationIcon} className={cls.notificationsBar} />
         </div>
 
-        {!googleAcc?.isLogged ? (
+        {!isLogged ? (
           <Button
             theme={ButtonTheme.OUTLINE}
             className={cls.login}
@@ -121,7 +119,7 @@ export const NavBar = memo(({ className }: navprops) => {
               setMiniModal2open(!MiniModal2open);
             }}
           >
-            {googleAcc.account?.displayName}
+            {nickname}
           </Button>
         )}
         {/* {username ? (
@@ -145,9 +143,9 @@ export const NavBar = memo(({ className }: navprops) => {
         )} */}
       </div>
       {/* по хорошему весь сей код над выделить в компонентик для шейред слоя + add onblur*/}
-      {isLogged && (
+      {/* {isLogged && (
         <MiniModal setIsLogged={setIsLogged} onLogout={ulbiLogout} />
-      )}
+      )} */}
       {MiniModal2open && (
         <MiniModal setIsLogged={setMiniModal2open} onLogout={onGoogleLogout} />
       )}

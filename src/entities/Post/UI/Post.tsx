@@ -8,10 +8,14 @@ import { Avatar } from 'shared/UI/Avatar/Avatar';
 import { PublicType } from 'entities/Community';
 import Text from 'shared/UI/Text/Text';
 import Skeleton from 'shared/UI/Skeleton/Skeleton';
+import { Icon } from 'shared/UI/Icon/Icon';
+import LikeIcon from '../../../shared/assets/icons/like.svg';
+import x from '../../../shared/assets/icons/Xmark.svg';
+import { ProfileInterface } from 'pages/ProfilePage/model/types/profilePageScheme';
 
 interface PostProps {
   className?: string;
-  isLoading: boolean;
+  isLoading?: boolean;
   post: PostType;
   renderData: PublicType | null; // ИЛИ ПРОФИЛЬ ЮЗЕРА ТАЙП
 }
@@ -47,22 +51,22 @@ const Post: React.FC<PostProps> = ({
     }
   }, []);
 
-  if (isLoading) {
-    return (
-      <div className={classNames(cls.Post, {}, [className])}>
-        <div className={cls.title}>
-          <Skeleton width={30} height={30} border="50%" />
-          <Skeleton
-            height={16}
-            width={100}
-            className={cls.username}
-            border="20%"
-          />
-        </div>
-        <Skeleton className={cls.text} width="100%" height={50} />
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className={classNames(cls.Post, {}, [className])}>
+  //       <div className={cls.title}>
+  //         <Skeleton width={30} height={30} border="50%" />
+  //         <Skeleton
+  //           height={16}
+  //           width={100}
+  //           className={cls.username}
+  //           border="20%"
+  //         />
+  //       </div>
+  //       <Skeleton className={cls.text} width="100%" height={50} />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className={classNames(cls.Post, {}, [className as string])}>
@@ -80,6 +84,8 @@ const Post: React.FC<PostProps> = ({
       </div>
 
       {post.blocks.map(renderBlock)}
+      <Icon Svg={LikeIcon} className={cls.like} />
+      <Icon Svg={x} className={cls.x} />
     </div>
   );
 };

@@ -1,9 +1,16 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { signInWithPopup, signOut } from 'firebase/auth';
+import {
+  browserLocalPersistence,
+  browserSessionPersistence,
+  setPersistence,
+  signInWithPopup,
+  signOut,
+} from 'firebase/auth';
 import { ThunkConfig } from 'App/providers/StoreProvider';
 import { authG, googleProvider } from 'App/API/firebaseAPI';
 import { GoogleProfile, logoutAccount } from 'entities/GoogleProfile';
+import { PROFILE_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 
 export const loginWithGoogle = createAsyncThunk<
   GoogleProfile,
@@ -11,6 +18,7 @@ export const loginWithGoogle = createAsyncThunk<
   ThunkConfig<string>
 >('googleLogin/loginWithGoogle', async (_, thunkAPI) => {
   try {
+    await setPersistence(authG, browserLocalPersistence);
     const response = await signInWithPopup(authG, googleProvider).then(() => {
       const currentUser = authG.currentUser;
       if (!currentUser) {
@@ -19,6 +27,11 @@ export const loginWithGoogle = createAsyncThunk<
 
       const { uid, displayName, email, photoURL } = currentUser;
       const profile: GoogleProfile = { uid, displayName, email, photoURL };
+
+      localStorage.setItem(
+        PROFILE_LOCALSTORAGE_KEY,
+        JSON.stringify(currentUser), //response.profile
+      );
 
       return Promise.resolve({
         profile,

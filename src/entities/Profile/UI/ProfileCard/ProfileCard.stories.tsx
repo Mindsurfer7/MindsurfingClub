@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ThemeDecorator } from 'shared/config/storybook/ThemeDecorator/ThemeDecorator';
 import { Theme } from 'App/providers/ThemeProvider';
-import ProfileCard from './ProfileCard';
+import ProfileCard from './NewProfileCard';
 
 export default {
   title: 'entities/ProfileCard',
@@ -18,8 +18,6 @@ export const Primary = Template.bind({});
 Primary.args = {
   profileData: {
     username: 'admin',
-    age: '22',
-    city: 'Moscow',
   },
 };
 
