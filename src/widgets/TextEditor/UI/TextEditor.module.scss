@@ -23,12 +23,42 @@
 .quill {
   height: 100%;
   width: 100%;
-  background-color: rebeccapurple;
-  border-radius: 12px;
+  // background-color: rebeccapurple;
   color: white;
   margin-bottom: 20px;
   box-sizing: border-box;
   // max-width: 500px;
+
+  :global(.ql-toolbar) {
+    background-color: var(--primary-color);
+    border-radius: 6px;
+  }
+  :global(.ql-container) {
+    border-radius: 6px;
+  }
+  :global(.ql-formats) {
+    color: var(--inverted-primary-color);
+  }
+  :global(.ql-picker-label) {
+    color: var(--inverted-primary-color);
+    border: 1px solid white;
+  }
+  :global(.ql-bold) {
+    color: var(--inverted-primary-color);
+  }
+  :global(.ql-stroke) {
+    color: var(--inverted-primary-color);
+  }
+  :global(.ql-blockstroke) {
+    color: var(--inverted-primary-color);
+  }
+  :global(.ql-list) {
+    color: var(--inverted-primary-color);
+  }
+  :global(svg) {
+    color: var(--inverted-primary-color);
+    stroke: white;
+  }
 
   @media (max-width: 1200px) {
     width: 1000px;

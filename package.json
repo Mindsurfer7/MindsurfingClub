@@ -92,6 +92,9 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
+    "@tiptap/pm": "^2.1.12",
+    "@tiptap/react": "^2.1.12",
+    "@tiptap/starter-kit": "^2.1.12",
     "@types/dotenv-webpack": "^7.0.4",
     "axios": "^0.26.1",
     "concurrently": "^7.0.0",

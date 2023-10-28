@@ -69,6 +69,7 @@ const ArticleCreatePage: React.FC<ArticleCreatePageProps> = ({ className }) => {
 
   const mods = {
     [cls['published']]: isPublished,
+    [cls['ql-toolbar']]: true,
   };
 
   return (
@@ -84,7 +85,7 @@ const ArticleCreatePage: React.FC<ArticleCreatePageProps> = ({ className }) => {
           // onChangeText={onChangeText}
           clsModification={mods}
         />
-        <ImageUploader />
+        {/* <ImageUploader /> */}
 
         <Button onClick={onPublish} theme={ButtonTheme.OUTLINE}>
           {t('Publish')}

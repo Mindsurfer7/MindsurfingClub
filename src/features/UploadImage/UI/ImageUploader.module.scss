@@ -1,4 +1,55 @@
+.ImageUploader {
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+  align-items: center;
+}
+
 .img {
+  margin-top: 10px;
   width: 200px;
   height: 200px;
+
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  padding: 10px;
 }
+
+.Inp {
+  border: 2px solid var(--primary-color);
+  border-radius: 5px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+// .customfileinput {
+//   color: transparent;
+// }
+// .customfileinput::-webkit-file-upload-button {
+//   visibility: hidden;
+// }
+// .customfileinput::before {
+//   content: 'Select some files';
+//   color: black;
+//   display: inline-block;
+//   background: -webkit-linear-gradient(top, #513799, #3f129246);
+//   border: 1px solid #999;
+//   border-radius: 3px;
+//   padding: 5px 8px;
+//   outline: none;
+//   white-space: nowrap;
+//   -webkit-user-select: none;
+//   cursor: pointer;
+//   text-shadow: 1px 1px #fff;
+//   font-weight: 700;
+//   font-size: 10pt;
+// }
+// .customfileinput:hover::before {
+//   border-color: black;
+// }
+// .customfileinput:active {
+//   outline: 0;
+// }
+// .customfileinput:active::before {
+//   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+// }

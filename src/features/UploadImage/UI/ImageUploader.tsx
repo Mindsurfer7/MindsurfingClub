@@ -5,9 +5,11 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { uploadImage } from '../model/services/uploadImage';
 import { useSelector } from 'react-redux';
 import { getArticleImageLink } from 'widgets/TextEditor/model/selectors/getTextEditorData';
+import { UploadPath } from '../model/types/uploadPath';
 
 interface ImageUploaderProps {
   className?: string;
+  uploadPath?: UploadPath;
 }
 
 const ImageUploader: React.FC<ImageUploaderProps> = ({ className }) => {
@@ -24,6 +26,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ className }) => {
     <div className={classNames(cls.ImageUploader, {}, [className as string])}>
       <input
         type="file"
+        className={cls.Inp}
         onChange={(e: any) => {
           dispatch(uploadImage(e.target.files[0]));
         }}
