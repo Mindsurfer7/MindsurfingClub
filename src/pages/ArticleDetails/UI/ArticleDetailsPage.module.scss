@@ -2,6 +2,12 @@
 .ArticleDetailsPage {
   // align-items: center;
   // justify-content: center;
+
+  @media (max-width: 429px) {
+    display: flex;
+    flex-direction: column;
+    max-width: 410px;
+  }
   @media (max-width: 375px) {
     display: flex;
     flex-direction: column;

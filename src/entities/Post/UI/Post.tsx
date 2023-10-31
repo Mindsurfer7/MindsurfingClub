@@ -10,8 +10,14 @@ import Text from 'shared/UI/Text/Text';
 import Skeleton from 'shared/UI/Skeleton/Skeleton';
 import { Icon } from 'shared/UI/Icon/Icon';
 import LikeIcon from '../../../shared/assets/icons/like.svg';
+import LikeFilledIcon from '../../../shared/assets/icons/likeFilled.svg';
 import x from '../../../shared/assets/icons/Xmark.svg';
 import { ProfileInterface } from 'pages/ProfilePage/model/types/profilePageScheme';
+import Button from 'shared/UI/Button/Button';
+import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
+import { likePost } from '../model/services/likePost';
+import { useSelector } from 'react-redux';
+import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 
 interface PostProps {
   className?: string;
@@ -26,6 +32,8 @@ const Post: React.FC<PostProps> = ({
   renderData,
   isLoading = true,
 }) => {
+  const dispatch = useAppDispatch();
+  const myID = useSelector(getGoogleID);
   const renderBlock = useCallback((block: PostBlock) => {
     switch (block.type) {
       case 'IMAGE':
@@ -68,6 +76,8 @@ const Post: React.FC<PostProps> = ({
   //   );
   // }
 
+  const isLiked = post.likes?.filter((like) => like === myID);
+
   return (
     <div className={classNames(cls.Post, {}, [className as string])}>
       <div className={cls.title}>
@@ -84,7 +94,13 @@ const Post: React.FC<PostProps> = ({
       </div>
 
       {post.blocks.map(renderBlock)}
-      <Icon Svg={LikeIcon} className={cls.like} />
+      <Button onClick={() => dispatch(likePost(post.id))}>
+        {isLiked ? (
+          <Icon Svg={LikeFilledIcon} className={cls.liked} />
+        ) : (
+          <Icon Svg={LikeIcon} className={cls.like} />
+        )}
+      </Button>
       <Icon Svg={x} className={cls.x} />
     </div>
   );

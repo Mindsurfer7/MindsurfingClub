@@ -8,9 +8,10 @@ import {
 } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import {
   getArticleImageLink,
-  getTextEditorPublicID,
   getTextEditorValue,
 } from '../selectors/getTextEditorData';
+import { getArticleID } from 'entities/Article/model/selectors/getArticleData';
+import { requestArticleByID } from 'entities/Article/model/services/firebaseAPI/requestArticleByID';
 
 export function extractFirstHtmlTagContent(htmlString: any) {
   const parser = new DOMParser();
@@ -21,14 +22,14 @@ export function extractFirstHtmlTagContent(htmlString: any) {
   return (firstElement && firstElement.textContent) || null;
 }
 
-export const publishArticle = createAsyncThunk<any, string, ThunkConfig<any>>(
-  'TextEditor/publishArticle',
+export const updateArticle = createAsyncThunk<any, void, ThunkConfig<any>>(
+  'TextEditor/updateArticle',
   async (publicID, thunkAPI) => {
     const text = getTextEditorValue(thunkAPI.getState());
     const authorID = getGoogleID(thunkAPI.getState());
+    const articleID = getArticleID(thunkAPI.getState());
     const articlesRef = collection(GPT_DB, 'articles');
     const imageLink = getArticleImageLink(thunkAPI.getState());
-    const publicid2 = getTextEditorPublicID(thunkAPI.getState());
 
     const currentDate = new Date();
 
@@ -39,10 +40,11 @@ export const publishArticle = createAsyncThunk<any, string, ThunkConfig<any>>(
     const article = {
       createdAt: formattedDate,
       img: imageLink || 'https://textis.ru/wp-content/uploads/2015/03/28.png',
-      publicID: publicid2 || publicID,
+      publicID: '',
       authorID: authorID,
       title: extractFirstHtmlTagContent(text),
       type: ['ALL'],
+      id: articleID,
       views: 0,
       blocks: [
         {
@@ -53,18 +55,14 @@ export const publishArticle = createAsyncThunk<any, string, ThunkConfig<any>>(
     };
 
     try {
-      const docRef = await addDoc(articlesRef, article);
+      await updateDoc(doc(articlesRef, articleID), article);
+      if (articleID) {
+        thunkAPI.dispatch(requestArticleByID(articleID));
+      }
 
-      const updatedArticle = {
-        ...article,
-        id: docRef.id,
-      };
-
-      await updateDoc(doc(articlesRef, docRef.id), updatedArticle);
-
-      console.log('article published');
+      console.log('article updated');
     } catch (error) {
-      console.error('Error creating article', error);
+      console.error('Error updating article', error);
     }
   },
 );

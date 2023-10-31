@@ -8,12 +8,15 @@ import { v4 } from 'uuid';
 
 export const uploadImage = createAsyncThunk<any, any, ThunkConfig<any>>(
   'xxxx/uploadImage',
-  async (image, thunkAPI) => {
+  async (payload, thunkAPI) => {
     try {
-      const imageRef = ref(storage, `articleImgs/${image.name + v4()}`);
-      console.log(image);
+      const imageRef = ref(
+        storage,
+        `${payload.path}/${payload.file.name + v4()}`,
+      );
+      console.log(payload);
 
-      await uploadBytes(imageRef, image);
+      await uploadBytes(imageRef, payload.file);
 
       const downloadURL = await getDownloadURL(imageRef);
       // if (!response.data) {

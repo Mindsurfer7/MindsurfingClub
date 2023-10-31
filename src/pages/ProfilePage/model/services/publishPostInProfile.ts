@@ -32,6 +32,7 @@ export const publishPostInProfile = createAsyncThunk<
     publicID: '',
     authorID: authorID,
     views: 0,
+    likes: [],
     blocks: [
       {
         paragraphs: [text],

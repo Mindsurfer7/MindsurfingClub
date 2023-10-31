@@ -1,17 +1,22 @@
 .ArticlePageFilters {
+  width: 100%;
   @media (max-width: 375px) {
     display: flex;
     flex-wrap: wrap;
     // flex-direction: column;
-    max-width: 370px;
+    max-width: 360px;
+
+    justify-content: space-between;
   }
 }
 
 .SortWrap {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
+  width: 100%;
 
   @media (max-width: 375px) {
     flex-direction: column;

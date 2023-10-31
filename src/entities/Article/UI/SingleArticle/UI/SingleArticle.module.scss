@@ -6,6 +6,11 @@
   margin-bottom: 20px;
 
   @media (max-width: 429px) {
+    // max-width: 400px;
+    width: 100%;
+  }
+
+  @media (max-width: 429px) {
     max-width: 400px;
     // width: 100%;
   }

@@ -1,7 +1,7 @@
 import { GoogleProfile } from 'entities/GoogleProfile';
 
 export interface User {
-  id: number;
+  id: string;
   username: string;
   avatar?: string;
 }

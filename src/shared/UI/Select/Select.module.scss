@@ -1,5 +1,9 @@
 .Wrapper {
   display: flex;
+
+  @media (max-width: 375px) {
+    flex-direction: column;
+  }
 }
 
 .label {
@@ -27,6 +31,7 @@
 .option {
   &:hover {
     cursor: pointer;
+    background: red;
   }
   color: var(--inverted-primary-color);
   background: var(--inverted-bg-color);

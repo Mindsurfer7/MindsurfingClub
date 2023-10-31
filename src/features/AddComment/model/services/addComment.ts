@@ -9,7 +9,10 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
-import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
+import {
+  getGoogleAvatar,
+  getGoogleID,
+} from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import { getTaskTrackerData } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
 import { getCommentText } from '../selectors/getCommentsData';
 import { getCurrentArticleID } from 'pages/ArticleDetails/model/selectors/getCommentsData';
@@ -20,6 +23,7 @@ export const addComment = createAsyncThunk<
   ThunkConfig<any>
 >('Comment/addComment', async (payload, thunkAPI) => {
   const userID = getGoogleID(thunkAPI.getState());
+  const avatar = getGoogleAvatar(thunkAPI.getState());
   const text = getCommentText(thunkAPI.getState());
   const comments = collection(GPT_DB, 'ArticleComments');
   const articleID = getCurrentArticleID(thunkAPI.getState());
@@ -27,6 +31,7 @@ export const addComment = createAsyncThunk<
   const comment = {
     ID: payload.ID,
     articleID: articleID,
+    photoURL: avatar,
     userID,
     text,
   };

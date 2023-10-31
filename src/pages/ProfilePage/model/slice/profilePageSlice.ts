@@ -21,6 +21,13 @@ export const profilePageSlice = createSlice({
   name: 'profilePage',
   initialState,
   reducers: {
+    setReadonly: (state, action: PayloadAction<boolean>) => {
+      state.readonly = action.payload;
+    },
+    cancelEdit: (state) => {
+      state.readonly = true;
+      state.form = state.profile;
+    },
     initprofilePage: (state, action: PayloadAction<string>) => {
       //   state._inited = true;
     },
@@ -68,5 +75,5 @@ export const profilePageSlice = createSlice({
   },
 });
 
-export const {} = profilePageSlice.actions;
+export const { cancelEdit, setReadonly } = profilePageSlice.actions;
 export const { reducer: profilePageReducer } = profilePageSlice;

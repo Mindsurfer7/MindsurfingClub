@@ -35,6 +35,8 @@ import {
   getProfilePageProfile,
   getProfilePageReadonly,
 } from '../model/selectors/getProfilePageData';
+import { getArticleImageLink } from 'widgets/TextEditor/model/selectors/getTextEditorData';
+import { updateProfilePicture } from 'entities/GoogleProfile/model/services/updateProfilePicture';
 
 interface ProfilePageProps {
   className?: string;
@@ -57,6 +59,7 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
   const error = useSelector(getProfilePageError);
   const isLoading = useSelector(getProfilePageIsLoading);
   const readonly = useSelector(getProfilePageReadonly);
+  const imageURL = useSelector(getArticleImageLink);
 
   useEffect(() => {
     if (profileID) {
@@ -64,6 +67,16 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
       dispatch(requestPostsByUserID(profileID));
     }
   }, [profileID]);
+
+  const onUpdateProfilePicture = useCallback(async () => {
+    console.log('cljfwdnlvnw;e');
+
+    await dispatch(updateProfilePicture());
+
+    if (profileID) {
+      dispatch(requestGoogleProfileData(profileID));
+    }
+  }, [dispatch, profileID]);
 
   const onCreatePost = useCallback(() => {
     if (!isLogged) {
@@ -77,12 +90,13 @@ const ProfilePage: React.FC<ProfilePageProps> = memo(({ className }) => {
   return (
     <DynamicModuleLoader reducers={reducers} removeAfterUnmount>
       <Page className={classNames(cls.ProfilePage, {}, [className as string])}>
-        <ProfilePageHeader />
+        <ProfilePageHeader testCallback={onUpdateProfilePicture} />
 
         <NewProfileCard
           profileData={profile}
           className={cls.profile}
           isLoading={isLoading}
+          onChangePic={onUpdateProfilePicture}
           readonly={readonly}
           error={error}
         />

@@ -21,7 +21,7 @@ const ArticleSortSelector: React.FC<ArticleSortSelectorProps> = ({
   onChangeOrder,
   onChangeSort,
 }) => {
-  const { t } = useTranslation('artilcles');
+  const { t } = useTranslation('articles');
 
   const changeSortHandler = useCallback(
     (newSort: string) => {
@@ -76,7 +76,7 @@ const ArticleSortSelector: React.FC<ArticleSortSelectorProps> = ({
         onChange={changeSortHandler}
       />
       <Select
-        label={t('sortBy')}
+        label={t('order')}
         options={orderOptions}
         onChange={changeOrderHandler}
       />

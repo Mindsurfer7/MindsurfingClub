@@ -8,7 +8,7 @@ import Text from 'shared/UI/Text/Text';
 
 interface ArticlesListProps {
   className?: string;
-  articles: Article[];
+  articles: Article[] | undefined;
   isLoading: boolean;
   view?: ArticleViewType;
   target?: HTMLAttributeAnchorTarget;
@@ -27,8 +27,6 @@ const ArticlesList: React.FC<ArticlesListProps> = ({
   target,
   view = ArticleViewType.Square,
 }) => {
-  console.log(articles.length);
-
   const renderArticle = (article: Article) => (
     <ArticleItem
       article={article}
@@ -57,7 +55,7 @@ const ArticlesList: React.FC<ArticlesListProps> = ({
 
   return (
     <div className={classNames(cls.ArticleList, {}, [className, cls[view]])}>
-      {articles.length > 0 ? articles.map(renderArticle) : null}
+      {articles && articles.length > 0 ? articles.map(renderArticle) : null}
       {isLoading && getSkeletons(view)}
     </div>
   );

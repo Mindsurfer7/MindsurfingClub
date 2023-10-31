@@ -7,8 +7,10 @@ export interface PostBlock {
 export interface PostType {
   createdAt: string;
   img: string;
+  id: string;
   publicID: string;
   authorID: string;
   views: number;
+  likes: Array<string>;
   blocks: PostBlock[];
 }

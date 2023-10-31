@@ -14,13 +14,13 @@ export const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
-    setReadonly: (state, action: PayloadAction<boolean>) => {
-      state.readonly = action.payload;
-    },
-    cancelEdit: (state) => {
-      state.readonly = true;
-      state.form = state.data;
-    },
+    // setReadonly: (state, action: PayloadAction<boolean>) => {
+    //   state.readonly = action.payload;
+    // },
+    // cancelEdit: (state) => {
+    //   state.readonly = true;
+    //   state.form = state.data;
+    // },
     updateProfile: (state, action: PayloadAction<Profile>) => {
       state.form = {
         ...state.form,
@@ -69,5 +69,5 @@ export const profileSlice = createSlice({
   },
 });
 
-export const { setReadonly, updateProfile, cancelEdit } = profileSlice.actions;
+export const { updateProfile } = profileSlice.actions;
 export const { reducer: profileReducer } = profileSlice;

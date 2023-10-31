@@ -1,12 +1,36 @@
 .ArticleList {
+  width: 100px;
   @media (max-width: 429px) {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    max-width: 100%;
+
+    // &.rectangle {
+    //   // Добавьте любые конкретные стили для вида rectangle при этой ширине
+    //   display: flex;
+    //   flex-direction: column;
+    //   align-items: center;
+    //   justify-content: center;
+    // }
+
+    // &.square {
+    //   // Добавьте любые конкретные стили для вида square при этой ширине
+    //   display: flex;
+    //   flex-direction: column;
+    //   align-items: center;
+    //   justify-content: center;
+    // }
+
+    // .card {
+    //   // Добавьте любые дополнительные стили для карточек внутри медиа-запроса
+    // }
   }
 }
 
 .rectangle {
+  width: 100%;
   margin-top: 10px;
   .card {
     margin-bottom: 30px;
@@ -17,7 +41,10 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
+  width: 100%;
 
+  @media (max-width: 429px) {
+  }
   .card {
     margin-right: 30px;
     margin-bottom: 30px;

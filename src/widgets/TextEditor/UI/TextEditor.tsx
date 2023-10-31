@@ -9,6 +9,7 @@ import { getTextEditorValue } from '../model/selectors/getTextEditorData';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useTranslation } from 'react-i18next';
 import { uploadImage } from 'features/UploadImage/model/services/uploadImage';
+import { UploadPath } from 'features/UploadImage/model/types/uploadPath';
 
 interface TextEditorProps {
   className?: string;
@@ -54,7 +55,9 @@ const TextEditor: React.FC<TextEditorProps> = ({
       const file = input.files![0];
 
       if (file && quillRef.current) {
-        const imageURL = await dispatch(uploadImage(file));
+        const imageURL = await dispatch(
+          uploadImage({ path: UploadPath.ARTICLE_IMAGES, file: file }),
+        );
         const quill = quillRef.current.getEditor();
 
         if (quill) {

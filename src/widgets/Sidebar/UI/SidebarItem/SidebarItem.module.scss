@@ -50,6 +50,10 @@
     }
   }
 
+  @media (max-width: 767px) {
+    flex-grow: 0;
+  }
+
   @media (max-width: 415px) {
     flex-grow: 0;
   }
@@ -72,8 +76,8 @@
 
   @media (max-width: 767px) {
     display: flex;
-    flex-direction: column;
-    display: none;
+    // flex-direction: column;
+    // display: none;
   }
 
   @media (max-width: 415px) {
@@ -85,6 +89,11 @@
     justify-content: center;
     &:hover {
       fill: var(--sidebar-text-hover);
+    }
+
+    @media (max-width: 767px) {
+      display: flex;
+      align-items: center;
     }
 
     @media (max-width: 415px) {

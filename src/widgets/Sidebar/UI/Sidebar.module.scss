@@ -34,6 +34,10 @@
   align-items: center;
   transition: width 0.5s, height 0.5s ease;
   // width: var(--sidebar-width); //min-
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
   @media (max-width: 415px) {
     width: 100%;
   }
@@ -155,9 +159,20 @@
   transition: width 0.5s, height 0.5s;
 
   @media (max-width: 767px) {
-    width: 40px;
+    transition: height 0.5s;
+    display: flex;
+    justify-content: space-between;
     justify-content: center;
     align-items: center;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: var(--inverted-bg-color);
+    border-top: 1px solid var(--primary-color);
+    // commented code is for prev version of collapsed bar
+    // width: 40px;
+    // justify-content: center;
+    // align-items: center;
   }
 
   @media (max-width: 415px) {
@@ -210,6 +225,13 @@
   .linkWrapper {
     justify-content: space-between;
 
+    @media (max-width: 767px) {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      align-items: center;
+    }
+
     @media (max-width: 415px) {
       display: flex;
       flex-direction: row;
@@ -231,6 +253,15 @@
     align-items: center;
     justify-content: center;
     margin-bottom: 20px;
+
+    @media (max-width: 767px) {
+      display: flex;
+      transform: rotate(-90deg);
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
     @media (max-width: 415px) {
       display: flex;
       transform: rotate(-90deg);

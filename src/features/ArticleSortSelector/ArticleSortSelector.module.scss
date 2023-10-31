@@ -2,4 +2,9 @@
   display: flex;
   gap: 10px;
   align-items: center;
+  margin-bottom: 10px;
+
+  @media (max-width: 375px) {
+    justify-content: space-between;
+  }
 }

@@ -9,29 +9,37 @@ import { UploadPath } from '../model/types/uploadPath';
 
 interface ImageUploaderProps {
   className?: string;
-  uploadPath?: UploadPath;
+  uploadPath: UploadPath;
 }
 
-const ImageUploader: React.FC<ImageUploaderProps> = ({ className }) => {
-  const [file, setFile] = useState([]);
+const ImageUploader: React.FC<ImageUploaderProps> = ({
+  className,
+  uploadPath,
+}) => {
   const dispatch = useAppDispatch();
-  const image = useSelector(getArticleImageLink);
+  const imageURL = useSelector(getArticleImageLink);
 
   // const onFileChoose = (e: ChangeEvent<HTMLInputElement>) => {
   //     //@ts-ignore
   //     setFile(e.target.files[0]);
   //     console.log(file);
   //   };
+
   return (
     <div className={classNames(cls.ImageUploader, {}, [className as string])}>
       <input
         type="file"
         className={cls.Inp}
         onChange={(e: any) => {
-          dispatch(uploadImage(e.target.files[0]));
+          dispatch(
+            uploadImage({
+              path: uploadPath,
+              file: e.target.files[0],
+            }),
+          );
         }}
       />
-      <img src={image} className={cls.img} />
+      <img src={imageURL} className={cls.img} />
     </div>
   );
 };

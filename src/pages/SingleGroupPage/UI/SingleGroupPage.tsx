@@ -34,11 +34,14 @@ import {
 } from 'shared/lib/DynamicModuleLoader/DynamicModuleLoader';
 import { singleGroupPageReducer } from '../model/slice/singleGroupPageSlice';
 import {
+  getSingleGroupPageArticles,
   getSingleGroupPageIsLoading,
   getSingleGroupPagePosts,
 } from '../model/selectors/getSingleGroupPageData';
 import { publishPostInPublic } from '../model/services/publishPostInPublic';
 import { requestPostsByPublicID } from '../model/services/requestPostsByPublicID';
+import { ArticlesList } from 'entities/Article';
+import { requestArticlesByPublicID } from '../model/services/requestArticlesByPublicID';
 
 interface SingleGroupPageProps {
   className?: string;
@@ -60,6 +63,7 @@ const SingleGroupPage: React.FC<SingleGroupPageProps> = ({ className }) => {
   const isLoading = useSelector(getSingleGroupPageIsLoading);
   const isLogged = useSelector(getGoogleIsLogged);
   const posts = useSelector(getSingleGroupPagePosts);
+  const articles = useSelector(getSingleGroupPageArticles);
 
   const challenges = challengesData.filter(
     (chal) => chal.communityID === publicID,
@@ -70,6 +74,7 @@ const SingleGroupPage: React.FC<SingleGroupPageProps> = ({ className }) => {
   useEffect(() => {
     publicID && dispatch(requestCommunityByID(publicID));
     publicID && dispatch(requestPostsByPublicID(publicID));
+    publicID && dispatch(requestArticlesByPublicID(publicID));
     publicID && dispatch(requestChallengesByPublicID(publicID));
   }, [dispatch, publicID]);
 
@@ -132,6 +137,15 @@ const SingleGroupPage: React.FC<SingleGroupPageProps> = ({ className }) => {
             chatName={community?.title ? community?.title : 'Club Chat'}
           />
         </div>
+        <div className={cls.articles}>
+          <Text title="Статьи паблика" align={TextAlign.Center} />
+          <ArticlesList
+            //@ts-ignore
+            articles={articles}
+            className={cls.list}
+          />
+        </div>
+
         <Wall
           posts={posts}
           className={cls.Wall}

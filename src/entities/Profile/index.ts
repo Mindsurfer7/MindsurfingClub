@@ -10,4 +10,4 @@ export { requestProfileData, requestGoogleProfileData };
 
 export { NewProfileCard };
 
-export { setReadonly, updateProfile } from './model/slice/profileSlice';
+export { updateProfile } from './model/slice/profileSlice';

@@ -19,6 +19,19 @@
   }
 }
 
+.option {
+  border: 1px solid black;
+  border-radius: 4px;
+  &:hover {
+    color: rgb(18, 247, 10);
+    cursor: pointer;
+  }
+}
+
+.selected {
+  background: red;
+}
+
 .textEditor {
   width: 100%;
 }

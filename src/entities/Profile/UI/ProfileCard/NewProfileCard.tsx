@@ -14,6 +14,8 @@ import { getPlayerProfile } from 'entities/Player/model/selectors/getPlayerData'
 import { PlayerData } from 'entities/Player/types/player';
 import { GoogleProfile } from 'entities/GoogleProfile';
 import { ProfileInterface } from 'pages/ProfilePage/model/types/profilePageScheme';
+import { ImageUploader } from 'features/UploadImage';
+import { UploadPath } from 'features/UploadImage/model/types/uploadPath';
 
 interface ProfileCardProps {
   className?: string;
@@ -92,21 +94,23 @@ const NewProfileCard: React.FC<ProfileCardProps> = ({
           readonly={readonly}
         />
 
-        {!readonly && (
-          <Input
-            onChange={onChangePic}
-            value={profileData?.photoURL}
-            placeholder={readonly ? '' : 'Your avatar link'}
-            className={cls.input}
-            readonly={readonly}
-          />
-        )}
+        {!readonly && <ImageUploader uploadPath={UploadPath.AVATARS} />}
       </div>
     </div>
   );
 };
 
 export default NewProfileCard;
+
+// {!readonly && (
+//   <Input
+//     onChange={onChangePic}
+//     value={profileData?.photoURL}
+//     placeholder={readonly ? '' : 'Your avatar link'}
+//     className={cls.input}
+//     readonly={readonly}
+//   />
+// )}
 
 // if (editMode) {
 //   <div className={classNames(cls.ProfileCard, {}, [className as string])}>

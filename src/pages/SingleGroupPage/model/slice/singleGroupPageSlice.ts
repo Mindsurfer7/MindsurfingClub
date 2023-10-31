@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { SingleGroupPageScheme } from '../types/singleGroupPageScheme';
 import { requestPostsByPublicID } from '../services/requestPostsByPublicID';
 import { publishPostInPublic } from '../services/publishPostInPublic';
+import { requestArticlesByPublicID } from '../services/requestArticlesByPublicID';
 
 const initialState: SingleGroupPageScheme = {
   isLoading: false,
   error: 'undefined',
+  articles: [],
   posts: [],
 };
 
@@ -40,6 +42,18 @@ export const singleGroupPageSlice = createSlice({
       .addCase(publishPostInPublic.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      });
+    builder
+      .addCase(requestArticlesByPublicID.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(requestArticlesByPublicID.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.articles = action.payload;
+      })
+      .addCase(requestArticlesByPublicID.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = 'error';
       });
   },
 });

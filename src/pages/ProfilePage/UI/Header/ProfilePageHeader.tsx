@@ -3,16 +3,22 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ProfilePageHeader.module.scss';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { useSelector } from 'react-redux';
-import { Profile, setReadonly } from 'entities/Profile';
-import { cancelEdit } from 'entities/Profile/model/slice/profileSlice';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { getProfilePageReadonly } from 'pages/ProfilePage/model/selectors/getProfilePageData';
+import {
+  cancelEdit,
+  setReadonly,
+} from 'pages/ProfilePage/model/slice/profilePageSlice';
 
 interface ProfilePageHeaderProps {
   className?: string;
+  testCallback?: () => void;
 }
 
-const ProfilePageHeader: React.FC<ProfilePageHeaderProps> = ({ className }) => {
+const ProfilePageHeader: React.FC<ProfilePageHeaderProps> = ({
+  testCallback,
+  className,
+}) => {
   const readonly = useSelector(getProfilePageReadonly);
   const dispatch = useAppDispatch();
 
@@ -25,18 +31,15 @@ const ProfilePageHeader: React.FC<ProfilePageHeaderProps> = ({ className }) => {
   }, [dispatch]);
 
   const onSaveEdit = useCallback(() => {
+    testCallback?.();
     // dispatch(updateProfileData());
-  }, [dispatch]);
-
-  //https://pic.rutubelist.ru/user/3b/27/3b2758ad5492a76b578f7ee072e4e894.jpg
-  // https://avatars.dzeninfra.ru/get-zen_doc/3680683/pub_6007cdab60595f5ffd5fd0e2_6007cf2da1b97e1f1a2ed4f5/scale_1200
+  }, [dispatch, testCallback]);
 
   return (
     <div
       className={classNames(cls.ProfilePageHeader, {}, [className as string])}
     >
       <h1> My Profile </h1>
-
       {readonly ? (
         <Button
           onClick={onEdit}

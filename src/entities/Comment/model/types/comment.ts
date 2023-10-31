@@ -8,4 +8,5 @@ export interface CommentType {
   text: string;
   username?: string;
   userID?: string;
+  photoURL?: string;
 }

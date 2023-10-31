@@ -74,10 +74,11 @@ const ArticlesPage: React.FC<ArticlesPageProps> = ({ className }) => {
         onScrollEnd={onLoadNextPart}
         className={classNames(cls.ArticlesPage, {}, [className as string])}
       >
-        <ArticlesPageFilters />
+        <ArticlesPageFilters className={cls.pageFilters} />
         <ArticlesList
           //@ts-ignore
           isLoading={isLoading}
+          className={cls.list}
           view={articlesPageData?.view}
           articles={articles}
         />

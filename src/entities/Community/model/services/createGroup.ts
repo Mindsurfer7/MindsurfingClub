@@ -16,24 +16,14 @@ export const createGroup = createAsyncThunk<any, void, ThunkConfig<any>>(
     const description = getGroupDescription(thunkAPI.getState());
 
     const publicsRef = collection(GPT_DB, 'publics');
-    //const habitDocRef = doc(GPT_DB, 'challenges', `${userID}`);
-
-    //мож понадобится как темплейт для объекта челленджа
-    // const newDaily = {
-    //   id: trackerData.id,
-    //   description: trackerData.description,
-    //   difficulty: trackerData.difficulty,
-    //   isDone: false,
-    //   title: trackerData.title,
-    //   tags: trackerData.tags,
-    //   isDoneTimestamp: new Date(),
-    // };
 
     try {
       await addDoc(publicsRef, {
         title: title,
         description: description,
         members: [userID],
+        admin: userID,
+        moderators: [userID],
         challenges: [],
         posterLink:
           'https://us.123rf.com/450wm/lkeskinen/lkeskinen1709/lkeskinen170910246/86379213-community-rubber-stamp.jpg?ver=6',

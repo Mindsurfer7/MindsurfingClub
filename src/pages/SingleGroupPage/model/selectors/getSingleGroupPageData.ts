@@ -7,3 +7,6 @@ export const getSingleGroupPageIsLoading = (state: StateScheme) => {
 export const getSingleGroupPagePosts = (state: StateScheme) => {
   return state?.SingleGroupPage?.posts;
 };
+export const getSingleGroupPageArticles = (state: StateScheme) => {
+  return state?.SingleGroupPage?.articles;
+};

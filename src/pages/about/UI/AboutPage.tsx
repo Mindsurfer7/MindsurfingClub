@@ -16,6 +16,8 @@ const about = [
 const AboutPage = memo(() => {
   const { t } = useTranslation('about');
 
+  console.log('=================');
+
   return (
     <Page className={cls.about}>
       <div>
@@ -32,3 +34,19 @@ const AboutPage = memo(() => {
 });
 
 export default AboutPage;
+
+//  const countedArr = new Map();
+
+//   function highestFrequency(array: any) {
+//     let count = 0;
+//     for (let i = 0; i < array.length; i++) {
+//       if (countedArr.has(array[i])) {
+//         let current = countedArr.get(array[i]);
+//         countedArr.set(array[i], (current += 1));
+//       } else {
+//         countedArr.set(array[i], 1);
+//       }
+//     }
+//    надо теп
+//     return countedArr.forEach
+//   }

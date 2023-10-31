@@ -29,6 +29,15 @@
     cursor: pointer;
   }
 }
+
+.liked {
+  position: absolute;
+  bottom: 7px;
+  right: 10px;
+  margin-right: auto;
+  transition: ease 0.2s;
+  fill: rgb(230, 20, 149);
+}
 .x {
   position: absolute;
   top: 7px;

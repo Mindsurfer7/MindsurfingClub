@@ -11,6 +11,8 @@ export interface CommunitiesScheme {
   members?: string[];
   posterLink?: string;
   id?: string;
+  admin?: string;
+  moderators?: Array<string>;
 }
 export interface PublicType {
   title: string;
@@ -19,4 +21,6 @@ export interface PublicType {
   posterLink?: string;
   challenges: Challenge[];
   id: string;
+  admin?: string;
+  moderators?: Array<string>;
 }
