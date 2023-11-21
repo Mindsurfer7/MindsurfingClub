@@ -17,7 +17,7 @@ export const getArticleTypes = createAsyncThunk<
     }
 
     const data = docSnap.data();
-    return data;
+    return data.articleTypes;
   } catch (e) {
     console.log(e);
     return thunkAPI.rejectWithValue('error');

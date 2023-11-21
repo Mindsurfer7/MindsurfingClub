@@ -16,6 +16,19 @@ const about = [
 const AboutPage = memo(() => {
   const { t } = useTranslation('about');
 
+  // function allAnagrams(array: any) {
+
+  //   for(let i = 0; i < array.length; i++) {
+  // if (new Set(array[i]) === ) {
+
+  // }
+  //   }
+
+  // }
+
+  // console.log(allAnagrams(['abcd', 'bdac', 'cabd'])); // true
+  // console.log(allAnagrams(['abcd', 'bdXc', 'cabd'])); // false
+
   console.log('=================');
 
   return (

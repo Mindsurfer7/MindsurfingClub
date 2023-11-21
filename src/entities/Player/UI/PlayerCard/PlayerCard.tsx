@@ -47,8 +47,8 @@ interface PlayerCardProps {
 
 const PlayerCard: React.FC<PlayerCardProps> = ({
   className,
-  isLoading,
   error,
+  isLoading,
 }) => {
   const account = useSelector(getGoogleProfile);
   const player = useSelector(getPlayerProfile);
@@ -164,9 +164,8 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
             <span>{player.health}</span>
           </div>
           <div className={cls.level}>
-            {' '}
             <span>{t('level')}</span>
-            <span>{player.level}</span>{' '}
+            <span>{player.level}</span>
           </div>
           <div className={cls.points}>
             <span>{t('points')}</span>
@@ -195,6 +194,14 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
               onClick={onShowToday}
             >
               {t('today')}
+            </Button>
+            <Button
+              theme={
+                showTodayTasks ? ButtonTheme.FILLED_GREEN : ButtonTheme.OUTLINE
+              }
+              // onClick={onShowToday}
+            >
+              {'Цели'}
             </Button>
           </div>
         </div>

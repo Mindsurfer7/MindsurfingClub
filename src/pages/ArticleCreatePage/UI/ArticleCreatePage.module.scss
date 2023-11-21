@@ -19,9 +19,16 @@
   }
 }
 
+.optionList {
+  margin: 15px 0px 15px 0px;
+  display: flex;
+  gap: 10px;
+}
+
 .option {
   border: 1px solid black;
   border-radius: 4px;
+  padding: 2px;
   &:hover {
     color: rgb(18, 247, 10);
     cursor: pointer;

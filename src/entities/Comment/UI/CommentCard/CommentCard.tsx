@@ -55,6 +55,9 @@ const CommentCard: React.FC<CommentCardProps> = ({
     );
   }
 
+
+
+
   return (
     <div className={classNames(cls.CommentCard, {}, [className as string])}>
       <AppLink
@@ -63,14 +66,15 @@ const CommentCard: React.FC<CommentCardProps> = ({
         }`}
         className={cls.header}
       >
+        {/* <img src={comment.photoURL} /> */}
         <Avatar
           size={30}
           src={
             comment.photoURL
               ? comment.photoURL
-              : 'https://cdn.iconscout.com/icon/free/png-256/free-laptop-user-1-1179329.png?f=webp'
+              : 'https://firebasestorage.googleapis.com/v0/b/advancedfrontend-bb20d.appspot.com/o/avatars%2Fmsclogo.jpg84153b28-fb3e-448f-834e-35b2c6f85aa4?alt=media&token=232da299-a191-4902-9932-171d4580ffee'
           }
-          alt="ava"
+          // alt="ava"
         />
         <Text title={comment.user ? comment.username : comment.username} />
       </AppLink>

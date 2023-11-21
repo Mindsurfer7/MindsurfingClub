@@ -120,26 +120,13 @@ const ArticleCreatePage: React.FC<ArticleCreatePageProps> = ({ className }) => {
       >
         <Text title={t('TextEditor')} align={TextAlign.Center} />
 
-        <Select
-          label={'Опубликовать в сообщество : '}
-          value={choosenOption}
-          options={publicSelectOptions}
-          onChange={onSelectPublic}
-        />
-
-        {
-          //@ts-ignore
-          articleTypeOptions?.articleTypes.map((opt) => {
-            return <div className={cls.option}>{opt}</div>;
-          })
-        }
-        <Select
+        {/* <Select
           label={'Выбрать тему : '}
           value={choosenOption}
           options={publicSelectOptions}
           onChange={onSelectArticleType}
           subClass={cls.selected}
-        />
+        /> */}
 
         <TextEditor
           className={cls.textEditor}
@@ -148,6 +135,24 @@ const ArticleCreatePage: React.FC<ArticleCreatePageProps> = ({ className }) => {
           clsModification={mods}
         />
         {/* <ImageUploader /> */}
+
+        <Select
+          label={'Опубликовать в сообщество : '}
+          value={choosenOption}
+          options={publicSelectOptions}
+          onChange={onSelectPublic}
+        />
+
+        <div className={cls.optionList}>
+          {' Выберите одну или несколько тем: '}
+          {articleTypeOptions?.map((opt) => {
+            return (
+              <div className={cls.option} key={opt}>
+                {opt}
+              </div>
+            );
+          })}
+        </div>
 
         {isEdit ? (
           <Button onClick={onSave} theme={ButtonTheme.OUTLINE}>
