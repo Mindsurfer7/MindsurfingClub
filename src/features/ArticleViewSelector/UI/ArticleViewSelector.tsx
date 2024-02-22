@@ -40,6 +40,7 @@ const ArticleViewSelector: React.FC<ArticleViewSelectorProps> = ({
       {viewTypes.map((viewType) => {
         return (
           <Button
+            key={viewType.view}
             theme={ButtonTheme.CLEAR}
             onClick={() => onClick(viewType.view)}
           >

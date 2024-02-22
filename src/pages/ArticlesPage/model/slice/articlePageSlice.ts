@@ -13,6 +13,7 @@ import { requestArticlesList } from '../services/requestArticlesList';
 import { ARTICLE_VIEW_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 import { ArticleSortField, ArticleType } from 'entities/Article/types/article';
 import { requestArticlesFirebaseTEST } from '../services/firebaseTestArticlesRequest';
+import { DocumentSnapshot } from 'firebase/firestore';
 
 const articlesAdapter = createEntityAdapter<Article>({
   selectId: (article) => article.id,
@@ -37,8 +38,12 @@ const articlesPageSlice = createSlice({
     search: '',
     order: 'desc',
     type: ArticleType.ALL,
+    lastDocSnapshot: null,
   }),
   reducers: {
+    setLastDocSnapshot: (state, action: PayloadAction<DocumentSnapshot>) => {
+      state.lastDocSnapshot = action.payload;
+    },
     setView: (state, action: PayloadAction<ArticleViewType>) => {
       state.view = action.payload;
       localStorage.setItem(ARTICLE_VIEW_LOCALSTORAGE_KEY, action.payload);
@@ -58,6 +63,9 @@ const articlesPageSlice = createSlice({
     },
     setType: (state, action: PayloadAction<ArticleType>) => {
       state.type = action.payload;
+    },
+    setHasMore: (state, action: PayloadAction<boolean>) => {
+      state.hasMore = action.payload;
     },
     initState: (state) => {
       const view = localStorage.getItem(
@@ -82,11 +90,16 @@ const articlesPageSlice = createSlice({
       .addCase(requestArticlesFirebaseTEST.fulfilled, (state, action) => {
         //PayloadAction<Article[]>
         state.isLoading = false;
-        state.hasMore = action.payload.length > 0;
+        //state.hasMore = action.payload.length > 0; оч станное условие для этого флага.
+        console.log(`BEFORE ALL IFS `);
 
         if (action.meta.arg.replace) {
+          console.log(action);
+
           articlesAdapter.setAll(state, action.payload);
         } else {
+          console.log(action);
+
           articlesAdapter.addMany(state, action.payload);
         }
       })
@@ -99,10 +112,12 @@ const articlesPageSlice = createSlice({
 export const {
   setPage,
   setView,
+  setHasMore,
   initState,
   setOrder,
   setSearch,
   setSort,
   setType,
+  setLastDocSnapshot,
 } = articlesPageSlice.actions;
 export const { reducer: articlesPageReducer } = articlesPageSlice;

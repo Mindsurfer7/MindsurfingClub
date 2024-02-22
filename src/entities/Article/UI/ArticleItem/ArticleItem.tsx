@@ -1,4 +1,8 @@
-import React, { HTMLAttributeAnchorTarget, useCallback } from 'react';
+import React, {
+  HTMLAttributeAnchorTarget,
+  StyleHTMLAttributes,
+  useCallback,
+} from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './ArticleItem.module.scss';
 import {
@@ -24,6 +28,7 @@ interface ArticleItemProps {
   article: Article;
   view: ArticleViewType;
   target?: HTMLAttributeAnchorTarget;
+  style?: React.CSSProperties;
 }
 
 const ArticleItem: React.FC<ArticleItemProps> = ({
@@ -31,6 +36,7 @@ const ArticleItem: React.FC<ArticleItemProps> = ({
   view,
   article,
   target,
+  style,
 }) => {
   const { t } = useTranslation();
   // const navigate = useNavigate(); функционал перенесен в апплинк
@@ -53,7 +59,10 @@ const ArticleItem: React.FC<ArticleItemProps> = ({
     ) as ArticleTextBlockType;
 
     return (
-      <div className={classNames(cls.ArticleItem, {}, [className, cls[view]])}>
+      <div
+        className={classNames(cls.ArticleItem, {}, [className, cls[view]])}
+        style={style}
+      >
         <Card className={cls.card}>
           <div className={cls.header}>
             <Avatar size={30} src={article.user?.avatar} />
@@ -87,7 +96,7 @@ const ArticleItem: React.FC<ArticleItemProps> = ({
       target={target}
       className={classNames(cls.ArticleItem, {}, [className, cls[view]])}
     >
-      <Card className={cls.card}>
+      <Card className={cls.card} style={style}>
         <div className={cls.imageWrapper}>
           <img alt={article.title} src={article.img} className={cls.img} />
           <Text text={article.createdAt} className={cls.date} />

@@ -17,13 +17,15 @@ export function useInfiniteScroll({
 
     if (callback) {
       const options = {
-        root: null,
-        rootMargin: '100px',
-        threshold: 1.0,
+        root: null, //wrapperElement ЪЪ null
+        rootMargin: '100px', // rootMargin: '0px', 100px было у меня 200 также стояло когда кажется все работало
+        threshold: 1.0, //даун надо было коммитить пока все работает))
       };
 
       observer = new IntersectionObserver(([entry]) => {
         if (entry.isIntersecting) {
+          console.log('isIntersecting');
+
           callback();
         }
       }, options);

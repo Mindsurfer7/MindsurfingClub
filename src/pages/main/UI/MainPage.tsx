@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-import React, { memo, useCallback, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './MainPage.module.scss';
 import Textarea from 'shared/UI/Textarea/Textarea';
@@ -31,6 +31,7 @@ const block = {
 
 const MainPage: React.FC<MainPageProps> = memo(({ className }) => {
   const { t } = useTranslation('main');
+
   return (
     <Page className={classNames(cls.MainPage, {}, [className as string])}>
       <div className={cls.textWrapper}>

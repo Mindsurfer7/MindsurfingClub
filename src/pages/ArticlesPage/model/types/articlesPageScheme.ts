@@ -3,6 +3,7 @@ import { EntityState } from '@reduxjs/toolkit';
 import { Article, ArticleViewType } from 'entities/Article';
 import { ArticleSortField, ArticleType } from 'entities/Article/types/article';
 import { SortOrder } from 'shared/types';
+import { DocumentSnapshot } from 'firebase/firestore';
 
 export interface ArticlesPageScheme extends EntityState<Article> {
   isLoading: boolean;
@@ -14,6 +15,7 @@ export interface ArticlesPageScheme extends EntityState<Article> {
   hasMore: boolean;
   limit?: number;
   page: number;
+  lastDocSnapshot: DocumentSnapshot | null;
 
   //filters
   order: SortOrder;

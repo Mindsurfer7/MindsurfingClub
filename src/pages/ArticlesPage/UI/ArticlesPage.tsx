@@ -57,16 +57,19 @@ const ArticlesPage: React.FC<ArticlesPageProps> = ({ className }) => {
   // });
 
   useEffect(() => {
-    dispatch(requestArticlesFirebaseTEST(''));
+    dispatch(requestArticlesFirebaseTEST({ replace: false }));
   }, []);
 
   const onLoadNextPart = useCallback(() => {
-    dispatch(requestNextArticlesPage());
+    // dispatch(requestNextArticlesPage());  //это фейк бекенды
+    dispatch(requestArticlesFirebaseTEST({ replace: false })); //
   }, [dispatch]);
 
   if (error) {
     return <span>sorry error</span>;
   }
+
+  console.log(articles);
 
   return (
     <DynamicModuleLoader reducers={reducers}>
@@ -76,8 +79,8 @@ const ArticlesPage: React.FC<ArticlesPageProps> = ({ className }) => {
       >
         <ArticlesPageFilters className={cls.pageFilters} />
         <ArticlesList
-          //@ts-ignore
-          isLoading={isLoading}
+          isLoading={isLoading ?? true}
+          hasMore={hasMore ?? true}
           className={cls.list}
           view={articlesPageData?.view}
           articles={articles}

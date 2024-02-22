@@ -34,3 +34,9 @@ export const getArtilcesOrder = (state: StateScheme) => {
 export const getArticleType = (state: StateScheme) => {
   return state.ArticlesPage?.type ?? ArticleType.ALL;
 };
+export const getLastDocSnapshot = (state: StateScheme) => {
+  return state.ArticlesPage?.lastDocSnapshot;
+};
+export const getArticleViewType = (state: StateScheme) => {
+  return state.ArticlesPage?.view;
+};
