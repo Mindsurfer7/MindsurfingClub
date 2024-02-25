@@ -18,7 +18,7 @@ import { rewardCoins } from 'entities/Player/model/services/InGameActions/reward
 import { saveNotification } from 'entities/Player/model/services/InGameActions/saveNotification';
 import { Subtask } from 'entities/TaskTracker/types/taskTracker';
 import { Icon } from 'shared/UI/Icon/Icon';
-import OpenSubtasksIcon from '../../../../shared/assets/icons/collapseBtn.svg';
+import OpenSubtasksIcon from '../../../../shared/assets/icons/collapseBtn.svg?react';
 
 interface SingleEndeavorProps {
   onRemove: (id: string) => Promise<void>;

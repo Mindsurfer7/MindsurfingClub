@@ -10,7 +10,7 @@ import {
 } from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
-import { Participant } from 'entities/Challenge/types/ChallengeScheme';
+import type { Participant } from 'entities/Challenge/types/ChallengeScheme';
 
 export const setChallengeIsDone = createAsyncThunk<
   any,

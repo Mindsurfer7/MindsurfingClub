@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { getchallenges } from 'entities/Challenge';
-import { Challenge } from 'entities/Challenge/types/ChallengeScheme';
+import type { Challenge } from 'entities/Challenge/types/ChallengeScheme';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 import Text from 'shared/UI/Text/Text';
 import { useTranslation } from 'react-i18next';

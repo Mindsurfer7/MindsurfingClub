@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ChatScheme, Message } from '../types/chat';
+import type { ChatScheme } from '../types/chat';
+import { Message } from '../types/chat';
 import { sendMessage } from '../services/sendMessage';
 import { requestChatMessages } from '../services/requestChatMessages';
 

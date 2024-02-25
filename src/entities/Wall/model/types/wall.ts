@@ -1,4 +1,4 @@
-import { PostType } from 'entities/Post';
+import type { PostType } from 'entities/Post';
 
 export interface WallScheme {
   isLoading: boolean;

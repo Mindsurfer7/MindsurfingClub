@@ -4,10 +4,10 @@ import {
   createSlice,
   PayloadAction,
 } from '@reduxjs/toolkit';
-
-import { Article, ArticleViewType } from 'entities/Article';
-import { StateScheme } from 'App/providers/StoreProvider';
-import { CommentType } from 'entities/Comment';
+import { ArticleViewType } from 'entities/Article';
+import { Article } from 'entities/Article';
+import type { StateScheme } from 'App/providers/StoreProvider';
+import type { CommentType } from 'entities/Comment';
 import { ArticlesPageScheme } from '../types/articlesPageScheme';
 import { requestArticlesList } from '../services/requestArticlesList';
 import { ARTICLE_VIEW_LOCALSTORAGE_KEY } from 'shared/const/localstorage';

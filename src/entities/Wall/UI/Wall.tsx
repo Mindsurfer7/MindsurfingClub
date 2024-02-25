@@ -10,9 +10,10 @@ import {
 } from 'shared/lib/DynamicModuleLoader/DynamicModuleLoader';
 import { WallReducer } from '../model/slice/wallSlice';
 import { useSelector } from 'react-redux';
-import { Post, PostType } from 'entities/Post';
+import type { PostType } from 'entities/Post';
+import { Post } from 'entities/Post';
 import { getGoogleIsLogged } from 'entities/GoogleProfile';
-import { PublicType } from 'entities/Community';
+import type { PublicType } from 'entities/Community';
 import Skeleton from 'shared/UI/Skeleton/Skeleton';
 import { AddPost } from 'features/AddPost';
 

@@ -1,4 +1,4 @@
-import { StateScheme } from 'App/providers/StoreProvider';
+import type { StateScheme } from 'App/providers/StoreProvider';
 
 export const getSingleGroupPageIsLoading = (state: StateScheme) => {
   return state?.SingleGroupPage?.isLoading;

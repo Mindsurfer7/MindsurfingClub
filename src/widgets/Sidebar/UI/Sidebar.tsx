@@ -8,7 +8,8 @@ import SidebarItem from './SidebarItem/SidebarItem';
 import { useSelector } from 'react-redux';
 import { getSideBarItems } from '../model/selectors/getSidebarItems';
 import { Icon } from 'shared/UI/Icon/Icon';
-import CollapseBtn from '../../../shared/assets/icons/collapseBtn.svg';
+// import CollapseBtn from '../../../shared/assets/icons/collapseBtn.svg?react';
+import CollapseBtn from '../../../shared/assets/icons/profile-20-20.svg?react';
 
 interface SidebarProps {
   className?: string;

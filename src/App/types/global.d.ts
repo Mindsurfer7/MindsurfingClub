@@ -30,5 +30,11 @@ type OptionalRecord<K extends keyof any, T> = {
   [P in K]?: T;
 };
 
+interface ImportMeta {
+  env: Record<string, string | boolean | undefined>;
+}
+
+/// <reference types="vite-plugin-svgr/client" />
+
 // declare module "*.module.css";
 // declare module "*.module.scss";

@@ -21,10 +21,10 @@ import {
 } from 'shared/config/routesConfig/routesConfig';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import NotificationBar from 'shared/UI/NotificationBar/NotificationBar';
-import NotificationIcon from 'shared/assets/icons/notification.svg';
+import NotificationIcon from 'shared/assets/icons/notification.svg?react';
 import { useTranslation } from 'react-i18next';
 import { Icon } from 'shared/UI/Icon/Icon';
-import logo from '../../../../public/LogoTransparent.svg';
+import logo from '../../../../LogoTransparent.svg?react';
 interface navprops {
   className?: string;
 }

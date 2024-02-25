@@ -20,7 +20,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routesConfig/routesConfig';
 import { Icon } from 'shared/UI/Icon/Icon';
-import EyeIcon from 'shared/assets/icons/eye-20-20.svg';
+import EyeIcon from 'shared/assets/icons/eye-20-20.svg?react';
 import AppLink from 'shared/UI/AppLink/AppLink';
 
 interface ArticleItemProps {

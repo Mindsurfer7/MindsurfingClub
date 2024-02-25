@@ -8,22 +8,22 @@ import {
   ReducersMapObject,
 } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { GPTscheme } from 'entities/GPT/types/GPTScheme';
-import { PlayerScheme } from 'entities/Player/types/player';
-import { TaskTrackerScheme } from 'entities/TaskTracker/types/taskTracker';
-import { SingleArticleScheme } from 'entities/Article';
-import { CommunitiesScheme } from 'entities/Community';
-import { ArticleDetailsCommentsScheme } from 'pages/ArticleDetails/model/types/ArticleDetailsCommentsSceme';
-import { AddCommentScheme } from 'features/AddComment';
-import { ChallengePageScheme } from 'pages/ChallengePage';
-import { ChatScheme } from 'entities/Chat';
-import { ArticlesPageScheme } from 'pages/ArticlesPage';
-import { ScrollSaverScheme } from 'features/ScrollSaver';
-import { ArticleDetailsRecomendationsScheme } from 'pages/ArticleDetails';
-import { TextEditorScheme } from 'widgets/TextEditor/model/types/textEditor';
-import { WallScheme } from 'entities/Wall';
-import { SingleGroupPageScheme } from 'pages/SingleGroupPage';
-import { ProfilePageScheme } from 'pages/ProfilePage';
+import type { GPTscheme } from 'entities/GPT/types/GPTScheme';
+import type { PlayerScheme } from 'entities/Player/types/player';
+import type { TaskTrackerScheme } from 'entities/TaskTracker/types/taskTracker';
+import type { SingleArticleScheme } from 'entities/Article';
+import type { CommunitiesScheme } from 'entities/Community';
+import type { ArticleDetailsCommentsScheme } from 'pages/ArticleDetails/model/types/ArticleDetailsCommentsSceme';
+import type { AddCommentScheme } from 'features/AddComment';
+import type { ChallengePageScheme } from 'pages/ChallengePage';
+import type { ChatScheme } from 'entities/Chat';
+import type { ArticlesPageScheme } from 'pages/ArticlesPage';
+import type { ScrollSaverScheme } from 'features/ScrollSaver';
+import type { ArticleDetailsRecomendationsScheme } from 'pages/ArticleDetails';
+import type { TextEditorScheme } from 'widgets/TextEditor/model/types/textEditor';
+import type { WallScheme } from 'entities/Wall';
+import type { SingleGroupPageScheme } from 'pages/SingleGroupPage';
+import type { ProfilePageScheme } from 'pages/ProfilePage';
 
 export interface StateScheme {
   //Article

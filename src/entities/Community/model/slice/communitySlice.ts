@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CommunitiesScheme } from 'entities/Community/types/CommunityScheme';
+import type { CommunitiesScheme } from 'entities/Community/types/CommunityScheme';
 import { requestAllGroups } from '../services/requestAllGroups';
 import { requestCommunityByID } from '../services/requestCommunityByID';
 

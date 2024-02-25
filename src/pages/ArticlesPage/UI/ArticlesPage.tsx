@@ -69,8 +69,6 @@ const ArticlesPage: React.FC<ArticlesPageProps> = ({ className }) => {
     return <span>sorry error</span>;
   }
 
-  console.log(articles);
-
   return (
     <DynamicModuleLoader reducers={reducers}>
       <Page

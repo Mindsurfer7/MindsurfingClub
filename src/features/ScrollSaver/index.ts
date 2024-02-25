@@ -3,7 +3,7 @@ import {
   getScrollPosition,
   getScrollByPath,
 } from './model/selectors/getScrollPosition';
-import {
+import type {
   ScrollSaverScheme,
   ScrollScheme,
 } from './model/types/scrollSaverScheme';

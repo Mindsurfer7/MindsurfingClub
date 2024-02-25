@@ -1,5 +1,5 @@
 // import { getProfileData } from './getProfile';
-// import { StateScheme } from 'App/providers/StoreProvider';
+// import  type{ StateScheme } from 'App/providers/StoreProvider';
 
 // describe('getProfile', () => {
 //   test('should return error', () => {

@@ -4,7 +4,7 @@ import {
   ReducersMapObject,
   combineReducers,
 } from '@reduxjs/toolkit';
-import {
+import type {
   MountedReducers,
   ReducerManager,
   StateScheme,

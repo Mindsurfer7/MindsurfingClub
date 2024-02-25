@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'App/providers/StoreProvider';
 import { collection, getDocs } from 'firebase/firestore';
 import { GPT_DB } from 'App/API/firebaseAPI';
-import {
+import type {
   Challenge,
   Participant,
 } from 'entities/Challenge/types/ChallengeScheme';

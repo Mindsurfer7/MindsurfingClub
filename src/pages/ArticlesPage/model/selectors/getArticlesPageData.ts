@@ -1,4 +1,4 @@
-import { StateScheme } from 'App/providers/StoreProvider';
+import type { StateScheme } from 'App/providers/StoreProvider';
 import { ArticleSortField, ArticleType } from 'entities/Article/types/article';
 
 export const getArtilcesPageData = (state: StateScheme) => {
