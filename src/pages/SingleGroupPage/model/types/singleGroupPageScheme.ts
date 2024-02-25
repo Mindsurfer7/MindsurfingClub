@@ -1,5 +1,5 @@
 import { ArticleType } from 'entities/Article/types/article';
-import { PostType } from 'entities/Post';
+import type { PostType } from 'entities/Post';
 
 export interface SingleGroupPageScheme {
   isLoading: boolean;

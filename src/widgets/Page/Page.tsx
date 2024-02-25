@@ -8,7 +8,7 @@ import { setScrollPosition } from 'features/ScrollSaver/model/slice/scrollSaverS
 import { useSelector } from 'react-redux';
 import { getScrollByPath, getScrollPosition } from 'features/ScrollSaver';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect/useInitialEffect';
-import { StateScheme } from 'App/providers/StoreProvider';
+import type { StateScheme } from 'App/providers/StoreProvider';
 import { useThrottle } from 'shared/lib/hooks/useThrottle';
 
 interface PageProps {

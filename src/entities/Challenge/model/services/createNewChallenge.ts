@@ -1,4 +1,4 @@
-import { Participant } from 'entities/Challenge/types/ChallengeScheme';
+import type { Participant } from 'entities/Challenge/types/ChallengeScheme';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'App/providers/StoreProvider';
 import { addDoc, collection } from 'firebase/firestore';

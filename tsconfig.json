@@ -7,9 +7,24 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
+    ////////////////////////////////////////////////////
+    // "verbatimModuleSyntax": true,
+    /////////////////////////////////////////////////////
+    // "*": ["*"]
+    // "*": ["./src/*"],
+    // "src/*": ["./src/*"],
+    // "@/*": ["./src/*"]
+    // "baseUrl": "./src",
     "baseUrl": ".",
     "paths": {
       "*": ["./src/*"]
+      // "/*": ["./src/*"],
+      // "@entities/*": ["src/entities/*"]
+      // "@widgets/*": ["src/widgets/*"],
+      // "@App/*": ["src/App/*"],
+      // "@pages/*": ["src/pages/*"],
+      // "@features/*": ["src/features/*"],
+      // "@shared/*": ["src/shared/*"]
     },
     "outDir": "dist",
     "jsx": "react-jsx",
@@ -23,3 +38,4 @@
   },
   "include": ["./src", "./config/jest/setupTests.ts"] //src/**/*.ts + tsx
 }
+/// <reference types="vite-plugin-svgr/client" />

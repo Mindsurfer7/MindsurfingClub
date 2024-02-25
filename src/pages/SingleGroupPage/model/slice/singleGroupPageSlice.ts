@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SingleGroupPageScheme } from '../types/singleGroupPageScheme';
+import type { SingleGroupPageScheme } from '../types/singleGroupPageScheme';
 import { requestPostsByPublicID } from '../services/requestPostsByPublicID';
 import { publishPostInPublic } from '../services/publishPostInPublic';
 import { requestArticlesByPublicID } from '../services/requestArticlesByPublicID';

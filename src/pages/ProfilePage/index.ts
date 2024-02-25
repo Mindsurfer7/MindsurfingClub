@@ -1,4 +1,4 @@
-import { ProfilePageScheme } from './model/types/profilePageScheme';
+import type { ProfilePageScheme } from './model/types/profilePageScheme';
 import { ProfilePageAsync } from './UI/ProfilePage.async';
 
 export { ProfilePageAsync, ProfilePageScheme };

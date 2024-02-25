@@ -2,7 +2,7 @@ import { requestGoogleProfileData } from '../GoogleProfile/model/services/reques
 
 import NewProfileCard from './UI/ProfileCard/NewProfileCard';
 import { requestProfileData } from './model/services/requestProfileData';
-export { Profile, ProfileScheme } from './model/types/profile';
+export type { Profile, ProfileScheme } from './model/types/profile';
 
 export { profileReducer } from './model/slice/profileSlice';
 

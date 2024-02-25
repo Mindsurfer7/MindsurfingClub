@@ -1,5 +1,5 @@
 import { requestCommunityByID } from './model/services/requestCommunityByID';
-import { PublicType } from './types/CommunityScheme';
+import type { PublicType } from './types/CommunityScheme';
 import {
   getCommunityData,
   getSinglePublicData,
@@ -14,7 +14,7 @@ import {
   setTitle,
   setDescription,
 } from 'entities/Community/model/slice/communitySlice';
-import { CommunitiesScheme } from 'entities/Community/types/CommunityScheme';
+import type { CommunitiesScheme } from 'entities/Community/types/CommunityScheme';
 
 export {
   CommunitiesScheme,

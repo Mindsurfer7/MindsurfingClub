@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { WallScheme } from '../types/wall';
+import type { WallScheme } from '../types/wall';
 
 const initialState: WallScheme = {
   isLoading: false,

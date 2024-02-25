@@ -1,4 +1,4 @@
-import { StateScheme } from 'App/providers/StoreProvider';
+import type { StateScheme } from 'App/providers/StoreProvider';
 
 export const getWallPosts = (state: StateScheme) => {
   return state?.Wall?.posts;

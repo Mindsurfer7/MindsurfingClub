@@ -1,4 +1,4 @@
-// import { StateScheme } from 'App/providers/StoreProvider';
+// import  type{ StateScheme } from 'App/providers/StoreProvider';
 
 // export const getProfileUsername = (state: StateScheme) => {
 //   return state?.profile?.data?.username;

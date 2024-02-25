@@ -4,8 +4,8 @@ import cls from './ArticleViewSelector.module.scss';
 import { ArticleViewType } from 'entities/Article';
 import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 import { Icon } from 'shared/UI/Icon/Icon';
-import ListIcon from 'shared/assets/icons/list-24-24.svg';
-import TiledIcon from 'shared/assets/icons/tiled-24-24.svg';
+import ListIcon from 'shared/assets/icons/list-24-24.svg?react';
+import TiledIcon from 'shared/assets/icons/tiled-24-24.svg?react';
 
 interface ArticleViewSelectorProps {
   className?: string;

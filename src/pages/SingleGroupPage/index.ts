@@ -1,4 +1,4 @@
-import { SingleGroupPageScheme } from './model/types/singleGroupPageScheme';
+import type { SingleGroupPageScheme } from './model/types/singleGroupPageScheme';
 import { requestChallengesByPublicID } from './model/services/requestChallengesByPublicID';
 import { SingleGroupPageAsync } from './UI/SingleGroupPage.async';
 import SingleGroupPage from './UI/SingleGroupPage';

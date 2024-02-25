@@ -1,6 +1,6 @@
-import { Challenge } from './types/ChallengeScheme';
+import type { Challenge } from './types/ChallengeScheme';
 import { setChallengeIsDone } from './model/services/setChallengeIsDone';
-import { Participant } from 'entities/Challenge/types/ChallengeScheme';
+import type { Participant } from 'entities/Challenge/types/ChallengeScheme';
 import { getChallengeData } from 'entities/Challenge/model/selectors/getChallengeData';
 import { getchallenges } from 'entities/Challenge/model/selectors/getChallengeData';
 import { getShowChallenges } from './model/selectors/getChallengeData';

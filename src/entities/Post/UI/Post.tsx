@@ -1,18 +1,22 @@
 import React, { useCallback } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './Post.module.scss';
-import { PostBlock, PostType } from '../model/types/post';
+import type { PostBlock, PostType } from '../model/types/post';
 import ArticleImageBlock from 'entities/Article/UI/ArticleImageBlock/ArticleImageBlock';
 import ArticleTextBlock from 'entities/Article/UI/ArticleTextBlock/ArticleTextBlock';
 import { Avatar } from 'shared/UI/Avatar/Avatar';
-import { PublicType } from 'entities/Community';
+import type { PublicType } from 'entities/Community';
 import Text from 'shared/UI/Text/Text';
 import Skeleton from 'shared/UI/Skeleton/Skeleton';
 import { Icon } from 'shared/UI/Icon/Icon';
-import LikeIcon from '../../../shared/assets/icons/like.svg';
-import LikeFilledIcon from '../../../shared/assets/icons/likeFilled.svg';
-import x from '../../../shared/assets/icons/Xmark.svg';
-import { ProfileInterface } from 'pages/ProfilePage/model/types/profilePageScheme';
+import LikeIcon from '../../../shared/assets/icons/like.svg?react';
+import LikeFilledIcon from '../../../shared/assets/icons/likeFilled.svg?react';
+// import LikeIcon from '../../../shared/assets/icons/profile-20-20.svg?react';
+// import LikeFilledIcon from '../../../shared/assets/icons/profile-20-20.svg?react';
+
+// import x from '../../../shared/assets/icons/Xmark.svg';
+import x from '../../../shared/assets/icons/profile-20-20.svg?react';
+
 import Button from 'shared/UI/Button/Button';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { likePost } from '../model/services/likePost';

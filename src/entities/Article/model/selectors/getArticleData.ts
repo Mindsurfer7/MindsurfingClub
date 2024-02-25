@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { StateScheme } from 'App/providers/StoreProvider';
+import type { StateScheme } from 'App/providers/StoreProvider';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 
 export const getArticleData = (state: StateScheme) => {

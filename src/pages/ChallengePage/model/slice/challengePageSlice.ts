@@ -1,6 +1,6 @@
-import { Challenge } from './../../../../entities/Challenge/types/ChallengeScheme';
+import type { Challenge } from './../../../../entities/Challenge/types/ChallengeScheme';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ChallengePageScheme } from '../types/ChallengePageScheme';
+import type { ChallengePageScheme } from '../types/ChallengePageScheme';
 import { requestChallengeByID } from '../services/requestChallengeByID';
 
 const initialState: ChallengePageScheme = {

@@ -1,4 +1,4 @@
-import { StateScheme } from 'App/providers/StoreProvider';
+import type { StateScheme } from 'App/providers/StoreProvider';
 
 export const getMessagesFromDBresponse = (state: StateScheme) => {
   return state?.GPT?.conversations[0]?.messages;

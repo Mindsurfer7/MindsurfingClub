@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { GPT_DB } from 'App/API/firebaseAPI';
 import axios from 'axios';
-import { PublicType } from 'entities/Community/types/CommunityScheme';
+import type { PublicType } from 'entities/Community/types/CommunityScheme';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { title } from 'process';
 

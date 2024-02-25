@@ -4,8 +4,8 @@ import {
   PayloadAction,
 } from '@reduxjs/toolkit';
 import { Article } from 'entities/Article';
-import { StateScheme } from 'App/providers/StoreProvider';
-import { ArticleDetailsRecomendationsScheme } from '../types/ArticleRecomedationsScheme';
+import type { StateScheme } from 'App/providers/StoreProvider';
+import type { ArticleDetailsRecomendationsScheme } from '../types/ArticleRecomedationsScheme';
 import { requestArticleRecomendations } from '../services/requestArticleRecomendations';
 
 const recomendationsAdapter = createEntityAdapter<Article>({

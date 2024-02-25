@@ -30,4 +30,4 @@ export {
   GPTReducer,
 } from './model/slice/GPTslice';
 
-export { GPTmessage } from './types/GPTScheme';
+export type { GPTmessage } from './types/GPTScheme';

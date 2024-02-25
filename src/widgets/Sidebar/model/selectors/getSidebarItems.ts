@@ -1,12 +1,15 @@
+/// <reference types="vite-plugin-svgr/client" />
 import { createSelector } from '@reduxjs/toolkit';
 import { RoutePath } from 'shared/config/routesConfig/routesConfig';
-import HomeIcon from '../../../../shared/assets/icons/main-20-20.svg';
-import AboutIcon from '../../../../shared/assets/icons/about-20-20.svg';
-import PsyIcon from '../../../../shared/assets/icons/chatGPT.svg';
-import ProfileIcon from '../../../../shared/assets/icons/profile-20-20.svg';
-import TaskIcon from '../../../../shared/assets/icons/TaskTracker.svg';
-import ArtIcon from '../../../../shared/assets/icons/article-20-20.svg';
-import ClubIcon from '../../../../shared/assets/icons/community.svg';
+import HomeIcon from '../../../../shared/assets/icons/main-20-20.svg?react';
+import AboutIcon from '../../../../shared/assets/icons/about-20-20.svg?react';
+import PsyIcon from '../../../../shared/assets/icons/chatGPT.svg?react';
+import ProfileIcon from '../../../../shared/assets/icons/profile-20-20.svg?react';
+import ArtIcon from '../../../../shared/assets/icons/profile-20-20.svg?react';
+import TaskIcon from '../../../../shared/assets/icons/TaskTracker.svg?react';
+// import ArtIcon from '../../../../shared/assets/icons/article-20-20.svg?react';
+import ClubIcon from '../../../../shared/assets/icons/profile-20-20.svg?react';
+// import ClubIcon from '../../../../shared/assets/icons/community.svg?react';
 import { SidebarItemType } from '../types/sidebar';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 
