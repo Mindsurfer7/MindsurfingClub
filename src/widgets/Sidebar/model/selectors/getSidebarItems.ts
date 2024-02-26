@@ -5,11 +5,13 @@ import HomeIcon from '../../../../shared/assets/icons/main-20-20.svg?react';
 import AboutIcon from '../../../../shared/assets/icons/about-20-20.svg?react';
 import PsyIcon from '../../../../shared/assets/icons/chatGPT.svg?react';
 import ProfileIcon from '../../../../shared/assets/icons/profile-20-20.svg?react';
-import ArtIcon from '../../../../shared/assets/icons/profile-20-20.svg?react';
 import TaskIcon from '../../../../shared/assets/icons/TaskTracker.svg?react';
 // import ArtIcon from '../../../../shared/assets/icons/article-20-20.svg?react';
-import ClubIcon from '../../../../shared/assets/icons/profile-20-20.svg?react';
 // import ClubIcon from '../../../../shared/assets/icons/community.svg?react';
+import ClubIcon from '../../../../shared/assets/icons/club.svg?react';
+import ArtIcon from '../../../../shared/assets/icons/articles.svg?react';
+// import ArtIcon from '../../../../shared/assets/icons/profile-20-20.svg?react';
+// import ClubIcon from '../../../../shared/assets/icons/profile-20-20.svg?react';
 import { SidebarItemType } from '../types/sidebar';
 import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
 

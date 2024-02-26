@@ -11,12 +11,7 @@ import Skeleton from 'shared/UI/Skeleton/Skeleton';
 import { Icon } from 'shared/UI/Icon/Icon';
 import LikeIcon from '../../../shared/assets/icons/like.svg?react';
 import LikeFilledIcon from '../../../shared/assets/icons/likeFilled.svg?react';
-// import LikeIcon from '../../../shared/assets/icons/profile-20-20.svg?react';
-// import LikeFilledIcon from '../../../shared/assets/icons/profile-20-20.svg?react';
-
-// import x from '../../../shared/assets/icons/Xmark.svg';
-import x from '../../../shared/assets/icons/profile-20-20.svg?react';
-
+import x from '../../../shared/assets/icons/Xmark.svg?react';
 import Button from 'shared/UI/Button/Button';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { likePost } from '../model/services/likePost';

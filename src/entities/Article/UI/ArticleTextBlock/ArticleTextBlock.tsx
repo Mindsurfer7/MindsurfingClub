@@ -17,7 +17,7 @@ const ArticleTextBlock: React.FC<ArticleCodeBlockProps> = memo((props) => {
       {block.title && <Text title={block.title} className={cls.title} />}
       {block.paragraphs.map((paragraph, index) => (
         // <Text key={paragraph} text={paragraph} className={cls.paragraph} />
-        <div dangerouslySetInnerHTML={{ __html: paragraph }} />
+        <div key={paragraph} dangerouslySetInnerHTML={{ __html: paragraph }} />
       ))}
     </div>
   );

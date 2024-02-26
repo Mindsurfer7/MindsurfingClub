@@ -1,43 +1,16 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
-import path from 'path';
 import tsconfigPaths from 'vite-tsconfig-paths';
-
-// [{},
-//     { find: '@', replacement: '/src'
-// }],
-
-// const aliases = ['App', 'entities', 'widgets', 'features', 'shared', 'pages'];
 
 export default defineConfig({
   server: {
     port: 4400,
   },
+
   plugins: [react(), svgr({}), tsconfigPaths()],
   resolve: {
-    alias: {
-      // '@': path.resolve(__dirname, './src/**/*'),
-      // '': path.resolve(__dirname, './src/**/*'),
-      // App: '/src/App',
-      // pages: '/src/pages',
-      // entities: '/src/entities',
-      // widgets: '/src/widgets',
-      // features: '/src/features',
-      // shared: '/src/shared',
-      // App: path.resolve(__dirname, '/src/App'),
-      // pages: path.resolve(__dirname, '/src/pages'),
-      // entities: path.resolve(__dirname, '/src/entities'),
-      // widgets: path.resolve(__dirname, '/src/widgets'),
-      // features: path.resolve(__dirname, '/src/features'),
-      // shared: path.resolve(__dirname, '/src/shared'),
-      // },
-      // alias{
-      // : aliases.map((alias) => ({
-      //   find: `@${alias}`,
-      //   replacement: path.resolve(__dirname, `./src/${alias}`),
-      // })),
-    },
+    alias: {},
   },
   define: {
     'process.env': {
@@ -74,18 +47,3 @@ export default defineConfig({
     // __PROJECT__: JSON.stringify('frontend'),
   },
 });
-
-// resolve: {
-//   alias: [{ find: '@', replacement: 'hui/src' }],
-// },
-// resolve: {
-//   alias: {
-//     '@': path.resolve(__dirname, './src/**/*'),
-//     '@entities': path.resolve(__dirname, './src/entities'),
-//     widgets: path.resolve(__dirname, './src/widgets'),
-//     '@pp': path.resolve(__dirname, './src/App'),
-//     features: path.resolve(__dirname, './src/features'),
-//     shared: path.resolve(__dirname, './src/shared'),
-//   },
-// },
-//'/entities': path.resolve(__dirname, 'src/entities'),
