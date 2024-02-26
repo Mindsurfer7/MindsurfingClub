@@ -36,6 +36,8 @@ import {
 import { requestArticleRecomendations } from '../model/services/requestArticleRecomendations';
 import ArticleDetailsHeader from './ArticleDetailsHeader/ArticleDetailsHeader';
 import { getArticleData } from 'entities/Article/model/selectors/getArticleData';
+import { useViewTracker } from 'shared/lib/hooks/useViewTracker';
+import { increaseArticleView } from 'entities/Article/model/services/increaseArticleView';
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -63,6 +65,16 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
   // dispatch(fetchCommentsByArticleId(articleID));
 
   // });
+
+  const onArticleRead = useCallback(() => {
+    console.log('intersected');
+
+    if (articleID && userID) {
+      dispatch(increaseArticleView({ articleID, userID }));
+    }
+  }, [dispatch, articleID, userID]);
+
+  const { trigger } = useViewTracker(onArticleRead, { triggerOnce: true });
 
   useEffect(() => {
     if (articleID) {
@@ -103,6 +115,7 @@ const ArticleDetailsPage: React.FC<ArticleDetailsPageProps> = ({
       >
         <ArticleDetailsHeader />
         <SingleArticle ID={articleID} className={cls.singleArticle} />
+        <div ref={trigger}></div>
         <Text
           align={TextAlign.Center}
           title="Комментарии"

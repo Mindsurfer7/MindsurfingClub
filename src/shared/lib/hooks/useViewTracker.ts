@@ -1,19 +1,31 @@
 import { useEffect, useRef } from 'react';
 
-const useViewTracker = (callback: any) => {
-  const trigger = useRef();
+interface UseViewTrackerOptions {
+  triggerOnce?: boolean;
+}
 
-  // const callback = (entries: IntersectionObserverEntry[]) => {
-  //     entries.forEach((entry) => {
-  //       if (entry.isIntersecting) {
-  //         console.log('me2');
-  //         setVal(1);
-  //       }
-  //     });
-  //   };
+export const useViewTracker = <T>(
+  callback: Function,
+  options?: UseViewTrackerOptions,
+) => {
+  const trigger = useRef<HTMLDivElement | null>(null);
+
+  const callAndDisconect = (
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver,
+  ) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        callback();
+        if (options?.triggerOnce) {
+          observer.disconnect();
+        }
+      }
+    });
+  };
 
   useEffect(() => {
-    const observer = new IntersectionObserver(callback, {
+    const observer = new IntersectionObserver(callAndDisconect, {
       root: null,
       rootMargin: '0px',
       threshold: 1.0,
@@ -28,5 +40,7 @@ const useViewTracker = (callback: any) => {
         observer.unobserve(trigger.current);
       }
     };
-  }, []); //trigger.current, callback надо помещать в массив ?
+  }, [trigger.current, callback]);
+
+  return { trigger };
 };
