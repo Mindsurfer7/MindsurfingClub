@@ -15,3 +15,10 @@ vite makes me import type as import type separately from js entities
 https://stackoverflow.com/questions/76983697/why-does-my-vue-vite-typescript-application-require-me-to-separate-import-and
 
 whats verbatimModuleSyntax ?
+
+command that deles old ref broken and then we can set again
+https://tooabstractive.com/how-to-tech/how-to-fix-git-error-unable-to-resolve-reference-refs-remotes-origin-master-reference-broken/
+
+rm .git/refs/remotes/origin/master
+
+git fetch origin
