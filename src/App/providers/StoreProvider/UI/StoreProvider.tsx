@@ -21,5 +21,7 @@ export const StoreProvider: React.FC<StoreProviderProps> = (props) => {
     asyncReducers as ReducersMapObject<StateScheme>,
     //navigate,
   );
+  //@ts-ignore
+
   return <Provider store={store}>{children}</Provider>;
 };

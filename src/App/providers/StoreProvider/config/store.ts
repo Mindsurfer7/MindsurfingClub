@@ -20,6 +20,7 @@ import { CommunityReducer } from 'entities/Community/model/slice/communitySlice'
 import { ChallengeReducer } from 'entities/Challenge/model/slice/ChallengeSlice';
 import { ChatReducer } from 'entities/Chat/model/slice/chatSlice';
 import { scrollSaverReducer } from 'features/ScrollSaver/model/slice/scrollSaverSlice';
+import { TherapyPageReducer } from 'pages/TherapyPage/model/slice/therapyPageSlice';
 
 export function createReduxStore(
   initialState?: StateScheme,
@@ -34,6 +35,7 @@ export function createReduxStore(
     Challenge: ChallengeReducer,
     Chat: ChatReducer,
     GPT: GPTReducer,
+    TherapyPage: TherapyPageReducer,
     GoogleProfile: GoogleProfileReducer,
   };
 
