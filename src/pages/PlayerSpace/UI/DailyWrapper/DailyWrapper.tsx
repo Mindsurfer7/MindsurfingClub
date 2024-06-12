@@ -5,6 +5,7 @@ import {
   getDailys,
   getFilteredDaily,
   getIsFilterApplied,
+  getPlayerIsLoading,
 } from 'entities/Player/model/selectors/getPlayerData';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
@@ -16,6 +17,7 @@ import { removeDaily } from 'entities/Player/model/services/removeDaily';
 import SingleEndeavor from 'entities/TaskTracker/UI/SingleEndeavor/SingleEndeavor';
 import { setIsDoneDailyAPI } from 'entities/Player';
 import { useTranslation } from 'react-i18next';
+import LoaderIOS from 'shared/UI/Preloader/LoaderIOS';
 
 interface DailyWrapperProps {
   className?: string;
@@ -25,6 +27,8 @@ const DailyWrapper: React.FC<DailyWrapperProps> = ({ className }) => {
   const Dailys = useSelector(getDailys);
   const filteredHDailys = useSelector(getFilteredDaily);
   const isFilterApplied = useSelector(getIsFilterApplied);
+  const isLoading = useSelector(getPlayerIsLoading);
+
   const dispatch = useAppDispatch();
   const { t } = useTranslation('PlayerCard');
   const [isVisible, setVisibility] = useState(false);
@@ -85,44 +89,49 @@ const DailyWrapper: React.FC<DailyWrapperProps> = ({ className }) => {
         />
       )}
       <div className={cls.header}>{t('myDailyTasks')}</div>
-      <div className={cls.listWrapper}>
-        {filteredHDailys.length > 0
-          ? filteredHDailys.map((h) => {
-              return (
-                <SingleEndeavor
-                  id={h.id}
-                  key={h.id}
-                  title={h.title}
-                  taskType="daily"
-                  isDone={h.isDone}
-                  subtasks={h.subtasks}
-                  tags={h.tags}
-                  onRemove={onRemoveDaily}
-                  onRequest={onRequestDailyz}
-                  difficulty={h.difficulty}
-                  description={h.description}
-                />
-              );
-            })
-          : !isFilterApplied &&
-            Dailys.map((h) => {
-              return (
-                <SingleEndeavor
-                  id={h.id}
-                  key={h.id}
-                  title={h.title}
-                  taskType="daily"
-                  isDone={h.isDone}
-                  subtasks={h.subtasks}
-                  tags={h.tags}
-                  onRemove={onRemoveDaily}
-                  onRequest={onRequestDailyz}
-                  difficulty={h.difficulty}
-                  description={h.description}
-                />
-              );
-            })}
-      </div>
+
+      {isLoading ? (
+        <LoaderIOS color="white" className={cls.loader} />
+      ) : (
+        <div className={cls.listWrapper}>
+          {filteredHDailys.length > 0
+            ? filteredHDailys.map((h) => {
+                return (
+                  <SingleEndeavor
+                    id={h.id}
+                    key={h.id}
+                    title={h.title}
+                    taskType="daily"
+                    isDone={h.isDone}
+                    subtasks={h.subtasks}
+                    tags={h.tags}
+                    onRemove={onRemoveDaily}
+                    onRequest={onRequestDailyz}
+                    difficulty={h.difficulty}
+                    description={h.description}
+                  />
+                );
+              })
+            : !isFilterApplied &&
+              Dailys.map((h) => {
+                return (
+                  <SingleEndeavor
+                    id={h.id}
+                    key={h.id}
+                    title={h.title}
+                    taskType="daily"
+                    isDone={h.isDone}
+                    subtasks={h.subtasks}
+                    tags={h.tags}
+                    onRemove={onRemoveDaily}
+                    onRequest={onRequestDailyz}
+                    difficulty={h.difficulty}
+                    description={h.description}
+                  />
+                );
+              })}
+        </div>
+      )}
 
       <div className={cls.createBtn}>
         <Button

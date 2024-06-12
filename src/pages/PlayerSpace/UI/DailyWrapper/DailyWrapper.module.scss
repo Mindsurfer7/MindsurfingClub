@@ -10,6 +10,9 @@
   min-width: calc(33.33% - 20px);
   min-height: 300px;
 
+  align-items: center;
+  justify-content: center;
+
   @media (max-width: 767px) {
     height: 300px;
     width: 100%;

@@ -5,6 +5,7 @@ import {
   getCompletedTasks,
   getFilteredTasks,
   getIsFilterApplied,
+  getPlayerIsLoading,
   getTasks,
 } from 'entities/Player/model/selectors/getPlayerData';
 import { useSelector } from 'react-redux';
@@ -19,6 +20,7 @@ import { getShowCompleted } from 'entities/TaskTracker/model/selectors/getTaskTr
 import { requestCompleted } from 'entities/Player/model/services/requestCompleted';
 import { useTranslation } from 'react-i18next';
 import { setSubtaskIsDone } from 'entities/Player/model/services/tasks/setSubtaskIsDone';
+import LoaderIOS from 'shared/UI/Preloader/LoaderIOS';
 
 interface TasksWrapperProps {
   className?: string;
@@ -33,6 +35,7 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation('PlayerCard');
   const [isVisible, setVisibility] = useState(false);
+  const isLoading = useSelector(getPlayerIsLoading);
 
   const onCloseModal = useCallback(() => {
     setVisibility(false);
@@ -93,52 +96,56 @@ const TasksWrapper: React.FC<TasksWrapperProps> = ({ className }) => {
       )}
       <div className={cls.header}>{t('myTasks')}</div>
 
-      <div className={cls.listWrapper}>
-        {filteredTasks.length > 0
-          ? filteredTasks.map((h) => {
-              return (
-                <SingleEndeavor
-                  id={h.id}
-                  key={h.id}
-                  tags={h.tags}
-                  title={h.title}
-                  taskType="task"
-                  isDone={h.isDone}
-                  subtasks={h.subtasks}
-                  onRemove={onTaskRemove}
-                  onRequest={onRequestTasks}
-                  difficulty={h.difficulty}
-                  description={h.description}
-                />
-              );
-            })
-          : !isFilterApplied &&
-            tasks.map((h) => {
-              return (
-                <SingleEndeavor
-                  id={h.id}
-                  key={h.id}
-                  tags={h.tags}
-                  title={h.title}
-                  taskType="task"
-                  isDone={h.isDone}
-                  subtasks={h.subtasks}
-                  onRemove={onTaskRemove}
-                  onRequest={onRequestTasks}
-                  difficulty={h.difficulty}
-                  description={h.description}
-                />
-              );
-            })}
-        <div className={cls.createBtn}>
-          <Button
-            onClick={onOpenModal}
-            theme={ButtonTheme.OUTLINE}
-            className={cls.addBtn}
-          >
-            {t('createNewTask')}
-          </Button>
+      {isLoading ? (
+        <LoaderIOS color="white" className={cls.loader} />
+      ) : (
+        <div className={cls.listWrapper}>
+          {filteredTasks.length > 0
+            ? filteredTasks.map((h) => {
+                return (
+                  <SingleEndeavor
+                    id={h.id}
+                    key={h.id}
+                    tags={h.tags}
+                    title={h.title}
+                    taskType="task"
+                    isDone={h.isDone}
+                    subtasks={h.subtasks}
+                    onRemove={onTaskRemove}
+                    onRequest={onRequestTasks}
+                    difficulty={h.difficulty}
+                    description={h.description}
+                  />
+                );
+              })
+            : !isFilterApplied &&
+              tasks.map((h) => {
+                return (
+                  <SingleEndeavor
+                    id={h.id}
+                    key={h.id}
+                    tags={h.tags}
+                    title={h.title}
+                    taskType="task"
+                    isDone={h.isDone}
+                    subtasks={h.subtasks}
+                    onRemove={onTaskRemove}
+                    onRequest={onRequestTasks}
+                    difficulty={h.difficulty}
+                    description={h.description}
+                  />
+                );
+              })}
         </div>
+      )}
+      <div className={cls.createBtn}>
+        <Button
+          onClick={onOpenModal}
+          theme={ButtonTheme.OUTLINE}
+          className={cls.addBtn}
+        >
+          {t('createNewTask')}
+        </Button>
       </div>
     </div>
   );

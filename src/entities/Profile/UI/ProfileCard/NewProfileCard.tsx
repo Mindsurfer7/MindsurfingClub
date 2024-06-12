@@ -16,6 +16,7 @@ import { GoogleProfile } from 'entities/GoogleProfile';
 import { ProfileInterface } from 'pages/ProfilePage/model/types/profilePageScheme';
 import { ImageUploader } from 'features/UploadImage';
 import { UploadPath } from 'features/UploadImage/model/types/uploadPath';
+import LoaderIOS from 'shared/UI/Preloader/LoaderIOS';
 
 interface ProfileCardProps {
   className?: string;
@@ -79,6 +80,9 @@ const NewProfileCard: React.FC<ProfileCardProps> = ({
         {profileData?.photoURL && <ProfilePic src={profileData?.photoURL} />}
         <Text title={profileData?.username} />
       </div>
+
+      <span>xxx</span>
+      <LoaderIOS color="white" />
 
       <div className={cls.data}>
         <div className={cls.inGameData}>

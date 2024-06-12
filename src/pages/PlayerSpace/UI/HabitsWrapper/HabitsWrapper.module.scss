@@ -9,6 +9,10 @@
   //min-width: 33%;
   min-width: calc(33.33% - 10px);
   min-height: 300px;
+
+  align-items: center;
+  justify-content: center;
+
   @media (max-width: 767px) {
     height: 300px;
     width: 100%;
@@ -62,4 +66,8 @@
   button {
     background: var(--hover-cursor);
   }
+}
+
+.loader {
+  align-items: center;
 }
