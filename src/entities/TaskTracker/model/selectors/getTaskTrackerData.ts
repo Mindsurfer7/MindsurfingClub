@@ -22,6 +22,14 @@ export const getDifficulty = (state: StateScheme) => {
 export const getSubtasks = (state: StateScheme) => {
   return state.TaskTracker.subtasks;
 };
+
 export const getTodayTasks = (state: StateScheme) => {
   return state.TaskTracker.todayTasks;
+};
+
+export const getShowPrinciples = (state: StateScheme) => {
+  return state.TaskTracker.showPrinciples;
+};
+export const getShowCharacter = (state: StateScheme) => {
+  return state.TaskTracker.showCharacter;
 };

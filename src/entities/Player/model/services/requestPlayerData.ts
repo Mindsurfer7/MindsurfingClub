@@ -22,6 +22,10 @@ export const requestPlayerData = createAsyncThunk<any, void, ThunkConfig<any>>(
         })
         .filter((c) => c.id === userID);
 
+      if (filteredResponse.length === 0) {
+        return thunkAPI.rejectWithValue('Player data not found');
+      }
+
       if (!response) {
         throw new Error();
       }

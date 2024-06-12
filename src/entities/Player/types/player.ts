@@ -1,4 +1,5 @@
-import { Subtask } from 'entities/TaskTracker/types/taskTracker';
+import { Subtask, TaskSubType } from 'entities/TaskTracker/types/taskTracker';
+import { Biology } from '../UI/PlayerCard/Character/types';
 
 export interface PlayerData {
   UID: string;
@@ -15,6 +16,7 @@ export interface PlayerScheme {
   isLoading: boolean;
   isFilterApplied: boolean;
   notifications: string[];
+  biology: Biology | null;
   allTags: string[];
   completedTasks: Task[];
   habits: Habit[];
@@ -33,6 +35,9 @@ export type Habit = {
   isDone: boolean;
   tags: string[];
   title: string;
+  taskSubType?: TaskSubType;
+  step?: number;
+  count?: number;
 };
 export type Daily = {
   id: string; // ID or any unique identifier

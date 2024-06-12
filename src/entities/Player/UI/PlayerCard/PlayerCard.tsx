@@ -18,12 +18,16 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import {
   clearSelectedTag,
   setSelectedTag,
+  setShowCharacter,
   setShowCompleted,
+  setShowPrinciples,
   setShowTodayTasks,
 } from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
 import {
   getSelectedTag,
+  getShowCharacter,
   getShowCompleted,
+  getShowPrinciples,
   getShowTodayTasks,
 } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
 import {
@@ -37,7 +41,10 @@ import { saveNotification } from 'entities/Player/model/services/InGameActions/s
 import Spinner from '../../../../shared/assets/icons/Spinner.svg';
 import { getShowChallenges, setShowChallenges } from 'entities/Challenge';
 import { useTranslation } from 'react-i18next';
-
+import { Icon } from 'shared/UI/Icon/Icon';
+// import loaderIOS from '../../../../shared/assets/icons/loader-ios.svg';
+import loaderIOS from '../../../../shared/assets/icons/Spinner.svg';
+import LoaderIOS from 'shared/UI/Preloader/LoaderIOS';
 interface PlayerCardProps {
   className?: string;
   PlayerData?: PlayerData;
@@ -61,8 +68,18 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
   const selectedTag = useSelector(getSelectedTag);
   const showChallenges = useSelector(getShowChallenges);
   const showTodayTasks = useSelector(getShowTodayTasks);
+  const showPrinciples = useSelector(getShowPrinciples);
+  const showCharacter = useSelector(getShowCharacter);
 
   const sortedTags = [...allTags].sort((a, b) => a.length - b.length);
+
+  const [pointsBarLevel, setPointsBarLevel] = useState(0);
+
+  useEffect(() => {
+    if (points) {
+      setPointsBarLevel(Math.round(points / 10));
+    }
+  }, [points]);
 
   const dispatch = useAppDispatch();
   const { t } = useTranslation('PlayerCard');
@@ -122,11 +139,18 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
     );
   }
 
+  const onShowPrincilpes = () => {
+    dispatch(setShowPrinciples(!showPrinciples));
+  };
+
   const onShowCompleted = () => {
     dispatch(setShowCompleted(!completed));
   };
   const onShowChallenges = () => {
     dispatch(setShowChallenges(!showChallenges));
+  };
+  const onShowCharacter = () => {
+    dispatch(setShowCharacter(!showCharacter));
   };
   const onShowToday = () => {
     dispatch(setShowTodayTasks(!showTodayTasks));
@@ -150,7 +174,11 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
         <div className={cls.user}>
           <div className={cls.pic}>
             {account?.photoURL ? (
-              <img src={account.photoURL} alt="User Avatar" />
+              <img
+                src={account.photoURL}
+                alt="User Avatar"
+                className={cls.avatar}
+              />
             ) : null}
           </div>
           <div className={cls.userBottom}>
@@ -167,12 +195,29 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
             <span>{t('level')}</span>
             <span>{player.level}</span>
           </div>
-          <div className={cls.points}>
-            <span>{t('points')}</span>
+
+          {isLoading && <LoaderIOS color="white" height={60} width={60} />}
+          <div className={cls.bar}>
+            <div
+              className={`${cls.fill} ${cls.p}`}
+              style={{ width: `${pointsBarLevel}%` }}
+            >
+              <span>{t('points')}</span>
+            </div>
             <span>{player.points}</span>
-            {/* {isLoading ? <Spinner /> :} */}
           </div>
+
+          {/* <div className={cls.points}>
+          </div> */}
           <div className={cls.buttnz}>
+            <Button
+              theme={
+                showCharacter ? ButtonTheme.FILLED_GREEN : ButtonTheme.OUTLINE
+              }
+              onClick={onShowCharacter}
+            >
+              {t('Character')}
+            </Button>
             <Button
               theme={
                 showChallenges ? ButtonTheme.FILLED_GREEN : ButtonTheme.OUTLINE
@@ -202,6 +247,22 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
               // onClick={onShowToday}
             >
               {'Цели'}
+            </Button>
+            <Button
+              theme={
+                showPrinciples ? ButtonTheme.FILLED_GREEN : ButtonTheme.OUTLINE
+              }
+              onClick={onShowPrincilpes}
+            >
+              {'Мои принципы'}
+            </Button>
+            <Button
+            // theme={
+            //   showPrinciples ? ButtonTheme.FILLED_GREEN : ButtonTheme.OUTLINE
+            // }
+            // onClick={onShowPrincilpes}
+            >
+              {'Мантры'}
             </Button>
           </div>
         </div>

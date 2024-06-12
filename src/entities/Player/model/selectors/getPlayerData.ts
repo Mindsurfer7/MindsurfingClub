@@ -42,3 +42,12 @@ export const getIsFilterApplied = (state: StateScheme) => {
 export const getNotifications = (state: StateScheme) => {
   return state.Player?.notifications;
 };
+export const getPlayerIsLoading = (state: StateScheme) => {
+  return state.Player?.isLoading;
+};
+export const getPlayersBiologyLevels = (state: StateScheme) => {
+  return state.Player?.biology?.levels;
+};
+export const getPlayersBiologyChanges = (state: StateScheme) => {
+  return state.Player?.biology?.changes;
+};

@@ -1,0 +1,117 @@
+.blocks {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 60px;
+}
+.descriptionContainer {
+}
+.descriptionTitle {
+  font-size: 18px;
+  border-radius: 12px;
+  padding: 5px;
+  margin: 10px;
+  text-align: center;
+  /* border: 1px solid black; */
+}
+.description {
+  font-size: 12px;
+  border-radius: 5px;
+
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 6px 6px 1px 1px rgba(0, 0, 0, 0.2);
+}
+.interface {
+  display: flex;
+  flex-direction: row;
+  max-width: 400px;
+}
+
+.statcontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 15px;
+  gap: 10px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 10px 0px;
+
+  .hormone {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+
+    .name {
+      width: 100px;
+    }
+
+    .bar {
+      width: 200px;
+      height: 10px;
+      background-color: #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+
+      .fill {
+        height: 100%;
+        border-radius: 5px;
+        transition: width 0.8s ease; // для плавной анимации
+
+        &.GABA {
+          background-color: #851de6;
+        } // пример цвета для кортизола
+        &.acetylcholine {
+          background-color: #1e82ec;
+        }
+        &.cortisol {
+          background-color: #f39c12;
+        }
+        &.melatonin {
+          background-color: #5d6d7e;
+        }
+        &.serotonin {
+          background-color: #aed6f1;
+        }
+        &.dopamine {
+          background-color: #f5b7b1;
+        }
+        &.adrenaline {
+          background-color: #f1210a;
+        }
+        &.norepinephrine {
+          background-color: #de3b12;
+        }
+        &.endorphins {
+          background-color: #d7bde2;
+        }
+        &.growth_hormone {
+          background-color: #abebc6;
+        }
+        &.testosterone {
+          background-color: #f3c018;
+        }
+        &.estrogen {
+          background-color: #f1948a;
+        }
+        &.oxytocin {
+          background-color: #2ecc71;
+        }
+        &.insulin {
+          background-color: #f9e79f;
+        }
+      }
+    }
+
+    .value {
+      width: 40px;
+      text-align: right;
+    }
+    .change {
+      font-size: 12px;
+    }
+  }
+}

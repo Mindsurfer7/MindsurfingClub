@@ -23,7 +23,14 @@ import { getGoogleID } from 'entities/GoogleProfile/model/selectors/getGooglePro
 import { useTranslation } from 'react-i18next';
 import { Page } from 'widgets/Page';
 import TodayTasks from 'entities/TaskTracker/UI/TodayTasks/UI/TodayTasks';
-import { getShowTodayTasks } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
+import {
+  getShowCharacter,
+  getShowPrinciples,
+  getShowTodayTasks,
+} from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
+import Principles from './Principles/Principles';
+import Character from 'entities/Player/UI/PlayerCard/Character/Character';
+import Preloader from 'shared/UI/Preloader/Preloader';
 
 interface PlayerSpaceProps {
   className?: string;
@@ -36,6 +43,8 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
 
   const showChallenges = useSelector(getShowChallenges);
   const showTodayTasks = useSelector(getShowTodayTasks);
+  const showPrinciples = useSelector(getShowPrinciples);
+  const showCharacter = useSelector(getShowCharacter);
 
   useEffect(() => {
     if (isAuth) {
@@ -49,11 +58,14 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
   };
 
   useEffect(() => {
-    if (!player.new) {
+    if (player.new === undefined) {
+      dispatch(requestPlayerData());
+    }
+
+    if (player.new === false && player.new !== undefined) {
       dispatch(requestHabits());
       dispatch(requestTasks());
       dispatch(requestDailyz());
-      dispatch(requestPlayerData());
       dispatch(requestNotifications());
       dispatch(requestAllTags());
       dispatch(requestCompleted());
@@ -61,6 +73,14 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
   }, [dispatch, player.new, isAuth]);
 
   const { t } = useTranslation();
+
+  if (player.new === undefined && isAuth) {
+    return (
+      <div className={cls.loader}>
+        <Preloader />
+      </div>
+    );
+  }
 
   if (player.new && isAuth) {
     return (
@@ -74,19 +94,29 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
     );
   }
 
+  const showChar = !showChallenges && showCharacter;
+
   return (
     <Page className={classNames(cls.PlayerSpace, {}, [className as string])}>
       <PlayerCard />
       {showTodayTasks && <TodayTasks />}
-      {showChallenges ? (
-        <ChallengesList />
+      {showPrinciples && <Principles />}
+
+      {showChar ? (
+        <Character />
       ) : (
-        <div className={cls.TrackerWrapper}>
-          <HabitsWrapper />
+        <div className="">
+          {showChallenges ? (
+            <ChallengesList />
+          ) : (
+            <div className={cls.TrackerWrapper}>
+              <HabitsWrapper />
 
-          <DailyWrapper />
+              <DailyWrapper />
 
-          <TasksWrapper />
+              <TasksWrapper />
+            </div>
+          )}
         </div>
       )}
     </Page>

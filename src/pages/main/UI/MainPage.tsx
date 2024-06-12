@@ -12,7 +12,6 @@ import Text from 'shared/UI/Text/Text';
 import { Page } from 'widgets/Page';
 import ArticleTextBlock from 'entities/Article/UI/ArticleTextBlock/ArticleTextBlock';
 import { ArticleBlockType } from 'entities/Article/types/article';
-
 interface MainPageProps {
   className?: string;
 }

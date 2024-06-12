@@ -13,6 +13,8 @@ const initialState: TaskTrackerScheme = {
   difficulty: 1,
   isLoading: false,
   ShowTodayTasks: false,
+  showPrinciples: false,
+  showCharacter: false,
   todayTasks: [],
   title: '',
   isDone: false,
@@ -63,6 +65,9 @@ export const TaskTrackerSlice = createSlice({
     setShowCompleted: (state, action: PayloadAction<boolean>) => {
       state.showCompleted = action.payload;
     },
+    setShowPrinciples: (state, action: PayloadAction<boolean>) => {
+      state.showPrinciples = action.payload;
+    },
     setSubtask: (state, action: PayloadAction<Subtask>) => {
       state.subtasks?.push(action.payload);
     },
@@ -71,6 +76,9 @@ export const TaskTrackerSlice = createSlice({
     },
     setShowTodayTasks: (state, action: PayloadAction<boolean>) => {
       state.ShowTodayTasks = action.payload;
+    },
+    setShowCharacter: (state, action: PayloadAction<boolean>) => {
+      state.showCharacter = action.payload;
     },
 
     clearInputs: (state) => {
@@ -137,8 +145,10 @@ export const {
   setShowCompleted,
   setSelectedTag,
   clearSelectedTag,
+  setShowCharacter,
   setSubtaskTitle,
   setShowTodayTasks,
+  setShowPrinciples,
   setID,
   setTags,
   setTitle,

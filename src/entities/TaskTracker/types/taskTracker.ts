@@ -8,6 +8,8 @@ export interface TaskTrackerScheme {
   description: string;
   difficulty: number;
   isLoading: boolean;
+  showPrinciples: boolean;
+  showCharacter: boolean;
   title: string;
   isDone: boolean;
   subtasks?: Subtask[];
@@ -25,3 +27,5 @@ export interface Subtask {
   title: string;
   isDone: boolean;
 }
+
+export type TaskSubType = 'reverse-count' | 'classic'; // | any что в глову придет

@@ -10,6 +10,10 @@ import { requestCompleted } from '../services/requestCompleted';
 import { requestAllTags } from '../services/requestAllTags';
 import { increasePoints } from '../services/increasePoints';
 import { removeTask } from '../services/removeTask';
+import { decreaseHabitReverseCounter } from '../services/decreaseHabitReverseCounter';
+import { setBiologyStats } from '../services/biology/setBiologyStats';
+import { requestBiologyStats } from '../services/biology/requestBiologyStats';
+import { analyzeActionWithAI } from '../services/biology/analyzeActionWithAI';
 
 const initialState: PlayerScheme = {
   PlayerData: {
@@ -19,8 +23,10 @@ const initialState: PlayerScheme = {
     level: 0,
     points: 10,
     username: 'username',
-    new: true,
+    // new: true,
+    new: undefined,
   },
+  biology: null,
   allTags: [],
   notifications: [],
   isFilterApplied: false,
@@ -198,9 +204,55 @@ export const PlayerSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload;
       });
+    builder
+      .addCase(decreaseHabitReverseCounter.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(decreaseHabitReverseCounter.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(decreaseHabitReverseCounter.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
+    builder
+      .addCase(setBiologyStats.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(setBiologyStats.fulfilled, (state, action) => {
+        state.isLoading = false;
+      })
+      .addCase(setBiologyStats.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
     builder.addCase(removeTask.fulfilled, (state, action) => {
       state.isLoading = false;
     });
+    builder
+      .addCase(requestBiologyStats.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(requestBiologyStats.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.biology = action.payload;
+      })
+      .addCase(requestBiologyStats.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
+    builder
+      .addCase(analyzeActionWithAI.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(analyzeActionWithAI.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.biology = action.payload;
+      })
+      .addCase(analyzeActionWithAI.rejected, (state, action) => {
+        state.isLoading = false;
+        // state.error = action.payload;
+      });
   },
 });
 
