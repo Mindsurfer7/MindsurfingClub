@@ -24,6 +24,7 @@ import type { TextEditorScheme } from 'widgets/TextEditor/model/types/textEditor
 import type { WallScheme } from 'entities/Wall';
 import type { SingleGroupPageScheme } from 'pages/SingleGroupPage';
 import type { ProfilePageScheme } from 'pages/ProfilePage';
+import { TherapyPageScheme } from 'pages/TherapyPage/model/types/therapy';
 
 export interface StateScheme {
   //Article
@@ -49,6 +50,8 @@ export interface StateScheme {
   //GPT
   Chat: ChatScheme;
   GPT: GPTscheme;
+  //psy
+  TherapyPage: TherapyPageScheme;
 }
 
 export type StateSchemeKey = keyof StateScheme;

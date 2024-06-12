@@ -5,7 +5,7 @@ import { GoogleAuthProvider, getAuth, onAuthStateChanged } from 'firebase/auth';
 import { PROFILE_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
 import { getStorage } from 'firebase/storage';
 
-export const GPT_API_KEY = process.env.GPT_API_KEY;
+export const GPT_API_KEY = import.meta.env.VITE_GPT_API_KEY;
 export const OPEN_AI_ORG_ID = process.env.OPEN_AI_ORG_ID;
 
 export const GPT_API = axios.create({

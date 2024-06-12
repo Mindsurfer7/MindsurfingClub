@@ -44,6 +44,8 @@ const ChatWindow: React.FC<ChatWindowProps> = ({ className }) => {
 
   const onSendtoGPT = useCallback(() => {
     dispatch(setMessages(singleMessage));
+    //@ts-ignore
+
     dispatch(sendMessageToGPT());
   }, [dispatch, singleMessage]);
 

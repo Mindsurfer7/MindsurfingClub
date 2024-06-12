@@ -22,3 +22,9 @@ https://tooabstractive.com/how-to-tech/how-to-fix-git-error-unable-to-resolve-re
 rm .git/refs/remotes/origin/master
 
 git fetch origin
+
+create async thunk types
+
+ReturnType, // 1. Тип ответа сервера
+ThunkArg, // 2. Тип аргумента thunk
+ThunkConfig // 3. Тип конфигурации thunk

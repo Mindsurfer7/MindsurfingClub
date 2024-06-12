@@ -14,6 +14,7 @@ import { AboutPageLazy } from 'pages/about';
 import { PracticeCenterAsync } from 'pages/PracticeCenter';
 import { TextEditor } from 'widgets/TextEditor';
 import { ArticleCreatePage } from 'pages/ArticleCreatePage';
+import { TherapyPageAsync } from 'pages/TherapyPage/UI/TherapyPage.async';
 
 export type AppRoutesProps = RouteProps & {
   authOnly?: boolean;
@@ -25,6 +26,7 @@ export enum AppRoutes {
   Home = 'Home',
   About = 'About',
   PsyRoom = 'PsyRoom',
+  Therapy = 'Therapy',
   Conversation = 'Conversation',
   Community = 'Community',
   SingleGroup = 'SingleGroup',
@@ -43,6 +45,7 @@ export const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.Home]: '/home',
   [AppRoutes.About]: '/about',
   [AppRoutes.PsyRoom]: '/psyroom',
+  [AppRoutes.Therapy]: '/therapy',
   [AppRoutes.Profile]: '/profile/',
   [AppRoutes.PlayerSpace]: '/PlayerSpace',
   [AppRoutes.Conversation]: '/:conversationID',
@@ -72,6 +75,11 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.PsyRoom]: {
     path: RoutePath[AppRoutes.PsyRoom],
     element: <PsyRoom />,
+    //requiresGoogleAuth: true,
+  },
+  [AppRoutes.Therapy]: {
+    path: RoutePath[AppRoutes.Therapy],
+    element: <TherapyPageAsync />,
     //requiresGoogleAuth: true,
   },
   [AppRoutes.Conversation]: {

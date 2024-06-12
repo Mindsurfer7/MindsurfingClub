@@ -5,14 +5,14 @@ import { getMessages } from '../selectors/getGPTdata';
 
 export const sendMessageToGPT = createAsyncThunk<
   GPTmessage[],
-  void,
+  any,
   ThunkConfig<any>
->('GPT/sendMessageToGPT', async (_, thunkAPI) => {
+>('GPT/sendMessageToGPT', async (systemMessage, thunkAPI) => {
   const messages = getMessages(thunkAPI.getState());
 
   const APIrequestBody = {
     model: 'gpt-3.5-turbo',
-    messages: messages,
+    messages: systemMessage ? systemMessage : messages,
   };
 
   try {
