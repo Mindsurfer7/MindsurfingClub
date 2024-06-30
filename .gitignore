@@ -1,6 +1,8 @@
 node_modules
 /build
+/dist
 /storybook-static
 .env
 .loki/report.html
 .loki/report.json
+.DS_Store

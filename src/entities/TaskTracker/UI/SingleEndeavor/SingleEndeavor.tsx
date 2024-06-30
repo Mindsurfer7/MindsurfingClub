@@ -16,9 +16,10 @@ import { TaskDisplayModal } from 'pages/PlayerSpace/UI/TaskDisplayModal/TaskDisp
 import { ToastContainer, toast } from 'react-toastify';
 import { rewardCoins } from 'entities/Player/model/services/InGameActions/rewardCoins';
 import { saveNotification } from 'entities/Player/model/services/InGameActions/saveNotification';
-import { Subtask } from 'entities/TaskTracker/types/taskTracker';
+import { Subtask, TaskSubType } from 'entities/TaskTracker/types/taskTracker';
 import { Icon } from 'shared/UI/Icon/Icon';
 import OpenSubtasksIcon from '../../../../shared/assets/icons/collapseBtn.svg?react';
+import { decreaseHabitReverseCounter } from 'entities/Player/model/services/decreaseHabitReverseCounter';
 
 interface SingleEndeavorProps {
   onRemove: (id: string) => Promise<void>;
@@ -33,6 +34,9 @@ interface SingleEndeavorProps {
   tags: string[];
   id: string;
   taskType: 'task' | 'daily' | 'habit' | 'today';
+  taskSubType?: TaskSubType | null;
+  step?: number | null;
+  count?: 500 | null;
 }
 
 const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
@@ -47,6 +51,9 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
     taskType,
     subtasks,
     id,
+    taskSubType,
+    step,
+    count,
   } = props;
 
   const dispatch = useAppDispatch();
@@ -363,14 +370,27 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
     );
   }
 
+  const reverseCount = (step: number, id: string) => {
+    dispatch(decreaseHabitReverseCounter({ step: step, taskID: id }));
+  };
+
   return (
     <div className={classNames(cls.SingleEndeavor, {}, [className as string])}>
       <div className={cls.Wrapper}>
-        <div className={cls.plusBtn}>
-          <Button onClick={onPlusClick} className={cls.Plus}>
-            +
-          </Button>
-        </div>
+        {taskSubType && step && taskSubType === 'reverse-count' ? (
+          <div
+            onClick={() => reverseCount(step, id)}
+            className={cls.reverseCounter}
+          >
+            {count}
+          </div>
+        ) : (
+          <div className={cls.plusBtn}>
+            <Button onClick={onPlusClick} className={cls.Plus}>
+              +
+            </Button>
+          </div>
+        )}
 
         <div onClick={onOpenModal2} className={cls.title}>
           {title}

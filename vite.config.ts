@@ -2,16 +2,61 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
+// import html from 'vite-plugin-html';
 
 export default defineConfig({
   server: {
     port: 4400,
   },
 
-  plugins: [react(), svgr({}), tsconfigPaths()],
+  plugins: [
+    react(),
+    svgr({}),
+    tsconfigPaths(),
+
+    // чтобы внедрить яндекс метрику
+    // html.createHtmlPlugin({
+    //   inject: {
+    //     data: {
+    //       yandexMetrikaScript: `
+    //     <script type="text/javascript">
+    //       (function (m, e, t, r, i, k, a) {
+    //         m[i] =
+    //           m[i] ||
+    //           function () {
+    //             (m[i].a = m[i].a || []).push(arguments);
+    //           };
+    //         m[i].l = 1 * new Date();
+    //         // ... (остальная часть кода Яндекс.Метрики)
+    //       })(window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym');
+
+    //       ym(97479883, 'init', {
+    //         clickmap: true,
+    //         trackLinks: true,
+    //         accurateTrackBounce: true,
+    //         webvisor: true,
+    //       });
+    //     </script>
+    //   `,
+    //       noscript: `
+    //     <noscript>
+    //       <div>
+    //         <img
+    //           src="https://mc.yandex.ru/watch/97479883"
+    //           style="position: absolute; left: -9999px"
+    //           alt=""
+    //         />
+    //       </div>
+    //     </noscript>
+    //   `,
+    //     },
+    //   },
+    // }),
+  ],
   resolve: {
     alias: {},
   },
+
   define: {
     'process.env': {
       NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),

@@ -91,11 +91,11 @@ const CustomInput: React.FC<InputProps> = memo((props) => {
         //placeholder={placeholder}
         name={name}
       />
-      <span
+      {/* <span
         className={classNames(cls.placeholder, mods, [className as string])}
       >
         {placeholder}
-      </span>
+      </span> */}
     </div>
   );
 });

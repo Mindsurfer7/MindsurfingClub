@@ -1,0 +1,83 @@
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+
+  &-default {
+    padding: 15px 12px 2px 12px;
+    border-radius: 16px;
+    width: 100%;
+    height: 56px;
+    line-height: 20.08px;
+    border: 0.5px solid #d5e5ff;
+    outline: none;
+    font-size: 16px;
+    line-height: 400px;
+    background-color: #f5f8fd;
+
+    &:focus {
+      border: 0.5px solid #56c8eb;
+      &-not-empty {
+        color: #56c8eb;
+        left: 12px;
+        font-size: 12px;
+        transform: translateY(20%);
+        transition: all ease 0.2s;
+        top: 5px;
+      }
+    }
+  }
+
+  &-input-error {
+    border: 0.5px solid #e10606;
+  }
+
+  &-error-message {
+    color: red;
+    margin-right: auto;
+    margin-top: 5px;
+    font-size: 12px;
+    margin-left: 5px;
+  }
+
+  &-label-placeholder {
+    position: absolute;
+    top: 13%;
+    font-size: 16px;
+    color: #92a7c9;
+    left: 12px;
+    pointer-events: none;
+    transform: translateY(20%);
+    transition: all ease 0.2s;
+  }
+
+  &-not-empty {
+    left: 12px;
+    color: #92a7c9;
+    font-size: 12px;
+    transform: translateY(-30%);
+    transition: all ease 0.2s;
+    top: 5px;
+  }
+  &-focus {
+    color: #56c8eb;
+  }
+  &-not-focused {
+    color: #92a7c9;
+  }
+
+  &-svg {
+    position: absolute;
+    top: 20px;
+    right: 13px;
+  }
+
+  &-placeholder-red {
+    color: red;
+  }
+
+  &-input-fullw {
+    width: 100%;
+  }
+}
