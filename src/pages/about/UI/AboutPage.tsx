@@ -6,6 +6,7 @@ import cls from './AboutPage.module.scss';
 import logo from '../../../../LogoTransparent.svg?react';
 // import icon from `../../../../LogoTransparent.svg${isVite ? '?react' : ''}`;
 import { Page } from 'widgets/Page';
+import FileUpload from 'features/FileUpload/FileUpload';
 
 const about = [
   'async import of RC and redux reducers',
@@ -28,6 +29,10 @@ const AboutPage = memo(() => {
           })}
         </ul>
         <Icon className={cls.logo} Svg={logo} />
+
+        <div className="">
+          <FileUpload />
+        </div>
       </div>
     </Page>
   );
