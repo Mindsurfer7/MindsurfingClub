@@ -5,6 +5,7 @@ import {
   TaskTrackerScheme,
 } from 'entities/TaskTracker/types/taskTracker';
 import { requestTodayTasks } from '../services/requestTodayTasks';
+import { transcribeVoice } from 'features/FileUpload/model/services/transcribeVoice';
 
 const initialState: TaskTrackerScheme = {
   showCompleted: false,
@@ -12,6 +13,7 @@ const initialState: TaskTrackerScheme = {
   description: '',
   difficulty: 1,
   isLoading: false,
+  transcribedVoice: '',
   ShowTodayTasks: false,
   showPrinciples: false,
   showCharacter: false,
@@ -133,6 +135,18 @@ export const TaskTrackerSlice = createSlice({
         state.todayTasks = action.payload;
       })
       .addCase(requestTodayTasks.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
+    builder
+      .addCase(transcribeVoice.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(transcribeVoice.fulfilled, (state, action) => {
+        state.transcribedVoice = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(transcribeVoice.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });

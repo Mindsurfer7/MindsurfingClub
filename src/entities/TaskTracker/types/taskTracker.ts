@@ -14,6 +14,7 @@ export interface TaskTrackerScheme {
   isDone: boolean;
   subtasks?: Subtask[];
   ShowTodayTasks: boolean;
+  transcribedVoice: string;
   todayTasks: Task[];
   habits?: [];
   tasks?: [];

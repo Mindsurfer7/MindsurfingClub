@@ -11,7 +11,7 @@ import { createReducerManager } from './reducerManager';
 import { useDispatch } from 'react-redux';
 import { API } from 'shared/API/API';
 import { NavigateOptions, To } from 'react-router-dom';
-import { GPT_API } from 'App/API/firebaseAPI';
+import { GPT_API, GPT_Audio_API } from 'App/API/firebaseAPI';
 import { GoogleProfileReducer } from 'entities/GoogleProfile/model/slice/GoogleProfileSlice';
 import { GPTReducer } from 'entities/GPT';
 import { PlayerReducer } from 'entities/Player/model/slice/playerSlice';
@@ -44,6 +44,7 @@ export function createReduxStore(
   const extraArg: ThunkExtraArg = {
     API: API,
     GPT_API: GPT_API,
+    GPT_Audio_API: GPT_Audio_API,
   };
 
   const store = configureStore({

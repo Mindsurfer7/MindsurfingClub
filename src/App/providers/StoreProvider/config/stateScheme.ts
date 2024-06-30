@@ -71,6 +71,7 @@ export interface ReduxStoreWithManager extends EnhancedStore<StateScheme> {
 export interface ThunkExtraArg {
   API: AxiosInstance;
   GPT_API: AxiosInstance;
+  GPT_Audio_API: AxiosInstance;
 }
 export interface ThunkConfig<T> {
   rejectValue: T;

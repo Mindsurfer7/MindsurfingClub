@@ -33,3 +33,9 @@ export const getShowPrinciples = (state: StateScheme) => {
 export const getShowCharacter = (state: StateScheme) => {
   return state.TaskTracker.showCharacter;
 };
+export const getTranscribedVoice = (state: StateScheme) => {
+  return state.TaskTracker.transcribedVoice;
+};
+export const getTaskTrackerIsLoading = (state: StateScheme) => {
+  return state.TaskTracker.isLoading;
+};

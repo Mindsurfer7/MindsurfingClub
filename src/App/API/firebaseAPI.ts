@@ -18,6 +18,15 @@ export const GPT_API = axios.create({
   method: 'POST',
 });
 
+export const GPT_Audio_API = axios.create({
+  baseURL: 'https://api.openai.com/v1/audio/transcriptions',
+  headers: {
+    'Authorization': `Bearer ${GPT_API_KEY}`, //prettier-ignore
+    'Content-Type': 'multipart/form-data',
+    'organization_id': 'org-v0i5enWH525ivYkYCD9msIqZ', //prettier-ignore
+  },
+});
+
 const firebaseConfigVite = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
