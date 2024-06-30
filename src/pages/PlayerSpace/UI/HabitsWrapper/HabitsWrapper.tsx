@@ -1,7 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import cls from './HabitsWrapper.module.scss';
 import {
+  getEndeavorIsLoading,
   getFilteredHabits,
   getHabits,
   getIsFilterApplied,
@@ -28,6 +29,7 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
   const filteredHabits = useSelector(getFilteredHabits);
   const isFilterApplied = useSelector(getIsFilterApplied);
   const isLoading = useSelector(getPlayerIsLoading);
+  const endeavorIsLoading = useSelector(getEndeavorIsLoading);
   const dispatch = useAppDispatch();
   const { t } = useTranslation('PlayerCard');
   const [isVisible, setVisibility] = useState(false);
@@ -47,9 +49,28 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
   const onRemoveHabit = async (id: string) => {
     await dispatch(removeHabit(id));
   };
+  const [lastRenderedIndex, setLastRenderedIndex] = useState(0);
+
+  ////////   эт я пытался сделать анимацию для появления тасок, еще не закончил    ///////////
+
+  const showElement = (index: number) => {
+    setTimeout(() => {
+      setLastRenderedIndex(index);
+    }, index * 200); // Задержка 200 мс между элементами
+  };
+
+  useEffect(() => {
+    setLastRenderedIndex(0); // Сброс индекса при изменении данных
+  }, [filteredHabits, habits]);
 
   return (
-    <div className={classNames(cls.HabitsWrapper, {}, [className as string])}>
+    <div
+      className={classNames(
+        cls.HabitsWrapper,
+        { [cls.loadingAnimation]: isLoading },
+        [className as string],
+      )}
+    >
       {isVisible && (
         <TaskCreatorModal
           onClose={onCloseModal}
@@ -60,55 +81,65 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
       )}
 
       <div className={cls.header}>{t('myHabits')}</div>
-      {isLoading ? (
-        <LoaderIOS color="white" className={cls.loader} />
-      ) : (
-        <div className={cls.listWrapper}>
-          {filteredHabits.length > 0
-            ? filteredHabits.map((h) => {
-                return (
-                  <SingleEndeavor
-                    key={h.id}
-                    taskType="habit"
-                    title={h.title}
-                    isDone={h.isDone}
-                    tags={h.tags}
-                    difficulty={h.difficulty}
-                    description={h.description}
-                    onRequest={onRequestHabits}
-                    onRemove={onRemoveHabit}
-                    id={h.id}
-                  />
-                );
-              })
-            : !isFilterApplied &&
-              habits.map((h) => {
-                return (
-                  <SingleEndeavor
-                    key={h.id}
-                    taskType="habit"
-                    title={h.title}
-                    isDone={h.isDone}
-                    tags={h.tags}
-                    difficulty={h.difficulty}
-                    description={h.description}
-                    onRequest={onRequestHabits}
-                    onRemove={onRemoveHabit}
-                    id={h.id}
-                    //@ts-ignore
-                    taskSubType={h.subtype}
-                    step={h.step}
-                    //@ts-ignore
 
-                    count={h.count}
-                    // taskSubType={'reverse-count'}
-                    // step={25}
-                    // count={500}
-                  />
-                );
-              })}
-        </div>
-      )}
+      <div className={cls.listWrapper}>
+        {filteredHabits.length > 0
+          ? filteredHabits.map((h, ix) => {
+              showElement(ix);
+              return (
+                <SingleEndeavor
+                  key={h.id}
+                  taskType="habit"
+                  title={h.title}
+                  isDone={h.isDone}
+                  tags={h.tags}
+                  difficulty={h.difficulty}
+                  description={h.description}
+                  onRequest={onRequestHabits}
+                  onRemove={onRemoveHabit}
+                  isLoading={
+                    endeavorIsLoading?.id === h.id
+                      ? endeavorIsLoading?.pending
+                      : false
+                  }
+                  id={h.id}
+                  // className={cls.slideInFromLeft}
+                  className={ix > lastRenderedIndex ? cls.slideInFromLeft : ''}
+                />
+              );
+            })
+          : !isFilterApplied &&
+            habits.map((h) => {
+              return (
+                <SingleEndeavor
+                  key={h.id}
+                  taskType="habit"
+                  title={h.title}
+                  isDone={h.isDone}
+                  tags={h.tags}
+                  difficulty={h.difficulty}
+                  description={h.description}
+                  onRequest={onRequestHabits}
+                  onRemove={onRemoveHabit}
+                  id={h.id}
+                  isLoading={
+                    endeavorIsLoading?.id === h.id
+                      ? endeavorIsLoading?.pending
+                      : false
+                  }
+                  //@ts-ignore
+                  taskSubType={h.subtype}
+                  step={h.step}
+                  //@ts-ignore
+
+                  count={h.count}
+                  // taskSubType={'reverse-count'}
+                  // step={25}
+                  // count={500}
+                />
+              );
+            })}
+      </div>
 
       <div className={cls.createBtn}>
         <Button

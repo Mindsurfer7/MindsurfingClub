@@ -24,11 +24,13 @@
     padding: 5px;
   }
   @media (max-width: 415px) {
+    border: none;
+    border: 1.5x solid black;
     display: flex;
     flex-direction: column;
     align-items: center;
     align-self: center;
-    width: 95%;
+    width: 100%;
     padding: 5px;
   }
 }
@@ -56,6 +58,8 @@
     width: 100%;
   }
   @media (max-width: 415px) {
+    border: 1x solid black;
+
     align-items: center;
     width: 100%;
   }
@@ -82,4 +86,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: auto;
+
+  @media (max-width: 415px) {
+    margin-left: auto;
+  }
 }

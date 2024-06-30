@@ -17,11 +17,15 @@
   align-items: center;
   justify-content: center;
 
+  overflow: hidden;
+
   @media (max-width: 767px) {
     height: 300px;
     min-width: 100%;
   }
   @media (max-width: 415px) {
+    border: 1.5px solid rgb(0, 0, 0);
+
     height: 250px;
     width: 100%;
   }
