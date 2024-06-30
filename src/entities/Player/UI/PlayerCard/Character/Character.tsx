@@ -15,6 +15,7 @@ import {
   getPlayersBiologyLevels,
 } from 'entities/Player/model/selectors/getPlayerData';
 import Preloader from 'shared/UI/Preloader/Preloader';
+import LoaderIOS from 'shared/UI/Preloader/LoaderIOS';
 
 interface CharacterProps {
   className?: string;
@@ -56,6 +57,8 @@ const HormoneStat: React.FC<HormoneStatProps> = ({
   );
 };
 
+//полагаю стоит отрефакторить и сделать этот функционал в папке features
+
 const Character: React.FC<CharacterProps> = ({ className }) => {
   const dispatch = useAppDispatch();
   const [userAction, setUserAction] = useState('');
@@ -91,7 +94,7 @@ const Character: React.FC<CharacterProps> = ({ className }) => {
             Эвристический механизм вычисления состояния своей биологической
             системы
           </div>
-          <div className={cls.buttons}>
+          {/* <div className={cls.buttons}>
             <Button theme={ButtonTheme.OUTLINE} onClick={onActionSubmit}>
               Утро
             </Button>
@@ -101,8 +104,7 @@ const Character: React.FC<CharacterProps> = ({ className }) => {
             <Button theme={ButtonTheme.OUTLINE} onClick={onActionSubmit}>
               День
             </Button>
-          </div>
-          {isLoading && <Preloader />}
+          </div> */}
 
           <div className={cls.description}>
             Искуственный интеллект на основе примерных данных высчитывает какие
@@ -128,8 +130,48 @@ const Character: React.FC<CharacterProps> = ({ className }) => {
             </Button>
           </div>
         </div>
-        <div className={cls.statcontainer}>
-          {biology ? (
+
+        {isLoading || !biology ? (
+          <div className={cls.loading}>
+            <LoaderIOS color="white" />
+          </div>
+        ) : (
+          <div
+            className={classNames(
+              cls.statcontainer,
+              {
+                [cls.loading]: isLoading,
+              },
+              [],
+            )}
+          >
+            {Object.entries(biology)
+              .sort((a, b) => a[0].localeCompare(b[0]))
+              .map(([name, level]) => (
+                <HormoneStat
+                  name={name}
+                  level={level}
+                  key={name}
+                  //@ts-ignore
+                  change={changes[name]}
+                />
+              ))}
+          </div>
+        )}
+
+        {/* <div
+          className={classNames(
+            cls.statcontainer,
+            {
+              [cls.loading]: isLoading,
+            },
+            [],
+          )}
+        >
+
+          {isLoading || !biology ? (
+            <LoaderIOS color="white" />
+          ) : (
             Object.entries(biology)
               .sort((a, b) => a[0].localeCompare(b[0]))
               .map(([name, level]) => (
@@ -141,10 +183,8 @@ const Character: React.FC<CharacterProps> = ({ className }) => {
                   change={changes[name]}
                 />
               ))
-          ) : (
-            <Preloader />
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );
