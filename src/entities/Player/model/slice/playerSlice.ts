@@ -1,3 +1,4 @@
+import { SingleEndeavor } from 'entities/TaskTracker/UI/SingleEndeavor/SingleEndeavor';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initializePlayer } from '../services/initializePlayer';
 import { PlayerScheme } from 'entities/Player/types/player';
@@ -31,6 +32,7 @@ const initialState: PlayerScheme = {
   notifications: [],
   isFilterApplied: false,
   isLoading: false,
+  endeavorIsLoading: null,
   completedTasks: [],
   habits: [],
   filteredHabits: [],
@@ -206,13 +208,29 @@ export const PlayerSlice = createSlice({
       });
     builder
       .addCase(decreaseHabitReverseCounter.pending, (state, action) => {
-        state.isLoading = true;
+        // state.isLoading = true;
+        console.log('action.meta.arg', action.meta.arg);
+
+        state.endeavorIsLoading = {
+          id: action.meta.arg.taskID,
+          pending: true,
+        };
       })
       .addCase(decreaseHabitReverseCounter.fulfilled, (state, action) => {
-        state.isLoading = false;
+        console.log('action.payload:', action.payload);
+        state.endeavorIsLoading = {
+          id: action.payload.taskID,
+          pending: false,
+        };
       })
       .addCase(decreaseHabitReverseCounter.rejected, (state, action) => {
-        state.isLoading = false;
+        if (state.endeavorIsLoading?.id) {
+          state.endeavorIsLoading = {
+            id: action.meta.arg.taskID,
+            pending: false,
+          };
+        }
+
         state.error = action.payload;
       });
     builder
@@ -235,6 +253,8 @@ export const PlayerSlice = createSlice({
       })
       .addCase(requestBiologyStats.fulfilled, (state, action) => {
         state.isLoading = false;
+        console.log('bio', action.payload);
+
         state.biology = action.payload;
       })
       .addCase(requestBiologyStats.rejected, (state, action) => {

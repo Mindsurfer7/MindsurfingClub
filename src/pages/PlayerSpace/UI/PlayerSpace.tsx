@@ -77,7 +77,15 @@ const PlayerSpace: React.FC<PlayerSpaceProps> = ({ className }) => {
   if (player.new === undefined && isAuth) {
     return (
       <div className={cls.loader}>
-        <Preloader />
+        <Preloader className={cls.loader} />
+      </div>
+    );
+  }
+
+  if (player.new === undefined && isAuth) {
+    return (
+      <div className={cls.loader}>
+        <Preloader className={cls.loader} />
       </div>
     );
   }

@@ -19,6 +19,7 @@ export interface PlayerScheme {
   biology: Biology | null;
   allTags: string[];
   completedTasks: Task[];
+  endeavorIsLoading: EndeavorIsLoading | null;
   habits: Habit[];
   filteredHabits: Habit[];
   filteredDaily: Daily[];
@@ -26,6 +27,11 @@ export interface PlayerScheme {
   tasks: Task[];
   daily: Daily[];
   error?: string;
+}
+
+interface EndeavorIsLoading {
+  id: string;
+  pending: boolean;
 }
 
 export type Habit = {

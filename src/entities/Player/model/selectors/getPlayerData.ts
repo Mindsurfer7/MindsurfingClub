@@ -51,3 +51,6 @@ export const getPlayersBiologyLevels = (state: StateScheme) => {
 export const getPlayersBiologyChanges = (state: StateScheme) => {
   return state.Player?.biology?.changes;
 };
+export const getEndeavorIsLoading = (state: StateScheme) => {
+  return state.Player?.endeavorIsLoading;
+};

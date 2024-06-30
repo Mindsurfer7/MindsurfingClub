@@ -20,8 +20,10 @@ import { Subtask, TaskSubType } from 'entities/TaskTracker/types/taskTracker';
 import { Icon } from 'shared/UI/Icon/Icon';
 import OpenSubtasksIcon from '../../../../shared/assets/icons/collapseBtn.svg?react';
 import { decreaseHabitReverseCounter } from 'entities/Player/model/services/decreaseHabitReverseCounter';
+import LoaderIOS from 'shared/UI/Preloader/LoaderIOS';
 
 interface SingleEndeavorProps {
+  isLoading?: boolean;
   onRemove: (id: string) => Promise<void>;
   APIcallback?: () => Promise<void>;
   onRequest: () => void;
@@ -44,6 +46,7 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
     onRemove,
     onRequest,
     APIcallback,
+    isLoading,
     className,
     title,
     difficulty,
@@ -374,10 +377,32 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
     dispatch(decreaseHabitReverseCounter({ step: step, taskID: id }));
   };
 
+  const renderSubmitBtn = () => {
+    if (isLoading) {
+      return <LoaderIOS color="white" height={20} width={20} />;
+    } else {
+      return taskSubType && step && taskSubType === 'reverse-count' ? (
+        <div
+          onClick={() => reverseCount(step, id)}
+          className={cls.reverseCounter}
+        >
+          {count}
+        </div>
+      ) : (
+        <div className={cls.plusBtn}>
+          <Button onClick={onPlusClick} className={cls.Plus}>
+            +
+          </Button>
+        </div>
+      );
+    }
+  };
+
   return (
     <div className={classNames(cls.SingleEndeavor, {}, [className as string])}>
       <div className={cls.Wrapper}>
-        {taskSubType && step && taskSubType === 'reverse-count' ? (
+        {renderSubmitBtn()}
+        {/* {taskSubType && step && taskSubType === 'reverse-count' ? (
           <div
             onClick={() => reverseCount(step, id)}
             className={cls.reverseCounter}
@@ -390,7 +415,7 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
               +
             </Button>
           </div>
-        )}
+        )} */}
 
         <div onClick={onOpenModal2} className={cls.title}>
           {title}
