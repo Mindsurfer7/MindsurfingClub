@@ -9,23 +9,29 @@ import { useSelector } from 'react-redux';
 import { transcribeVoice } from './model/services/transcribeVoice';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import LoaderIOS from 'shared/UI/Preloader/LoaderIOS';
+import Button, { ButtonTheme } from 'shared/UI/Button/Button';
 
 interface FileUploadProps {
   className?: string;
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({ className }) => {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const transcribedVoice = useSelector(getTranscribedVoice);
   const isLoading = useSelector(getTaskTrackerIsLoading);
   const dispatch = useAppDispatch();
 
-  const handleFileChange = (event) => {
+  const handleFileChange = (event: any) => {
     const file = event.target.files[0];
-    if (file && (file.type === 'audio/mp3' || file.type === 'audio/ogg')) {
+    if (
+      file &&
+      (file.type === 'audio/mpeg' ||
+        file.type === 'audio/ogg' ||
+        file.type === 'audio/wav')
+    ) {
       setSelectedFile(file);
     } else {
-      alert('Please select a valid audio file (mp3 or ogg).');
+      alert('Please select a valid audio file (mp3 / ogg / wav).');
     }
   };
 
@@ -39,15 +45,42 @@ const FileUpload: React.FC<FileUploadProps> = ({ className }) => {
   };
   return (
     <div className={classNames(cls.FileUpload, {}, [className as string])}>
-      <input type="file" accept=".mp3,.ogg" onChange={handleFileChange} />
-      {selectedFile && (
-        <div>
-          <p>Selected file: {selectedFile.name}</p>
-          <button onClick={handleFileUpload}>Upload</button>
+      <div className={cls.wrap}>
+        <span className={cls.text}>
+          Тут можно выбрать файл в формате ogg / mp3 для отправки на сервера
+          whisper ai.
+        </span>
+        <div className={cls.fileInputWrapper}>
+          <input
+            id="fileInput"
+            type="file"
+            accept=".mp3,.ogg,.wav"
+            onChange={handleFileChange}
+            className={cls.fileInput}
+          />
+          <label htmlFor="fileInput" className={cls.fileInputLabel}>
+            Выберите файл
+          </label>
+          {selectedFile && (
+            <div className={cls.chooseInterface}>
+              <span className={cls.choosenFile}>
+                Выбранный файл: {selectedFile.name}
+              </span>
+              <Button
+                className={cls.recBtn}
+                theme={ButtonTheme.OUTLINE}
+                onClick={handleFileUpload}
+              >
+                Расшифровать
+              </Button>
+            </div>
+          )}
         </div>
-      )}
-      <div className="">
+      </div>
+
+      <div className={cls.answerText}>
         {isLoading && <LoaderIOS color="white" />}
+
         {transcribedVoice && <span>{transcribedVoice}</span>}
       </div>
     </div>

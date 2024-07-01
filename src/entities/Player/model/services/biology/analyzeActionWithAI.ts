@@ -100,6 +100,7 @@ export const analyzeActionWithAI = createAsyncThunk<
   };
 
   const APIrequestBody = {
+    // model: 'gpt-4o',
     model: 'gpt-3.5-turbo',
     messages: [systemMsg, prompt],
   };

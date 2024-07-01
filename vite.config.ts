@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import tsconfigPaths from 'vite-tsconfig-paths';
 // import html from 'vite-plugin-html';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   server: {
@@ -13,6 +14,106 @@ export default defineConfig({
     react(),
     svgr({}),
     tsconfigPaths(),
+    VitePWA({
+      registerType: 'autoUpdate', // Или 'prompt'
+      manifest: {
+        name: 'Mindsurfing Club',
+        short_name: 'Mindsurf Club',
+        description:
+          'Отслеживайте привычки, дела, участвуйте в челленджах и клубах',
+
+        icons: [
+          {
+            src: '/public/LogoiconsZero.svg', // Путь к вашей SVG-иконке
+            sizes: '192x192 512x512 180x180', // Размеры для генерации (можно указать несколько)
+            type: 'image/png', // Тип генерируемых иконок
+          },
+          {
+            src: 'manifest-icon-192.maskable.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: 'manifest-icon-192.maskable.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+          {
+            src: 'manifest-icon-512.maskable.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: 'manifest-icon-512.maskable.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+          {
+            src: 'apple-icon-180.png',
+            sizes: '180x180',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          // ... остальные иконки (apple-splash) ...
+        ],
+        start_url: '/PlayerSpace', // Проверьте этот путь!
+        scope: '/communities/group/id/challenge/id', // Проверьте этот путь!
+        display: 'standalone',
+        background_color: '#000000',
+        theme_color: '#000000',
+      },
+      workbox: {
+        // ... опции Workbox (если нужно) ...
+      },
+      includeAssets: [
+        'favicon.ico',
+        'apple-touch-icon.png',
+        'robots.txt',
+        'manifest-icon-192.maskable.png',
+        'manifest-icon-512.maskable.png',
+        'favicon-196.png',
+        'apple-icon-180.png',
+        'apple-splash-1125-2436.jpg',
+        'apple-splash-2048-2732.jpg',
+        'apple-splash-2732-2048.jpg',
+        'apple-splash-1668-2388.jpg',
+        'apple-splash-2388-1668.jpg',
+        'apple-splash-1536-2048.jpg',
+        'apple-splash-2048-1536.jpg',
+        'apple-splash-1668-2224.jpg',
+        'apple-splash-2224-1668.jpg',
+        'apple-splash-1620-2160.jpg',
+        'apple-splash-2160-1620.jpg',
+        'apple-splash-1290-2796.jpg',
+        'apple-splash-2796-1290.jpg',
+        'apple-splash-1179-2556.jpg',
+        'apple-splash-2556-1179.jpg',
+        'apple-splash-1284-2778.jpg',
+        'apple-splash-2778-1284.jpg',
+        'apple-splash-1170-2532.jpg',
+        'apple-splash-2532-1170.jpg',
+        'apple-splash-2436-1125.jpg',
+        'apple-splash-1242-2688.jpg',
+        'apple-splash-2688-1242.jpg',
+        'apple-splash-828-1792.jpg',
+        'apple-splash-1792-828.jpg',
+        'apple-splash-1242-2208.jpg',
+        'apple-splash-2208-1242.jpg',
+        'apple-splash-750-1334.jpg',
+        'apple-splash-1334-750.jpg',
+        'apple-splash-640-1136.jpg',
+        'apple-splash-1136-640.jpg',
+        'mstile-icon-128.png',
+        'mstile-icon-270.png',
+        'mstile-icon-558.png',
+        'mstile-icon-558-270.png',
+        // ... другие файлы, которые нужно скопировать ...
+      ],
+    }),
 
     // чтобы внедрить яндекс метрику
     // html.createHtmlPlugin({

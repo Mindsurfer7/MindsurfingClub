@@ -23,6 +23,24 @@
   //   }
 }
 
+.interface {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+  background-color: rgb(204, 137, 137);
+  border: 1px solid black;
+  border-radius: 4px;
+  box-shadow: 1px;
+
+  @media (max-width: 415px) {
+    max-width: 375px;
+    /* padding: 10px; */
+    margin-left: 10px;
+  }
+}
+
 .about {
   display: flex;
   flex-direction: column;

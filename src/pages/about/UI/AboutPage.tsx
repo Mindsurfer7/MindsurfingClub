@@ -7,6 +7,7 @@ import logo from '../../../../LogoTransparent.svg?react';
 // import icon from `../../../../LogoTransparent.svg${isVite ? '?react' : ''}`;
 import { Page } from 'widgets/Page';
 import FileUpload from 'features/FileUpload/FileUpload';
+import AudioRecorder from 'widgets/AudioRecorder/UI/AudioRecorder';
 
 const about = [
   'async import of RC and redux reducers',
@@ -30,8 +31,9 @@ const AboutPage = memo(() => {
         </ul>
         <Icon className={cls.logo} Svg={logo} />
 
-        <div className="">
+        <div className={cls.interface}>
           <FileUpload />
+          <AudioRecorder />
         </div>
       </div>
     </Page>

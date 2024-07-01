@@ -1,0 +1,68 @@
+.AudioRecorder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  @media (max-width: 415px) {
+    max-width: 375px;
+  }
+}
+
+.wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 8px;
+  align-items: center;
+  border: 1px solid rgb(255, 255, 255);
+
+  .text {
+    width: 40%;
+  }
+
+  .recordBtn {
+    margin-right: 20px;
+    width: 120px;
+    height: 40px;
+  }
+
+  .btns {
+    display: flex;
+  }
+
+  @media (max-width: 415px) {
+    flex-direction: column;
+
+    .text {
+      width: 100%;
+      gap: 20px;
+    }
+
+    .recordBtn {
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+  }
+}
+
+@keyframes blink2 {
+  0% {
+    box-shadow: 0 0 10px rgba(25, 230, 212, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(25, 230, 212, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(25, 230, 212, 0.5);
+  }
+}
+
+.isRec {
+  animation-name: blink2;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}

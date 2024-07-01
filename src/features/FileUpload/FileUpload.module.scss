@@ -1,0 +1,75 @@
+.wrap {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 8px;
+  align-items: center;
+  border: 1px solid rgb(255, 255, 255);
+
+  .text {
+    width: 40%;
+  }
+
+  @media (max-width: 415px) {
+    max-width: 375px;
+    flex-direction: column;
+
+    .text {
+      width: 100%;
+    }
+  }
+}
+
+.fileInputWrapper {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+  /* margin-left: auto; */
+  max-width: 400px;
+
+  .chooseInterface {
+    display: flex;
+    flex-direction: column;
+  }
+  .choosenFile {
+    margin-top: auto;
+    /* max-width: 100px;
+    overflow: hidden; */
+  }
+  .recBtn {
+  }
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileInputLabel {
+  display: inline-block;
+  padding: 5px 5px;
+  border-radius: 6px; /* Радиус скругления */
+  background-color: transparent; /* Прозрачный фон */
+  border: 1px solid rgb(255, 255, 255); /* Черный бордер */
+  cursor: pointer;
+  font-size: 16px; /* Размер шрифта */
+  color: rgb(255, 255, 255);
+  text-align: center;
+
+  width: 160px;
+  height: 40px;
+}
+
+.fileInputLabel:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Легкий бокс-шадоу при ховере */
+}
+
+.answerText {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px; /* Радиус скругления */
+
+  padding: 10px;
+  border: 1px solid rgb(255, 255, 255); /* Черный бордер */
+}
