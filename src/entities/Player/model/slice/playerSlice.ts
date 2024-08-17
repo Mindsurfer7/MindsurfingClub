@@ -15,6 +15,7 @@ import { decreaseHabitReverseCounter } from '../services/decreaseHabitReverseCou
 import { setBiologyStats } from '../services/biology/setBiologyStats';
 import { requestBiologyStats } from '../services/biology/requestBiologyStats';
 import { analyzeActionWithAI } from '../services/biology/analyzeActionWithAI';
+import { requestFullPlayerData } from '../services/requestFullPlayerData';
 
 const initialState: PlayerScheme = {
   PlayerData: {
@@ -25,7 +26,7 @@ const initialState: PlayerScheme = {
     points: 10,
     username: 'username',
     // new: true,
-    new: undefined,
+    new: null,
   },
   biology: null,
   allTags: [],
@@ -38,6 +39,7 @@ const initialState: PlayerScheme = {
   filteredHabits: [],
   filteredDaily: [],
   filteredTasks: [],
+  today: [],
   tasks: [],
   daily: [],
   error: '',
@@ -47,6 +49,7 @@ export const PlayerSlice = createSlice({
   name: 'Player',
   initialState,
   reducers: {
+    resetPlayerState: () => initialState,
     setIsDoneDaily: (
       state,
       action: PayloadAction<{ taskID: string; isDone: boolean }>,
@@ -144,6 +147,25 @@ export const PlayerSlice = createSlice({
         state.error = action.payload;
       });
     builder
+      .addCase(requestFullPlayerData.pending, (state, action) => {
+        state.isLoading = true;
+      })
+      .addCase(requestFullPlayerData.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.allTags = action.payload.AllTags;
+        state.PlayerData = action.payload.Player;
+        state.completedTasks = action.payload.completed;
+        state.daily = action.payload.daily;
+        state.habits = action.payload.habits;
+        state.notifications = action.payload.notifications;
+        state.tasks = action.payload.tasks;
+        state.today = action.payload.today;
+      })
+      .addCase(requestFullPlayerData.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
+    builder
       .addCase(requestTasks.pending, (state, action) => {
         state.isLoading = true;
       })
@@ -230,7 +252,7 @@ export const PlayerSlice = createSlice({
             pending: false,
           };
         }
-
+        //@ts-ignore
         state.error = action.payload;
       });
     builder
@@ -282,5 +304,6 @@ export const {
   displayTasksByTag,
   clearTags,
   cutTask,
+  resetPlayerState,
 } = PlayerSlice.actions;
 export const { reducer: PlayerReducer } = PlayerSlice;

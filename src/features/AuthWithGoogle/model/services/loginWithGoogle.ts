@@ -11,6 +11,7 @@ import { ThunkConfig } from 'App/providers/StoreProvider';
 import { authG, googleProvider } from 'App/API/firebaseAPI';
 import { GoogleProfile, logoutAccount } from 'entities/GoogleProfile';
 import { PROFILE_LOCALSTORAGE_KEY } from 'shared/const/localstorage';
+import { resetPlayerState } from 'entities/Player/model/slice/playerSlice';
 
 export const loginWithGoogle = createAsyncThunk<
   GoogleProfile,
@@ -57,7 +58,10 @@ export const logoutWithGoogle = createAsyncThunk(
         Promise.resolve({ status: 200, message: 'You were logged out' }),
       );
 
+      // очищаем локал сторадж и boolean isLogged
       thunkAPI.dispatch(logoutAccount());
+      //очищаем данные игрока в player space
+      thunkAPI.dispatch(resetPlayerState());
     } catch (e) {
       console.log(e);
       return thunkAPI.rejectWithValue('error');

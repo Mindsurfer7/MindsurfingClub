@@ -1,4 +1,4 @@
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, initializeFirestore } from 'firebase/firestore';
 import axios from 'axios';
 import { initializeApp } from 'firebase/app';
 import { GoogleAuthProvider, getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -58,4 +58,8 @@ export const authG = getAuth(firebaseApp);
 
 export const googleProvider = new GoogleAuthProvider();
 
-export const GPT_DB = getFirestore(firebaseApp);
+// export const GPT_DB = getFirestore(firebaseApp);
+
+export const GPT_DB = initializeFirestore(firebaseApp, {
+  experimentalForceLongPolling: true,
+});

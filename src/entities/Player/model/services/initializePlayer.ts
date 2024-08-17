@@ -6,6 +6,8 @@ import {
   getGoogleID,
   getGoogleProfile,
 } from 'entities/GoogleProfile/model/selectors/getGoogleProfile';
+import { v4 } from 'uuid';
+import { requestPlayerData } from './requestPlayerData';
 
 export const initializePlayer = createAsyncThunk<any, void, ThunkConfig<any>>(
   'Player/initializePlayer',
@@ -30,8 +32,8 @@ export const initializePlayer = createAsyncThunk<any, void, ThunkConfig<any>>(
         AllTags: ['Monday'],
         habits: [
           {
-            id: 'advwebvsqbvr',
-            description: 'create ur 1st task',
+            id: v4(),
+            description: 'create ur 1st habit',
             difficulty: 4,
             isDone: false,
             title: 'onboarding task',
@@ -40,7 +42,7 @@ export const initializePlayer = createAsyncThunk<any, void, ThunkConfig<any>>(
         ],
         tasks: [
           {
-            id: 'advwebvsqbvr',
+            id: v4(),
             description: 'create ur 1st task',
             difficulty: 4,
             isDone: false,
@@ -49,17 +51,20 @@ export const initializePlayer = createAsyncThunk<any, void, ThunkConfig<any>>(
           },
         ],
         daily: [
-          // {
-          //   id: 'advwebvsqbvr',
-          //   description: 'create ur 1st task',
-          //   difficulty: 4,
-          //   isDone: false,
-          //   title: 'onboarding task',
-          //   tags: [],
-          // },
+          {
+            id: v4(),
+            description: 'create ur 1st daily task',
+            difficulty: 4,
+            isDone: false,
+            title: 'onboarding task',
+            tags: [],
+          },
         ],
         completed: [],
       });
+
+      thunkAPI.dispatch(requestPlayerData());
+
       console.log('account created');
     } catch (error) {
       console.error('Error creating account document:', error);

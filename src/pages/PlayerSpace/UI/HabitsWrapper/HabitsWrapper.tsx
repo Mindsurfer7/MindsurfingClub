@@ -67,7 +67,9 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
     <div
       className={classNames(
         cls.HabitsWrapper,
-        { [cls.loadingAnimation]: isLoading },
+        {
+          //  [cls.loadingAnimation]: isLoading анимация мигания, пока мешается
+        },
         [className as string],
       )}
     >
@@ -82,64 +84,70 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
 
       <div className={cls.header}>{t('myHabits')}</div>
 
-      <div className={cls.listWrapper}>
-        {filteredHabits.length > 0
-          ? filteredHabits.map((h, ix) => {
-              showElement(ix);
-              return (
-                <SingleEndeavor
-                  key={h.id}
-                  taskType="habit"
-                  title={h.title}
-                  isDone={h.isDone}
-                  tags={h.tags}
-                  difficulty={h.difficulty}
-                  description={h.description}
-                  onRequest={onRequestHabits}
-                  onRemove={onRemoveHabit}
-                  isLoading={
-                    endeavorIsLoading?.id === h.id
-                      ? endeavorIsLoading?.pending
-                      : false
-                  }
-                  id={h.id}
-                  // className={cls.slideInFromLeft}
-                  className={ix > lastRenderedIndex ? cls.slideInFromLeft : ''}
-                />
-              );
-            })
-          : !isFilterApplied &&
-            habits.map((h) => {
-              return (
-                <SingleEndeavor
-                  key={h.id}
-                  taskType="habit"
-                  title={h.title}
-                  isDone={h.isDone}
-                  tags={h.tags}
-                  difficulty={h.difficulty}
-                  description={h.description}
-                  onRequest={onRequestHabits}
-                  onRemove={onRemoveHabit}
-                  id={h.id}
-                  isLoading={
-                    endeavorIsLoading?.id === h.id
-                      ? endeavorIsLoading?.pending
-                      : false
-                  }
-                  //@ts-ignore
-                  taskSubType={h.subtype}
-                  step={h.step}
-                  //@ts-ignore
+      {isLoading ? (
+        <LoaderIOS color="white" className={cls.loader} />
+      ) : (
+        <div className={cls.listWrapper}>
+          {filteredHabits.length > 0
+            ? filteredHabits.map((h, ix) => {
+                showElement(ix);
+                return (
+                  <SingleEndeavor
+                    key={h.id}
+                    taskType="habit"
+                    title={h.title}
+                    isDone={h.isDone}
+                    tags={h.tags}
+                    difficulty={h.difficulty}
+                    description={h.description}
+                    onRequest={onRequestHabits}
+                    onRemove={onRemoveHabit}
+                    isLoading={
+                      endeavorIsLoading?.id === h.id
+                        ? endeavorIsLoading?.pending
+                        : false
+                    }
+                    id={h.id}
+                    // className={cls.slideInFromLeft}
+                    className={
+                      ix > lastRenderedIndex ? cls.slideInFromLeft : ''
+                    }
+                  />
+                );
+              })
+            : !isFilterApplied &&
+              habits.map((h) => {
+                return (
+                  <SingleEndeavor
+                    key={h.id}
+                    taskType="habit"
+                    title={h.title}
+                    isDone={h.isDone}
+                    tags={h.tags}
+                    difficulty={h.difficulty}
+                    description={h.description}
+                    onRequest={onRequestHabits}
+                    onRemove={onRemoveHabit}
+                    id={h.id}
+                    isLoading={
+                      endeavorIsLoading?.id === h.id
+                        ? endeavorIsLoading?.pending
+                        : false
+                    }
+                    //@ts-ignore
+                    taskSubType={h.subtype}
+                    step={h.step}
+                    //@ts-ignore
 
-                  count={h.count}
-                  // taskSubType={'reverse-count'}
-                  // step={25}
-                  // count={500}
-                />
-              );
-            })}
-      </div>
+                    count={h.count}
+                    // taskSubType={'reverse-count'}
+                    // step={25}
+                    // count={500}
+                  />
+                );
+              })}
+        </div>
+      )}
 
       <div className={cls.createBtn}>
         <Button

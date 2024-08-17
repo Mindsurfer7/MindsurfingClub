@@ -257,10 +257,11 @@ const PlayerCard: React.FC<PlayerCardProps> = ({
               {'Мои принципы'}
             </Button>
             <Button
-            // theme={
-            //   showPrinciples ? ButtonTheme.FILLED_GREEN : ButtonTheme.OUTLINE
-            // }
-            // onClick={onShowPrincilpes}
+              // theme={
+              //   showPrinciples ? ButtonTheme.FILLED_GREEN : ButtonTheme.OUTLINE
+              // }
+              theme={ButtonTheme.OUTLINE}
+              // onClick={onShowPrincilpes}
             >
               {'Мантры'}
             </Button>

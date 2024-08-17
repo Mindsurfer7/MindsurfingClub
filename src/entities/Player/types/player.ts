@@ -8,7 +8,7 @@ export interface PlayerData {
   level: number;
   points: number;
   username: string;
-  new: boolean;
+  new: boolean | null;
 }
 
 export interface PlayerScheme {
@@ -27,6 +27,7 @@ export interface PlayerScheme {
   tasks: Task[];
   daily: Daily[];
   error?: string;
+  today: Daily[] | Task[] | Habit[];
 }
 
 interface EndeavorIsLoading {

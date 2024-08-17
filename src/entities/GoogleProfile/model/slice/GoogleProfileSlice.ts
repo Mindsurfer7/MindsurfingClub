@@ -33,6 +33,7 @@ export const GoogleProfileSlice = createSlice({
       const user = localStorage.getItem(PROFILE_LOCALSTORAGE_KEY);
       if (user) {
         state.account = JSON.parse(user);
+        state.isLogged = true;
       }
       state.inited = true;
     },
