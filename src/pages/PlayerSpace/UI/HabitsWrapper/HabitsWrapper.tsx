@@ -20,6 +20,7 @@ import { useTranslation } from 'react-i18next';
 import { Icon } from 'shared/UI/Icon/Icon';
 import loaderIOS from '../../../../shared/assets/icons/loader-ios.svg';
 import LoaderIOS from 'shared/UI/Preloader/LoaderIOS';
+import { TaskType } from 'entities/Player/types/player';
 interface HabitsWrapperProps {
   className?: string;
 }
@@ -79,6 +80,7 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
           isVisible={isVisible}
           APIcallback={onCreateNewHabit}
           requestCallback={onRequestHabits}
+          taskType={TaskType.Habit}
         />
       )}
 
@@ -91,10 +93,11 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
           {filteredHabits.length > 0
             ? filteredHabits.map((h, ix) => {
                 showElement(ix);
+                //для фильтрованных вообще нет подтипа??? надо срочно переработать эту кринж фильтрацию1
                 return (
                   <SingleEndeavor
                     key={h.id}
-                    taskType="habit"
+                    taskType="habit" //todo: use enum
                     title={h.title}
                     isDone={h.isDone}
                     tags={h.tags}
@@ -108,10 +111,12 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
                         : false
                     }
                     id={h.id}
-                    // className={cls.slideInFromLeft}
                     className={
                       ix > lastRenderedIndex ? cls.slideInFromLeft : ''
                     }
+                    taskSubType={h.subtype}
+                    step={h.step}
+                    count={h.count}
                   />
                 );
               })
@@ -120,7 +125,7 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
                 return (
                   <SingleEndeavor
                     key={h.id}
-                    taskType="habit"
+                    taskType="habit" //todo: use enum
                     title={h.title}
                     isDone={h.isDone}
                     tags={h.tags}
@@ -134,15 +139,9 @@ const HabitsWrapper: React.FC<HabitsWrapperProps> = ({ className }) => {
                         ? endeavorIsLoading?.pending
                         : false
                     }
-                    //@ts-ignore
                     taskSubType={h.subtype}
                     step={h.step}
-                    //@ts-ignore
-
                     count={h.count}
-                    // taskSubType={'reverse-count'}
-                    // step={25}
-                    // count={500}
                   />
                 );
               })}

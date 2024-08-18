@@ -16,6 +16,9 @@ export interface TaskTrackerScheme {
   ShowTodayTasks: boolean;
   transcribedVoice: string;
   todayTasks: Task[];
+  subtype: TaskSubType;
+  count?: number;
+  step?: number;
   habits?: [];
   tasks?: [];
   tags: string[];
@@ -29,4 +32,8 @@ export interface Subtask {
   isDone: boolean;
 }
 
-export type TaskSubType = 'reverse-count' | 'classic'; // | any что в глову придет
+export enum TaskSubType {
+  Reverse = 'reverse-count',
+  Classic = 'Classic',
+  Empty = '',
+}

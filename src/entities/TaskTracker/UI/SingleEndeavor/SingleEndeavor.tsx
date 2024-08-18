@@ -35,7 +35,7 @@ interface SingleEndeavorProps {
   isDone: boolean;
   tags: string[];
   id: string;
-  taskType: 'task' | 'daily' | 'habit' | 'today';
+  taskType: 'task' | 'daily' | 'habit' | 'today'; //todo: use ENUM that is in types file
   taskSubType?: TaskSubType | null;
   step?: number | null;
   count?: 500 | null;
@@ -377,6 +377,7 @@ const SingleEndeavor: React.FC<SingleEndeavorProps> = (props) => {
     dispatch(decreaseHabitReverseCounter({ step: step, taskID: id }));
   };
 
+  //todo: refactor to switch case
   const renderSubmitBtn = () => {
     if (isLoading) {
       return <LoaderIOS color="white" height={20} width={20} />;

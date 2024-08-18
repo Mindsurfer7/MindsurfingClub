@@ -42,7 +42,7 @@ export type Habit = {
   isDone: boolean;
   tags: string[];
   title: string;
-  taskSubType?: TaskSubType;
+  subtype?: TaskSubType;
   step?: number;
   count?: number;
 };
@@ -67,3 +67,9 @@ export type Task = {
   tags: string[]; // Array of tags
   title: string;
 };
+
+export enum TaskType {
+  Task = 'task',
+  Daily = 'daily',
+  Habit = 'habit',
+}

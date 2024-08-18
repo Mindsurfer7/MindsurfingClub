@@ -26,6 +26,9 @@ export const getSubtasks = (state: StateScheme) => {
 export const getTodayTasks = (state: StateScheme) => {
   return state.TaskTracker.todayTasks;
 };
+export const getSubType = (state: StateScheme) => {
+  return state.TaskTracker.subtype;
+};
 
 export const getShowPrinciples = (state: StateScheme) => {
   return state.TaskTracker.showPrinciples;
@@ -38,4 +41,10 @@ export const getTranscribedVoice = (state: StateScheme) => {
 };
 export const getTaskTrackerIsLoading = (state: StateScheme) => {
   return state.TaskTracker.isLoading;
+};
+export const getTaskTrackerStep = (state: StateScheme) => {
+  return state.TaskTracker.step;
+};
+export const getTaskTrackerCount = (state: StateScheme) => {
+  return state.TaskTracker.count;
 };

@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { createNewHabit } from 'entities/Player/model/services/createNewHabit';
 import {
   Subtask,
+  TaskSubType,
   TaskTrackerScheme,
 } from 'entities/TaskTracker/types/taskTracker';
 import { requestTodayTasks } from '../services/requestTodayTasks';
@@ -21,6 +22,9 @@ const initialState: TaskTrackerScheme = {
   title: '',
   isDone: false,
   subtasks: [],
+  subtype: TaskSubType.Empty,
+  step: 0,
+  count: 0,
   tags: [],
   id: '',
   error: '',
@@ -76,6 +80,9 @@ export const TaskTrackerSlice = createSlice({
     setSubtasks: (state, action: PayloadAction<Subtask[]>) => {
       state.subtasks = action.payload;
     },
+    setSubtype: (state, action: PayloadAction<TaskSubType>) => {
+      state.subtype = action.payload;
+    },
     setShowTodayTasks: (state, action: PayloadAction<boolean>) => {
       state.ShowTodayTasks = action.payload;
     },
@@ -90,6 +97,7 @@ export const TaskTrackerSlice = createSlice({
       state.id = '';
       state.tags = [];
       state.subtasks = [];
+      (state.step = 0), (state.count = 0);
     },
     setNewInitialState: (
       state,
@@ -107,7 +115,13 @@ export const TaskTrackerSlice = createSlice({
       state.title = action.payload.title;
       state.tags = action.payload.tags;
     },
-    //////////////////////////////
+    setStep: (state, action: PayloadAction<number>) => {
+      state.step = action.payload;
+    },
+    setCount: (state, action: PayloadAction<number>) => {
+      state.count = action.payload;
+    },
+    ///////////////////////////
     // setChallengeTitle: (state, action: PayloadAction<string>) => {
     //   state.challengeData.title = action.payload;
   },
@@ -170,6 +184,9 @@ export const {
   clearInputs,
   setSubtasks,
   setNewInitialState,
+  setSubtype,
+  setStep,
+  setCount,
   /////////////////////////////
   // setChallengeTitle,
   // setChallengeDescription,

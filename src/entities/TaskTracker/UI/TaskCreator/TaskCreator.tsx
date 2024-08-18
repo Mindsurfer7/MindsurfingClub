@@ -7,25 +7,34 @@ import { useSelector } from 'react-redux';
 import {
   getDifficulty,
   getSubtasks,
+  getSubType,
   getTags,
+  getTaskTrackerCount,
   getTaskTrackerData,
+  getTaskTrackerStep,
 } from 'entities/TaskTracker/model/selectors/getTaskTrackerData';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import {
   clearInputs,
+  setCount,
   setDescription,
   setDifficulty,
   setID,
+  setStep,
   setSubtask,
   setSubtaskTitle,
   setSubtasks,
+  setSubtype,
   setTags,
   setTitle,
 } from 'entities/TaskTracker/model/slice/TaskTrackerSlice';
 import { v4 } from 'uuid';
 import { getAllTags } from 'entities/Player/model/selectors/getPlayerData';
-import { Subtask } from 'entities/TaskTracker/types/taskTracker';
+import { Subtask, TaskSubType } from 'entities/TaskTracker/types/taskTracker';
 import CustomInput from 'shared/UI/CustomInput/CustomInput';
+import { TaskType } from 'entities/Player/types/player';
+import Input from 'shared/UI/Input/Input';
+import Input2 from 'shared/UI/Input2/Input.component';
 
 interface TaskCreatorProps {
   className?: string;
@@ -33,17 +42,29 @@ interface TaskCreatorProps {
   requestData: () => any;
   onClose?: () => void;
   subtasksFromDB?: Subtask[];
+  taskType: TaskType;
 }
 
 const TaskCreator: React.FC<TaskCreatorProps> = (props) => {
-  const { createTask, className, requestData, onClose, subtasksFromDB } = props;
-
+  const {
+    createTask,
+    className,
+    requestData,
+    onClose,
+    subtasksFromDB,
+    taskType,
+  } = props;
   const dispatch = useAppDispatch();
+
+  //todo: refactor to use discrete selectors
   const trackerData = useSelector(getTaskTrackerData);
   const allTags = useSelector(getAllTags);
   const tags = useSelector(getTags);
+  const subtype = useSelector(getSubType);
   const diffState = useSelector(getDifficulty);
   const subtasks = useSelector(getSubtasks);
+  const step = useSelector(getTaskTrackerStep);
+  const count = useSelector(getTaskTrackerCount);
   const [inputValue, setInputValue] = useState('');
   const [isChecked, setIsChecked] = useState(false);
 
@@ -116,6 +137,22 @@ const TaskCreator: React.FC<TaskCreatorProps> = (props) => {
     }
   };
 
+  const onReverseCountClick = () => {
+    dispatch(setSubtype(TaskSubType.Reverse));
+  };
+
+  const onClassicTypeClick = () => {
+    dispatch(setSubtype(TaskSubType.Classic));
+  };
+
+  const onSetStep = (value: string) => {
+    dispatch(setStep(Number(value)));
+  };
+
+  const onSetCount = (value: string) => {
+    dispatch(setCount(Number(value)));
+  };
+
   return (
     <div className={classNames(cls.TaskCreator, {}, [className as string])}>
       <div className={cls.difficulty}>
@@ -149,6 +186,7 @@ const TaskCreator: React.FC<TaskCreatorProps> = (props) => {
         >
           Hard
         </Button>
+
         <Button
           theme={
             isDifficultySelected(4, diffState)
@@ -204,6 +242,58 @@ const TaskCreator: React.FC<TaskCreatorProps> = (props) => {
           className={cls.textarea}
         />{' '}
       </div>
+
+      {taskType === TaskType.Habit && (
+        <div className={cls.advancesSettings}>
+          <span>Select the subtype of task:</span>
+
+          <div className="">
+            {/* мб стоит маппить все имеющиеся типы и внутри цикла константу theme создавать и юзать енум*/}
+            <Button
+              // className={cls.btn}
+              onClick={onClassicTypeClick}
+              theme={
+                subtype === TaskSubType.Classic
+                  ? ButtonTheme.OUTLINE_GREEN
+                  : ButtonTheme.OUTLINE
+              }
+            >
+              Classic
+            </Button>
+
+            <Button
+              // className={cls.btn}
+              onClick={onReverseCountClick}
+              theme={
+                subtype === TaskSubType.Reverse
+                  ? ButtonTheme.OUTLINE_GREEN
+                  : ButtonTheme.OUTLINE
+              }
+            >
+              Reverse Count
+            </Button>
+          </div>
+          {subtype === TaskSubType.Reverse && (
+            <div className={cls.reverse}>
+              <Input2
+                value={step}
+                type="text"
+                placeholder={'Set Step'}
+                onChange={(e) => onSetStep(e.target.value)}
+                className={cls.subtypeInput}
+              />
+              <Input2
+                value={count}
+                type="text"
+                placeholder={'Set Count'}
+                onChange={(e) => onSetCount(e.target.value)}
+                className={cls.subtypeInput}
+              />
+            </div>
+          )}
+        </div>
+      )}
+
       <div className={cls.tags}>
         <div className={cls.Y}>
           <div className={cls.x}>
