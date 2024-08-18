@@ -72,16 +72,24 @@ export const requestArticlesFirebaseTEST = createAsyncThunk<
 
     thunkAPI.dispatch(setLastDocSnapshot(lastDoc)); //setting the last doc to use the startAfter() method
 
+    // console.log('response', response);
+
     const articles: Article[] = [];
     response.forEach((doc) => {
+      console.log('cycle start');
       const articleData = doc.data();
+
+      console.log('Article Data:', articleData);
       // @ts-ignore
       articles.push(articleData);
+      // console.log(articles, 'AFTER PUSH');
     });
-    console.log(`${articles.length} < ${actualLimit}`);
+    // console.log(`${articles.length} < ${actualLimit}`);
 
     const hasMore = articles.length < actualLimit ? false : true;
     thunkAPI.dispatch(setHasMore(hasMore));
+
+    // console.log({ arts: articles, response: response }, 'articles fetch');
 
     return articles;
   } catch (e) {

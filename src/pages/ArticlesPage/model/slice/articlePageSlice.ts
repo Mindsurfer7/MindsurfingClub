@@ -91,14 +91,14 @@ const articlesPageSlice = createSlice({
         //PayloadAction<Article[]>
         state.isLoading = false;
         //state.hasMore = action.payload.length > 0; оч станное условие для этого флага.
-        console.log(`BEFORE ALL IFS `);
+        // console.log(`BEFORE ALL IFS `);
 
         if (action.meta.arg.replace) {
-          console.log(action);
+          // console.log(action);
 
           articlesAdapter.setAll(state, action.payload);
         } else {
-          console.log(action);
+          // console.log(action);
 
           articlesAdapter.addMany(state, action.payload);
         }

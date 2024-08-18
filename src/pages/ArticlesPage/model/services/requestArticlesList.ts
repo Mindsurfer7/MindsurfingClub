@@ -15,7 +15,7 @@ import { ArticleType } from 'entities/Article/types/article';
 export interface requestArticlesProps {
   replace?: boolean;
 }
-
+// fake backend
 export const requestArticlesList = createAsyncThunk<
   Article[],
   requestArticlesProps,

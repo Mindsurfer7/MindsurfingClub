@@ -73,6 +73,7 @@ const ArticlesPage: React.FC<ArticlesPageProps> = ({ className }) => {
     <DynamicModuleLoader reducers={reducers}>
       <Page
         onScrollEnd={onLoadNextPart}
+        isLoading={isLoading}
         className={classNames(cls.ArticlesPage, {}, [className as string])}
       >
         <ArticlesPageFilters className={cls.pageFilters} />

@@ -1,5 +1,14 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin: 30px;
+}
+
 .logo {
-  margin-top: 100px;
+  margin-top: 30px;
   rotate: (-180deg);
   fill: transparent; // var(--inverted-bg-color);
   width: 400px;
@@ -46,4 +55,12 @@
   flex-direction: column;
   align-items: center;
   //   background-color: rgb(43, 42, 42);
+}
+
+.listElem {
+  color: black;
+  text-align: center;
+  height: 70px;
+  margin-top: 5px;
+  border: 1px solid rgb(0, 0, 0);
 }

@@ -43,6 +43,15 @@ const FileUpload: React.FC<FileUploadProps> = ({ className }) => {
 
     dispatch(transcribeVoice(selectedFile));
   };
+
+  const handleCopyToClipboard = () => {
+    if (transcribedVoice) {
+      navigator.clipboard.writeText(transcribedVoice).catch((err) => {
+        alert('Не удалось скопировать текст в буфер обмена.');
+      });
+    }
+  };
+
   return (
     <div className={classNames(cls.FileUpload, {}, [className as string])}>
       <div className={cls.wrap}>
@@ -82,6 +91,13 @@ const FileUpload: React.FC<FileUploadProps> = ({ className }) => {
         {isLoading && <LoaderIOS color="white" />}
 
         {transcribedVoice && <span>{transcribedVoice}</span>}
+
+        <Button
+          theme={ButtonTheme.OUTLINE_DARK}
+          onClick={handleCopyToClipboard}
+        >
+          Copy
+        </Button>
       </div>
     </div>
   );

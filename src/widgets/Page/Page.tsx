@@ -15,9 +15,15 @@ interface PageProps {
   className?: string;
   children: ReactNode;
   onScrollEnd?: () => void;
+  isLoading?: boolean;
 }
 
-const Page: React.FC<PageProps> = ({ className, children, onScrollEnd }) => {
+const Page: React.FC<PageProps> = ({
+  className,
+  children,
+  onScrollEnd,
+  isLoading,
+}) => {
   const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
   const triggerRef = useRef() as MutableRefObject<HTMLDivElement>;
   const dispatch = useAppDispatch();
@@ -50,7 +56,7 @@ const Page: React.FC<PageProps> = ({ className, children, onScrollEnd }) => {
       className={classNames(cls.Page, {}, [className as string])}
     >
       {children}
-      {onScrollEnd ? (
+      {onScrollEnd && !isLoading ? (
         <div className={cls.trigger} ref={triggerRef}></div>
       ) : null}
     </section>
